@@ -1,0 +1,36 @@
+stages:
+  f2_validate_panel:
+    cmd: python scripts/run_all_models_n1_n2_n3.py
+    deps:
+      - data/output/municipios_comunidad_madrid_completo.json
+      - src/lodcore/data/quality_gates.py
+      - src/lodcore/data/pointintime.py
+      - src/lodcore/models/m1_avm/train.py
+      - src/lodcore/models/m2_indicadores/train.py
+      - src/lodcore/models/m3_demografia/train.py
+      - src/lodcore/models/m4_capacidad/train.py
+      - src/lodcore/models/m5_recomendador/train.py
+    params:
+      - params.yaml:
+          - dataset
+          - models
+    outs:
+      - data/processed/municipios_integrado_f2.csv
+      - data/validated/municipios_panel_validado.csv
+      - src/lodcore/models/m1_avm/model.onnx
+      - src/lodcore/models/m4_capacidad/model.onnx
+      - src/lodcore/models/m4_capacidad/shap_background.json
+      - src/lodcore/models/m5_recomendador/clustering.json
+      - oracle/onnx/m1_avm.onnx
+      - oracle/onnx/m4_capacidad.onnx
+    metrics:
+      - src/lodcore/models/m1_avm/metrics.json:
+          cache: false
+      - src/lodcore/models/m2_indicadores/metrics.json:
+          cache: false
+      - src/lodcore/models/m3_demografia/metrics.json:
+          cache: false
+      - src/lodcore/models/m4_capacidad/metrics.json:
+          cache: false
+      - src/lodcore/models/m5_recomendador/metrics.json:
+          cache: false

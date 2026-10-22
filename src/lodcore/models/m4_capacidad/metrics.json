@@ -1,0 +1,30 @@
+{
+  "model_name": "M4_CAPACIDAD_ACOGIDA",
+  "algorithm": "GradientBoostingRegressor",
+  "cv_scheme": "Spatial_GroupKFold_Comarca",
+  "n_samples": 20,
+  "n_features": 8,
+  "r2_in_sample": 1.0,
+  "r2_cv_oof": 0.7345,
+  "mae_cv_mean": 5.15,
+  "mae_cv_std": 2.41,
+  "rmse_cv_mean": 6.47,
+  "rmse_cv_std": 2.38,
+  "residual_std": 6.64,
+  "feature_importances": {
+    "score_sanidad": 0.0652,
+    "score_educacion": 0.0602,
+    "score_conectividad": 0.0038,
+    "score_vivienda": 0.0641,
+    "hab_por_medico": 0.7575,
+    "ocupacion_escolar_pct": 0.0051,
+    "stock_vivienda_vacia_est": 0.0025,
+    "suelo_urbano_disponible_m2": 0.0416
+  },
+  "dataset_version": "v1.0.0-F2",
+  "origen": "ESTIMADO",
+  "metodo": "GBR_SHAP_NON_COMPENSATORY_ONNX",
+  "shap_background_sha256": "cdb4e87de3fcb51c764128d684fe457ba356db818899ec61f3845750850c1a6b",
+  "onnx_max_abs_diff": 0.0,
+  "onnx_equivalence_passed": true
+}

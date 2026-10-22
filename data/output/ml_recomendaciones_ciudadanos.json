@@ -1,0 +1,246 @@
+{
+  "FAMILIA_CON_HIJOS": {
+    "perfil_nombre": "Familia con Hijos en Edad Escolar",
+    "descripcion": "Prioriza plazas escolares libres, centros de salud cercanos, seguridad y vivienda espaciosa asequible.",
+    "top_municipios": [
+      {
+        "id_municipio": 10,
+        "nombre": "Montejo de la Sierra",
+        "comarca": "Sierra Norte",
+        "poblacion": 404.0,
+        "score_afinidad": 67.85,
+        "precio_m2": 1100.0,
+        "tiempo_madrid": 85.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      },
+      {
+        "id_municipio": 14,
+        "nombre": "Robledo de Chavela",
+        "comarca": "Sierra Oeste",
+        "poblacion": 4818.0,
+        "score_afinidad": 62.35,
+        "precio_m2": 1550.0,
+        "tiempo_madrid": 60.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "ALTA"
+      },
+      {
+        "id_municipio": 1,
+        "nombre": "Buitrago del Lozoya",
+        "comarca": "Sierra Norte",
+        "poblacion": 2034.0,
+        "score_afinidad": 61.26,
+        "precio_m2": 1450.0,
+        "tiempo_madrid": 60.0,
+        "factor_limitante": "VIVIENDA",
+        "nivel_idoneidad": "ALTA"
+      },
+      {
+        "id_municipio": 13,
+        "nombre": "Rascafría",
+        "comarca": "Sierra Norte",
+        "poblacion": 1704.0,
+        "score_afinidad": 50.91,
+        "precio_m2": 2050.0,
+        "tiempo_madrid": 85.0,
+        "factor_limitante": "SANIDAD",
+        "nivel_idoneidad": "BAJA"
+      },
+      {
+        "id_municipio": 5,
+        "nombre": "Chinchón",
+        "comarca": "Las Vegas",
+        "poblacion": 5800.0,
+        "score_afinidad": 42.61,
+        "precio_m2": 1550.0,
+        "tiempo_madrid": 50.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      }
+    ]
+  },
+  "JOVEN_TELETRABAJADOR": {
+    "perfil_nombre": "Joven Profesional / Teletrabajador",
+    "descripcion": "Prioriza conexión de fibra FTTH ultra-rápida, alquiler o compra asequible y transporte interurbano a Madrid.",
+    "top_municipios": [
+      {
+        "id_municipio": 20,
+        "nombre": "Villarejo de Salvanés",
+        "comarca": "Las Vegas",
+        "poblacion": 8042.0,
+        "score_afinidad": 67.57,
+        "precio_m2": 1200.0,
+        "tiempo_madrid": 50.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      },
+      {
+        "id_municipio": 18,
+        "nombre": "Torres de la Alameda",
+        "comarca": "Cuenca del Henares",
+        "poblacion": 7824.0,
+        "score_afinidad": 66.67,
+        "precio_m2": 1750.0,
+        "tiempo_madrid": 40.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      },
+      {
+        "id_municipio": 14,
+        "nombre": "Robledo de Chavela",
+        "comarca": "Sierra Oeste",
+        "poblacion": 4818.0,
+        "score_afinidad": 66.04,
+        "precio_m2": 1550.0,
+        "tiempo_madrid": 60.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "ALTA"
+      },
+      {
+        "id_municipio": 9,
+        "nombre": "El Molar",
+        "comarca": "Cuenca del Medio Jarama",
+        "poblacion": 9999.0,
+        "score_afinidad": 65.13,
+        "precio_m2": 1850.0,
+        "tiempo_madrid": 35.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      },
+      {
+        "id_municipio": 11,
+        "nombre": "Morata de Tajuña",
+        "comarca": "Las Vegas",
+        "poblacion": 8397.0,
+        "score_afinidad": 62.63,
+        "precio_m2": 1500.0,
+        "tiempo_madrid": 40.0,
+        "factor_limitante": "SANIDAD",
+        "nivel_idoneidad": "BAJA"
+      }
+    ]
+  },
+  "JUBILACION_SILVER": {
+    "perfil_nombre": "Senior / Jubilación Activa (Silver Economy)",
+    "descripcion": "Prioriza consultorios médicos no saturados, cercanía hospitalaria, entorno verde y tranquilidad comunitaria.",
+    "top_municipios": [
+      {
+        "id_municipio": 10,
+        "nombre": "Montejo de la Sierra",
+        "comarca": "Sierra Norte",
+        "poblacion": 404.0,
+        "score_afinidad": 68.52,
+        "precio_m2": 1100.0,
+        "tiempo_madrid": 85.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      },
+      {
+        "id_municipio": 13,
+        "nombre": "Rascafría",
+        "comarca": "Sierra Norte",
+        "poblacion": 1704.0,
+        "score_afinidad": 41.38,
+        "precio_m2": 2050.0,
+        "tiempo_madrid": 85.0,
+        "factor_limitante": "SANIDAD",
+        "nivel_idoneidad": "BAJA"
+      },
+      {
+        "id_municipio": 14,
+        "nombre": "Robledo de Chavela",
+        "comarca": "Sierra Oeste",
+        "poblacion": 4818.0,
+        "score_afinidad": 39.7,
+        "precio_m2": 1550.0,
+        "tiempo_madrid": 60.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "ALTA"
+      },
+      {
+        "id_municipio": 1,
+        "nombre": "Buitrago del Lozoya",
+        "comarca": "Sierra Norte",
+        "poblacion": 2034.0,
+        "score_afinidad": 32.99,
+        "precio_m2": 1450.0,
+        "tiempo_madrid": 60.0,
+        "factor_limitante": "VIVIENDA",
+        "nivel_idoneidad": "ALTA"
+      },
+      {
+        "id_municipio": 5,
+        "nombre": "Chinchón",
+        "comarca": "Las Vegas",
+        "poblacion": 5800.0,
+        "score_afinidad": 27.51,
+        "precio_m2": 1550.0,
+        "tiempo_madrid": 50.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      }
+    ]
+  },
+  "EMPRENDEDOR_RURAL": {
+    "perfil_nombre": "Emprendedor / Inversor Local",
+    "descripcion": "Prioriza suelo urbano disponible, viviendas vacías movilizables y potencial de absorción demográfica.",
+    "top_municipios": [
+      {
+        "id_municipio": 14,
+        "nombre": "Robledo de Chavela",
+        "comarca": "Sierra Oeste",
+        "poblacion": 4818.0,
+        "score_afinidad": 75.3,
+        "precio_m2": 1550.0,
+        "tiempo_madrid": 60.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "ALTA"
+      },
+      {
+        "id_municipio": 1,
+        "nombre": "Buitrago del Lozoya",
+        "comarca": "Sierra Norte",
+        "poblacion": 2034.0,
+        "score_afinidad": 71.14,
+        "precio_m2": 1450.0,
+        "tiempo_madrid": 60.0,
+        "factor_limitante": "VIVIENDA",
+        "nivel_idoneidad": "ALTA"
+      },
+      {
+        "id_municipio": 10,
+        "nombre": "Montejo de la Sierra",
+        "comarca": "Sierra Norte",
+        "poblacion": 404.0,
+        "score_afinidad": 58.52,
+        "precio_m2": 1100.0,
+        "tiempo_madrid": 85.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      },
+      {
+        "id_municipio": 5,
+        "nombre": "Chinchón",
+        "comarca": "Las Vegas",
+        "poblacion": 5800.0,
+        "score_afinidad": 57.47,
+        "precio_m2": 1550.0,
+        "tiempo_madrid": 50.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      },
+      {
+        "id_municipio": 15,
+        "nombre": "San Martín de Valdeiglesias",
+        "comarca": "Sierra Oeste",
+        "poblacion": 9324.0,
+        "score_afinidad": 55.27,
+        "precio_m2": 1500.0,
+        "tiempo_madrid": 65.0,
+        "factor_limitante": "EDUCACION",
+        "nivel_idoneidad": "MEDIA"
+      }
+    ]
+  }
+}

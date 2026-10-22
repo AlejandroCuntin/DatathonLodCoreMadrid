@@ -1,0 +1,13 @@
+{
+  "r2_score": 0.3309,
+  "mae_euros_m2": 291.44,
+  "rmse_euros_m2": 349.55,
+  "coeficientes": {
+    "bias": 1747.5,
+    "tiempo_madrid_coef": -23.68,
+    "log_poblacion_coef": 248.99,
+    "densidad_coef": 130.79,
+    "conectividad_coef": -14.28,
+    "servicios_coef": 217.96
+  }
+}

@@ -1,0 +1,20 @@
+# Byte-compiled / cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# MLflow local runs (si aplica)
+mlruns/
+
+# Archivos temporales de sistema y Office
+.DS_Store
+Thumbs.db
+~$*.docx
