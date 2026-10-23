@@ -1,0 +1,67 @@
+=== PAGE 1 ===
+De la escritura a la acción
+II Datathon LoDCOREMadrid – UC3M
+
+
+=== PAGE 2 ===
+De 1862 a 2026
+2
+Evolución
+1862
+Ley del notariado
+
+=== PAGE 3 ===
+De 1862 a 2026
+3
+Evolución
+1862
+Ley del notariado
+2007
+IUIN
+Volumetría índice:
+• 8M de documentos/año
+• Más de 1.500M de Datapoints anuales.
+• ~30.000M de Datapoints.
+
+=== PAGE 4 ===
+De 1862 a 2026
+4
+Evolución
+1862
+Ley del notariado
+2007
+IUIN
+2012
+CIEN
+*Los QRs son clickables
+
+=== PAGE 5 ===
+De 1862 a 2026
+5
+Evolución
+1862
+Ley del notariado
+2007
+IUIN
+2012
+CIEN Portal
+2025
+
+
+=== PAGE 6 ===
+De 1862 a 2026
+6
+Evolución
+1862
+Ley del notariado
+2007
+IUIN
+2012
+CIEN
+2026
+Portal
+2025
+Extracción con IA:
+96,77% media acierto
+5m 11s (sin IA) a 1m 56s (total actos)
+11m 31s (sin IA) a 2m 48s (compraventa)

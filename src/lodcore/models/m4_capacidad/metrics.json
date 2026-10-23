@@ -24,7 +24,7 @@
   "dataset_version": "v1.0.0-F2",
   "origen": "ESTIMADO",
   "metodo": "GBR_SHAP_NON_COMPENSATORY_ONNX",
-  "shap_background_sha256": "cdb4e87de3fcb51c764128d684fe457ba356db818899ec61f3845750850c1a6b",
+  "shap_background_sha256": "93c4670134d9bd838b53f1fc51e6a5edb46b758031f4c57226661d4f58464f13",
   "onnx_max_abs_diff": 0.0,
   "onnx_equivalence_passed": true
 }

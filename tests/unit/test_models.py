@@ -80,3 +80,17 @@ def test_fastapi_n3_whatif_endpoint():
     assert sim["ic_95_inferior"] <= sim["indice_ica_ajustado"] <= sim["ic_95_superior"] or sim["alerta_no_compensatoria"]
     assert "shap_recalculado" in sim
     assert verificar_ausencia_causalidad(sim["explicacion_natural_es"]) is True
+
+def test_fastapi_n3_optimizar_presupuesto_endpoint():
+    payload = {
+        "comarca": "Sierra Oeste",
+        "presupuesto_total_eur": 2500000.0
+    }
+    resp = client.post("/optimizar-presupuesto", json=payload)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["comarca"] == "Sierra Oeste"
+    assert data["presupuesto_total_eur"] == 2500000.0
+    assert data["presupuesto_utilizado_eur"] <= 2500000.0
+    assert data["origen"] == "SIMULADO"
+    assert len(data["asignaciones"]) > 0

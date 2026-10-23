@@ -1,0 +1,796 @@
+=== PAGE 1 ===
+1
+II Datathon LoDCOREMadrid
+José Alfonso Solórzano Martín
+Gerente Regional del Catastro de Madrid. DG del Catastro
+
+=== PAGE 2 ===
+2
+_1
+Presentación,  referencia histórica y legislación básica 
+
+=== PAGE 3 ===
+3
+Desde hace 300 años se desarrollan operaciones catastrales con finalidad tributaria
+El Catastro español se ha ido construyendo sobre la base de amplias operaciones de formación y 
+mantenimiento, ligadas frecuentemente a coyunturas históricas transformadoras
+• Siglo XVIII: Única Contribución. El Catastro de Ensenada 1749-1756
+• Siglo XIX: Reforma de Mon-Santillán 1845. Contribución territorial: Amillaramientos. Francisco Coello: 
+Catastro Topográfico Parcelario.  
+• Ley de 1906 del Catastro Parcelario: Avance Catastral
+• 1964: Reforma del sistema tributario. Contribuciones Territoriales de rústica y urbana
+• 1979: Ley de medidas urgentes de las Corporaciones Locales: Contribuciones Territoriales
+• 1985-1990: Centro de Gestión Catastral y Cooperación Tributaria. Ley Reguladora de las haciendas locales.
+El Impuesto de Bienes Inmuebles. Revocación de los Valores Catastrales.
+• 1993: La Dirección General del Catastro
+• 1996: Referencia catastral obligatoria
+• 2002-2004: Texto Refundido de la Ley del Catastro Inmobiliario
+• 2015: Ley 13/2015. Reforma de la Ley Hipotecaria y la Ley del Catastro: La parcela catastral, seguridad 
+jurídica
+• 2021: Ley 11/2021. Valor Referencia: Indicador universal del valor de los inmuebles 
+Apunte histórico
+
+=== PAGE 4 ===
+4
+“La historia del Catastro en España discurre pareja al nacimiento y evolución del Estado moderno, y sus
+momentos de mayor o menor significación han sido, generalmente, un eco nítido de las distintas situaciones
+por las que ha atravesado la Hacienda Pública. Así lo demuestra la posición alcanzada por el Catastro a lo
+largo de los siglos XVIII y XIX, siempre marcada por los sucesivos intentos de reforma de nuestra Hacienda
+entre los que es preciso destacar la magna averiguación catastral emprendida por el Marqués de la
+Ensenada, a mediados de aquella centuria, para dotar a la Nación del instrumento imprescindible para la
+justa exacción del impuesto territorial”.
+“Sin embargo, junto a su finalidad tributaria, el Catastro ha visto surgir en los últimos años la 
+necesidad de que la información que contiene sea utilizada para otras muchas actividades, 
+tanto públicas como privadas, evolucionando hasta convertirse en lo que es hoy:”
+“una gran infraestructura de información territorial disponible para todas las 
+Administraciones públicas, fedatarios, empresas y ciudadanos en general”
+“el origen y principal uso del Catastro en nuestro país es, sin duda alguna, el tributario”
+Ley 48/2002, de 23 de diciembre, del Catastro Inmobiliario
+Exposición de motivos
+
+=== PAGE 5 ===
+5
+INFRAESTRUCTURA DE INFORMACIÓN TERRITORIAL                                    
+Integra los dos grandes activos de un país: Territorio y población            
+Registro Administrativo: Fiscal
+• Descriptivo de la riqueza de los bienes inmuebles
+• Universalidad
+• Obligatoriedad
+Representación gráfica única:  Seguridad jurídica
+¿Qué es el Catastro?
+
+=== PAGE 6 ===
+6
+_2
+El Catastro en el Sistema Tributario 
+
+=== PAGE 7 ===
+7
+Identificación de inmuebles,  valores y titulares
+El valor catastral como base imponible Impuesto sobre Bienes Inmuebles
+permite la suficiencia financiera local y garantizar muchos servicios municipales
+El valor de Referencia como base imponible del ITP AJD, ISD, IP garantiza la 
+seguridad jurídica de los impuestos patrimoniales gestionados los las CCAA
+GRAVAMEN
+VALOR CATASTRAL
+VALOR DE REFERENCIATENENCIA 
+TRANSMISIÓN VALOR DE REFERENCIA
+HACIENDA ESTATAL HACIENDA AUTONÓMICA HACIENDA LOCAL
+IBI VALOR CATASTRAL
+IIVTNU VALOR CATASTRAL
+IPIRPF, IRNR VALOR CATASTRAL
+IRPF, IRNR VALOR DE REFERENCIA ITP Y AJD, ISD
+El papel del Catastro español en el sistema tributario
+
+=== PAGE 8 ===
+8
+_3
+Catastro como registro de inmuebles: descripción y difusión 
+
+=== PAGE 9 ===
+9
+Ha
+Parcelas
+Inmuebles
+Titulares
+1
+14
+40
+26
+47,5
+39
+39
+9
+48,5
+53
+79
+29
+Cifras en millones.Titulares acumulados
+Urbano Rústico
+53 millones
+de parcelas
+Total
+Valor catastral 
+medio
+60.455 €/BI 1.402 €/Ha
+Descripción y difusión: Parcelario continuo y completo
+
+=== PAGE 10 ===
+10
+Descripción y difusión
+
+=== PAGE 11 ===
+11
+40.213.765  Bienes inmuebles 
+urbanos
+38.720.439 Bienes inmuebles rústicos
+7.226  Bienes inmuebles de    
+características especiales
+--------------
+78.941.430 Bienes inmuebles 
+registrados en el Catastro (enero 
+2026)
+
+=== PAGE 12 ===
+12
+Físicos: Localización y medición: Referencia Catastral, Superficie de la 
+parcela, de las construcciones y de las subparcelas. Descripción de 
+locales, usos, categoría constructiva y año de construcción. Cultivos, 
+aprovechamiento e intensidad productiva, …
+Jurídicos: Identificación: NIF titular, domicilio fiscal. Derechos, datos 
+registrales, documentación y expedientes. Coordinación con el Registro 
+de la propiedad
+Económicos: Valoración: criterios, zonas, módulos, tipos: valores 
+catastrales y valores de referencia
+Gráficos: Cartografía (base geométrica de los inmuebles): localización 
+representación gráfica, croquis de planta de los edificios, fotos y 
+ortofotografías
+Datos descriptivos
+
+=== PAGE 13 ===
+13
+• Referencia Catastral
+• Localización
+• Titular (*)
+• NIF, domicilio fiscal (*)
+• Cartografía 
+• Planos por plantas
+• Fotografía, Ortofotografía
+• Superficie
+• Usos, aprovechamientos
+• Características constructivas
+• Valor Catastral(*)
+• Valor de Referencia
+(*) Datos protegidos disponibles sólo para el titular catastral, herederos, titular de derechos reales o arrendamiento
+sobre el inmueble (o autorizados por cualquiera de los anteriores). Los titulares catastrales pueden acceder a los datos
+protegidos de sus colindantes, salvo al valor catastral
+
+
+=== PAGE 14 ===
+14
+✓ Obligatoriedad tributaria
+✓ Concordancia con la realidad
+✓ Libres y gratuitos
+✓ Presunción de certeza
+✓ Procedimientos de subsanación
+DATOS
+Datos descriptivos: Atributos de los datos
+
+=== PAGE 15 ===
+15
+Difusión: Sede Electrónica del Catastro (SEC)
+
+=== PAGE 16 ===
+16
+Sede Electrónica del Catastro (SEC)
+
+
+=== PAGE 17 ===
+17
+17
+1º-IZ
+viv
+LOCALIZACIÓN
+SUPERFICIE M2
+USO
+CALIDAD CONSTRUCTIVA
+ANTIGÜEDAD
+SUPERFICIE        200 M2
+USO                     vivienda
+Fecha construcción    1910
+1º-CN
+viv
+1ºDR
+viv
+Planta 1ª
+Valor catastral
+Valor de referencia
+Sede Electrónica del Catastro (SEC)
+
+=== PAGE 18 ===
+18
+Sede Electrónica del Catastro (SEC)
+
+
+=== PAGE 19 ===
+19
+19
+Fichero PDF
+Ficheros KML
+Fichero FXCC
+Sede Electrónica del Catastro (SEC)
+
+=== PAGE 20 ===
+20
+Sede Electrónica del Catastro (SEC)
+
+=== PAGE 21 ===
+21
+Sede Electrónica del Catastro (SEC)
+
+=== PAGE 22 ===
+22
+INFORMACIÓN PLANTAS:
+Sede Electrónica del Catastro (SEC)
+Visor
+
+=== PAGE 23 ===
+23
+Visor 3D de inmuebles catastrales
+Sede Electrónica del Catastro (SEC)
+
+
+=== PAGE 24 ===
+24
+Visor 3D de inmuebles catastrales
+Sede Electrónica del Catastro (SEC)
+
+=== PAGE 25 ===
+25
+Visor 3D de inmuebles catastrales
+MAPA DE SOMBRAS
+Sede Electrónica del Catastro (SEC)
+
+=== PAGE 26 ===
+26
+Visor 3D de inmuebles catastrales
+Sede Electrónica del Catastro (SEC)
+El relieve se activa por defecto. Las opciones del mapa de sombras son:
+• Selección de fecha. Se muestra la hora de orto y ocaso.
+• Selección de hora
+
+=== PAGE 27 ===
+27
+Cerca de 9.000.000 alteraciones / año
+Más de 5.000.000 expedientes / año
+Más de 600.000 consultas tfn./año
+Más de 19.000.000 certificados /año
+Más de 1.000.000.000 visitas SEC
+Actividad Mantenimiento de la información catastral
+
+=== PAGE 28 ===
+28
+_4
+Valor Catastral y Valor de Referencia: 
+Capacidad económica, riqueza inmobiliaria 
+
+=== PAGE 29 ===
+29
+Compraventas urbanas 
+El valor de referencia
+
+=== PAGE 30 ===
+30
+Compraventas: IAMI DETERMINACIÓN DE VALORES DE 
+REFERENCIA PARA 2025
+✓ IAMIU 2024
+✓ Se analizaron un total de 
+1.610.454 precios de 
+compraventas de 
+inmuebles de clase urbana.
+El valor de referencia
+
+=== PAGE 31 ===
+31
+Compraventas: IAMI
+El valor de referencia
+
+=== PAGE 32 ===
+32
+El valor de referencia
+
+=== PAGE 33 ===
+33
+Conclusiones del análisis: MAPAS ATH
+86.680
+ ÁMBITOS HOMOGÉNEOS DE VALORACIÓN
+(Residencial y de Garaje
+-
+aparcamiento)
+233
+ ATH RÚSTICOS
+El valor de referencia
+
+=== PAGE 34 ===
+34
+Conclusiones del análisis: MAPAS ATH
+✓ 233 ATH rústicos
+26 cultivos diferenciados
+1.222 módulos de valor por cultivo
+El valor de referencia
+
+=== PAGE 35 ===
+35
+MAPAS ATH con MÓDULOS PIR en la SEDE ELECTRÓNICA DEL CATASTRO
+El valor de referencia
+
+=== PAGE 36 ===
+36
+MAPAS ATH con MÓDULOS PIR en la SEDE ELECTRÓNICA DEL CATASTRO
+El valor de referencia
+
+
+=== PAGE 37 ===
+37
+_5
+La Cartografía Catastral: Base gráfica de las fincas registrales: 
+Coordinación 
+
+=== PAGE 38 ===
+38
+Artículo 10.1 Ley Hipotecaria 
+“La base de la representación gráfica de las fincas registrales será la cartografía catastral, que estará a
+disposición de los Registradores de la Propiedad”.
+Coordinación Catastro - Registro
+
+=== PAGE 39 ===
+39
+_6
+Unidad del Catastro en el Territorio Rural 
+
+=== PAGE 40 ===
+40
+NUEVA COMPETENCIA
+r) Coordinación de actuaciones del Catastro inmobiliario en el ámbito rural, así como su
+vinculación con el desarrollo sostenible del territorio rural y la protección del medio
+ambiente
+Unidad del Catastro en el Territorio Rural
+Real Decreto 689/2020, de 21 de julio, por el que se desarrolla la estructura orgánica básica del 
+Ministerio de Hacienda
+
+=== PAGE 41 ===
+41
+Impulso del catastro en el territorio rural: un nuevo enfoque
+✓ Avanzar en la garantía de la seguridad jurídica
+✓ Información catastral accesible en la España
+vaciada
+✓ Propiciar el acceso del territorio rural al Registro
+de la Propiedad
+✓ Mejora de la protección del Dominio Público
+Unidad del Catastro en el Territorio Rural
+
+=== PAGE 42 ===
+42
+360270160032
+5FR
+TITULAR 
+CATASTRAL
+Cultivo
+Valor de 
+Referencia
+Superficie m2
+Potencial 
+productivo
+Periodo frio
+Pendiente
+Altitud
+Servcs. 
+Ambientales
+….
+Unidad del Catastro en el Territorio Rural
+La parcela catastral es la unidad mínima de gestión del territorio.
+
+=== PAGE 43 ===
+43
+_7
+Otros servicios y utilidades del Catastro 
+IDEAS DE PROYECTOS
+
+=== PAGE 44 ===
+44
+Información Territorial Georreferenciada
+Administración de la Tierra 
+El catastro mantiene la información inmobiliaria estructurada sobre el territorio. La 
+parcela es la unidad básica de soporte, y actúa como contenedor de toda la información 
+existente.  
+Monitorizamos toda la actividad inmobiliaria, y gestionamos toda la información 
+suministrada por todas las fuentes de información. 
+De la misión tributaria a la infraestructura de información territorial
+La imposición sobre bienes inmuebles requiere exigencias en su inventario:
+Inventario de la riqueza inmobiliaria
+• Información: Completa, actualizada, representación gráfica, cartográfica
+• Valoración: objetiva, referenciada con el mercado 
+DISPONIBILIDAD: Oficial, libre, digital, gratuita
+
+=== PAGE 45 ===
+45
+Plataforma de servicios en la Sociedad Digital 
+
+=== PAGE 46 ===
+46
+Gestión de otras políticas públicas (además de la tributaria)
+✓ Identificación y evaluación del Patrimonio: Justicia, Policía, ayudas [agricultura- FEGA (control ayudas PAC), enseñanza,
+dependencia]
+Planificación y ordenación:
+✓ Infraestructuras, urbanismo o agricultura
+Eficiencia en el mercado:
+✓ Transparenciay reducción de costes de transacción
+Geoestrategia:
+✓ Estadísticas
+✓ Eficiencia productiva
+✓ Territorios inteligentes
+…y conocimiento de nuestro pasado: excelente patrimonio documental
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 47 ===
+47
+Planificación urbanística
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 48 ===
+48
+Infraestructuras
+Herramienta básica para la administración eficaz de la tierra
+
+
+=== PAGE 49 ===
+49
+Certificados energéticos
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 50 ===
+50
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 51 ===
+51
+Edificios 3D
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 52 ===
+52
+Herramienta básica para la administración eficaz de la tierra
+Riesgo de terremotos
+
+=== PAGE 53 ===
+53
+Herramienta básica para la administración eficaz de la tierra
+Riesgos ante erupciones
+
+=== PAGE 54 ===
+54
+Erupción Cumbre Vieja. Edificios afectados
+Herramienta básica para la administración eficaz de la tierra
+Riesgos ante erupciones
+
+=== PAGE 55 ===
+55
+Riesgos ante erupciones
+Erupción Cumbre Vieja. Cultivos afectados
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 56 ===
+56
+Riesgo de inundaciones e indemnizaciones en costas
+178.703 parcelas catastrales
+146.907 parcelas de titularidad privada
+20.664 parcelas de titularidad pública
+2.149 parcelas de titularidad mixta
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 57 ===
+57
+Riesgo de inundaciones e indemnizaciones en costas
+DANA 28 OCTUBRE 9 NOVIEMBRE 2024
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 58 ===
+58
+Riesgo de inundaciones e indemnizaciones en costas
+DANA 28 OCTUBRE 9 NOVIEMBRE 2024
+Herramienta básica para la administración eficaz de la tierra
+
+
+=== PAGE 59 ===
+59
+DANA 28 OCTUBRE 9 NOVIEMBRE 2024
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 60 ===
+60
+Etiquetas de fila
+Parcelas 
+afectadas
+Superficie 
+afectada m2
+117 MAHIDE 10092 53967234.53
+123 MANZANAL DE 
+ARRIBA 112 1444475.409
+129 MELGAR DE TERA 644 8650492.536
+153 OTERO DE BODAS 3676 31429312.41
+196 RIOFRIO DE ALISTE 2361 31531595.69
+197 RIONEGRO DEL 
+PUENTE 4883 3183358.623
+231 SAN VICENTE DE LA 
+CABEZA 1 2804.85
+237 TABARA 2 2849603.98
+260 VEGA DE TERA 1449 4985902.895
+291 VILLARDECIERVOS 2687 39855899.27
+36 CALZADILLA DE TERA 1447 12931007.03
+77 FERRERAS DE ABAJO 4906 27216726.82
+78 FERRERAS DE ARRIBA 1971 34347750.78
+(en blanco)
+Total general 34231 252396164.8
+Tipo de titularidad 
+Por parcela Número de parcelas Superficie afectada m2
+DESCONOCIDA 5201 28747559.72
+PRIVADA 27449 85986203.98
+PUBLICA 1581 137662401.1
+Total general 34231 252396164.8
+Uso
+Número de 
+edificios
+1_residential 73
+2_agriculture 68
+3_industrial 42
+4_3_publicServices 4
+Sin datos 7
+Total general 194
+Cultivo
+Número 
+de 
+subparcel
+as
+Superficie 
+afectada m2
+Almendro secano 11 31057.618
+Arboles de ribera 38 71866.829
+Castañar 487 830799.023
+Encinar 5 12358.766
+Frutales secano 266 230350.761
+Hidrografía construida (embalse,canal..) 66 88373.546
+Hidrografía natural (río,laguna,arroyo.) 124 294166.193
+Improductivo 220 2321006.459
+Labor o labradío regadío 246 307275.62
+Labor o Labradío secano 18867 52492849.98
+Monte bajo 6813 81102293.2
+Otros 1 209.486
+Pastos 2595 27350558.43
+Pinar maderable 1552 70149157.19
+Prados o praderas 2900 8493832.779
+Robledal 468 2883048.248
+Vía de comunicación de dominio público 910 3821710.565
+Vía férrea 10 459692.153
+Viña secano 743 627953.615
+Sin datos 89 445536.165
+Total general 36411 252014096.6
+Herramienta básica para la administración eficaz de la tierra
+DANA 28 OCTUBRE 9 NOVIEMBRE 2024
+
+=== PAGE 61 ===
+61
+Localización de instalaciones apoyo para emergencias 
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 62 ===
+62
+Datos fundamentales en Naciones Unidas
+Herramienta básica para la administración eficaz de la tierra
+
+=== PAGE 63 ===
+63
+_8
+Descarga masiva de información Catastral a través de la Sede 
+Electrónica del Catastro 
+
+=== PAGE 64 ===
+64
+
+
+=== PAGE 65 ===
+Difusión de datos catastrales.
+Puede descargar de forma interactiva toda la información catastral de los inmuebles (salvo titularidad
+y valor catastral) NO PROTEGIDA. Dispone de información sobre los formatos de los ficheros a través de
+los enlaces de ayuda. Se requiere la identificación del usuario mediante certificado electrónico o Cl@ve así
+como la aceptación de una licencia de uso de esa información.
+65
+
+
+=== PAGE 66 ===
+Ayuda descarga de información alfanumérica (formato CAT)
+La Dirección General del Catastro ofrece, de forma totalmente gratuita, a través del Servicio de descarga de
+información alfanumérica (formato CAT), los datos catastrales no protegidos (todos, excepto la
+titularidad y el valor catastral de los inmuebles) de los inmuebles y fincas correspondientes a los municipios
+bajo la competencia de la Dirección General del Catastro (todo el territorio nacional excepto País Vasco y
+Navarra).
+66
+
+
+=== PAGE 67 ===
+Ayuda descarga de información alfanumérica (formato CAT)
+La fecha a la que corresponden los datos de catastro de un fichero se indica en el proceso de descarga. 
+Esta información se proporciona por provincia.
+Estos ficheros se actualizan dos veces al año, siempre en las siguientes fechas:
+▪ Febrero, coincidiendo con la parada programada de la Sede Electrónica del Catastro.
+▪ Septiembre, coincidiendo con la parada programada de la Sede Electrónica del Catastro.
+67
+
+
+=== PAGE 68 ===
+Ayuda descarga de cartografía vectorial (formato Shapefile)
+La Dirección General del Catastro ofrece, de forma totalmente gratuita, a través del Servicio de descarga de
+cartografía vectorial (formato Shapefile), la cartografía catastral en formato vectorial.
+Esta información se descarga por provincia.
+Estos ficheros se actualizan dos veces al año, siempre en las siguientes fechas:
+▪ Febrero, coincidiendo con la parada programada de la Sede Electrónica del Catastro.
+▪ Septiembre, coincidiendo con la parada programada de la Sede Electrónica del Catastro.
+68
+
+
+=== PAGE 69 ===
+La Dirección General del Catastro ofrece, de forma gratuita, a través del Servicio de descarga de
+Cartografía Histórica Catastral, sus fondos de cartografía histórica en formato PDF.
+Esta información se proporciona por municipio en formato gratuito 7zip (.7z), incluyendo
+separadamente los diferentes tipos de documento (producto) digitalizado a partir de su original en
+papel.
+69
+
+
+=== PAGE 70 ===
+70
+
+
+=== PAGE 71 ===
+DESCARGA DE INFORMACIÓN EN LA SEDE ELECTRÓNICA DEL CATASTRO
+AVANCE CATASTRAL (1908-48)
+INFORMACIÓN ALFANUMÉRICA (RELACIÓN DE CARACTERÍSTICAS FÍSICAS Y JURÍDICA )
+CROQUIS 
+TOPOGRÁFICO PARCELARIO (1968)
+RELACIÓN DE CARACTERÍSTICAS 
+PLANOS  
+RELACIÓN DE PROPIETARIOS 
+1ª RENOVACIÓN (1989)
+ANUNCIO BOCM
+CARACTERÍSTICAS 
+PLANOS
+2ª RENOVACIÓN (2000)
+ANUNCIO BOCM
+PLANOS
+3ª RENOVACIÓN 
+ANUNCIO BOCM
+PLANOS
+Descarga cartografía Histórica catastral. Rústica.
+71
+
+
+=== PAGE 72 ===
+72
+
+
+=== PAGE 73 ===
+DESCARGA DE INFORMACIÓN EN LA SEDE ELECTRÓNICA DEL CATASTRO
+IMPLANTACIÓN (1969-1977)
+PRIMERA REVISIÓN (1984-1989)
+SEGUNDA REVISIÓN (1994-2006)
+Descarga cartografía Histórica catastral. Urbana.
+73
+
+
+=== PAGE 74 ===
+74
+
+
+=== PAGE 75 ===
+75
+
+
+=== PAGE 76 ===
+76
+
+
+=== PAGE 77 ===
+77
+
+
+=== PAGE 78 ===
+78
+
+
+=== PAGE 79 ===
+79
+
+
+=== PAGE 80 ===
+80
+
+
+=== PAGE 81 ===
+AVANCE CATASTRAL.
+Aranjuez. 1912.
+81
+
+
+=== PAGE 82 ===
+INFORMACIÓN ALFANUMÉRICA (RELACIÓN DE CARACTERÍSTICAS FÍSICAS Y JURÍDICA )
+AVANCE CATASTRAL.
+Chinchón.
+82
+
+
+=== PAGE 83 ===
+Difusión de datos catastrales.
+Se proporcionan una serie de servicios web que permiten la consulta a datos no protegidos (de uso libre) o
+a datos protegidos (para usuarios registrados en la Sede Electrónica del Catastro).
+Servicios de consulta de datos no protegidos.
+www.catastro.hacienda.gob.es/ws/Webservices_Libres.pdf
+83
+PAe - CTT - General - Servicio de 
+Verificación y Consulta de Datos: 
+Plataforma de Intermediación 
+(administracionelectronica.gob.es)
+
+
+=== PAGE 84 ===
+Difusión de datos catastrales.
+Se proporciona una consulta de datos no protegidos (todos salvo titularidad y valor) de inmuebles a partir
+de un fichero de entrada en formato XML.
+Puede acceder al documento que describe el formato de entrada, así como diferentes métodos para
+generarlo. El resultado es un fichero que se genera fuera de línea, es decir, una vez solicitado el servicio, el
+sistema pone el trabajo en la cola de peticiones y al finalizar dicho trabajo (en condiciones normales no
+deberá exceder mucho más de una hora) lo pone a disposición del usuario que puede acceder a él
+mediante el enlace "Descargar resultados de consulta masiva al Catastro".
+84
+
+
+=== PAGE 85 ===
+Difusión de datos catastrales.
+Puede descargar también datos estadísticos catastrales, así como de las estadísticas tributarias del
+Impuesto sobre Bienes Inmuebles.
+85
+
+
+=== PAGE 86 ===
+Difusión de datos catastrales.
+86
+A finales de los años 80, el Centro de Gestión Catastral y Cooperación Tributaria elaboró ortofotografías
+a escala 1:5.000 y 1:2.000 para casi todo el territorio nacional (excepto País Vasco y Navarra), con el
+objetivo de actualizar el catastro rústico mediante un soporte gráfico preciso.
+Este trabajo generó unas 60.000 ortofotografías analógicas que, tras su digitalización y
+georreferenciación entre 2006 y 2008, se convirtieron en un valioso patrimonio histórico que permite
+conservar y utilizar información territorial inédita.
+Actualmente, la Dirección General del Catastro ofrece un mosaico provincial en formato COG,
+optimizado para su consulta en la Sede Electrónica del Catastro mediante el Visor temático catastral.
+Al buscar un municipio y activar las ortofotos históricas, puede consultarse el nombre del fichero y la
+fecha de vuelo haciendo clic en cualquier punto.
+El servicio es gratuito y abierto para administraciones, profesionales y ciudadanía, proporcionando una
+memoria visual del territorio español entre finales de los años 80 y los años 90, útil para análisis,
+planificación y estudios históricos.
+En el caso de Canarias, Cataluña y Murcia, los trabajos están en curso y se publicarán próximamente.
+
+
+=== PAGE 87 ===
+Difusión de datos catastrales.
+87
+
+
+=== PAGE 88 ===
+Difusión de datos catastrales.
+88
+Ejemplo. RC 6565801VK3666N0
+
+
+=== PAGE 89 ===
+89
+II Datathon LoDCOREMadrid
+José Alfonso Solórzano Martín
+Gerente Regional del Catastro de Madrid. DG del Catastro

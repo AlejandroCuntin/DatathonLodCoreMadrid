@@ -25,11 +25,14 @@ def consolidate_f2_dataset() -> str:
     records = json.loads(payload_path.read_text(encoding="utf-8"))
     df = pd.DataFrame(records)
 
-    # Añadir columnas obligatorias de punto-en-tiempo y procedencia (Fase F2)
-    df["fecha_disponible"] = df.get("fecha_referencia", "2026-10-14")
-    df["origen"] = "OBSERVADO"
-    df["metodo"] = "PANEL_MUNICIPAL_INTEGRADO_F2"
-    df["dataset_version"] = "v1.0.0-F2"
+    # Añadir columnas obligatorias de punto-en-tiempo y procedencia (Fase F1 / F2)
+    df["fecha_disponible"] = df.get("fecha_disponible", df.get("fecha_referencia", "2026-10-14"))
+    if "origen" not in df.columns:
+        df["origen"] = "OBSERVADO"
+    if "metodo" not in df.columns:
+        df["metodo"] = "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS"
+    if "dataset_version" not in df.columns:
+        df["dataset_version"] = "v1.0.0-F2"
 
     # Filtrar point-in-time
     df = filtrar_point_in_time(df, fecha_decision="2026-10-22", col_fecha="fecha_disponible")
