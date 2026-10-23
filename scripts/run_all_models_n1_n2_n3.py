@@ -26,9 +26,23 @@ def consolidate_f2_dataset() -> str:
     df = pd.DataFrame(records)
 
     # Añadir columnas obligatorias de punto-en-tiempo y procedencia (Fase F1 / F2)
-    df["fecha_disponible"] = df.get("fecha_disponible", df.get("fecha_referencia", "2026-10-14"))
+    if "fecha_disponible" in df.columns:
+        pass
+    elif "fecha_referencia" in df.columns:
+        df["fecha_disponible"] = df["fecha_referencia"]
+    else:
+        df["fecha_disponible"] = "2026-10-14"
+    df["fecha_disponible"] = pd.to_datetime(df["fecha_disponible"], errors="coerce").dt.date.astype(str)
+
+    # Procedencia honesta
     if "origen" not in df.columns:
-        df["origen"] = "OBSERVADO"
+        if "fuente_datos" in df.columns:
+            df["origen"] = "OBSERVADO"
+            es_sintetico = df["fuente_datos"].astype(str).str.contains("SINT", case=False, na=False)
+            df.loc[es_sintetico, "origen"] = "OBSERVADO+SIMULADO"
+        else:
+            df["origen"] = "OBSERVADO"
+
     if "metodo" not in df.columns:
         df["metodo"] = "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS"
     if "dataset_version" not in df.columns:

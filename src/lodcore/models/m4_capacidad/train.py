@@ -1,6 +1,7 @@
 """
-train.py - Entrenamiento del Modelo M4 (Core: Capacidad de Acogida + SHAP + No-Compensatoriedad),
-persistencia auditable de `shap_background.json` y exportación ONNX para Oracle Database.
+train.py - Entrenamiento del Modelo M4 (Core: Capacidad de Acogida + atribuciones
+aditivas + No-Compensatoriedad), persistencia auditable de `shap_background.json`
+y exportación ONNX para Oracle Database.
 """
 
 import json
@@ -14,7 +15,8 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import GroupKFold, KFold
 from sklearn.metrics import mean_absolute_error, root_mean_squared_error, r2_score
 
-from src.lodcore.models.base import BaseLoDCOREModel
+from src.lodcore.config import cargar_params
+from src.lodcore.models.base import BaseLoDCOREModel, comparar_equivalencia_onnx
 from src.lodcore.explain.shap_to_json import guardar_shap_background
 from src.lodcore.publish.uncertainty_band import empaquetar_prediccion_con_banda
 from src.lodcore.data.provenance import TipoOrigen
@@ -102,7 +104,12 @@ class M4CapacidadModel(BaseLoDCOREModel):
             "feature_importances": importances,
             "dataset_version": "v1.0.0-F2",
             "origen": TipoOrigen.ESTIMADO.value,
-            "metodo": "GBR_SHAP_NON_COMPENSATORY_ONNX"
+            "metodo": "GBR_ATRIBUCIONES_ADITIVAS_NON_COMPENSATORY_ONNX",
+            "advertencia": (
+                "El target (ICA) es una combinación determinista de los sub-índices: "
+                "r2_in_sample=1.0 no es evidencia de generalización. La métrica de "
+                "referencia es r2_cv_oof con GroupKFold por comarca."
+            ),
         }
 
     def uncertainty_95(self, X: np.ndarray) -> List[Dict[str, Any]]:
@@ -129,7 +136,13 @@ def run_training_m4(
     y = df["indice_capacidad_global"].to_numpy(dtype=np.float32)
     groups = df["comarca"].to_numpy()
 
-    model = M4CapacidadModel(n_estimators=120, learning_rate=0.05, max_depth=3, random_state=2026)
+    _p = cargar_params().get("models", {}).get("m4_capacidad", {})
+    model = M4CapacidadModel(
+        n_estimators=int(_p.get("n_estimators", 120)),
+        learning_rate=float(_p.get("learning_rate", 0.05)),
+        max_depth=int(_p.get("max_depth", 3)),
+        random_state=int(_p.get("random_state", 2026)),
+    )
     metrics = model.train(X, y, groups=groups)
 
     out_p = Path(out_dir)
@@ -151,12 +164,10 @@ def run_training_m4(
     )
     metrics["shap_background_sha256"] = bg_payload["background_sha256"]
 
-    # Verificar equivalencia Python vs ONNX
+    # Verificar equivalencia real: scikit-learn nativo vs binario ONNX
     preds_py = model.predict(X)
     preds_onnx = model.predict_onnx(onnx_file, X)
-    max_abs_diff = float(np.max(np.abs(preds_py - preds_onnx)))
-    metrics["onnx_max_abs_diff"] = max_abs_diff
-    metrics["onnx_equivalence_passed"] = bool(max_abs_diff < 1e-4)
+    metrics.update(comparar_equivalencia_onnx(preds_py, preds_onnx))
 
     (out_p / "metrics.json").write_text(json.dumps(metrics, indent=2, ensure_ascii=False), encoding="utf-8")
 
@@ -168,4 +179,4 @@ def run_training_m4(
 
 if __name__ == "__main__":
     m = run_training_m4()
-    print(f"[M4 Capacidad] Entrenado y exportado a ONNX. MAE CV: {m['mae_cv_mean']} | Hash SHAP: {m['shap_background_sha256'][:12]}...")
+    print(f"[M4 Capacidad] Entrenado y exportado a ONNX. MAE CV: {m['mae_cv_mean']} | Hash atribuciones: {m['shap_background_sha256'][:12]}...")

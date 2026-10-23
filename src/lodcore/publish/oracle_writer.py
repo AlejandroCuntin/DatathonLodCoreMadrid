@@ -3,10 +3,13 @@ oracle_writer.py - Escritura auditada a Oracle Database usando modo thin (oracle
 Garantiza que ningún registro entre en la base de datos sin `origen`, `metodo`, `dataset_version` y banda 95%.
 """
 
-import json
+import math
+import re
 from pathlib import Path
 from typing import List, Dict, Any
 from src.lodcore.data.provenance import validar_procedencia_registro
+
+_IDENTIFICADOR_SQL = re.compile(r"^[A-Za-z][A-Za-z0-9_$#]*(?:\.[A-Za-z][A-Za-z0-9_$#]*)?$")
 
 class OraclePublisher:
     def __init__(self, dsn: str = "localhost:1521/FREEPDB1", user: str = "LODCORE", password: str = ""):
@@ -19,11 +22,23 @@ class OraclePublisher:
             validar_procedencia_registro(reg)
             if "ic_95_inferior" not in reg or "ic_95_superior" not in reg:
                 raise ValueError(f"Registro {idx} rechazado: carece de banda de incertidumbre al 95%.")
+            pred = float(reg["prediccion"])
+            ic_low = float(reg["ic_95_inferior"])
+            ic_high = float(reg["ic_95_superior"])
+            if not all(math.isfinite(v) for v in (pred, ic_low, ic_high)):
+                raise ValueError(f"Registro {idx} rechazado: valores no finitos en la predicción o la banda.")
+            if not (ic_low <= pred <= ic_high):
+                raise ValueError(
+                    f"Registro {idx} rechazado: la predicción {pred} queda fuera de la banda "
+                    f"[{ic_low}, {ic_high}]."
+                )
 
     def exportar_sql_inserts(self, registros: List[Dict[str, Any]], tabla: str, ruta_salida: str) -> str:
         """
         Valida todos los registros y genera sentencias INSERT idempotentes para Oracle APEX.
         """
+        if not _IDENTIFICADOR_SQL.fullmatch(str(tabla)):
+            raise ValueError(f"Nombre de tabla no válido para SQL: {tabla!r}")
         self.validar_lote(registros)
         lineas = [
             f"-- Lote generado y validado por OraclePublisher (tabla: {tabla})",

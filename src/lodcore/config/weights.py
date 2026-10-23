@@ -3,11 +3,13 @@ weights.py - Ponderaciones de sub-índices y preferencias MCDM para LoDCORE Madr
 """
 
 # Pesos de los 4 Sub-índices para el Índice Global ICA (Suma = 1.0)
+# Debe coincidir con la fórmula que genera `indice_capacidad_global` en el panel F2:
+#   0,30·vivienda + 0,30·(sanidad+educación)/2 + 0,25·conectividad + 0,15·holgura
 WEIGHTS_SUBINDICES_ICA = {
-    "capacidad_sanitaria_educativa": 0.35,
-    "conectividad_movilidad": 0.25,
-    "vivienda_suelo_asequibilidad": 0.25,
-    "sostenibilidad_presupuestos": 0.15
+    "sanidad_educacion": 0.30,
+    "conectividad": 0.25,
+    "vivienda": 0.30,
+    "holgura": 0.15
 }
 
 # Perfiles de recomendación ciudadana (MCDM - Distancia Coseno Ponderada)

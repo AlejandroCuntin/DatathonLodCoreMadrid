@@ -1,4 +1,31 @@
-pandas>=1.5
-numpy>=1.23
+# =============================================================================
+# LoDCORE Madrid - dependencias del pipeline N1 (Python) y serving N3 (FastAPI)
+# Instalación: python -m pip install -r requirements.txt
+# =============================================================================
+
+# Datos y cálculo
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.4        # root_mean_squared_error y KMeans(n_init=...) requieren >=1.4
+joblib>=1.3
+PyYAML>=6.0
+
+# Exportación e inferencia ONNX (N1 -> N2 Oracle 23ai)
+skl2onnx>=1.16
+onnx>=1.15
+onnxruntime>=1.17
+
+# API N3
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.5
+
+# Oracle Database (modo thin de oracledb)
 oracledb>=2.0
+
+# Utilidades de ingesta documental (PDFs de bases y fuentes)
 pypdf>=4.0
+
+# Tests
+pytest>=8.0
+httpx>=0.27              # requerido por fastapi.testclient

@@ -1,6 +1,8 @@
 """
-shap_to_json.py - Cálculo de atribuciones aditivas tipo Shapley respecto a un background fijo y auditable.
-Garantiza aditividad exacta: sum(shap_values) + base_value == prediction, y registra el hash SHA-256 del background.
+shap_to_json.py - Cálculo de atribuciones aditivas normalizadas respecto a un background
+fijo y auditable. Es una aproximación de Shapley de 2 órdenes (media de la contribución
+marginal hacia delante y hacia atrás), NO valores Shapley exactos.
+Garantiza aditividad antes del redondeo de publicación: sum(contribuciones) + base_value == prediction, con un residuo de redondeo menor que 1e-4 por variable. Registra el hash SHA-256 del background.
 """
 
 import json
@@ -28,6 +30,7 @@ def guardar_shap_background(
         "feature_importances": [round(float(w), 6) for w in feature_importances],
         "base_value": round(float(base_prediction), 6),
         "n_samples_background": int(X_bg.shape[0]),
+        "metodo_atribucion": "EFECTOS_MARGINALES_SIMETRICOS_NORMALIZADOS",
         "dataset_version": "v1.0.0-F2"
     }
     bg_hash = calcular_hash_background(payload_core)
@@ -44,8 +47,9 @@ def explicar_instancia_a_json(
     background_data: Dict[str, Any]
 ) -> Dict[str, Any]:
     """
-    Calcula las contribuciones marginales aditivas exactas de cada variable respecto al background fijado,
-    usando intervención condicional sobre las medias del background y normalización de eficiencia de Shapley.
+    Calcula contribuciones marginales aditivas de cada variable respecto al background
+    fijado, usando intervención condicional sobre las medias y normalización de eficiencia.
+    Es una aproximación de 2 órdenes, no Shapley exacto (no enumera todos los subconjuntos).
     """
     features = background_data["features"]
     means = np.asarray(background_data["feature_means"], dtype=np.float64)
@@ -73,18 +77,26 @@ def explicar_instancia_a_json(
     diff_total = pred_full - base_val
     suma_efectos = float(np.sum(efectos_arr))
 
-    # Propiedad de eficiencia de Shapley: sum(phi_i) == f(x) - E[f(X)]
+    # Propiedad de eficiencia: sum(phi_i) == f(x) - E[f(X)]. La normalización
+    # redistribuye las interacciones no capturadas por el enfoque de 2 órdenes.
     if abs(suma_efectos) > 1e-9:
         shap_vals = efectos_arr * (diff_total / suma_efectos)
     else:
+        # Sin efectos netos no hay proporción que repartir; asignamos el residuo
+        # a la variable de mayor efecto bruto para no romper la aditividad.
         shap_vals = np.zeros_like(efectos_arr)
+        if abs(diff_total) > 1e-9 and len(efectos_arr):
+            idx = int(np.argmax(np.abs(efectos_arr)))
+            shap_vals[idx] = diff_total
 
     contribuciones = []
-    for feat, val, phi in zip(features, x_vec[0], shap_vals):
+    for i, (feat, val, phi) in enumerate(zip(features, x_vec[0], shap_vals)):
         contribuciones.append({
             "feature": feat,
             "feature_value": round(float(val), 4),
-            "background_mean": round(float(means[features.index(feat)]), 4),
+            "background_mean": round(float(means[i]), 4),
+            # Se mantiene la clave `shap_value` por compatibilidad con la API/UI;
+            # el método real se declara en `metodo_atribucion`.
             "shap_value": round(float(phi), 4)
         })
 
@@ -92,5 +104,6 @@ def explicar_instancia_a_json(
         "base_value": round(base_val, 4),
         "prediction": round(pred_full, 4),
         "background_sha256": background_data.get("background_sha256", ""),
+        "metodo_atribucion": "EFECTOS_MARGINALES_SIMETRICOS_NORMALIZADOS",
         "contributions": contribuciones
     }

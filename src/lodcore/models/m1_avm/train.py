@@ -14,7 +14,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GroupKFold, KFold
 from sklearn.metrics import mean_absolute_error, root_mean_squared_error, r2_score
 
-from src.lodcore.models.base import BaseLoDCOREModel
+from src.lodcore.config import cargar_params
+from src.lodcore.models.base import BaseLoDCOREModel, comparar_equivalencia_onnx
 from src.lodcore.publish.uncertainty_band import calcular_banda_95_ensemble
 from src.lodcore.data.provenance import TipoOrigen
 
@@ -56,11 +57,14 @@ class M1AVMModel(BaseLoDCOREModel):
         fold_rmses = []
         oof_preds = np.zeros_like(y_f32, dtype=np.float64)
 
+        min_samples_leaf = int(
+            cargar_params().get("models", {}).get("m1_avm", {}).get("min_samples_leaf", 2)
+        )
         for train_idx, val_idx in splits:
             rf_cv = RandomForestRegressor(
                 n_estimators=self.n_estimators,
                 max_depth=self.max_depth,
-                min_samples_leaf=2,
+                min_samples_leaf=min_samples_leaf,
                 random_state=self.random_state
             )
             rf_cv.fit(X_f32[train_idx], y_f32[train_idx])
@@ -73,7 +77,7 @@ class M1AVMModel(BaseLoDCOREModel):
         self.estimator = RandomForestRegressor(
             n_estimators=self.n_estimators,
             max_depth=self.max_depth,
-            min_samples_leaf=2,
+            min_samples_leaf=min_samples_leaf,
             random_state=self.random_state
         )
         self.estimator.fit(X_f32, y_f32)
@@ -100,7 +104,11 @@ class M1AVMModel(BaseLoDCOREModel):
             "feature_importances": importances,
             "dataset_version": "v1.0.0-F2",
             "origen": TipoOrigen.ESTIMADO.value,
-            "metodo": "RANDOM_FOREST_SPATIAL_CV_ONNX"
+            "metodo": "RANDOM_FOREST_SPATIAL_CV_ONNX",
+            "advertencia": (
+                "Con n=20 y 8 comarcas el R² fuera de muestra es inestable y puede ser "
+                "negativo. M1 es un módulo ilustrativo, no un AVM validado."
+            ),
         }
         return metrics
 
@@ -133,7 +141,12 @@ def run_training_m1(
     y = df["precio_m2_compra"].to_numpy(dtype=np.float32)
     groups = df["comarca"].to_numpy()
 
-    model = M1AVMModel(n_estimators=100, max_depth=5, random_state=2026)
+    _p = cargar_params().get("models", {}).get("m1_avm", {})
+    model = M1AVMModel(
+        n_estimators=int(_p.get("n_estimators", 100)),
+        max_depth=int(_p.get("max_depth", 5)),
+        random_state=int(_p.get("random_state", 2026)),
+    )
     metrics = model.train(X, y, groups=groups)
 
     out_p = Path(out_dir)
@@ -141,12 +154,10 @@ def run_training_m1(
     onnx_file = model.to_onnx(str(out_p / "model.onnx"), n_features=len(FEATURES_M1))
     joblib.dump(model, out_p / "model.joblib")
 
-    # Verificar equivalencia inmediata Python vs ONNX
+    # Verificar equivalencia real: scikit-learn nativo vs binario ONNX
     preds_py = model.predict(X)
     preds_onnx = model.predict_onnx(onnx_file, X)
-    max_abs_diff = float(np.max(np.abs(preds_py - preds_onnx)))
-    metrics["onnx_max_abs_diff"] = max_abs_diff
-    metrics["onnx_equivalence_passed"] = bool(max_abs_diff < 1e-4)
+    metrics.update(comparar_equivalencia_onnx(preds_py, preds_onnx))
 
     (out_p / "metrics.json").write_text(json.dumps(metrics, indent=2, ensure_ascii=False), encoding="utf-8")
 

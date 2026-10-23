@@ -20,7 +20,8 @@ def calcular_banda_95_ensemble(
     arr = np.asarray(predicciones_arboles, dtype=np.float64)
     media = float(np.mean(arr))
     std = float(np.std(arr))
-    # Percentiles empíricos de los árboles + margen t-student para muestras pequeñas (n=20/41)
+    # Percentiles empíricos de los árboles combinados con el margen normal al 95 %.
+    # (No es un intervalo t-Student: se usa 1,96 y los percentiles empíricos como suelo.)
     ic_inferior = float(min(np.percentile(arr, 2.5), media - 1.96 * std))
     ic_superior = float(max(np.percentile(arr, 97.5), media + 1.96 * std))
 

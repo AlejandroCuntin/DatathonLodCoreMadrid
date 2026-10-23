@@ -22,7 +22,7 @@ def run_training_m3(
     en_riesgo_10pct = sum(1 for p in proyecciones if p["supera_capacidad_en_estres_10pct"])
 
     metrics = {
-        "model_name": "M3_DEMOGRAFIA_SARIMAX_PROPHET",
+        "model_name": "M3_DEMOGRAFIA_EXTRAPOLACION_GEOMETRICA",
         "n_municipios": len(proyecciones),
         "poblacion_agregada_2025": int(pob_2025_total),
         "poblacion_proyectada_2030": round(float(pob_2030_total), 0),
@@ -31,7 +31,11 @@ def run_training_m3(
         "confidence_level": 0.95,
         "dataset_version": "v1.0.0-F2",
         "origen": TipoOrigen.PROYECTADO.value,
-        "metodo": "SARIMAX_EXOG_CI95"
+        "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
+        "advertencia": (
+            "Proyección determinista calibrada con la proyección padronal "
+            "intermedia de 2031. No es un modelo SARIMAX ni Prophet."
+        ),
     }
 
     out_p = Path(out_dir)

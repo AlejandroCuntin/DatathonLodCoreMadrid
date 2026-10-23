@@ -1,7 +1,7 @@
 """
 whatif.py - Endpoint lógico N3 para el perfil Institucional:
 Simulación contrafactual paramétrica de choque demográfico e inversión pública
-con recálculo en vivo de SHAP, banda 95 % y reglas no compensatorias.
+con recálculo en vivo de atribuciones aditivas, banda 95 % y reglas no compensatorias.
 """
 
 from typing import Dict, Any
@@ -10,10 +10,16 @@ from pydantic import BaseModel, Field
 
 from src.lodcore.config.thresholds import (
     COSTE_UNITARIO_PLAZA_ESCOLAR_EUR,
-    COSTE_AMPLIACION_CONSULTA_MEDICA_EUR
+    COSTE_AMPLIACION_CONSULTA_MEDICA_EUR,
+    PROPORCION_POBLACION_ESCOLAR,
+    UMBRAL_ICA_BAJA
 )
 from src.lodcore.models.m4_capacidad.predict import predecir_capacidad_municipio
 from src.lodcore.data.provenance import TipoOrigen
+
+class MunicipioNoEncontrado(Exception):
+    """Señal explícita para que la API devuelva 404 y no confundirlo con un KeyError."""
+
 
 class SimuladorWhatIfRequest(BaseModel):
     id_municipio: int = Field(..., ge=1, description="Identificador único del municipio")
@@ -30,7 +36,7 @@ def ejecutar_simulacion_whatif(
     df = pd.read_csv(data_path)
     match = df.loc[df["id_municipio"] == req.id_municipio]
     if match.empty:
-        raise ValueError(f"No existe el municipio con id_municipio={req.id_municipio}")
+        raise MunicipioNoEncontrado(f"No existe el municipio con id_municipio={req.id_municipio}")
 
     fila_base = match.iloc[0].to_dict()
     eval_base = predecir_capacidad_municipio(fila_base, model_dir=model_dir)
@@ -38,10 +44,19 @@ def ejecutar_simulacion_whatif(
     # Construir estado contrafactual
     fila_sim = dict(fila_base)
     pob_nueva = float(fila_base["poblacion_actual"]) + float(req.nuevos_residentes)
-    medicos_nuevos = max(1.0, float(fila_base["num_medicos_ap"]) + float(req.nuevos_medicos_ap))
-    plazas_nuevas = max(1.0, float(fila_base["num_plazas_escolares"]) + float(req.nuevas_plazas_escolares))
-    # 16% del contingente entrante se estima en edad escolar obligatoria
-    alumnos_nuevos = float(fila_base["num_alumnos_matriculados"]) + (0.16 * float(req.nuevos_residentes))
+    medicos_nuevos = float(fila_base["num_medicos_ap"]) + float(req.nuevos_medicos_ap)
+    plazas_nuevas = float(fila_base["num_plazas_escolares"]) + float(req.nuevas_plazas_escolares)
+    if medicos_nuevos <= 0 or plazas_nuevas <= 0:
+        raise ValueError(
+            "El municipio no tiene médicos o plazas escolares registrados: "
+            "el contrafactual no puede calcular ratios de saturación fiables."
+        )
+    # Proporción del contingente entrante en edad escolar obligatoria (3-16 años).
+    # Debe coincidir con el denominador 0,17 usado en la capacidad educativa del panel.
+    alumnos_nuevos = (
+        float(fila_base["num_alumnos_matriculados"])
+        + PROPORCION_POBLACION_ESCOLAR * float(req.nuevos_residentes)
+    )
 
     hab_por_medico_sim = pob_nueva / medicos_nuevos
     ocupacion_escolar_sim = (alumnos_nuevos / plazas_nuevas) * 100.0
@@ -71,6 +86,16 @@ def ejecutar_simulacion_whatif(
     capex_escuelas = float(req.nuevas_plazas_escolares) * COSTE_UNITARIO_PLAZA_ESCOLAR_EUR
     capex_total = capex_medicos + capex_escuelas + float(req.inversion_conectividad_eur)
 
+    # La banda del modelo es sobre el ICA bruto. Si la regla dura trunca el ICA,
+    # la banda publicada debe respetar el mismo techo; si no, mostraría valores
+    # por encima del colapso que la propia regla prohíbe.
+    ic_inf_sim = float(eval_sim["ic_95_inferior"])
+    ic_sup_sim = float(eval_sim["ic_95_superior"])
+    if eval_sim["alerta_no_compensatoria"]:
+        techo = UMBRAL_ICA_BAJA - 1.0
+        ic_sup_sim = min(ic_sup_sim, techo)
+        ic_inf_sim = min(ic_inf_sim, ic_sup_sim)
+
     return {
         "id_municipio": req.id_municipio,
         "nombre": str(fila_base["nombre"]),
@@ -85,8 +110,8 @@ def ejecutar_simulacion_whatif(
         },
         "estado_simulado": {
             "indice_ica_ajustado": eval_sim["indice_capacidad_ajustado"],
-            "ic_95_inferior": eval_sim["ic_95_inferior"],
-            "ic_95_superior": eval_sim["ic_95_superior"],
+            "ic_95_inferior": round(ic_inf_sim, 2),
+            "ic_95_superior": round(ic_sup_sim, 2),
             "delta_ica": round(eval_sim["indice_capacidad_ajustado"] - eval_base["indice_capacidad_ajustado"], 2),
             "semaforo_ica": eval_sim["semaforo_ica"],
             "hab_por_medico": round(hab_por_medico_sim, 1),
@@ -97,6 +122,6 @@ def ejecutar_simulacion_whatif(
             "explicacion_natural_es": eval_sim["explicacion_natural_es"]
         },
         "origen": TipoOrigen.SIMULADO.value,
-        "metodo": "CONTRAFACTUAL_GBR_SHAP_NON_COMPENSATORY",
+        "metodo": "CONTRAFACTUAL_GBR_ATRIBUCIONES_ADITIVAS_NON_COMPENSATORY",
         "dataset_version": "v1.0.0-F2"
     }

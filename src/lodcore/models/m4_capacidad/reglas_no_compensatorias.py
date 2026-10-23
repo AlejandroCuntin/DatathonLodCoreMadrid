@@ -24,10 +24,15 @@ def aplicar_salvaguarda_no_compensatoria(muni_dict: dict) -> dict:
       - 'indice_capacidad_ajustado': float
       - 'semaforo_ica': 'ALTA' | 'MEDIA' | 'BAJA'
     """
-    hab_por_medico = muni_dict.get('hab_por_medico', 0)
-    ocupacion_escolar = muni_dict.get('ocupacion_escolar_pct', 0)
-    score_raw = muni_dict.get('indice_capacidad_global', 50.0)
-    
+    faltantes = [c for c in ("hab_por_medico", "ocupacion_escolar_pct", "indice_capacidad_global") if c not in muni_dict]
+    if faltantes:
+        # Un 0 por defecto haría pasar por "sin saturación" un municipio sin datos.
+        raise ValueError(f"Faltan campos obligatorios para la salvaguarda: {faltantes}")
+
+    hab_por_medico = float(muni_dict["hab_por_medico"])
+    ocupacion_escolar = float(muni_dict["ocupacion_escolar_pct"])
+    score_raw = float(muni_dict["indice_capacidad_global"])
+
     colapso_sanitario = hab_por_medico > MAX_HABITANTES_POR_MEDICO_AP
     colapso_educativo = ocupacion_escolar > MAX_OCUPACION_ESCOLAR_PCT
     
@@ -54,9 +59,11 @@ def aplicar_salvaguarda_no_compensatoria(muni_dict: dict) -> dict:
         else:
             semaforo = "BAJA"
             
-    muni_dict['alerta_no_compensatoria'] = alerta
-    muni_dict['motivo_colapso'] = motivo_str
-    muni_dict['indice_capacidad_ajustado'] = round(score_ajustado, 2)
-    muni_dict['semaforo_ica'] = semaforo
-    
-    return muni_dict
+    # Devolver una copia: la función no debe mutar el registro de entrada.
+    resultado = dict(muni_dict)
+    resultado['alerta_no_compensatoria'] = alerta
+    resultado['motivo_colapso'] = motivo_str
+    resultado['indice_capacidad_ajustado'] = round(score_ajustado, 2)
+    resultado['semaforo_ica'] = semaforo
+
+    return resultado

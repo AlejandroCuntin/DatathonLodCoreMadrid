@@ -71,7 +71,7 @@ flowchart TD
         ML3["Clustering K-Means + PCA (4 Arquetipos)"]
         ML4["Motor de Recomendación Multicriterio (Perfiles)"]
         ML5["Forecasting Demográfico y Detección de Cuellos de Botella"]
-        ML6["Módulo de Explicabilidad XAI (Valores SHAP)"]
+        ML6["Módulo de Explicabilidad (atribuciones aditivas)"]
     end
 
     subgraph Capa3 ["3. Almacén Relacional y Analítico (Oracle Database 23ai)"]
@@ -162,8 +162,8 @@ Para asegurar que los municipios pequeños (ej. Montejo de la Sierra con 404 hab
 
 ### 4.6. Módulo de Explicabilidad y Confianza (XAI - Explainable AI)
 Alineado con los principios de gobernanza del dato de Oracle:
-* **Explicabilidad Local:** Cada recomendación o valoración municipal muestra los 3 factores de mayor impacto positivo y los 2 cuellos de botella mediante contribuciones aditivas tipo **SHAP (SHapley Additive exPlanations)**.
-* **Transparencia Institucional:** El gestor público puede auditar en la tabla `PARAMETROS_MODELO` los pesos, coeficientes y umbrales aplicados.
+* **Explicabilidad Local:** Cada recomendación o valoración municipal muestra los factores de mayor impacto positivo y los cuellos de botella mediante contribuciones aditivas normalizadas (aproximación de 2 órdenes; no son valores Shapley exactos).
+* **Transparencia Institucional:** El gestor público puede auditar en `src/lodcore/config/params.yaml` (hiperparámetros) y `src/lodcore/config/thresholds.py` (umbrales y costes) los pesos, coeficientes y umbrales aplicados.
 
 ---
 

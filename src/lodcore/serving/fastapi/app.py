@@ -3,7 +3,7 @@ app.py - Servidor mínimo FastAPI Nivel N3 para LoDCORE Madrid.
 Siguiendo el diseño de arquitectura:
   - Nivel N1: Entrenamiento y exportación ONNX (Python/CI)
   - Nivel N2: Scoring masivo en Oracle Database (DBMS_VECTOR.LOAD_ONNX_MODEL + PREDICTION())
-  - Nivel N3: Runtime dinámico mínimo en FastAPI exclusivamente para `/recomendar` y `/whatif`
+  - Nivel N3: Runtime dinámico mínimo en FastAPI para `/recomendar`, `/whatif` y `/optimizar-presupuesto`
 """
 
 from fastapi import FastAPI, HTTPException
@@ -16,6 +16,7 @@ from src.lodcore.serving.fastapi.recomendar import (
 )
 from src.lodcore.serving.fastapi.whatif import (
     SimuladorWhatIfRequest,
+    MunicipioNoEncontrado,
     ejecutar_simulacion_whatif
 )
 from src.lodcore.models.m4_capacidad.optimizador_presupuestario import optimizar_presupuesto_comarca
@@ -37,7 +38,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -67,12 +68,14 @@ def post_recomendar(req: PreferenciasCiudadanoRequest):
 def post_whatif(req: SimuladorWhatIfRequest):
     """
     Ejecuta una simulación contrafactual sobre un municipio ante cambios demográficos o
-    inversiones dotacionales, recalculando SHAP, bandas al 95 % y el semáforo no compensatorio.
+    inversiones dotacionales, recalculando atribuciones, bandas al 95 % y el semáforo no compensatorio.
     """
     try:
         return ejecutar_simulacion_whatif(req)
-    except ValueError as exc:
+    except MunicipioNoEncontrado as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Error en simulación: {exc}") from exc
 
@@ -91,4 +94,3 @@ def post_optimizar_presupuesto(req: OptimizadorPresupuestoRequest):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Error en optimización: {exc}") from exc
-        raise HTTPException(status_code=400, detail=str(exc)) from exc

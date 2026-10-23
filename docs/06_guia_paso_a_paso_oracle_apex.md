@@ -1,6 +1,12 @@
 # GUÍA PASO A PASO: PUESTA EN MARCHA EN ORACLE Y ORACLE APEX
 **II Datathon LoDCOREMadrid 2026**
 
+> ⚠️ **AVISO (octubre 2026)**: esta guía describe el prototipo antiguo de 5 tablas
+> (`MUNICIPIOS`, `DOTACION_SERVICIOS`, `VIVIENDA_Y_SUELO`, `INDICES_CAPACIDAD`,
+> `PARAMETROS_MODELO`). El esquema vigente es `oracle/ddl/01-tablas_raw.sql` …
+> `05-modelos_onnx.sql`; el orden de carga está en el `README.md` §3. **No ejecutes**
+> el script de ~35 sentencias que menciona esta guía: ya no existe en el repositorio.
+
 Esta guía explica con capturas textuales y paso a paso cómo cargar el modelo de datos del reto y ver los mapas y tablas funcionando en **Oracle APEX** en menos de 10 minutos.
 
 ---
