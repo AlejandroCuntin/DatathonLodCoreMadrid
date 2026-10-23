@@ -22,6 +22,10 @@
   "dataset_version": "v1.0.0-F2",
   "origen": "ESTIMADO",
   "metodo": "RANDOM_FOREST_SPATIAL_CV_ONNX",
-  "onnx_max_abs_diff": 0.0,
+  "advertencia": "Con n=20 y 8 comarcas el R² fuera de muestra es inestable y puede ser negativo. M1 es un módulo ilustrativo, no un AVM validado.",
+  "onnx_max_abs_diff": 0.0005468750000545697,
+  "onnx_max_rel_diff": 3.649242215192778e-07,
+  "onnx_rel_tolerance": 1e-06,
+  "onnx_abs_tolerance": 0.001,
   "onnx_equivalence_passed": true
 }

@@ -7,7 +7,10 @@ import pytest
 from fastapi.testclient import TestClient
 
 from src.lodcore.models.m4_capacidad.reglas_no_compensatorias import aplicar_salvaguarda_no_compensatoria
-from src.lodcore.explain.redaccion_natural import verificar_ausencia_causalidad
+from src.lodcore.explain.redaccion_natural import (
+    verificar_ausencia_causalidad,
+    redactar_explicacion_shap,
+)
 from src.lodcore.serving.fastapi.app import app
 
 client = TestClient(app)
@@ -35,6 +38,38 @@ def test_salvaguarda_no_compensatoria_colapso_educativo():
     assert res["alerta_no_compensatoria"] is True
     assert res["semaforo_ica"] == "BAJA"
     assert res["indice_capacidad_ajustado"] < 40.0
+
+def test_salvaguarda_no_compensatoria_no_muta_entrada():
+    muni = {
+        "hab_por_medico": 900.0,
+        "ocupacion_escolar_pct": 80.0,
+        "indice_capacidad_global": 70.0
+    }
+    aplicar_salvaguarda_no_compensatoria(muni)
+    assert "indice_capacidad_ajustado" not in muni
+    assert "alerta_no_compensatoria" not in muni
+
+def test_salvaguarda_no_compensatoria_exige_campos():
+    with pytest.raises(ValueError):
+        aplicar_salvaguarda_no_compensatoria({"indice_capacidad_global": 70.0})
+
+
+def test_redaccion_no_atribuye_regla_dura_por_redondeo():
+    texto = redactar_explicacion_shap(
+        municipio="Municipio Prueba",
+        score_predicho=70.004,
+        ic_95_inf=68.0,
+        ic_95_sup=72.0,
+        base_value=65.0,
+        contribuciones=[
+            {"feature": "score_sanidad", "feature_value": 80.0, "shap_value": 3.0},
+            {"feature": "score_vivienda", "feature_value": 30.0, "shap_value": -1.0},
+        ],
+        alerta_no_compensatoria=False,
+        score_ajustado=70.0,
+    )
+    assert "regla dura" not in texto
+    assert verificar_ausencia_causalidad(texto) is True
 
 def test_detector_lenguaje_causal():
     texto_valido = "El modelo asocia una aportación positiva con el sub-índice sanitario."
@@ -77,6 +112,11 @@ def test_fastapi_n3_whatif_endpoint():
     assert data["origen"] == "SIMULADO"
     sim = data["estado_simulado"]
     assert "ic_95_inferior" in sim and "ic_95_superior" in sim
-    assert sim["ic_95_inferior"] <= sim["indice_ica_ajustado"] <= sim["ic_95_superior"] or sim["alerta_no_compensatoria"]
+    assert sim["ic_95_inferior"] <= sim["indice_ica_ajustado"] <= sim["ic_95_superior"]
     assert "shap_recalculado" in sim
     assert verificar_ausencia_causalidad(sim["explicacion_natural_es"]) is True
+
+def test_fastapi_n3_whatif_municipio_inexistente_404():
+    resp = client.post("/whatif", json={"id_municipio": 99999})
+    assert resp.status_code == 404
+    assert "No existe el municipio" in resp.json()["detail"]

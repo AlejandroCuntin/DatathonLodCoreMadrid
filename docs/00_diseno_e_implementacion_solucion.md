@@ -2,6 +2,12 @@
 **II DATATHON LODCOREMADRID · COMUNIDAD DE MADRID / UC3M**  
 *Proyecto: Herramienta de Diagnóstico del Índice de Capacidad de Acogida (ICA) en Municipios < 50.000 Habitantes*
 
+> ⚠️ **AVISO (octubre 2026)**: documento de diseño inicial. La implementación
+> vigente está en `src/lodcore/`, `scripts/run_all_models_n1_n2_n3.py` y
+> `oracle/ddl/`. Las referencias a `etl/etl_pipeline.py` y a la tabla
+> `PARAMETROS_MODELO` están obsoletas: los umbrales viven en
+> `src/lodcore/config/thresholds.py` y los hiperparámetros en `params.yaml`.
+
 ---
 
 ## 1. RESUMEN EJECUTIVO Y PROPÓSITO DEL SISTEMA

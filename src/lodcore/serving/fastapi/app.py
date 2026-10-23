@@ -15,6 +15,7 @@ from src.lodcore.serving.fastapi.recomendar import (
 )
 from src.lodcore.serving.fastapi.whatif import (
     SimuladorWhatIfRequest,
+    MunicipioNoEncontrado,
     ejecutar_simulacion_whatif
 )
 
@@ -23,15 +24,17 @@ app = FastAPI(
     description=(
         "Servicio de inferencia interactiva para el II Datathon LoDCOREMadrid 2026. "
         "Expone únicamente `/recomendar` (M5 MCDM coseno ponderado) y `/whatif` "
-        "(M4 contrafactual con recálculo SHAP y reglas duras no compensatorias)."
+        "(M4 contrafactual con atribuciones aditivas y reglas duras no compensatorias)."
     ),
     version=__version__
 )
 
 app.add_middleware(
     CORSMiddleware,
+    # CORS prohíbe combinar origen comodín con credenciales: al no usar cookies,
+    # se desactivan las credenciales para que el navegador acepte el comodín.
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -61,11 +64,13 @@ def post_recomendar(req: PreferenciasCiudadanoRequest):
 def post_whatif(req: SimuladorWhatIfRequest):
     """
     Ejecuta una simulación contrafactual sobre un municipio ante cambios demográficos o
-    inversiones dotacionales, recalculando SHAP, bandas al 95 % y el semáforo no compensatorio.
+    inversiones dotacionales, recalculando atribuciones, bandas al 95 % y el semáforo no compensatorio.
     """
     try:
         return ejecutar_simulacion_whatif(req)
-    except ValueError as exc:
+    except MunicipioNoEncontrado as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
     except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc

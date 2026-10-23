@@ -9,7 +9,11 @@ CREATE TABLE raw_ine_padron (
     nombre_municipio VARCHAR2(100) NOT NULL,
     poblacion_total NUMBER NOT NULL,
     anio_referencia NUMBER(4) NOT NULL,
-    origen VARCHAR2(50) DEFAULT 'INE_PADRON_2025' NOT NULL,
+    -- `origen` usa el enum global; la fuente concreta va en `fuente_datos`.
+    origen VARCHAR2(50) DEFAULT 'OBSERVADO' NOT NULL,
+    fuente_datos VARCHAR2(150) DEFAULT 'INE_PADRON' NOT NULL,
+    metodo VARCHAR2(100) DEFAULT 'INGESTA_CRUDA' NOT NULL,
+    dataset_version VARCHAR2(20) DEFAULT 'v1.0.0-F2' NOT NULL,
     fecha_disponible DATE NOT NULL,
     fecha_carga TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -21,7 +25,10 @@ CREATE TABLE raw_ckan_sanidad (
     nombre_centro VARCHAR2(150) NOT NULL,
     num_medicos NUMBER(4) DEFAULT 1 NOT NULL,
     hospital_adscrito VARCHAR2(150),
-    origen VARCHAR2(50) DEFAULT 'DATOS_COMUNIDAD_MADRID' NOT NULL,
+    origen VARCHAR2(50) DEFAULT 'OBSERVADO' NOT NULL,
+    fuente_datos VARCHAR2(150) DEFAULT 'COMUNIDAD_DE_MADRID' NOT NULL,
+    metodo VARCHAR2(100) DEFAULT 'INGESTA_CRUDA' NOT NULL,
+    dataset_version VARCHAR2(20) DEFAULT 'v1.0.0-F2' NOT NULL,
     fecha_disponible DATE NOT NULL
 );
 
@@ -31,6 +38,9 @@ CREATE TABLE raw_ckan_educacion (
     nombre_centro VARCHAR2(150) NOT NULL,
     plazas_totales NUMBER(5) NOT NULL,
     alumnos_matriculados NUMBER(5) NOT NULL,
-    origen VARCHAR2(50) DEFAULT 'DATOS_COMUNIDAD_MADRID' NOT NULL,
+    origen VARCHAR2(50) DEFAULT 'OBSERVADO' NOT NULL,
+    fuente_datos VARCHAR2(150) DEFAULT 'COMUNIDAD_DE_MADRID' NOT NULL,
+    metodo VARCHAR2(100) DEFAULT 'INGESTA_CRUDA' NOT NULL,
+    dataset_version VARCHAR2(20) DEFAULT 'v1.0.0-F2' NOT NULL,
     fecha_disponible DATE NOT NULL
 );

@@ -19,14 +19,24 @@ REQUIRED_MUNICIPAL_COLUMNS = [
     "num_medicos_ap",
     "num_plazas_escolares",
     "num_alumnos_matriculados",
+    "hab_por_medico",
+    "ocupacion_escolar_pct",
     "score_sanidad",
     "score_educacion",
     "score_conectividad",
     "score_vivienda",
     "indice_capacidad_global",
     "personas_acogida_efectiva",
-    "factor_limitante"
+    "factor_limitante",
+    # Trazabilidad obligatoria (AGENTS.md): sin estos campos no se publica nada
+    "origen",
+    "metodo",
+    "dataset_version",
+    "fecha_disponible",
+    "fuente_datos",
 ]
+
+ORIGENES_VALIDOS = {"OBSERVADO", "IMPUTADO", "ESTIMADO", "PROYECTADO", "SIMULADO"}
 
 def ejecutar_quality_gates(df: pd.DataFrame) -> Dict[str, Any]:
     """
@@ -41,7 +51,24 @@ def ejecutar_quality_gates(df: pd.DataFrame) -> Dict[str, Any]:
         errores.append(f"Columnas obligatorias ausentes: {faltantes}")
 
     if not errores:
-        # 2. Unicidad de clave primaria e INE
+        # 2. No-nulidad de las columnas obligatorias (un nulo silencioso invalida el panel)
+        nulos = {c: int(df[c].isna().sum()) for c in REQUIRED_MUNICIPAL_COLUMNS if df[c].isna().any()}
+        if nulos:
+            errores.append(f"Valores nulos en columnas obligatorias: {nulos}")
+
+        # 2b. Procedencia: cada fila debe declarar un origen permitido (combinable con '+')
+        origenes_invalidos = sorted({
+            str(o) for o in df["origen"].dropna().unique()
+            if any(parte.strip() not in ORIGENES_VALIDOS for parte in str(o).split("+"))
+        })
+        if origenes_invalidos:
+            errores.append(f"Valores de 'origen' no permitidos: {origenes_invalidos}")
+
+        # 2c. Fechas de disponibilidad parseables (control de punto-en-tiempo)
+        if pd.to_datetime(df["fecha_disponible"], errors="coerce").isna().any():
+            errores.append("'fecha_disponible' contiene fechas no parseables")
+
+        # 2d. Unicidad de clave primaria e INE
         if df["id_municipio"].duplicated().any():
             errores.append("Duplicados detectados en 'id_municipio'")
         if df["codigo_ine"].duplicated().any():
@@ -59,6 +86,16 @@ def ejecutar_quality_gates(df: pd.DataFrame) -> Dict[str, Any]:
         # 5. Precios positivos
         if (df["precio_m2_compra"] <= 0).any():
             errores.append("Precios por m² no positivos detectados")
+
+        # 6. Ratios de saturación en dominio físico
+        if (df["hab_por_medico"] <= 0).any():
+            errores.append("'hab_por_medico' debe ser positivo")
+        if (df["ocupacion_escolar_pct"] < 0).any():
+            errores.append("'ocupacion_escolar_pct' no puede ser negativo")
+        if (df["num_medicos_ap"] <= 0).any():
+            errores.append("'num_medicos_ap' debe ser positivo (evita ratios infinitos)")
+        if (df["num_plazas_escolares"] <= 0).any():
+            errores.append("'num_plazas_escolares' debe ser positivo (evita ratios infinitos)")
 
     if errores:
         raise ValueError("PUERTA DE CALIDAD RECHAZADA: " + " | ".join(errores))

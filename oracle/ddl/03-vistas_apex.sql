@@ -18,6 +18,7 @@ SELECT
     
     -- Regla DURA de No-Compensatoriedad:
     -- Si hab_por_medico > 1500 o ocupacion_escolar_pct > 95, el semáforo se fuerza a BAJA (<40)
+    -- Sincronizar estos valores con src/lodcore/config/thresholds.py (fuente canónica).
     CASE 
         WHEN m.hab_por_medico > 1500 OR m.ocupacion_escolar_pct > 95.0 THEN 'BAJA'
         WHEN m.indice_capacidad_global >= 60.0 THEN 'ALTA'
@@ -35,7 +36,8 @@ SELECT
     m.arquetipo_nombre,
     m.dataset_version,
     m.origen,
-    m.metodo
+    m.metodo,
+    m.fuente_datos
 FROM municipios_procesados m;
 
 CREATE OR REPLACE VIEW v_apex_panel_institucional AS
@@ -50,8 +52,10 @@ SELECT
     SUM(CASE WHEN m.factor_limitante = 'SANIDAD' THEN 1 ELSE 0 END) AS alerta_sanitaria,
     SUM(CASE WHEN m.factor_limitante = 'EDUCACION' THEN 1 ELSE 0 END) AS alerta_educativa,
     SUM(CASE WHEN m.factor_limitante = 'VIVIENDA' THEN 1 ELSE 0 END) AS alerta_vivienda,
-    m.dataset_version,
-    m.origen,
-    m.metodo
+    MAX(m.dataset_version) AS dataset_version,
+    -- La procedencia es por municipio; en una agregación comarcal se declaran
+    -- todos los orígenes presentes, no se agrupa por ellos (rompería el total).
+    LISTAGG(DISTINCT m.origen, ' | ') WITHIN GROUP (ORDER BY m.origen) AS origen,
+    'AGREGACION_COMARCADA_APEX' AS metodo
 FROM municipios_procesados m
-GROUP BY m.comarca, m.dataset_version, m.origen, m.metodo;
+GROUP BY m.comarca;

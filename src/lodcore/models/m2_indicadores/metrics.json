@@ -1,7 +1,8 @@
 {
-  "model_name": "M2_PCA_ISOCRONAS_30MIN",
+  "model_name": "M2_PCA_HEURISTICA_30MIN",
   "n_municipios": 20,
-  "explained_variance_ratio_pc1": {
+  "explained_variance_ratio_pc1": 0.7044,
+  "explained_variance_por_bloque": {
     "subindice_sanidad_educacion": 0.7263,
     "subindice_conectividad": 0.7761,
     "subindice_sostenibilidad": 0.6875,
@@ -11,5 +12,5 @@
   "municipios_30min_publico": 8,
   "dataset_version": "v1.0.0-F2",
   "origen": "ESTIMADO",
-  "metodo": "PCA_MINMAX_0_100_ISOCRONA_CRTM"
+  "metodo": "PCA_MINMAX_0_100_HEURISTICA_TIEMPO_PARADAS"
 }

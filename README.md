@@ -1,65 +1,183 @@
-# ICA · Índice de Capacidad de Acogida — II Datathon LoDCOREMadrid
+# LoDCORE Madrid · Índice de Capacidad de Acogida (ICA)
 
-Herramienta de diagnóstico para identificar qué municipios de la Comunidad de Madrid
-de **menos de 50.000 habitantes** pueden acoger nueva población sin saturar sus
-servicios públicos.
+MVP para el **II Datathon LoDCOREMadrid 2026** (UC3M + Comunidad de Madrid).
+Identifica en qué municipios de menos de 50.000 habitantes se puede acoger nueva
+población **sin saturar sanidad, educación, vivienda y conectividad**, y permite
+simular inversiones y shocks demográficos antes de decidir.
 
-## Estructura
+> **Alcance del MVP**: piloto reproducible sobre **20 municipios de 8 comarcas**.
+> No pretende cubrir los ~160 municipios menores de 50.000 hab. de la región.
+> El panel es una **maqueta calibrada**: la columna `fuente_datos` distingue la
+> parte padronal de la calibrada sintéticamente (seed 2026).
+
+---
+
+## 1. Estructura real del repositorio
 
 ```
-DATATHON/
+DatathonLodCoreMadrid/
+├── params.yaml                      # Hiperparámetros (los leen los modelos)
 ├── requirements.txt
-├── etl/
-│   └── etl_pipeline.py          # Ingesta + generador sintético + algoritmo ICA + exportadores
-├── sql/
-│   ├── 01_ddl_schema.sql        # DDL Oracle (tablas, PK/FK, CHECK, índices, comentarios)
-│   └── 02_dml_inserts.sql       # GENERADO por el ETL (INSERT Oracle)
-└── data/
-    ├── raw/                     # (opcional) CSV con datos reales para --entrada-csv
-    └── output/                  # GENERADO: municipios_ica.csv/.json + 1 CSV por tabla
+├── dvc.yaml                         # Pipeline reproducible (opcional en el sprint)
+├── index.html                       # Prototipo visual estático (no consume la API)
+├── src/lodcore/
+│   ├── config/                      # thresholds.py, weights.py, cargar_params()
+│   ├── data/                        # quality gates, punto-en-tiempo, procedencia
+│   ├── models/
+│   │   ├── m1_avm/                  # M1 · valoración hedónica y esfuerzo familiar
+│   │   ├── m2_indicadores/          # M2 · PCA + isócronas de 30 min
+│   │   ├── m3_demografia/           # M3 · extrapolación demográfica calibrada
+│   │   ├── m4_capacidad/            # M4 · ICA + reglas no compensatorias (core)
+│   │   └── m5_recomendador/         # M5 · K-Means + recomendación MCDM
+│   ├── explain/                     # atribuciones aditivas y redacción sin causalidad
+│   ├── publish/                     # bandas 95 %, escritura Oracle
+│   └── serving/fastapi/             # API N3: /recomendar y /whatif
+├── scripts/run_all_models_n1_n2_n3.py
+├── tests/                           # unit + integración (pytest)
+├── oracle/ddl/                      # 01..05 DDL Oracle 23ai / APEX
+├── oracle/onnx/                     # binarios ONNX para N2
+├── data/output/                     # payload de entrada y dataset ML
+├── data/processed/                  # panel integrado F2
+├── data/validated/                  # panel que pasa las puertas de calidad
+└── docs/                            # informe de validación y notas de diseño
 ```
 
-## Ejecución
+---
+
+## 2. Puesta en marcha
 
 ```powershell
-pip install -r requirements.txt
-python etl/etl_pipeline.py                 # INE online (tabla 2881) con fallback offline
-python etl/etl_pipeline.py --fuente offline
-python etl/etl_pipeline.py --entrada-csv data/raw/datos_reales.csv
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+
+# Pipeline completo: F2 (validación) -> F3..F7 (modelos) -> N2 (ONNX)
+python scripts/run_all_models_n1_n2_n3.py
+
+# Tests (unitarios + integración)
+python -m pytest tests -q
+
+# API N3 (desde la raíz del proyecto)
+uvicorn src.lodcore.serving.fastapi.app:app --reload --port 8000
 ```
 
-Después, en Oracle (SQL Developer, SQLcl o APEX › SQL Workshop › SQL Scripts):
+Endpoints:
 
-1. `sql/01_ddl_schema.sql`
-2. `sql/02_dml_inserts.sql`
+- `POST /recomendar` — recomendación personalizada para un ciudadano (M5 + MCDM).
+- `POST /whatif` — simulación institucional de residentes, médicos, plazas e inversión.
+- `GET /docs` — Swagger autogenerado por FastAPI.
 
-> SQLcl/SQL*Plus: usar `NLS_LANG=SPANISH_SPAIN.AL32UTF8` para que las tildes se carguen bien.
+> El prototipo `index.html` es **estático** y no llama a la API. La UI de entrega
+> será Oracle APEX; este HTML sirve para validar el discurso visual.
 
-## Procedencia de los datos
+---
 
-| Bloque | Origen | Estado |
-|---|---|---|
-| Población | INE, Padrón 1-ene-2025, tabla 2881 (API JSON) | **Real** |
-| Código INE, comarca, superficie, coordenadas | Referencia embebida (aprox.) | Sustituir por IGN / NOMECALLES |
-| Tiempo a Madrid, precios €/m² | Referencia embebida (aprox.) | Sustituir por CRTM / portales / MITMA |
-| Hospital de referencia y camas | Referencia embebida (aprox.) | Sustituir por Catálogo Nacional de Hospitales |
-| Médicos AP, centros, plazas/alumnos, paradas, fibra, viviendas, suelo | **Sintético** calibrado por tipología (seed 2026) | Sustituir por SERMAS, Educación, CRTM, CNMC, Censo 2021 |
+## 3. Carga en Oracle Database 23ai / APEX
 
-Para sustituir datos sintéticos por reales, crea un CSV con `codigo_ine` + cualquiera de las
-columnas de `COLS_SOBRESCRIBIBLES` (en `etl_pipeline.py`) y pásalo con `--entrada-csv`.
-El campo `MUNICIPIOS.FUENTE_DATOS` registra en cada fila qué parte es real y qué parte es sintética.
+Ejecutar en orden con SQLcl, SQL Developer o APEX › SQL Workshop:
 
-## Modelo ICA (v1.0.0)
+1. `oracle/ddl/01-tablas_raw.sql`
+2. `oracle/ddl/02-tablas_procesadas.sql`
+3. `oracle/ddl/03-vistas_apex.sql`
+4. `oracle/ddl/04-indices_espaciales.sql`
+5. `oracle/ddl/05-modelos_onnx.sql`
 
-$$ICA = 0{,}30\,V + 0{,}30\,\tfrac{S+E}{2} + 0{,}25\,C + 0{,}15\,H$$
+Para el paso 5, copiar `oracle/onnx/*.onnx` a un directorio del servidor y crear
+el objeto de directorio antes de cargar los modelos:
 
-- Indicadores per cápita → winsorización p5–p95 → Min-Max 0–100 (invertido si «menos es mejor»).
-- **Umbrales de absorción** (habitantes adicionales):
-  - Sanidad = médicos × 1.500 − población
-  - Educación = (plazas × 0,95 − alumnos) / 0,17
-  - Vivienda = (vacías × 0,30 + viviendas edificables en suelo vacante) × 2,5
-  - *Sin colapso* = mín(Sanidad, Educación) · *Efectiva* = mín(las tres) · *factor limitante* = argmín
+```sql
+CREATE OR REPLACE DIRECTORY LODCORE_ONNX_DIR AS '/opt/lodcore/onnx';
+-- Otorgar READ al usuario LODCORE si el directorio lo crea otro usuario.
+```
+
+La vista `v_onnx_scoring_n2` puntúa **con las columnas reales** del panel, no con
+constantes. La equivalencia con Python se verifica con error relativo < 1e-6 y
+absoluto < 1e-3 (ONNX devuelve float32).
+
+Al cargar `data/validated/municipios_panel_validado.csv` en `municipios_procesados`
+(APEX › Data Workshop › Load Data o SQL Developer), mapear estos cuatro nombres:
+
+| Columna del CSV | Columna de la tabla |
+|---|---|
+| `tiempo_medio_madrid_minutos` | `tiempo_madrid_min` |
+| `num_plazas_escolares` | `plazas_escolares` |
+| `num_alumnos_matriculados` | `alumnos_matriculados` |
+| `precio_predicho_avm_m2` | `precio_avm_m2` |
+
+El resto de columnas de la tabla coincide por nombre. La tabla conserva un
+subconjunto de las 88 columnas del CSV; las demás se ignoran al cargar. Las
+columnas calculadas (`densidad`, `hab_por_medico`, `ocupacion_escolar_pct`) no se
+cargan: Oracle las genera. `fecha_disponible`, `origen`, `metodo`,
+`dataset_version` y `fuente_datos` son obligatorias.
+
+---
+
+## 4. Fórmula del ICA y reglas duras
+
+```
+ICA = 0,30 · vivienda
+    + 0,30 · (sanidad + educación) / 2
+    + 0,25 · conectividad
+    + 0,15 · holgura
+```
+
+Capacidad de absorción (habitantes adicionales):
+
+- **Sanidad** = médicos × 1.500 − población
+- **Educación** = (plazas × 0,95 − alumnos) / 0,17
+- **Vivienda** = 0,75 × viviendas vacías + 0,00375 × suelo urbano disponible (m²)
+  (calibración del panel F2; reproduce `personas_absorb_vivienda`)
+- **Sin colapso** = mín(sanidad, educación) · **Efectiva** = mín(las tres)
 - **Coste de ampliación** = médicos adicionales × 450.000 € + plazas adicionales × 12.000 €
-  para ocupar todo el potencial residencial.
 
-Todos los parámetros están en `ParametrosModelo` y se cargan en la tabla `PARAMETROS_MODELO`.
+Regla **no compensatoria** (diferencial del proyecto): si un municipio supera
+**1.500 hab/médico** o **95 % de ocupación escolar**, su ICA se trunca a
+`< 40` (semáforo BAJA) aunque el resto de factores sea excelente.
+
+Los umbrales y costes viven en `src/lodcore/config/thresholds.py`; los
+hiperparámetros en `params.yaml`. **No hay** tabla `PARAMETROS_MODELO`: esa
+referencia del prototipo antiguo quedó obsoleta.
+
+---
+
+## 5. Modelos y estado real
+
+| Modelo | Qué hace | Método real | Estado |
+|---|---|---|---|
+| **M1** | Precio justo €/m², gap de mercado y esfuerzo familiar | Random Forest + CV espacial por comarca | Ilustrativo: con n=20 el R² fuera de muestra es inestable (puede ser negativo) |
+| **M2** | 4 sub-índices 0–100 e isócronas de 30 min | PCA + MinMax + heurística con tiempo a Madrid y paradas (sin rutas OSM/GTFS) | Determinista |
+| **M3** | Población 2030/2035 y escenarios +5 %/+10 % | Extrapolación geométrica calibrada con la proyección padronal 2031 | Determinista, no SARIMAX |
+| **M4** | ICA, banda 95 %, reglas duras y atribuciones | Gradient Boosting + GroupKFold por comarca + ONNX | **Core**; usar `r2_cv_oof`, no el in-sample |
+| **M5** | Arquetipos municipales y recomendación ciudadana | K-Means + coseno ponderado (MCDM) | No supervisado |
+
+**Limitaciones que hay que declarar en la presentación**:
+
+- El target de M4 (`indice_capacidad_global`) es una combinación determinista de
+  los sub-índices; `r2_in_sample = 1.0` **no** es evidencia de generalización.
+  La métrica honesta es `r2_cv_oof` (~0,73 con las 8 comarcas).
+- Las atribuciones de M4 son una **aproximación aditiva de 2 órdenes**, no
+  valores Shapley exactos. El JSON lo declara en `metodo_atribucion`.
+- La parte de servicios y vivienda está calibrada sintéticamente. Antes de uso
+  real hay que sustituirla por SERMAS, Consejería de Educación, CRTM, CNMC y
+  Catastro.
+- El **optimizador** de asignación presupuestaria por comarca y el efecto
+  spillover **no están implementados en el backend**: el what-if evalúa
+  escenarios manuales (médicos, plazas, conectividad, residentes), no busca la
+  combinación óptima. Es la extensión pendiente de P1.
+
+---
+
+## 6. Procedencia y trazabilidad
+
+Toda fila del panel debe portar:
+
+- `origen`: `OBSERVADO | IMPUTADO | ESTIMADO | PROYECTADO | SIMULADO` (combinables con `+`).
+- `metodo`: algoritmo o regla que produjo el valor.
+- `fuente_datos`: fuente oficial concreta (INE, CKAN, Catastro, CRTM, etc.).
+- `dataset_version`: `v1.0.0-F2`.
+- `fecha_disponible`: control de punto-en-tiempo (nada posterior a `fecha_decision`).
+
+Toda predicción publicada debe portar `origen`, `metodo`, `dataset_version` y su
+banda de incertidumbre. Las puertas de `src/lodcore/data/quality_gates.py` bloquean
+el pipeline si falta cualquiera de estos campos en el panel, si hay nulos en
+columnas obligatorias o si un sub-índice sale de `[0, 100]`.

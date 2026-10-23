@@ -11,7 +11,7 @@
       "incertidumbre_relativa_pct": 12.7,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -21,14 +21,14 @@
       "incertidumbre_relativa_pct": 17.34,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 5239,
     "escenario_estres_10pct_2030": 5488,
     "supera_capacidad_en_estres_10pct": false,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -43,7 +43,7 @@
       "incertidumbre_relativa_pct": 12.7,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -53,14 +53,14 @@
       "incertidumbre_relativa_pct": 17.34,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 2212,
     "escenario_estres_10pct_2030": 2317,
     "supera_capacidad_en_estres_10pct": false,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -75,7 +75,7 @@
       "incertidumbre_relativa_pct": 12.7,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -85,14 +85,14 @@
       "incertidumbre_relativa_pct": 17.36,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 439,
     "escenario_estres_10pct_2030": 460,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -107,7 +107,7 @@
       "incertidumbre_relativa_pct": 12.26,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -117,14 +117,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 6529,
     "escenario_estres_10pct_2030": 6840,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -139,7 +139,7 @@
       "incertidumbre_relativa_pct": 12.27,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -149,14 +149,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 10495,
     "escenario_estres_10pct_2030": 10995,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -171,7 +171,7 @@
       "incertidumbre_relativa_pct": 12.27,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -181,14 +181,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 11255,
     "escenario_estres_10pct_2030": 11791,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -203,7 +203,7 @@
       "incertidumbre_relativa_pct": 12.26,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -213,14 +213,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 9052,
     "escenario_estres_10pct_2030": 9483,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -235,7 +235,7 @@
       "incertidumbre_relativa_pct": 12.26,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -245,14 +245,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 8807,
     "escenario_estres_10pct_2030": 9226,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -267,7 +267,7 @@
       "incertidumbre_relativa_pct": 12.7,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -277,14 +277,14 @@
       "incertidumbre_relativa_pct": 17.34,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 1853,
     "escenario_estres_10pct_2030": 1941,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -299,7 +299,7 @@
       "incertidumbre_relativa_pct": 12.26,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -309,14 +309,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 8716,
     "escenario_estres_10pct_2030": 9131,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -331,7 +331,7 @@
       "incertidumbre_relativa_pct": 12.27,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -341,14 +341,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 10273,
     "escenario_estres_10pct_2030": 10762,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -363,7 +363,7 @@
       "incertidumbre_relativa_pct": 12.26,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -373,14 +373,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 9452,
     "escenario_estres_10pct_2030": 9902,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -395,7 +395,7 @@
       "incertidumbre_relativa_pct": 12.27,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -405,14 +405,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 10859,
     "escenario_estres_10pct_2030": 11376,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -427,7 +427,7 @@
       "incertidumbre_relativa_pct": 12.27,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -437,14 +437,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 17921,
     "escenario_estres_10pct_2030": 18775,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -459,7 +459,7 @@
       "incertidumbre_relativa_pct": 12.27,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -469,14 +469,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 5719,
     "escenario_estres_10pct_2030": 5991,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -491,7 +491,7 @@
       "incertidumbre_relativa_pct": 12.27,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -501,14 +501,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 8748,
     "escenario_estres_10pct_2030": 9165,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -523,7 +523,7 @@
       "incertidumbre_relativa_pct": 11.85,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -533,14 +533,14 @@
       "incertidumbre_relativa_pct": 15.11,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 30697,
     "escenario_estres_10pct_2030": 32159,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -555,7 +555,7 @@
       "incertidumbre_relativa_pct": 11.85,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -565,14 +565,14 @@
       "incertidumbre_relativa_pct": 15.11,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 38830,
     "escenario_estres_10pct_2030": 40679,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -587,7 +587,7 @@
       "incertidumbre_relativa_pct": 12.26,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -597,14 +597,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 19751,
     "escenario_estres_10pct_2030": 20692,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -619,7 +619,7 @@
       "incertidumbre_relativa_pct": 12.26,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_5Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_5Y",
       "dataset_version": "v1.0.0-F2"
     },
     "proyeccion_10y_2035": {
@@ -629,14 +629,14 @@
       "incertidumbre_relativa_pct": 16.18,
       "nivel_confianza": 0.95,
       "origen": "PROYECTADO",
-      "metodo": "SARIMAX_EXOG_DRIFT_10Y",
+      "metodo": "EXTRAPOLACION_GEOMETRICA_10Y",
       "dataset_version": "v1.0.0-F2"
     },
     "escenario_estres_5pct_2030": 10581,
     "escenario_estres_10pct_2030": 11085,
     "supera_capacidad_en_estres_10pct": true,
     "origen": "PROYECTADO",
-    "metodo": "SARIMAX_EXOG_CI95",
+    "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
     "dataset_version": "v1.0.0-F2"
   }
 ]

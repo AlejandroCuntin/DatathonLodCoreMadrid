@@ -10,11 +10,18 @@ Un municipio no puede ser calificado con alta capacidad de acogida si sus consul
 
 ### 2. Umbrales Duros de Activación de Colapso
 
-| Factor Crítico | Métrica Operativa | Umbral de Alerta | Fuente Normativa | Acción No Compensatoria |
+| Factor Crítico | Métrica Operativa | Umbral de Alerta | Referencia | Acción No Compensatoria |
 |---|---|---|---|---|
-| **Sanidad de Atención Primaria** | Habitantes por Médico AP | **> 1.500 hab/médico** | SERMAS / Criterios OMS | Techo ICA fijado en **39.0** (Alerta Baja) |
-| **Educación Obligatoria** | Tasa de Ocupación Escolar | **> 95.0 %** | Consejería de Educación CAM | Techo ICA fijado en **39.0** (Alerta Baja) |
-| **Vivienda Asequible** | Tasa de Esfuerzo Familiar | **> 40.0 % de la renta** | Banco de España / INE | Techo ICA fijado en **45.0** (Alerta Media) |
+| **Sanidad de Atención Primaria** | Habitantes por Médico AP | **> 1.500 hab/médico** | Parámetro del MVP (contraste con SERMAS) | Techo ICA fijado en **39.0** (Alerta Baja) |
+| **Educación Obligatoria** | Tasa de Ocupación Escolar | **> 95.0 %** | Parámetro del MVP (contraste con Consejería de Educación) | Techo ICA fijado en **39.0** (Alerta Baja) |
+
+> **Nota de honestidad:** 1.500 hab/médico y 95 % de ocupación son parámetros de
+> planificación fijados para el piloto, **no umbrales normativos oficiales**. Antes
+> de un uso real deben validarse con SERMAS y la Consejería de Educación.
+
+> La asequibilidad de vivienda **no** se aplica como regla dura en el MVP: entra
+> en el ICA con peso 0,30. El esfuerzo familiar se muestra en M1 como indicador,
+> pero no trunca el índice.
 
 ### 3. Semáforo ICA (Índice de Capacidad de Acogida)
 

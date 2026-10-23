@@ -26,13 +26,32 @@ def consolidate_f2_dataset() -> str:
     df = pd.DataFrame(records)
 
     # Añadir columnas obligatorias de punto-en-tiempo y procedencia (Fase F2)
-    df["fecha_disponible"] = df.get("fecha_referencia", "2026-10-14")
-    df["origen"] = "OBSERVADO"
+    if "fecha_referencia" in df.columns:
+        df["fecha_disponible"] = df["fecha_referencia"]
+    else:
+        df["fecha_disponible"] = "2026-10-14"
+    df["fecha_disponible"] = pd.to_datetime(df["fecha_disponible"], errors="coerce").dt.date.astype(str)
+
+    # Procedencia honesta: la población es INE observada, pero servicios/vivienda
+    # están calibrados sintéticamente (ver columna 'fuente_datos'). No etiquetar
+    # todo el panel como OBSERVADO.
+    if "fuente_datos" in df.columns:
+        df["origen"] = "OBSERVADO"
+        es_sintetico = df["fuente_datos"].astype(str).str.contains("SINT", case=False, na=False)
+        df.loc[es_sintetico, "origen"] = "OBSERVADO+SIMULADO"
+    else:
+        # Sin la columna de fuente no podemos separar lo observado de lo calibrado:
+        # ser conservadores y no etiquetar todo como OBSERVADO.
+        df["origen"] = "OBSERVADO+SIMULADO"
+        df["fuente_datos"] = "NO_DECLARADA: payload sin columna fuente_datos"
     df["metodo"] = "PANEL_MUNICIPAL_INTEGRADO_F2"
     df["dataset_version"] = "v1.0.0-F2"
 
     # Filtrar point-in-time
     df = filtrar_point_in_time(df, fecha_decision="2026-10-22", col_fecha="fecha_disponible")
+
+    # Validar ANTES de escribir: nunca dejar un fichero "validado" que no pasó las puertas
+    ejecutar_quality_gates(df)
 
     # Guardar en data/processed/ y data/validated/ y sincronizar data/output/municipios_completo_ml.csv
     Path("data/processed").mkdir(parents=True, exist_ok=True)
@@ -43,7 +62,6 @@ def consolidate_f2_dataset() -> str:
     out_path = "data/output/municipios_completo_ml.csv"
 
     df.to_csv(proc_path, index=False, encoding="utf-8")
-    ejecutar_quality_gates(df)
     df.to_csv(val_path, index=False, encoding="utf-8")
     df.to_csv(out_path, index=False, encoding="utf-8")
     return val_path
@@ -68,10 +86,10 @@ def main() -> None:
     print(f"[F5 Modelo M3 Demografía] Pob 2025: {m3['poblacion_agregada_2025']} -> Pob 2030: {m3['poblacion_proyectada_2030']:.0f} -> Pob 2035: {m3['poblacion_proyectada_2035']:.0f}")
 
     m4 = run_training_m4(data_path=val_path)
-    print(f"[F6 Modelo M4 Capacidad] MAE CV: {m4['mae_cv_mean']} | R² in-sample: {m4['r2_in_sample']} | Max diff ONNX: {m4['onnx_max_abs_diff']:.2e} | SHAP SHA256: {m4['shap_background_sha256'][:16]}...")
+    print(f"[F6 Modelo M4 Capacidad] MAE CV: {m4['mae_cv_mean']} | R² in-sample: {m4['r2_in_sample']} | Max diff ONNX: {m4['onnx_max_abs_diff']:.2e} | Hash atribuciones: {m4['shap_background_sha256'][:16]}...")
 
     m5 = run_training_m5(data_path=val_path)
-    print(f"[F7 Modelo M5 Recomendador] K-Means (k=4) Silhouette: {m5['silhouette_score']}")
+    print(f"[F7 Modelo M5 Recomendador] K-Means (k={m5['n_clusters']}) Silhouette: {m5['silhouette_score']}")
 
     print("=" * 72)
     print("ARTEFACTOS ONNX EXPORTADOS Y LISTOS PARA ORACLE 23ai Y FASTAPI N3")

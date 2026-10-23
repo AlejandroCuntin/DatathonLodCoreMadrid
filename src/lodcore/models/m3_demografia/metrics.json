@@ -1,5 +1,5 @@
 {
-  "model_name": "M3_DEMOGRAFIA_SARIMAX_PROPHET",
+  "model_name": "M3_DEMOGRAFIA_EXTRAPOLACION_GEOMETRICA",
   "n_municipios": 20,
   "poblacion_agregada_2025": 200267,
   "poblacion_proyectada_2030": 216597.0,
@@ -8,5 +8,6 @@
   "confidence_level": 0.95,
   "dataset_version": "v1.0.0-F2",
   "origen": "PROYECTADO",
-  "metodo": "SARIMAX_EXOG_CI95"
+  "metodo": "EXTRAPOLACION_GEOMETRICA_CALIBRADA_CI95",
+  "advertencia": "Proyección determinista calibrada con la proyección padronal intermedia de 2031. No es un modelo SARIMAX ni Prophet."
 }

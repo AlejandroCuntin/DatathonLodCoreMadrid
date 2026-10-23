@@ -3,6 +3,12 @@
 *Evento de Lanzamiento: 14 de Octubre de 2026 · Salón de Grados (Campus de Leganés, UC3M)*  
 *Fuente Oficial:* [Programa Datathon LoDCOREMadrid](https://datathon.lodcoremadrid.es/index.php/programa/)
 
+> **Nota de vigencia (MVP):** este documento describe el diseño objetivo y la
+> correspondencia con las bases del concurso. La implementación actual vive en
+> `src/lodcore/` y en el esquema `municipios_procesados` (`oracle/ddl/`), no en
+> `etl_pipeline.py` ni en las tablas `INDICES_CAPACIDAD` / `PARAMETROS_MODELO`.
+> Consultar `README.md` para el estado real y los comandos de ejecución.
+
 ---
 
 ## 1. AUDITORÍA DEL PROGRAMA OFICIAL Y PARTICIPANTES INSTITUCIONALES

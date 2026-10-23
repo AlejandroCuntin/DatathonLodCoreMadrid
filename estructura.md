@@ -3,6 +3,13 @@
 Árbol de directorios y justificación de cada carpeta y archivo clave.
 Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos (AVM, indicadores, demografía, capacidad de acogida, recomendador), publicación en Oracle/APEX y serving mínimo en FastAPI.
 
+> **Aviso (23 oct 2026):** este documento es el **mapa objetivo** del repositorio,
+> no un inventario de lo ya implementado. El estado real, los comandos y las
+> limitaciones están en `README.md`. Carpetas como `src/lodcore/ingest/`,
+> `mlruns/` o `.github/prompts/` pueden no existir todavía; las descripciones de
+> algoritmos en el árbol pueden corresponder al prompt original y no al código
+> actual. La tabla de la sección 4 es la referencia corregida.
+
 ---
 
 ## 1. Árbol de directorios
@@ -110,11 +117,11 @@ Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos
 │   │   │   ├── isocronas.py
 │   │   │   ├── pca_subindices.py
 │   │   │   └── metrics.json
-│   │   ├── m3_demografia/       # SARIMAX / Prophet: proyección 5 y 10 años, bandas incertidumbre
+│   │   ├── m3_demografia/       # Extrapolación geométrica calibrada: proyección 5/10 años, bandas 95%
 │   │   │   ├── train.py
 │   │   │   ├── project.py
 │   │   │   └── metrics.json
-│   │   ├── m4_capacidad/        # XGBoost + SHAP: índice capacidad acogida + no-compensatoriedad
+│   │   ├── m4_capacidad/        # Gradient Boosting + atribuciones aditivas + no-compensatoriedad
 │   │   │   ├── train.py
 │   │   │   ├── predict.py
 │   │   │   ├── shap_background.json  # Fijado y persistido (auditable)
@@ -147,7 +154,7 @@ Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos
 │   │   ├── test_features.py
 │   │   └── test_models.py
 │   ├── integration/
-│   │   ├── test_onnx_equivalence.py   # |score_ONNX − score_Python| < 1e-6
+│   │   ├── test_onnx_equivalence.py   # |score_ONNX − score_Python|: rel < 1e-6, abs < 1e-3
 │   │   ├── test_pointintime.py
 │   │   └── test_no_leakage.py         # Temporal, espacial, entre fases
 │   └── fixtures/                # Datos de prueba sintéticos (nunca PII real)
@@ -194,16 +201,16 @@ Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos
 | `src/lodcore/data/` | Esquemas pandera, procedencia, punto-en-tiempo | Cada celda lleva `origen` y `metodo`. `fecha_disponible` evita fuga temporal. Puertas de calidad con pandera (no Great Expectations en Oracle, que falla con `FROM DUAL`). |
 | `src/lodcore/features/` | Panel municipal + 7 bloques de factores | Implementa exactamente los 7 factores del PDF: demografía, vivienda, transporte, sanidad/educación, necesidades ciudadanas, sostenibilidad, presupuestos. Joins point-in-time. |
 | `src/lodcore/features/subindices.py` | 4 sub-índices 0–100 (MinMaxScaler) | Capacidad Sanitaria/Educativa, Conectividad y Movilidad, Sostenibilidad Ambiental, Músculo Presupuestario. Sin multicolinealidad gracias a PCA. |
-| `src/lodcore/models/m1_avm/` | AVM (RF/LightGBM) | Estima precio justo por m² (compra/alquiler) y esfuerzo financiero familiar. Datos: Catastro + INE renta. Crítico para municipios con poca oferta inmobiliaria (n=41, pocos comparables). |
-| `src/lodcore/models/m2_indicadores/` | PCA + grafos/isócronas | Isócronas 30 min (público vs privado) hacia polos de empleo y hospitales. Dijkstra/A* sobre OSM + GTFS CRTM. |
-| `src/lodcore/models/m3_demografia/` | SARIMAX / Prophet | Proyección 5 y 10 años con bandas de incertidumbre 95 %. Variables exógenas: precios Madrid capital, presupuesto inversión municipal. |
-| `src/lodcore/models/m4_capacidad/` | XGBoost + SHAP + no-compensatoriedad | Core del proyecto. Predice índice de capacidad de acogida futura. SHAP explica por municipio (sin causalidad). Reglas duras impiden que un servicio colapsado se compense con otros. |
-| `src/lodcore/models/m5_recomendador/` | K-Means/GMM + MCDM | Segmenta municipios en tipologías (nodos metropolitanos, pueblos teletrabajo, etc.). Ranking personalizado por preferencias del ciudadano. |
-| `src/lodcore/explain/` | SHAP → JSON + redacción español | SHAP describe el modelo, no la realidad. Redacción en español de España, sin palabras causales. JSON se publica en Oracle para que APEX lo dibuje. |
+| `src/lodcore/models/m1_avm/` | Random Forest (AVM) | Estima precio de referencia por m² y esfuerzo financiero familiar. Datos: Catastro + INE renta. Con n=20 el R² fuera de muestra es negativo: módulo ilustrativo, no AVM validado. |
+| `src/lodcore/models/m2_indicadores/` | PCA + heurística de tiempos | Isócronas 30 min (público vs privado) estimadas a partir del tiempo a Madrid y de la densidad de paradas; no es un cálculo de rutas sobre OSM/GTFS. |
+| `src/lodcore/models/m3_demografia/` | Extrapolación geométrica calibrada | Proyección 5 y 10 años con bandas de incertidumbre 95 %, calibrada con la proyección padronal intermedia de 2031. |
+| `src/lodcore/models/m4_capacidad/` | Gradient Boosting + atribuciones aditivas + no-compensatoriedad | Core del proyecto. Predice el índice de capacidad de acogida. Las atribuciones (aproximación de 2 órdenes, no Shapley exacto) explican por municipio, sin causalidad. Reglas duras impiden que un servicio colapsado se compense con otros. |
+| `src/lodcore/models/m5_recomendador/` | K-Means + MCDM | Segmenta municipios en 4 tipologías y genera un ranking personalizado por preferencias del ciudadano. |
+| `src/lodcore/explain/` | Atribuciones → JSON + redacción español | Las atribuciones describen el modelo, no la realidad. Redacción en español de España, sin palabras causales. JSON se publica en Oracle para que APEX lo dibuje. |
 | `src/lodcore/publish/` | Escritura Oracle (`oracledb` thin) | Ninguna predicción se publica sin origen y sin banda 95 %. Thin mode = no depende de Oracle Client thick. |
 | `src/lodcore/serving/fastapi/` | N3: `/recomendar`, `/whatif` | Solo dos endpoints en runtime Python. Todo lo demás se puntúa en Oracle (N2). Menor superficie de ataque y mantenimiento. |
 | `tests/unit/` | Pruebas unitarias por capa | Cada componente probado aisladamente. |
-| `tests/integration/test_onnx_equivalence.py` | Equivalencia ONNX < 1e-6 | Obligatorio en CI antes de promover. Detecta fallos de dtype (float64 vs float32) y operadores no soportados. |
+| `tests/integration/test_onnx_equivalence.py` | Equivalencia ONNX (rel < 1e-6, abs < 1e-3) | Obligatorio en CI antes de promover. Detecta fallos de dtype (float64 vs float32) y operadores no soportados. |
 | `tests/integration/test_no_leakage.py` | Sin fuga temporal/espacial/fase | Con n=41 y municipios contiguos, valida `GroupKFold` + split temporal + spatial buffer 20–30 km. |
 | `tests/fixtures/` | Datos sintéticos sin PII | Pruebas reales nunca usan datos personales. |
 | `mlruns/` | MLflow tracking | Experimentos y métricas registrados. Backend Postgres (no Oracle, issue #15195). |

@@ -23,8 +23,12 @@
   },
   "dataset_version": "v1.0.0-F2",
   "origen": "ESTIMADO",
-  "metodo": "GBR_SHAP_NON_COMPENSATORY_ONNX",
-  "shap_background_sha256": "cdb4e87de3fcb51c764128d684fe457ba356db818899ec61f3845750850c1a6b",
-  "onnx_max_abs_diff": 0.0,
+  "metodo": "GBR_ATRIBUCIONES_ADITIVAS_NON_COMPENSATORY_ONNX",
+  "advertencia": "El target (ICA) es una combinación determinista de los sub-índices: r2_in_sample=1.0 no es evidencia de generalización. La métrica de referencia es r2_cv_oof con GroupKFold por comarca.",
+  "shap_background_sha256": "4c86e5edf5164a9d62e809875fce89e5d74358c5e513d4b6a99b319b93a81c85",
+  "onnx_max_abs_diff": 1.0314583775539177e-05,
+  "onnx_max_rel_diff": 2.289004594584864e-07,
+  "onnx_rel_tolerance": 1e-06,
+  "onnx_abs_tolerance": 0.001,
   "onnx_equivalence_passed": true
 }

@@ -1,6 +1,6 @@
 """
 redaccion_natural.py - Generación de explicaciones en español de España sin vocabulario causal.
-Regla transversal: SHAP describe el modelo ("el modelo asocia"), nunca causalidad física.
+Regla transversal: las atribuciones describen el modelo ("el modelo asocia"), nunca causalidad física.
 """
 
 from typing import Dict, Any, List
@@ -48,18 +48,39 @@ def redactar_explicacion_shap(
     base_value: float,
     contribuciones: List[Dict[str, Any]],
     alerta_no_compensatoria: bool = False,
-    motivo_colapso: str = ""
+    motivo_colapso: str = "",
+    score_ajustado: float | None = None
 ) -> str:
     """
     Genera un párrafo explicativo en español de España riguroso y libre de afirmaciones causales.
+
+    `score_predicho` es la salida bruta del modelo (a la que suman las contribuciones);
+    `score_ajustado` es el valor tras aplicar la regla dura, si difiere.
     """
     ordenadas_pos = sorted([c for c in contribuciones if c["shap_value"] > 0], key=lambda x: x["shap_value"], reverse=True)
     ordenadas_neg = sorted([c for c in contribuciones if c["shap_value"] < 0], key=lambda x: x["shap_value"])
 
-    partes = [
-        f"En la evaluación de {municipio}, el modelo estima un índice de capacidad de {score_predicho:.1f} puntos "
-        f"(intervalo de confianza al 95 %: [{ic_95_inf:.1f}, {ic_95_sup:.1f}]) respecto a la línea base regional de {base_value:.1f} puntos."
-    ]
+    if (
+        alerta_no_compensatoria
+        and score_ajustado is not None
+        and score_ajustado < score_predicho - 0.01
+    ):
+        frase_principal = (
+            f"En la evaluación de {municipio}, el modelo estima un índice bruto de capacidad de "
+            f"{score_predicho:.1f} puntos (intervalo de confianza al 95 %: "
+            f"[{ic_95_inf:.1f}, {ic_95_sup:.1f}]) respecto al valor medio del background de "
+            f"referencia ({base_value:.1f} puntos); la regla dura de no-compensatoriedad lo "
+            f"ajusta a {score_ajustado:.1f} puntos."
+        )
+    else:
+        frase_principal = (
+            f"En la evaluación de {municipio}, el modelo estima un índice de capacidad de "
+            f"{score_predicho:.1f} puntos (intervalo de confianza al 95 %: "
+            f"[{ic_95_inf:.1f}, {ic_95_sup:.1f}]) respecto al valor medio del background de "
+            f"referencia ({base_value:.1f} puntos)."
+        )
+
+    partes = [frase_principal]
 
     if ordenadas_pos:
         top_p = ordenadas_pos[0]

@@ -42,6 +42,12 @@ def validar_procedencia_registro(registro: Dict[str, Any]) -> bool:
     faltantes = [c for c in campos_obligatorios if not registro.get(c)]
     if faltantes:
         raise ValueError(f"Registro rechazado por falta de procedencia: faltan {faltantes}")
-    if registro["origen"] not in {e.value for e in TipoOrigen} and "+" not in str(registro["origen"]):
-        raise ValueError(f"Tipo de origen inválido: {registro['origen']}")
+    validos = {e.value for e in TipoOrigen}
+    partes = [p.strip() for p in str(registro["origen"]).split("+")]
+    invalidos = [p for p in partes if p not in validos]
+    if invalidos:
+        raise ValueError(
+            f"Tipo de origen inválido: {registro['origen']} "
+            f"(partes no permitidas: {invalidos})"
+        )
     return True

@@ -19,14 +19,16 @@ def run_training_m2(
     df_full = evaluar_isocronas_30min(df_pca)
 
     metrics = {
-        "model_name": "M2_PCA_ISOCRONAS_30MIN",
+        "model_name": "M2_PCA_HEURISTICA_30MIN",
         "n_municipios": int(len(df_full)),
-        "explained_variance_ratio_pc1": varianza,
+        # Varianza explicada por el PC1 de cada bloque (escala 0-1), y su media.
+        "explained_variance_ratio_pc1": round(float(sum(varianza.values()) / len(varianza)), 4),
+        "explained_variance_por_bloque": varianza,
         "municipios_30min_privado": int(df_full["cumple_isocrona_30min_privado"].sum()),
         "municipios_30min_publico": int(df_full["cumple_isocrona_30min_publico"].sum()),
         "dataset_version": "v1.0.0-F2",
         "origen": TipoOrigen.ESTIMADO.value,
-        "metodo": "PCA_MINMAX_0_100_ISOCRONA_CRTM"
+        "metodo": "PCA_MINMAX_0_100_HEURISTICA_TIEMPO_PARADAS"
     }
 
     out_p = Path(out_dir)
@@ -36,4 +38,4 @@ def run_training_m2(
 
 if __name__ == "__main__":
     m = run_training_m2()
-    print(f"[M2 Indicadores] Completado. Varianza explicada PC1: {m['explained_variance_ratio_pc1']}")
+    print(f"[M2 Indicadores] Completado. Varianza media explicada por PC1: {m['explained_variance_ratio_pc1']}")
