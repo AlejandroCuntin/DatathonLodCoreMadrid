@@ -1,0 +1,125 @@
+/* LoDCORE · Observatorio Territorial (index.css) — estilos del contenido (acotados a #lodcore-obs: no afectan al resto de la aplicación APEX) */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+#lodcore-obs { --font-primary: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; --font-serif: 'IBM Plex Serif', Georgia, serif; --font-mono: 'IBM Plex Mono', monospace; --madrid-red: #C8102E; --madrid-red-dark: #9F0B22; --madrid-red-light: #FDF2F3; --madrid-red-border: #F7B5BD; --madrid-blue: #0078A8; --madrid-blue-light: #F0F7FB; --madrid-blue-dark: #00567A; --text-main: #232323; --text-secondary: #4A5568; --text-muted: #718096; --bg-page: #F8F9FA; --bg-surface: #FFFFFF; --bg-subtle: #F1F3F5; --bg-tinted: #F4F6F8; --border-main: #D9D9D9; --border-subtle: #E2E8F0; --border-dark: #A0AEC0; --status-alta: #1B7A3C; --status-alta-bg: #E8F5EC; --status-media: #B7791F; --status-media-bg: #FEF3C7; --status-baja: #C8102E; --status-baja-bg: #FEE2E2; --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-card: 0 2px 8px rgba(0,0,0,0.08); --shadow-hover: 0 8px 20px rgba(0,0,0,0.12); --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; }
+#lodcore-obs * { box-sizing: border-box; margin: 0; padding: 0; }
+#lodcore-obs { font-family: var(--font-primary); background-color: var(--bg-page); color: var(--text-main); line-height: 1.5; font-size: 15px; -webkit-font-smoothing: antialiased; }
+#lodcore-obs .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+#lodcore-obs .gov-breadcrumb-bar { background: #FFFFFF; border-bottom: 1px solid var(--border-subtle); padding: 10px 0; font-size: 12px; color: var(--text-muted); }
+#lodcore-obs .breadcrumb-trail { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+#lodcore-obs .breadcrumb-trail a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+#lodcore-obs .breadcrumb-trail a:hover { color: var(--madrid-red); text-decoration: underline; }
+#lodcore-obs .breadcrumb-sep { color: var(--border-dark); }
+#lodcore-obs .breadcrumb-current { color: var(--text-main); font-weight: 600; }
+#lodcore-obs .gov-hero { background: #FFFFFF; border-bottom: 1px solid var(--border-main); padding: 32px 0 24px; }
+#lodcore-obs .hero-pretitle { font-size: 12px; font-weight: 700; color: var(--madrid-red); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+#lodcore-obs .hero-title { font-family: var(--font-primary); font-size: 30px; font-weight: 700; color: var(--text-main); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px; }
+#lodcore-obs .hero-lead { font-family: var(--font-serif); font-size: 15px; line-height: 1.6; color: var(--text-secondary); max-width: 960px; margin-bottom: 24px; }
+#lodcore-obs .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+#lodcore-obs .kpi-box { background: var(--bg-subtle); border: 1px solid var(--border-main); border-left: 4px solid var(--madrid-red); padding: 14px 18px; border-radius: var(--radius-sm); }
+#lodcore-obs .kpi-box.blue-left { border-left-color: var(--madrid-blue); }
+#lodcore-obs .kpi-box.green-left { border-left-color: var(--status-alta); }
+#lodcore-obs .kpi-box.ochre-left { border-left-color: var(--status-media); }
+#lodcore-obs .kpi-box-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 4px; }
+#lodcore-obs .kpi-box-num { font-family: var(--font-mono); font-size: 24px; font-weight: 700; color: var(--text-main); line-height: 1.1; margin-bottom: 4px; }
+#lodcore-obs .kpi-box-sub { font-size: 12px; color: var(--text-secondary); }
+#lodcore-obs .main-body { padding: 28px 0 64px; }
+#lodcore-obs .view-panel { display: none; }
+#lodcore-obs .view-panel.active { display: block; }
+#lodcore-obs .official-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--madrid-red); }
+#lodcore-obs .official-title { font-size: 22px; font-weight: 700; color: var(--text-main); letter-spacing: -0.01em; }
+#lodcore-obs .official-desc { font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+#lodcore-obs .filter-panel { background: #FFFFFF; border: 1px solid var(--border-main); padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 24px; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-sm); }
+#lodcore-obs .search-input-box { flex: 1; display: flex; align-items: center; gap: 10px; background: var(--bg-tinted); border: 1px solid var(--border-main); border-radius: var(--radius-sm); padding: 8px 12px; }
+#lodcore-obs .search-input-box input { width: 100%; border: none; background: transparent; outline: none; font-family: var(--font-primary); font-size: 14px; color: var(--text-main); }
+#lodcore-obs .select-filter { font-family: var(--font-primary); font-size: 13px; font-weight: 500; padding: 8px 12px; border: 1px solid var(--border-main); border-radius: var(--radius-sm); background: #FFFFFF; color: var(--text-main); outline: none; cursor: pointer; }
+#lodcore-obs .muni-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+#lodcore-obs .muni-official-card { background: #FFFFFF; border: 1px solid var(--border-main); border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: all 0.2s ease; cursor: pointer; }
+#lodcore-obs .muni-official-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--madrid-red); }
+#lodcore-obs .card-photo-wrap { position: relative; height: 200px; width: 100%; background: #1A202C; overflow: hidden; }
+#lodcore-obs .card-photo-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+#lodcore-obs .muni-official-card:hover .card-photo-img { transform: scale(1.04); }
+#lodcore-obs .card-badge-comarca { position: absolute; top: 12px; left: 12px; background: rgba(35, 35, 35, 0.85); color: #FFFFFF; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: var(--radius-sm); backdrop-filter: blur(4px); }
+#lodcore-obs .card-badge-ica { position: absolute; bottom: 12px; right: 12px; font-family: var(--font-mono); font-size: 13px; font-weight: 700; padding: 5px 10px; border-radius: var(--radius-sm); color: #FFFFFF; box-shadow: 0 2px 6px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 6px; }
+#lodcore-obs .card-content { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+#lodcore-obs .card-header-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+#lodcore-obs .card-muni-name { font-size: 19px; font-weight: 700; color: var(--text-main); letter-spacing: -0.01em; }
+#lodcore-obs .card-ine-code { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+#lodcore-obs .card-geography-sub { font-size: 12px; color: var(--madrid-blue-dark); font-weight: 600; margin-bottom: 12px; }
+#lodcore-obs .card-specs-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 14px; background: var(--bg-subtle); border-radius: var(--radius-sm); overflow: hidden; }
+#lodcore-obs .card-specs-table tr { border-bottom: 1px solid var(--border-subtle); }
+#lodcore-obs .card-specs-table tr:last-child { border-bottom: none; }
+#lodcore-obs .card-specs-table td { padding: 6px 10px; }
+#lodcore-obs .card-specs-label { color: var(--text-muted); font-weight: 600; width: 48%; }
+#lodcore-obs .card-specs-val { color: var(--text-main); font-weight: 600; text-align: right; }
+#lodcore-obs .card-footer-strip { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; }
+#lodcore-obs .card-cluster-pill { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: var(--radius-sm); background: var(--madrid-blue-light); color: var(--madrid-blue-dark); border: 1px solid #B8E0F2; }
+#lodcore-obs .card-action-link { color: var(--madrid-red); font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+#lodcore-obs .comparador-controls { background: #FFFFFF; border: 1px solid var(--border-main); padding: 20px; border-radius: var(--radius-sm); margin-bottom: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+#lodcore-obs .comparador-slot { display: flex; flex-direction: column; gap: 6px; }
+#lodcore-obs .comparador-slot-label { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); }
+#lodcore-obs .radar-container { background: #FFFFFF; border: 1px solid var(--border-main); padding: 24px; border-radius: var(--radius-sm); margin-bottom: 24px; display: flex; flex-direction: column; align-items: center; }
+#lodcore-obs .radar-svg-wrap { width: 100%; max-width: 520px; height: 400px; }
+#lodcore-obs .radar-legend { display: flex; gap: 24px; margin-top: 16px; font-size: 13px; font-weight: 600; }
+#lodcore-obs .radar-legend-item { display: flex; align-items: center; gap: 8px; }
+#lodcore-obs .legend-color-dot { width: 12px; height: 12px; border-radius: 2px; }
+#lodcore-obs .comparison-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+#lodcore-obs .comp-col-card { background: #FFFFFF; border: 1px solid var(--border-main); border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-card); }
+#lodcore-obs .gov-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); z-index: 500; align-items: center; justify-content: center; padding: 20px; }
+#lodcore-obs .gov-modal-backdrop.open { display: flex; }
+#lodcore-obs .gov-modal-window { background: #FFFFFF; width: 100%; max-width: 960px; max-height: 92vh; border-radius: var(--radius-md); box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow-y: auto; border: 1px solid var(--border-main); position: relative; }
+#lodcore-obs .modal-cover-wrap { height: 260px; width: 100%; position: relative; background: #1A202C; }
+#lodcore-obs .modal-cover-img { width: 100%; height: 100%; object-fit: cover; }
+#lodcore-obs .modal-close-button { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; background: rgba(35, 35, 35, 0.85); border: none; color: #FFFFFF; border-radius: var(--radius-sm); font-size: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+#lodcore-obs .modal-body-content { padding: 28px; }
+#lodcore-obs .modal-title-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid var(--border-main); padding-bottom: 14px; }
+#lodcore-obs .modal-muni-name { font-size: 26px; font-weight: 700; color: var(--text-main); letter-spacing: -0.01em; }
+#lodcore-obs .modal-muni-comarca { font-size: 13px; color: var(--text-secondary); font-weight: 500; margin-top: 2px; }
+#lodcore-obs .dossier-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+#lodcore-obs .dossier-block { background: var(--bg-tinted); border: 1px solid var(--border-main); border-radius: var(--radius-sm); padding: 16px; }
+#lodcore-obs .dossier-block-header { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--madrid-red); margin-bottom: 10px; border-bottom: 1px solid var(--border-main); padding-bottom: 6px; }
+#lodcore-obs .dossier-text { font-size: 13px; line-height: 1.5; color: var(--text-main); }
+#lodcore-obs .dossier-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 12px; }
+#lodcore-obs .rec-wizard-card { background: #FFFFFF; border: 1px solid var(--border-main); border-radius: var(--radius-sm); padding: 24px; box-shadow: var(--shadow-card); margin-bottom: 28px; }
+#lodcore-obs .rec-wizard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+#lodcore-obs .rec-criteria-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--madrid-red); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+#lodcore-obs .rec-option-item { background: var(--bg-subtle); border: 1px solid var(--border-main); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s ease; }
+#lodcore-obs .rec-option-item:hover { border-color: var(--madrid-red); background: #FFFFFF; }
+#lodcore-obs .rec-option-item.active { background: var(--madrid-red-light); border-color: var(--madrid-red); border-left: 4px solid var(--madrid-red); }
+#lodcore-obs .rec-option-name { font-size: 13px; font-weight: 700; color: var(--text-main); }
+#lodcore-obs .rec-option-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+#lodcore-obs .btn-official-calc { background: var(--madrid-red); color: #FFFFFF; font-family: var(--font-primary); font-size: 14px; font-weight: 700; padding: 12px 24px; border: none; border-radius: var(--radius-sm); cursor: pointer; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+#lodcore-obs .btn-official-calc:hover { background: var(--madrid-red-dark); }
+#lodcore-obs .simulator-grid-panel { display: grid; grid-template-columns: 360px 1fr; gap: 24px; }
+#lodcore-obs .sim-card-controls { background: #FFFFFF; border: 1px solid var(--border-main); border-radius: var(--radius-sm); padding: 22px; box-shadow: var(--shadow-card); }
+#lodcore-obs .sim-card-results { background: #FFFFFF; border: 1px solid var(--border-main); border-radius: var(--radius-sm); padding: 24px; box-shadow: var(--shadow-card); }
+#lodcore-obs .gov-table-wrap { background: #FFFFFF; border: 1px solid var(--border-main); border-radius: var(--radius-sm); overflow-x: auto; box-shadow: var(--shadow-card); }
+#lodcore-obs .gov-table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+#lodcore-obs .gov-table th { background: var(--bg-subtle); border-bottom: 2px solid var(--madrid-red); padding: 12px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-main); cursor: pointer; white-space: nowrap; }
+#lodcore-obs .gov-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); color: var(--text-main); }
+#lodcore-obs .gov-table tr:hover td { background: #F4F6F8; }
+#lodcore-obs .badge-status { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: var(--radius-sm); }
+#lodcore-obs .badge-status.alta { background: var(--status-alta-bg); color: var(--status-alta); border: 1px solid #A3D9B1; }
+#lodcore-obs .badge-status.media { background: var(--status-media-bg); color: var(--status-media); border: 1px solid #FCD34D; }
+#lodcore-obs .badge-status.baja { background: var(--status-baja-bg); color: var(--status-baja); border: 1px solid #FCA5A5; }
+#lodcore-obs .gov-footer { background: #232323; color: #D9D9D9; border-top: 4px solid var(--madrid-red); padding: 36px 0 20px; font-size: 13px; }
+#lodcore-obs .footer-content { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+#lodcore-obs .footer-legal { border-top: 1px solid #444444; padding-top: 14px; font-size: 11px; color: #999999; display: flex; justify-content: space-between; }
+#lodcore-obs .svg-icon { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
+@media (max-width: 1024px) {
+  #lodcore-obs .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+  #lodcore-obs .muni-cards-grid { grid-template-columns: repeat(2, 1fr); }
+  #lodcore-obs .rec-wizard-grid { grid-template-columns: 1fr; }
+  #lodcore-obs .simulator-grid-panel { grid-template-columns: 1fr; }
+  #lodcore-obs .comparador-controls { grid-template-columns: 1fr; }
+  #lodcore-obs .comparison-grid { grid-template-columns: 1fr; }
+  #lodcore-obs .dossier-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  #lodcore-obs .kpi-strip { grid-template-columns: 1fr; }
+  #lodcore-obs .muni-cards-grid { grid-template-columns: 1fr; }
+}
+
+/* Botón "Exportar CSV Oficial" (antes estaba en la barra roja) */
+#lodcore-obs .lc-export-btn { margin-left: auto; background: var(--madrid-red); color: #FFFFFF; font-family: var(--font-primary); font-size: 12px; font-weight: 700; padding: 7px 14px; border: none; border-radius: var(--radius-sm); cursor: pointer; display: flex; align-items: center; gap: 6px; }
+#lodcore-obs .lc-export-btn:hover { background: var(--madrid-red-dark); }

@@ -1,4 +1,4 @@
-/* LoDCORE · Mapa de municipios — lógica. Requiere Leaflet 1.9.4 cargado antes. Endpoint: CONFIG.apiUrl */
+/* LoDCORE · Mapa de municipios (mapa.js) — lógica. Requiere Leaflet 1.9.4 cargado antes. Endpoint: CONFIG.apiUrl */
 (function () {
   'use strict';
 
@@ -52,11 +52,11 @@
   var pinned = null;    // id con la tarjeta fijada (clic)
   var map = null, capaMarcadores = null, capaTile = null;
 
-  var GRIS = '#94a3b8';
-  var COLOR_NIVEL = { Alta: '#16a34a', Media: '#d97706', Baja: '#dc2626' };
+  var GRIS = '#A0AEC0';
+  var COLOR_NIVEL = { Alta: '#1B7A3C', Media: '#B7791F', Baja: '#C8102E' };
   var CLASE_NIVEL = { Alta: 'green', Media: 'amber', Baja: 'red' };
   var BD_NIVEL = { Alta: 'proy', Media: 'est', Baja: 'sim' };
-  var COLOR_LIMIT = { 'Sanidad': '#2563eb', 'Educación': '#d97706', 'Vivienda': '#7c3aed' };
+  var COLOR_LIMIT = { 'Sanidad': '#0078A8', 'Educación': '#B7791F', 'Vivienda': '#4A5568' };
   var ALERTAS = {
     ESTABLE: ['Estable', 'green'],
     ATENCION_MEDIA: ['Atención media', 'amber'],
@@ -125,7 +125,7 @@
     if (m[k] === null || m[k] === undefined) return GRIS;
     var r = rango(k), lo = r[0], hi = r[1];
     var t = Math.max(0, Math.min(1, (m[k] - lo) / ((hi - lo) || 1)));
-    return 'rgb(' + Math.round(219 - t * 190) + ',' + Math.round(234 - t * 156) + ',' + Math.round(254 - t * 38) + ')';
+    return 'rgb(' + Math.round(214 - t * 214) + ',' + Math.round(232 - t * 146) + ',' + Math.round(243 - t * 121) + ')';
   }
 
   // ===================== FILTROS =====================
@@ -191,12 +191,12 @@
         radius: esSel ? radio + 3 : radio,
         fillColor: getColor(m, cur),
         fillOpacity: esSel ? 0.95 : 0.8,
-        color: esSel ? '#0f172a' : '#ffffff',
+        color: esSel ? '#232323' : '#ffffff',
         weight: esSel ? 3 : 1.5,
         bubblingMouseEvents: false
       });
       mk.on('mouseover', function () {
-        mk.setStyle({ weight: 3, color: '#0f172a' });
+        mk.setStyle({ weight: 3, color: '#232323' });
         mostrarTarjeta(m, puntoDe(m), m.id === pinned);
       });
       mk.on('mouseout', function () {
@@ -264,9 +264,9 @@
     ].filter(function (x) { return x[0] !== cur; })
      .map(function (x) { return stat(x[1], x[2]); }).join('');
     var cuello = cur === 'limit' ? '' :
-      '<div style="padding:7px 9px;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;">' +
-        '<div style="font-size:11.5px;font-weight:700;color:#991b1b;">' + ICO_AVISO + 'Cuello de botella: ' + esc(m.limit || '—') + '</div>' +
-        (m.limit_det ? '<div style="font-size:11px;color:#7f1d1d;margin-top:2px;">' + esc(m.limit_det) + '</div>' : '') +
+      '<div style="padding:7px 9px;background:var(--madrid-red-light);border:1px solid var(--madrid-red-border);border-radius:var(--radius-sm);">' +
+        '<div style="font-size:11.5px;font-weight:700;color:var(--madrid-red-dark);">' + ICO_AVISO + 'Cuello de botella: ' + esc(m.limit || '—') + '</div>' +
+        (m.limit_det ? '<div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">' + esc(m.limit_det) + '</div>' : '') +
       '</div>';
 
     return '' +
@@ -367,7 +367,7 @@
     }
     if (cur === 'ica') {
       el.innerHTML = titulo +
-        '<div style="' + barra + 'background:linear-gradient(90deg,#dc2626 0 40%,#d97706 40% 60%,#16a34a 60% 100%);"></div>' +
+        '<div style="' + barra + 'background:linear-gradient(90deg,#C8102E 0 40%,#B7791F 40% 60%,#1B7A3C 60% 100%);"></div>' +
         '<div style="' + etiq + '"><span>Baja (&lt;40)</span><span>Media (40–59)</span><span>Alta (≥60)</span></div>';
       return;
     }
@@ -475,7 +475,7 @@
 
     setTile(TILE_INICIAL);
     L.geoJSON(LIMITE_MADRID, {
-      style: { color: '#2563eb', weight: 2.2, dashArray: '3, 4', fillColor: '#38bdf8', fillOpacity: 0.04 },
+      style: { color: '#0078A8', weight: 2.2, dashArray: '3, 4', fillColor: '#0078A8', fillOpacity: 0.04 },
       interactive: false
     }).addTo(map);
     capaMarcadores = L.layerGroup().addTo(map);

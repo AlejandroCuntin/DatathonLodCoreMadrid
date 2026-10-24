@@ -1,0 +1,117 @@
+/* ==========================================================================
+   LoDCORE · Barra superior estilo Comunidad de Madrid
+   Origen: index.html (clases .gov-top-bar, .gov-nav-bar ...)
+
+   USO EN APEX (todas las páginas de la aplicación):
+     Shared Components > User Interface Attributes > Cascading Style Sheet > File URLs
+     #APP_FILES#lodcore-barra-apex.css
+   (el archivo se sube antes en Shared Components > Static Application Files)
+
+   Logotipo: sube logo_comunidad_madrid.svg a la carpeta svg/ de los archivos estáticos y úsalo en
+     User Interface Attributes > Logo (tipo Imagen, o Imagen y texto):
+     #APP_FILES#svg/logo_comunidad_madrid.svg
+
+   El archivo tiene dos partes:
+     A. CSS ORIGINAL extraído tal cual del documento (clases gov-*). Solo se aplica si
+        editas la plantilla de página y usas ese mismo HTML.
+     B. ADAPTACIÓN a Universal Theme (clases t-*): es la que cambia la cabecera real de APEX.
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+/* ==========================================================================
+   A. CSS ORIGINAL EXTRAÍDO (sin cambios)
+   ========================================================================== */
+:root { --font-primary: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; --font-serif: 'IBM Plex Serif', Georgia, serif; --font-mono: 'IBM Plex Mono', monospace; --madrid-red: #C8102E; --madrid-red-dark: #9F0B22; --madrid-red-light: #FDF2F3; --madrid-red-border: #F7B5BD; --madrid-blue: #0078A8; --madrid-blue-light: #F0F7FB; --madrid-blue-dark: #00567A; --text-main: #232323; --text-secondary: #4A5568; --text-muted: #718096; --bg-page: #F8F9FA; --bg-surface: #FFFFFF; --bg-subtle: #F1F3F5; --bg-tinted: #F4F6F8; --border-main: #D9D9D9; --border-subtle: #E2E8F0; --border-dark: #A0AEC0; --status-alta: #1B7A3C; --status-alta-bg: #E8F5EC; --status-media: #B7791F; --status-media-bg: #FEF3C7; --status-baja: #C8102E; --status-baja-bg: #FEE2E2; --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-card: 0 2px 8px rgba(0,0,0,0.08); --shadow-hover: 0 8px 20px rgba(0,0,0,0.12); --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+.svg-icon { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
+
+.gov-top-bar { background: #FFFFFF; border-bottom: 1px solid var(--border-main); padding: 12px 0; }
+.gov-top-inner { display: flex; align-items: center; justify-content: space-between; }
+.gov-brand { display: flex; align-items: center; gap: 16px; text-decoration: none; color: var(--text-main); }
+.gov-logo-img { height: 48px; width: auto; display: block; }
+.gov-brand-divider { width: 1px; height: 36px; background: var(--border-main); }
+.gov-brand-text { display: flex; flex-direction: column; }
+.gov-brand-title { font-size: 17px; font-weight: 700; color: var(--text-main); line-height: 1.2; letter-spacing: -0.01em; }
+.gov-brand-subtitle { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+.gov-utility-links { display: flex; align-items: center; gap: 20px; font-size: 13px; }
+.gov-utility-link { color: var(--text-secondary); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: color 0.15s ease; }
+.gov-utility-link:hover { color: var(--madrid-red); }
+.gov-nav-bar { background: var(--madrid-red); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+.gov-nav-inner { display: flex; align-items: center; justify-content: space-between; }
+.gov-nav-menu { display: flex; list-style: none; gap: 0; overflow-x: auto; }
+.gov-nav-item { margin: 0; }
+.gov-nav-btn { background: transparent; border: none; color: #FFFFFF; font-family: var(--font-primary); font-size: 13px; font-weight: 600; padding: 16px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s ease; white-space: nowrap; border-bottom: 4px solid transparent; }
+.gov-nav-btn:hover { background: var(--madrid-red-dark); }
+.gov-nav-btn.active { background: var(--madrid-red-dark); border-bottom-color: #FFFFFF; }
+@media (max-width: 640px) {
+  .gov-top-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .gov-utility-links { display: none; }
+}
+
+/* ==========================================================================
+   B. ADAPTACIÓN A UNIVERSAL THEME
+   Si algún selector no surte efecto en tu versión de APEX, inspecciónalo con F12
+   y cambia solo el nombre de la clase t-*: los valores de estilo son los de la parte A.
+   ========================================================================== */
+
+/* B.1 Cabecera blanca: logo + título de la aplicación (equivale a .gov-top-bar / .gov-brand) */
+body .t-Header { background: #FFFFFF; border-top: 0 !important; border-bottom: 1px solid var(--border-main); box-shadow: none; font-family: var(--font-primary); }
+body .t-Header-branding { background: #FFFFFF; padding: 12px 20px; min-height: 0; align-items: center; }
+body .t-Header-logo { display: flex; align-items: center; margin: 0; }
+body .t-Header-logo-link { display: flex; align-items: center; gap: 16px; color: var(--text-main); text-decoration: none; font-size: 17px; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; height: auto; }
+body .t-Header-logo-link img { height: 48px; width: auto; display: block; padding-right: 16px; border-right: 1px solid var(--border-main); }
+body .t-Header-controls .t-Button { color: var(--text-secondary); }
+body .t-Header-controls .t-Button:hover { color: var(--madrid-red); }
+
+/* B.2 Menú de usuario de la derecha (equivale a .gov-utility-link) */
+body .t-Header-navBar .t-NavigationBar-item > a,
+body .t-Header-navBar .t-Button--navBar { color: var(--text-secondary); font-family: var(--font-primary); font-size: 13px; font-weight: 500; text-decoration: none; transition: color 0.15s ease; }
+body .t-Header-navBar .t-NavigationBar-item > a:hover,
+body .t-Header-navBar .t-Button--navBar:hover { color: var(--madrid-red); background: transparent; }
+
+/* B.3 Barra roja con los enlaces (equivale a .gov-nav-bar / .gov-nav-btn).
+   Aparece cuando la navegación de la aplicación está en posición SUPERIOR.
+   Se usan selectores amplios y !important porque el tema pinta de oscuro la lista interior. */
+body .t-Header-nav { background: var(--madrid-red) !important; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 0 20px; border: 0 !important; }
+body .t-Header-nav *,
+body .t-Header-nav ul,
+body .t-Header-nav li { background-color: transparent !important; box-shadow: none; }
+body .t-Header-nav ul { display: flex; gap: 0; margin: 0; padding: 0; list-style: none; overflow-x: auto; }
+body .t-Header-nav li { margin: 0; border: 0 !important; }
+body .t-Header-nav a,
+body .t-Header-nav button { color: #FFFFFF !important; font-family: var(--font-primary); font-size: 13px; font-weight: 600; line-height: 1.2; padding: 16px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; text-decoration: none; border: 0; border-bottom: 4px solid transparent; transition: background 0.15s ease; }
+body .t-Header-nav a *,
+body .t-Header-nav button * { color: inherit !important; font-weight: inherit; }
+body .t-Header-nav a:hover,
+body .t-Header-nav a:focus,
+body .t-Header-nav button:hover { background-color: var(--madrid-red-dark) !important; }
+body .t-Header-nav li.is-active > a,
+body .t-Header-nav li.is-current > a,
+body .t-Header-nav li[aria-current] > a,
+body .t-Header-nav a.is-active,
+body .t-Header-nav a[aria-current] { background-color: var(--madrid-red-dark) !important; border-bottom-color: #FFFFFF; }
+
+/* B.4 Alternativa: si mantienes el menú lateral, mismo lenguaje visual (acento rojo) */
+body .t-Body-nav { background: #FFFFFF; border-right: 1px solid var(--border-main); }
+body .t-TreeNav .a-TreeView-content { color: var(--text-secondary); font-family: var(--font-primary); font-weight: 500; }
+body .t-TreeNav .a-TreeView-content:hover { background: var(--madrid-red-light); color: var(--madrid-red); }
+body .t-TreeNav .a-TreeView-content.is-current,
+body .t-TreeNav .a-TreeView-content.is-current:hover { background: var(--madrid-red-light); color: var(--madrid-red); box-shadow: inset 4px 0 0 var(--madrid-red); }
+
+/* Responsive: igual que el original en pantallas pequeñas */
+@media (max-width: 640px) {
+  body .t-Header-navBar { display: none; }
+}
+
+/* ==========================================================================
+   C. TIPOGRAFÍA POR DEFECTO DE TODA LA APLICACIÓN
+   'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif
+   (queda definida en --font-primary, parte A). Los iconos (fa, t-Icon, a-Icon) no se tocan.
+   ========================================================================== */
+html, body, .t-Body, .t-Header, .t-Body-nav, .t-Body-main, .t-Body-content, .t-Footer,
+.t-Button, .a-Button, .t-Form-label, .t-Region-title, .t-Dialog { font-family: var(--font-primary) !important; }
+
+/* Resto de elementos: heredan la fuente del cuerpo (especificidad mínima: no pisa las clases de iconos) */
+body :where(div, span, p, a, li, ul, ol, h1, h2, h3, h4, h5, h6, label, legend, button, input, select,
+            textarea, table, th, td, strong, b, em, small, section, article, header, footer, nav, aside) { font-family: inherit; }
