@@ -9,7 +9,8 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import date
+import re
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any, Dict
 
@@ -56,7 +57,19 @@ def ejecutar_pipeline_ingesta_f1(actualizar_panel: bool = True) -> Dict[str, Any
     df = pd.read_csv(panel_validado_path)
     df["codigo_ine"] = df["codigo_ine"].astype(str).str.zfill(5)
 
-    fecha_real_snapshot = "2026-10-23"
+    # La fecha de disponibilidad se deriva de los snapshots que realmente se
+    # han consumido, no de una constante. Se toma la más reciente de las tres
+    # fuentes: el panel no está completo hasta que llega la última.
+    fechas_snapshot = []
+    for snap in (path_snap_ine, path_snap_san, path_snap_edu):
+        m_fecha = re.search(r"(\d{8})\.json$", snap.name)
+        if m_fecha:
+            fechas_snapshot.append(
+                datetime.strptime(m_fecha.group(1), "%Y%m%d").date()
+            )
+    fecha_real_snapshot = (
+        max(fechas_snapshot).isoformat() if fechas_snapshot else date.today().isoformat()
+    )
 
     for idx, row in df.iterrows():
         cod_ine = row["codigo_ine"]
@@ -107,7 +120,9 @@ def ejecutar_pipeline_ingesta_f1(actualizar_panel: bool = True) -> Dict[str, Any
     df["fecha_disponible"] = fecha_real_snapshot
     df["fecha_carga"] = fecha_real_snapshot
     df["fecha_referencia"] = fecha_real_snapshot
-    df["fecha_calculo"] = f"{fecha_real_snapshot}T18:45:00"
+    # Timestamp real de ejecución (no una hora inventada). Es el único campo
+    # que cambia entre ejecuciones del mismo snapshot.
+    df["fecha_calculo"] = datetime.now().replace(microsecond=0).isoformat()
     df["fuente_datos"] = (
         "Población: INE Padrón continuo 2025 (tabla 2881 API) | "
         "Equipamientos: CKAN CAM (Sanidad/Educación en ALTA) | "

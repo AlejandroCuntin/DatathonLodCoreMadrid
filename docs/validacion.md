@@ -13,22 +13,22 @@
 
 #### 1.1 Justificación Técnica del Veredicto
 - **Fuentes Oficiales Conectadas (F1.1)**:
-  - **INE Padrón Municipal Continuo (Año 2025)**: Consumido vía API JSON oficial (tabla 2881) con snapshot inmutable fechado en `data/raw/ine/ine_padron_2881_snapshot_20261023.json`.
-  - **CKAN Comunidad de Madrid (Sanidad)**: Recurso oficial de *Recursos y asistencia sanitaria por tipo*, snapshot inmutable en `data/raw/ckan/ckan_madrid_sanidad_snapshot_20261023.json`.
-  - **CKAN Comunidad de Madrid (Educación)**: Directorio oficial de *Centros Educativos*, snapshot inmutable en `data/raw/ckan/ckan_madrid_educacion_snapshot_20261023.json`.
+  - **INE Padrón Municipal Continuo (Año 2025)**: Consumido vía API JSON oficial (tabla 2881) con snapshot inmutable fechado en `data/raw/ine/ine_padron_2881_snapshot_20261024.json`.
+  - **CKAN Comunidad de Madrid (Sanidad)**: Recurso oficial de *Recursos y asistencia sanitaria por tipo*, snapshot inmutable en `data/raw/ckan/ckan_madrid_sanidad_snapshot_20261024.json`.
+  - **CKAN Comunidad de Madrid (Educación)**: Directorio oficial de *Centros Educativos*, snapshot inmutable en `data/raw/ckan/ckan_madrid_educacion_snapshot_20261024.json`.
 - **Identificación Estricta (F1.3)**: 100 % de los 20 municipios piloto casados mediante **código INE de 5 dígitos** (`28xxx`), eliminando cualquier ambigüedad toponímica o error por nombre.
 - **Trazabilidad y Linaje Transparente**:
-  - Declaración honesta a nivel de registro: `origen = 'OBSERVADO+SIMULADO'`, `metodo = 'INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS'`, `dataset_version = 'v1.0.0-F2'`, `fecha_disponible = '2026-10-23'`.
-  - Desglose columna a columna documentado en la [Matriz de Procedencia por Variable](file:///C:/Users/USUARIO/Desktop/DATATHON/docs/matriz_procedencia_variables.md): la población y los recuentos de centros de salud y colegios en ALTA proceden de registros públicos oficiales (INE y CKAN CAM); la dotación detallada de médicos asignados, plazas escolares y vivienda vacía permanece calibrada sintéticamente (`seed=2026`).
-- **Quality Gates (F2)**: 20 / 20 municipios superan las 18 validaciones de esquema, rangos $[0, 100]$ y punto-en-tiempo en `src/lodcore/data/quality_gates.py`.
+  - Declaración honesta a nivel de registro: `origen = 'OBSERVADO+SIMULADO'`, `metodo = 'PANEL_MUNICIPAL_INTEGRADO_F2'`, `dataset_version = 'v1.0.0-F2'`, `fecha_disponible = '2026-10-24'`.
+  - Desglose columna a columna documentado en la [Matriz de Procedencia por Variable](./matriz_procedencia_variables.md): solo la población y los recuentos de centros de salud y colegios en ALTA se ingestan de registros públicos oficiales (INE y CKAN CAM); la dotación detallada de médicos, plazas escolares, alumnado, vivienda y precios permanece calibrada sintéticamente (`seed=2026`), y los scores/ICA son estimaciones del MVP.
+- **Quality Gates (F2)**: 20 / 20 municipios superan las validaciones de esquema, rangos $[0, 100]$ y punto-en-tiempo en `src/lodcore/data/quality_gates.py`.
 
 #### 1.2 Modelos que el Panel Puede y NO Puede Alimentar
 | Modelo | Veredicto para este Modelo | Justificación y Límites |
 |---|---|---|
-| **M2 — Indicadores e Isócronas** | **APTO** | Recálculo directo sobre centros de salud y colegios oficiales; 16/20 municipios cumplen el criterio de 30 min. |
+| **M2 — Indicadores e Isócronas** | **APTO** | Subíndices calculados a partir de ratios que combinan recuentos oficiales de centros (CKAN) con dotación sintética calibrada; 16/20 municipios cumplen el criterio de 30 min. |
 | **M3 — Proyección Demográfica** | **APTO** | Población base 2025 verificada con Padrón INE oficial (200.267 hab. agregados); proyecciones 2030/2035 con bandas al 95%. |
-| **M4 — Capacidad de Acogida (Core)** | **APTO** | Target determinista sobre dotaciones oficiales y reglas no compensatorias operativas ($>1.500$ hab/médico, $>95\%$ aulas). MAE CV comarcal: 5.15 ptos. |
-| **M5 — Recomendador MCDM** | **APTO** | Clustering ($k=4$, silhouette 0.3183) y ranking con filtros de exclusión dura sobre infraestructura real. |
+| **M4 — Capacidad de Acogida (Core)** | **APTO CON RESERVAS** | El ICA es una calibración determinista del MVP (no un dato observado); médicos y plazas son sintéticos. Reglas no compensatorias operativas ($>1.500$ hab/médico, $>95\%$ aulas). MAE CV comarcal: 5.15 ptos. |
+| **M5 — Recomendador MCDM** | **APTO** | Clustering ($k=4$, silhouette 0.3183) y ranking con filtros de exclusión dura sobre scores calibrados del MVP. |
 | **M1 — AVM Inmobiliario** | **APTO CON RESERVAS** | Con $n=20$ el modelo Random Forest tiene $R^2$ OOF negativo (-0.34) debido a alta varianza entre comarcas. **Veredicto**: Válido como estimador de esfuerzo y orden de magnitud relativo, pero **NO como tasación inmobiliaria de precisión comercial**. No debe presentarse al jurado como AVM cerrado. |
 
 ---
@@ -43,6 +43,12 @@
   `fecha_disponible <= fecha_decision`.
 - **Evidencia**: `src/lodcore/data/quality_gates.py`,
   `src/lodcore/data/pointintime.py` y `tests/integration/test_pointintime.py`.
+- **Procedencia**: población y recuentos de centros son `OBSERVADO` (INE/CKAN);
+  médicos, plazas, alumnado, vivienda y precios son `SIMULADO` calibrado
+  (`seed=2026`); los scores y el ICA son `ESTIMADO`. El detalle está en la
+  matriz de procedencia.
+- **Fechas**: `fecha_disponible` se deriva del snapshot realmente consumido y
+  `fecha_calculo` es el timestamp real de ejecución; no se usan fechas fijas.
 
 ---
 

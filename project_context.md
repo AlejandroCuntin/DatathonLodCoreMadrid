@@ -118,12 +118,12 @@ DATATHON/ (raíz del proyecto activo)
 
 **16 fases en 6 días.** Cada fase tiene subfases específicas, responsables asignados y entregable concreto. Las fases F1-F4 (datos y calidad) son secuenciales; F5-F13 (modelos y publicación) se solapan; F14-F16 (presentación y entrega) son transversales al final.
 
-> **Estado real al 23 oct 2026:** el núcleo ya es ejecutable y está probado
-> (`python scripts/run_all_models_n1_n2_n3.py` + `pytest`: 18 tests en verde).
-> F0.3 cerrada (rama `p1/datos`, issues F1-F16 en `.github/ISSUES_F1_F16.md`),
-> F1 completada (INE Padrón 2025 y CKAN Madrid Sanidad/Educación conectados, snapshots inmutables fechados, cruce 20/20 por código INE de 5 dígitos),
+> **Estado real al 24 oct 2026:** el núcleo ya es ejecutable y está probado
+> (`python scripts/run_all_models_n1_n2_n3.py` + `pytest`: 25 tests en verde).
+> F0.3 documentada (tablero F1–F16 en `.github/ISSUES_F1_F16.md`; creación de los issues reales en GitHub pendiente),
+> F1 completada para las fuentes prioritarias (INE Padrón 2025 y CKAN Madrid Sanidad/Educación conectados, snapshots inmutables fechados, cruce 20/20 por código INE de 5 dígitos; Catastro/CRTM/Notariado quedan fuera del alcance MVP),
 > F2 con veredicto formal APTO CON RESERVAS en `docs/validacion.md`, y
-> optimizador de asignación presupuestaria comarcal (M4-OPT) implementado y documentado.
+> heurística voraz de asignación presupuestaria comarcal (M4-OPT) implementada y documentada (el spillover continuo queda como roadmap de Fase 2).
 > F3-F4 (auditoría de fuga P2), F12 (APEX P3) y F13-F16 continúan abiertas para sus respectivos responsables.
 
 ### Fase 0 — Fundamento y reparto (23 octubre)
@@ -131,9 +131,9 @@ DATATHON/ (raíz del proyecto activo)
 - **Subfases:**
   - F0.1: Definir alcance honesto: piloto sobre 20 municipios, escalable a todos los <50k (P1) — [CERRADO].
   - F0.2: Crear repositorio GitHub y estructura limpia (P1) — [CERRADO].
-  - F0.3: Asignar roles y crear Issues en GitHub: F1–F16 documentadas y asignadas en `.github/ISSUES_F1_F16.md`, rama `p1/datos` abierta (P1/P3) — [CERRADO].
+  - F0.3: Asignar roles y documentar Issues: F1–F16 documentadas y asignadas en `.github/ISSUES_F1_F16.md`, rama `p1/datos` abierta (P1/P3) — [DOCUMENTADO; pendiente crear los issues en GitHub].
   - F0.4: Acordar canal de comunicación y regla de actualización del contexto (todos) — [CERRADO].
-- **Entregable:** repositorio limpio, reglas de trabajo, issues asignados, rama `p1/datos`.
+- **Entregable:** repositorio limpio, reglas de trabajo, tablero de issues documentado (creación en GitHub pendiente), rama `p1/datos`.
 
 ### Fase 1 — Ingesta de fuentes oficiales (24 octubre)
 - **Responsable:** P1.
@@ -356,7 +356,11 @@ Endpoints activos: `/health`, `/recomendar`, `/whatif`.
 ## 11. Datos y trazabilidad
 
 - Cada columna del dataset validado debe tener `origen` y `metodo` rellenos. Una celda sin ellos es un bug, no una excepción.
-- `fecha_disponible` por fila: punto-en-tiempo, evita fuga temporal.
+- `fecha_disponible` por fila: punto-en-tiempo, evita fuga temporal. Se deriva
+  de los snapshots realmente consumidos.
+- `fecha_decision` del MVP: `FECHA_DECISION_MVP` en
+  `scripts/run_all_models_n1_n2_n3.py` (hoy `2026-10-24`). Si se actualizan los
+  snapshots, hay que actualizarla de forma explícita para no usar datos futuros.
 - `dataset_version`: `v1.0.0-F2`.
 - Fuentes oficiales: INE (Padrón 2025), CKAN Comunidad de Madrid, Catastro, CRTM, Notariado, IGN/CNIG, MITECO, Renfe, Canal Isabel II (ver `Fuentes de datos.pdf`).
 

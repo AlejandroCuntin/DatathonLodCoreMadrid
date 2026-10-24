@@ -71,17 +71,21 @@ def test_cruce_20_municipios_con_snapshots_locales():
     codigos_20 = set(df["codigo_ine"].astype(str).str.zfill(5))
     assert len(codigos_20) == 20
 
-    # Snapshot INE local
-    ine_snap = Path("data/raw/ine/ine_padron_2881_snapshot_20261023.json")
-    assert ine_snap.exists(), "Snapshot INE oficial debe existir en data/raw/ine/"
-    ine_data = IngestorINEPadron().procesar_poblacion_madrid(json.loads(ine_snap.read_text(encoding="utf-8")))
+    # Último snapshot local disponible (sin fijar una fecha concreta)
+    ine_snaps = sorted(Path("data/raw/ine").glob("ine_padron_2881_snapshot_*.json"))
+    assert ine_snaps, "Debe existir al menos un snapshot INE en data/raw/ine/"
+    ine_data = IngestorINEPadron().procesar_poblacion_madrid(
+        json.loads(ine_snaps[-1].read_text(encoding="utf-8"))
+    )
     for cod in codigos_20:
         assert cod in ine_data, f"Municipio {cod} no encontrado en snapshot INE"
 
-    # Snapshot CKAN Educación local
-    edu_snap = Path("data/raw/ckan/ckan_madrid_educacion_snapshot_20261023.json")
-    assert edu_snap.exists(), "Snapshot CKAN Educación debe existir en data/raw/ckan/"
-    edu_data = IngestorCKANMadrid().procesar_educacion(json.loads(edu_snap.read_text(encoding="utf-8")), solo_reglada=True)
+    # Último snapshot CKAN Educación disponible
+    edu_snaps = sorted(Path("data/raw/ckan").glob("ckan_madrid_educacion_snapshot_*.json"))
+    assert edu_snaps, "Debe existir al menos un snapshot CKAN Educación en data/raw/ckan/"
+    edu_data = IngestorCKANMadrid().procesar_educacion(
+        json.loads(edu_snaps[-1].read_text(encoding="utf-8")), solo_reglada=True
+    )
     for cod in codigos_20:
         assert cod in edu_data, f"Municipio {cod} no encontrado en snapshot Educación"
 

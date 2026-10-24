@@ -20,16 +20,28 @@ from src.lodcore.models.m3_demografia.train import run_training_m3
 from src.lodcore.models.m4_capacidad.train import run_training_m4
 from src.lodcore.models.m5_recomendador.train import run_training_m5
 
-def consolidate_f2_dataset() -> str:
+# Fecha de decisión del MVP. Debe ser >= la fecha de disponibilidad del snapshot
+# usado; se deja explícita para que el filtro de punto-en-tiempo no dependa de
+# una constante escondida dentro de la función.
+FECHA_DECISION_MVP = "2026-10-24"
+
+def consolidate_f2_dataset(fecha_decision: str = FECHA_DECISION_MVP) -> str:
     payload_path = Path("data/output/municipios_comunidad_madrid_completo.json")
     records = json.loads(payload_path.read_text(encoding="utf-8"))
     df = pd.DataFrame(records)
 
-    # Añadir columnas obligatorias de punto-en-tiempo y procedencia (Fase F2)
-    if "fecha_referencia" in df.columns:
+    # Añadir columnas obligatorias de punto-en-tiempo y procedencia (Fase F2).
+    # Si el payload no declara una fecha, fallar de forma explícita: inventar
+    # una fecha produciría un falso control de fuga temporal.
+    if "fecha_disponible" in df.columns:
+        pass
+    elif "fecha_referencia" in df.columns:
         df["fecha_disponible"] = df["fecha_referencia"]
     else:
-        df["fecha_disponible"] = "2026-10-14"
+        raise ValueError(
+            "El payload no declara 'fecha_disponible' ni 'fecha_referencia': "
+            "no se puede validar el punto-en-tiempo."
+        )
     df["fecha_disponible"] = pd.to_datetime(df["fecha_disponible"], errors="coerce").dt.date.astype(str)
 
     # Procedencia honesta: la población es INE observada, pero servicios/vivienda
@@ -47,8 +59,13 @@ def consolidate_f2_dataset() -> str:
     df["metodo"] = "PANEL_MUNICIPAL_INTEGRADO_F2"
     df["dataset_version"] = "v1.0.0-F2"
 
-    # Filtrar point-in-time
-    df = filtrar_point_in_time(df, fecha_decision="2026-10-24", col_fecha="fecha_disponible")
+    # Filtrar point-in-time con la fecha de decisión explícita del MVP
+    df = filtrar_point_in_time(df, fecha_decision=fecha_decision, col_fecha="fecha_disponible")
+    if df.empty:
+        raise ValueError(
+            f"Ningún municipio tiene fecha_disponible <= {fecha_decision}; "
+            "revise la fecha de decisión o los snapshots consumidos."
+        )
 
     # Validar ANTES de escribir: nunca dejar un fichero "validado" que no pasó las puertas
     ejecutar_quality_gates(df)

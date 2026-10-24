@@ -1,53 +1,103 @@
 # Matriz de Procedencia y Linaje por Variable (Fase F1 / F2)
-## Proyecto LoDCORE Madrid • II Datathon 2026
+## Proyecto LoDCORE Madrid — II Datathon 2026
 
-> **Regla de Metrología y Transparencia**: Para garantizar el cumplimiento de las bases del Datathon y resistir la auditoría del jurado (UC3M / Comunidad de Madrid), ninguna variable se presenta como dato real sin respaldo oficial. Las variables sintéticas de calibración se declaran explícitamente.
+> **Regla de transparencia**: solo se presentan como `OBSERVADO` las variables
+> que el pipeline F1 descarga de una fuente oficial. El resto son referencias
+> curadas, estimaciones, calibraciones sintéticas o variables derivadas, y así
+> se declara. Ninguna variable sin conector oficial se atribuye a IGN, SERMAS,
+> CRTM, CNMC, Catastro o Catálogo Nacional de Hospitales.
 
 ---
 
-### 1. Taxonomía de Linaje (Nivel de Columna)
+### 1. Variables ingestadas de fuentes oficiales en F1
 
-| Variable en el Panel | Tipo de Origen | Fuente Oficial / Método | Descripción / Justificación |
+| Variable | Origen | ¿Ingerida en F1? | Fuente / método |
 |---|---|---|---|
-| `codigo_ine` | **OBSERVADO** | INE (Instituto Nacional de Estadística) | Código oficial de 5 dígitos (`28xxx`). |
-| `nombre` | **OBSERVADO** | INE / Nomenclátor oficial de la CAM | Toponimia oficial normalizada. |
-| `comarca` | **OBSERVADO** | Comunidad de Madrid (D.G. Reequilibrio Territorial) | División comarcal oficial de la CAM (8 comarcas piloto). |
-| `tipologia` | **OBSERVADO** | Clasificación por umbrales de población | RURAL ($<5.000$), SEMIURBANO ($5.000-20.000$), URBANO ($>20.000$). |
-| `poblacion_actual` | **OBSERVADO** | INE Padrón Municipal continuo (1-ene-2025) | API JSON oficial tabla 2881 (`servicios.ine.es/wstempus`). |
-| `anio_padron` | **OBSERVADO** | INE (Año 2025) | Año oficial de referencia del dato padronal. |
-| `superficie_km2` | **OBSERVADO** | IGN (Instituto Geográfico Nacional) | Medición cartográfica oficial del término municipal. |
-| `latitud`, `longitud` | **OBSERVADO** | IGN / CNIG | Coordenadas WGS84 del núcleo urbano principal. |
-| `tiempo_medio_madrid_minutos` | **ESTIMADO** | Heurística sobre red de carreteras principales | Tiempo medio estimado en vehículo privado en hora valle a Madrid centro. |
-| `precio_m2_compra`, `precio_m2_alquiler` | **ESTIMADO** | Portales inmobiliarios y estadísticas de referencia | Precio de mercado aproximado por m² de vivienda en el municipio. |
-| `hospital_referencia` | **OBSERVADO** | SERMAS (Servicio Madrileño de Salud) | Hospital público de la red asistencial asignado al área sanitaria. |
-| `camas_hospitalarias_cercanas` | **OBSERVADO** | Catálogo Nacional de Hospitales (Ministerio de Sanidad) | Número de camas instaladas en el hospital de referencia. |
-| `restriccion_ambiental` | **OBSERVADO** | Red Natura 2000 / Espacios Naturales Protegidos CAM | Indicador binario ('S'/'N') de afección a parques regionales o cuencas protegidas. |
-| `num_centros_salud` | **OBSERVADO** | CKAN Comunidad de Madrid (Sanidad) | Recuento oficial de equipamientos de Atención Primaria (Centros de Salud + Consultorios Locales). |
-| `num_medicos_ap` | **SIMULADO** | Generador calibrado (semilla 2026) | Estimación sintética calibrada por tipología según cupos medios del SERMAS. |
-| `num_plazas_escolares` | **SIMULADO** | Generador calibrado (semilla 2026) | Estimación sintética calibrada según ratios de escolarización comarcales. |
-| `num_alumnos_matriculados` | **SIMULADO** | Generador calibrado (semilla 2026) | Estimación sintética calibrada por perfil demográfico. |
-| `num_centros_educativos` | **OBSERVADO** | CKAN Comunidad de Madrid (Educación) | Directorio oficial de centros de enseñanza escolar reglada en situación de ALTA. |
-| `paradas_transporte_publico` | **OBSERVADO** | CRTM (Consorcio Regional de Transportes de Madrid) | Red de paradas de autobús interurbano y estaciones de Cercanías Renfe. |
-| `cobertura_fibra_pct` | **ESTIMADO** | CNMC / Ministerio de Transformación Digital | Porcentaje estimado de cobertura FTTH en el municipio. |
-| `num_viviendas_totales_est` | **SIMULADO** | Estimación basada en Catastro y tamaño de hogar | Parque estimado de viviendas residenciales. |
-| `stock_vivienda_vacia_est` | **SIMULADO** | Censo de Vivienda INE / Calibración municipal | Estimación del parque desocupado movilizable a medio plazo. |
-| `suelo_urbano_disponible_m2` | **ESTIMADO** | SIT Madrid / Planeamiento municipal | Superficie de suelo vacante clasificado como urbano o urbanizable residencial. |
-| `densidad` | **OBSERVADO** | Calculado: `poblacion / superficie` | Densidad demográfica en hab/km². |
-| `medicos_x1000`, `hab_por_medico` | **SIMULADO** | Ratios sanitarios derivados | Ratios auditados contra el umbral crítico ($1.500\text{ hab/médico}$). |
-| `ocupacion_escolar_pct` | **SIMULADO** | Ratio educativo derivado | Ratio auditado contra el umbral crítico ($95\%$). |
-| `score_sanidad`, `score_educacion` | **ESTIMADO** | Sub-índices Min-Max con Winsorización p5-p95 | Escala relativa 0-100 para la comparación intermunicipal. |
-| `score_conectividad`, `score_vivienda` | **ESTIMADO** | Sub-índices Min-Max con Winsorización p5-p95 | Escala relativa 0-100 para la comparación intermunicipal. |
-| `indice_capacidad_global` (ICA) | **ESTIMADO** | Combinación determinista de sub-índices + reglas duras | Puntuación sintética de idoneidad con salvaguarda no compensatoria. |
-| `nivel_idoneidad` | **ESTIMADO** | Semáforo tripartito (ALTA, MEDIA, BAJA) | Clasificación de planificación territorial. |
+| `codigo_ine` | **OBSERVADO** | Sí | INE; código oficial de 5 dígitos (`28xxx`) |
+| `nombre` | **OBSERVADO** | Sí | INE; nomenclátor oficial |
+| `poblacion_actual` | **OBSERVADO** | Sí | INE; Padrón Municipal continuo 2025, tabla 2881 |
+| `anio_padron` | **OBSERVADO** | Sí | INE; año de referencia del padrón |
+| `num_centros_salud` | **OBSERVADO** | Sí | CKAN CAM; centros de salud + consultorios locales |
+| `num_centros_educativos` | **OBSERVADO** | Sí | CKAN CAM; enseñanza reglada en situación `ALTA` |
 
 ---
 
-### 2. Declaración de Nivel de Fila en el Panel (`origen`)
+### 2. Variables de referencia curada (no ingestadas en F1)
 
-Dado que el panel municipal combina **datos reales observados** (Población 2025, centros sanitarios y colegios oficiales de la CAM, cartografía IGN) con **variables calibradas sintéticamente** (médicos asignados, plazas escolares y viviendas vacías), la columna `origen` de cada registro se define como:
+| Variable | Origen | ¿Ingerida en F1? | Método / nota |
+|---|---|---|---|
+| `comarca` | **REFERENCIA CURADA** | No | División comarcal de planificación de la CAM; valor fijo del piloto |
+| `tipologia` | **DERIVADO** | No | Umbral de población: RURAL <5.000; SEMIURBANO 5.000–20.000; URBANO >20.000 |
+| `superficie_km2`, `latitud`, `longitud` | **REFERENCIA CURADA** | No | Cartografía de referencia; no se descarga de IGN en este MVP |
+| `hospital_referencia`, `camas_hospitalarias_cercanas` | **REFERENCIA CURADA** | No | Catálogo de referencia; no se descarga de SERMAS en este MVP |
+| `paradas_transporte_publico` | **REFERENCIA CURADA** | No | Red de transporte de referencia; no se descarga de CRTM en este MVP |
+| `restriccion_ambiental` | **REFERENCIA CURADA** | No | Espacios protegidos de referencia; no se descarga de Red Natura 2000 en este MVP |
+| `tiempo_medio_madrid_minutos` | **ESTIMADO** | No | Heurística sobre la red de carreteras; vehículo privado en hora valle |
+| `cobertura_fibra_pct` | **ESTIMADO** | No | Referencia CNMC; no ingestada en este MVP |
+
+---
+
+### 3. Variables calibradas sintéticamente (`seed=2026`)
+
+| Variable | Origen | ¿Ingerida en F1? | Método / nota |
+|---|---|---|---|
+| `num_medicos_ap` | **SIMULADO** | No | Generador calibrado por tipología y cupos medios del SERMAS |
+| `num_plazas_escolares` | **SIMULADO** | No | Generador calibrado según ratios de escolarización comarcales |
+| `num_alumnos_matriculados` | **SIMULADO** | No | Generador calibrado por perfil demográfico |
+| `num_viviendas_totales_est` | **SIMULADO** | No | Estimación basada en Catastro y tamaño de hogar |
+| `stock_vivienda_vacia_est` | **SIMULADO** | No | Calibración municipal del parque desocupado movilizable |
+| `suelo_urbano_disponible_m2` | **SIMULADO** | No | Calibración del suelo vacante disponible |
+| `precio_m2_compra`, `precio_m2_alquiler` | **SIMULADO** | No | Calibración de precios de mercado (`seed=2026`) |
+
+---
+
+### 4. Variables derivadas
+
+Se calculan a partir de las anteriores y **heredan la fuente más débil**; no se
+presentan como observadas:
+
+- `densidad`, `medicos_x1000`, `hab_por_medico`, `centros_salud_x10k`
+- `ocupacion_escolar_pct`, `tasa_holgura_escolar`, `centros_edu_x1000_alumnos`
+- `paradas_x1000`, `vacias_x1000`, `suelo_m2_x_hab`, `tasa_vivienda_vacia_pct`
+- `rentabilidad_bruta_alquiler_pct`, `holgura_relativa_pct`
+- `personas_absorb_sanidad`, `personas_absorb_educacion`, `personas_absorb_vivienda`
+- `personas_absorbibles_sin_colapso`, `personas_acogida_efectiva`
+- `factor_limitante`, `medicos_adicionales_necesarios`
+- `plazas_escolares_adicionales_nec`, `coste_estimado_ampliacion_servicios`
+
+---
+
+### 5. Scores, ICA y salidas de modelos
+
+| Variable | Origen | Método / nota |
+|---|---|---|
+| `score_sanidad`, `score_educacion`, `score_servicios`, `score_conectividad`, `score_vivienda`, `score_holgura` | **ESTIMADO** | Subíndices Min-Max con winsorización p5–p95; calibración F2 |
+| `indice_capacidad_global` (ICA) | **ESTIMADO** | Combinación determinista de subíndices + reglas duras no compensatorias |
+| `nivel_idoneidad`, `ranking_ica` | **DERIVADO** | Semáforo tripartito (ALTA, MEDIA, BAJA) y orden relativo |
+| `cluster_id`, `arquetipo_codigo`, `arquetipo_nombre` | **ESTIMADO** | Salida del clustering M5 |
+| `precio_predicho_avm_m2`, `gap_mercado_pct`, `diagnostico_mercado` | **ESTIMADO** | Salida del modelo M1 (estimador de referencia, no tasación comercial) |
+| `poblacion_2027`, `poblacion_2029`, `poblacion_2031`, `anio_estimado_saturacion` | **PROYECTADO** | Proyección demográfica M3 |
+| Textos descriptivos (`*_detalle`, `observaciones_acogida`, etc.) | **ESTIMADO** | Redacción asistida a partir de los datos anteriores |
+
+**Importante**: los `score_*` y el ICA son la base calibrada del MVP y **no se
+recalculan automáticamente** al actualizar los recuentos oficiales de centros en
+F1. M2 sí recalcula sus propios subíndices PCA a partir de los ratios. Esta
+distinción debe explicarse si el jurado pregunta por la evolución de los scores.
+
+---
+
+### 6. Declaración de fila en el panel
+
+El panel combina variables observadas y calibradas, por lo que cada registro
+declara:
 
 ```text
 origen = "OBSERVADO+SIMULADO"
+fuente_datos = "Población: INE Padrón continuo 2025 (tabla 2881 API) |
+                Equipamientos: CKAN CAM (Sanidad/Educación en ALTA) |
+                Dotación servicios, vivienda y precios: SINTÉTICO calibrado (seed=2026)"
 ```
 
-Esta etiqueta compuesta garantiza ante el jurado que no se está ocultando la existencia de variables calibradas, preservando la máxima integridad académica y técnica.
+En resumen: **solo la población y los recuentos de centros son datos oficiales
+observados**. Todo lo demás es referencia curada, estimación, calibración
+sintética, variable derivada o salida de modelo, y se declara como tal.
