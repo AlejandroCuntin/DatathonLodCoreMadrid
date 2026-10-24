@@ -79,7 +79,8 @@ def main() -> None:
     sizes = [int(v) for v in clusters["cluster_sizes"].values()]
     assert sorted(sizes) == [4, 4, 6, 6], sizes
     panel_counts = df["arquetipo_nombre"].value_counts().to_dict()
-    print("Aviso: el panel conserva una asignación antigua de arquetipos:", panel_counts)
+    assert sorted(panel_counts.values()) == [4, 4, 6, 6], panel_counts
+    assert set(panel_counts) == {c["tipologia_m5"] for c in clusters["clusters"]}, panel_counts
 
     # --- Peores errores OOF citados en las fichas ---
     f1 = ["tiempo_medio_madrid_minutos", "densidad", "cobertura_fibra_pct",

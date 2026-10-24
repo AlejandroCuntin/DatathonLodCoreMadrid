@@ -15,13 +15,13 @@
     },
     {
       "path": "dataset/municipios_panel_validado.csv",
-      "bytes": 31970,
-      "sha256": "2d2f440fabae86edb798f0f20840ed47e7c8395728329681dc752971ceafa30a"
+      "bytes": 32043,
+      "sha256": "f9285666ccbd436db2202ef6bb228c9d713024462680f8621835fde4fbe41962"
     },
     {
       "path": "dataset/municipios_panel_validado.json",
-      "bytes": 79454,
-      "sha256": "7ab54baf9fda38f958528bd55dead528c03e8966d057427cf7e98c87d538a292"
+      "bytes": 79210,
+      "sha256": "8dbd72d8778b4626f0153bc282b2d11f4583baa65c8e6898412dfe32aa9b5097"
     },
     {
       "path": "docs/diccionario_datos.md",
@@ -45,8 +45,8 @@
     },
     {
       "path": "docs/model_cards.md",
-      "bytes": 13366,
-      "sha256": "5e926061914bcbced3804c7ddb630f5ec214650d890b302072464516561e0b37"
+      "bytes": 13163,
+      "sha256": "8f00594af57bcba9776791342502ed6dc09bbd8e3d5613bb05f31fb961e1f86c"
     },
     {
       "path": "docs/validacion.md",

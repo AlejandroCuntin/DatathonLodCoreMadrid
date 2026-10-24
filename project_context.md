@@ -130,7 +130,7 @@ DATATHON/ (raíz del espacio de trabajo)
 > F2 con veredicto formal APTO CON RESERVAS en `docs/validacion.md`, y
 > heurística voraz de asignación presupuestaria comarcal (M4-OPT) implementada y documentada (el spillover continuo queda como roadmap de Fase 2).
 > F3 documentada (`docs/auditoria_fuga_informacion.md`: 0 bloqueantes, 2 materiales - target determinista y sesgo de selección) y F4 completada (validación espacial, 4 baselines naive y bootstrap B=1000), con **36 tests en verde**.
-> F12: DDL unificado a 88 columnas, vistas con trazabilidad y guía de carga listas (P3); falta montar las 3 páginas APEX. F15: guion de 15 min disponible en `docs/guion_presentacion_15min.md`. **F13: model cards de M1-M5 con límites y ejemplos concretos en `docs/model_cards.md`, más script de cross-check; falta el informe técnico/glosario extenso.** F14 y F16 siguen abiertas.
+> F12: DDL unificado a 88 columnas, vistas con trazabilidad y guía de carga listas (P3); falta montar las 3 páginas APEX. **F13: model cards + informe técnico + glosario + cross-check completos.** **F14: revisión adversarial de 12 ataques completa en `docs/revision_adversarial.md`.** **F15: guion y contenido de diapositivas listos; faltan diseño y ensayo.** **F16: dataset, ZIP y checklist listos; falta el congelado final.**
 > El **paquete de datos para el jurado** está en `entrega/` (dataset validado + diccionario de 88 variables + catálogo de fuentes con licencias + checksums): cubre la parte de F16.2.
 
 ### Fase 0 — Fundamento y reparto (23 octubre)
@@ -259,8 +259,8 @@ DATATHON/ (raíz del espacio de trabajo)
 - **Responsable:** P3.
 - **Subfases:**
   - F13.1: Model cards con sección obligatoria "Límites y riesgos conocidos" (≥4 ítems, cada uno con ejemplo concreto de municipio donde el modelo falla) (P3) — [HECHO en `docs/model_cards.md`].
-  - F13.2: Informe técnico para administraciones + glosario (P3).
-  - F13.3: Cross-check de números: script que verifica que cada número del informe existe en los artefactos y que informe, model card y APP coinciden (P3).
+  - F13.2: Informe técnico para administraciones + glosario (P3) — [HECHO en `docs/informe_tecnico.md`].
+  - F13.3: Cross-check de números: script que verifica que cada número del informe existe en los artefactos y que informe, model card y APP coinciden (P3) — [HECHO en `scripts/check_model_cards.py`].
 - **Entregable:** model cards + informe + verificación de consistencia.
 - **Prompt asociado:** **13 · Model cards e informe técnico**.
 
@@ -269,14 +269,14 @@ DATATHON/ (raíz del espacio de trabajo)
 - **Subfases:**
   - F14.1: 12 ataques concretos: consistencia pipeline/publicado, tautología del ICA, no-compensatoriedad, caducidad del GTFS, backtest honesto, municipios excluidos, escala relativa vs absoluta, credibilidad del What-If, reproducibilidad real, correspondencia de municipios, trazabilidad de la narrativa, cumplimiento de claims del PDF de diseño (tabla APTO/PARCIAL/NO CUMPLIDO) (todos).
   - F14.2: Sección de "puntos fuertes" (una revisión solo negativa no genera confianza) (todos).
-- **Entregable:** revisión de 12 ataques + sección de puntos fuertes.
+- **Entregable:** revisión de 12 ataques + sección de puntos fuertes (`docs/revision_adversarial.md`).
 - **Prompt asociado:** **14 · Revisión adversarial pipeline**.
 
 ### Fase 15 — Preparación de la presentación para instituciones (28-29 octubre)
 - **Responsable:** P3 (contenido), P2 (demo en vivo).
 - **Subfases:**
-  - F15.1: Guion de 15 minutos, lenguaje no técnico (no decir SHAP, float32, ONNX, AVM ante el jurado) (P3).
-  - F15.2: Diapositivas visuales: mapa semafórico, tabla inversión→municipios beneficiados, efecto spillover (P3).
+  - F15.1: Guion de 15 minutos, lenguaje no técnico (no decir SHAP, float32, ONNX, AVM ante el jurado) (P3) — [HECHO en `docs/guion_presentacion_15min.md`].
+  - F15.2: Diapositivas visuales: mapa semafórico, tabla inversión→municipios beneficiados, efecto spillover (P3) — [CONTENIDO HECHO en `docs/diapositivas_15min.md`; diseño pendiente].
   - F15.3: Simulador what-if en vivo durante la presentación (P2).
   - F15.4: Ensayo cronometrado 15 min + preparación para preguntas del jurado (P3).
 - **Entregable:** diapositivas + guion cronometrado + demo lista.

@@ -176,8 +176,8 @@
 ### Límites y riesgos conocidos
 
 1. **La estructura es débil-media** (silhouette 0,3183). No es una segmentación natural fuerte; es una agrupación útil para describir, no para certificar.
-2. **El panel y M5 no coinciden.** La columna `arquetipo_nombre` del panel conserva una asignación antigua (11/6/2/1) mientras que la salida vigente de M5 es 6/4/6/4. Ejemplo: **Meco** aparece en el panel como “Retiro Silver Economy y Alta Calidad Ambiental”, pero M5 lo asigna a otro clúster. Hay que regenerar `arquetipo_nombre`/`arquetipo_codigo` desde `clustering.json` antes de publicar.
-3. **Los nombres son interpretación, no etiquetas oficiales.** `clustering.json` usa `Cabeceras Comarcales Equilibradas`, `Nodos Metropolitanos y Corredores Dinámicos`, `Pueblos Conectados de Calidad Ambiental y Teletrabajo` y `Reserva de Oportunidad Residencial y Suelo Asequible`; el panel usa otra nomenclatura.
+2. **El panel ya se alinea con M5** (6/4/6/4). Los nombres siguen siendo una interpretación de los centroides; si se amplía la muestra, los clústeres cambiarán y habrá que regenerarlos.
+3. **Los nombres son interpretación, no etiquetas oficiales.** `clustering.json` usa `Cabeceras Comarcales Equilibradas`, `Nodos Metropolitanos y Corredores Dinámicos`, `Pueblos Conectados de Calidad Ambiental y Teletrabajo` y `Reserva de Oportunidad Residencial y Suelo Asequible`; el panel ya usa esos mismos nombres.
 4. **Con 20 municipios, los clústeres cambian si se amplía la muestra.** No son universales.
 5. **El ranking es descriptivo**, no causal: “el modelo asocia”, no “este municipio es mejor para usted”.
 
