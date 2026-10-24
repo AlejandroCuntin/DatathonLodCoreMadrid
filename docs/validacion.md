@@ -17,7 +17,9 @@
   - **CKAN Comunidad de Madrid (Sanidad)**: Recurso oficial de *Recursos y asistencia sanitaria por tipo*, snapshot inmutable en `data/raw/ckan/ckan_madrid_sanidad_snapshot_20261023.json`.
   - **CKAN Comunidad de Madrid (Educación)**: Directorio oficial de *Centros Educativos*, snapshot inmutable en `data/raw/ckan/ckan_madrid_educacion_snapshot_20261023.json`.
 - **Identificación Estricta (F1.3)**: 100 % de los 20 municipios piloto casados mediante **código INE de 5 dígitos** (`28xxx`), eliminando cualquier ambigüedad toponímica o error por nombre.
-- **Trazabilidad y Linaje por Celda**: Columnas `origen = 'OBSERVADO'`, `metodo = 'INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS'`, `dataset_version = 'v1.0.0-F2'` y `fecha_disponible = '2026-10-14'` registradas obligatoriamente.
+- **Trazabilidad y Linaje Transparente**:
+  - Declaración honesta a nivel de registro: `origen = 'OBSERVADO+SIMULADO'`, `metodo = 'INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS'`, `dataset_version = 'v1.0.0-F2'`, `fecha_disponible = '2026-10-23'`.
+  - Desglose columna a columna documentado en la [Matriz de Procedencia por Variable](file:///C:/Users/USUARIO/Desktop/DATATHON/docs/matriz_procedencia_variables.md): la población y los recuentos de centros de salud y colegios en ALTA proceden de registros públicos oficiales (INE y CKAN CAM); la dotación detallada de médicos asignados, plazas escolares y vivienda vacía permanece calibrada sintéticamente (`seed=2026`).
 - **Quality Gates (F2)**: 20 / 20 municipios superan las 18 validaciones de esquema, rangos $[0, 100]$ y punto-en-tiempo en `src/lodcore/data/quality_gates.py`.
 
 #### 1.2 Modelos que el Panel Puede y NO Puede Alimentar

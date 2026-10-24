@@ -370,7 +370,7 @@ Endpoints activos: `/health`, `/recomendar`, `/whatif`.
 1. Problema y reto (2 min) — municipios <50k, reto demográfico CAM.
 2. Solución y arquitectura (3 min) — MVP funcional, datos abiertos, Oracle APEX.
 3. Demo en vivo (5 min) — mapa semafórico + simulador what-if (construir centro de salud/colegio y ver impacto en la comarca).
-4. Diferenciador: optimizador por comarca (3 min) — dónde invertir para maximizar acogida, efecto spillover. **Presentar el enfoque y el prototipo de UI; no afirmar que el optimizador de backend ya está implementado (sigue pendiente).**
+4. Diferenciador: optimizador comarcal (3 min) — dónde invertir para maximizar acogida. Presentar la asignación presupuestaria comarcal determinista (M4-OPT) y el roadmap de spillover continuo.
 5. Cierre y pedido (2 min) — escalabilidad a todos los <50k, próximos pasos.
 
 **Nunca decir ante el jurado:** "SHAP", "float32", "ONNX", "AVM", "p-valor", "gradient boosting". Decir: "el modelo identifica el cuello de botella", "el modelo se ejecuta dentro de Oracle para ser rápido y seguro", "estimador de precio de referencia".

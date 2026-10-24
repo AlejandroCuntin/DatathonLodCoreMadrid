@@ -33,13 +33,18 @@ class IngestorINEPadron:
             self.raw_dir = Path(raw_dir)
         self.raw_dir.mkdir(parents=True, exist_ok=True)
 
-    def descargar_y_guardar_snapshot(self, timeout: int = 25) -> Tuple[Path, Dict[str, Any]]:
+    def descargar_y_guardar_snapshot(self, timeout: int = 25, overwrite: bool = False) -> Tuple[Path, Dict[str, Any]]:
         """
         Descarga la tabla 2881 de la API del INE y la guarda como snapshot inmutable.
-        El nombre del fichero incluye la fecha de captura. No sobrescribe snapshots anteriores.
+        Si el snapshot para la fecha actual ya existe y overwrite=False, lo reutiliza sin mutar disco ni red.
         """
         fecha_str = date.today().strftime("%Y%m%d")
         snapshot_path = self.raw_dir / f"ine_padron_2881_snapshot_{fecha_str}.json"
+
+        if snapshot_path.exists() and not overwrite:
+            logger.info("Snapshot INE existente reutilizado (inmutable): %s", snapshot_path)
+            payload = json.loads(snapshot_path.read_text(encoding="utf-8"))
+            return snapshot_path, payload
 
         logger.info("Conectando a la API INE (tabla 2881): %s", INE_TABLA_2881_URL)
         req = urllib.request.Request(
@@ -56,7 +61,6 @@ class IngestorINEPadron:
             texto = raw_bytes.decode("utf-8", errors="replace")
             payload = json.loads(texto)
 
-            # Guardar snapshot inmutable (si ya existe hoy, no romper, asegurar escritura)
             snapshot_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
             logger.info("Snapshot INE guardado con éxito en: %s", snapshot_path)
             return snapshot_path, payload

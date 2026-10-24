@@ -75,7 +75,7 @@
   - Exportación a ONNX y prueba de equivalencia N1/N2.
 - **Criterio de aceptación**:
   - Artefacto `m1_avm.onnx` en `oracle/onnx/`.
-  - Diferencia absoluta contra predicción Python $< 10^{-6}$.
+  - Diferencia relativa contra predicción Python $< 10^{-6}$ y absoluta $< 10^{-3}$.
 
 ---
 

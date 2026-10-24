@@ -1,87 +1,84 @@
-# Especificación Técnica: Asignación Presupuestaria Óptima por Comarca (M4-OPT)
+# Especificación Técnica: Asignación Presupuestaria por Comarca (M4-OPT)
 > **Rol responsable**: P1 (Datos + Reglas de negocio + Optimizador M4)  
-> **Fecha**: 23 de octubre de 2026  
-> **Estado**: IMPLEMENTACIÓN DETERMINISTA MVP (Sin alegar spillover continuo)
+> **Fecha**: 24 de octubre de 2026  
+> **Naturaleza del Módulo**: Heurística Voraz Acotada Determinista (MVP Fase 1)  
+> **Roadmap Fase 2**: Difusión territorial continua (Spillover por matrices origen-destino)
 
 ---
 
-## 1. Contexto y Decisión de Diseño
-El simulador What-If actual evalúa el impacto de inversiones aisladas por municipio, pero los gestores públicos de la Comunidad de Madrid y los consorcios comarcales disponen de una **partida presupuestaria agregada** (ej. 1 M€, 3 M€, 5 M€) y necesitan responder:
-> *¿En qué municipio(s) exacto(s) de la comarca debemos asignar este presupuesto para maximizar el incremento neto de acogida sin provocar colapsos?*
+## 1. Contexto Operativo y Alcance Honesto
+El simulador What-If evalúa el impacto de inversiones municipales aisladas. Los gestores públicos de la Comunidad de Madrid y los consorcios comarcales disponen de partidas presupuestarias cerradas (ej. 1 M€, 2 M€, 5 M€) y requieren una herramienta para responder:
+> *¿En qué municipios de una comarca conviene asignar la dotación médica y educativa para maximizar el incremento neto en capacidad de acogida efectiva sin provocar saturaciones?*
 
-Se implementa un **algoritmo de optimización determinista (Knapsack / Greedy acotado)** sobre los municipios candidatos de la comarca.  
-El efecto "spillover geográfico continuo con matriz origen-destino y gravedad espacial" se declara con honestidad metodológica en el **Roadmap Fase 2**.
+Para la Fase 1, se implementa una **heurística voraz acotada (Greedy) con poda de ineficiencia residencial**, determinista y auditable.  
+El efecto *spillover continuo mediante matrices de movilidad origen-destino y gravedad territorial* se declara con honestidad metodológica como **Roadmap Fase 2**.
 
 ---
 
-## 2. Definición Matemática del Problema
+## 2. Formulación Matemática de la Heurística
 
-### 2.1 Variables de Entrada y Candidatos
-- **Comarca objetivo**: $C \in \{\text{Sierra Norte}, \text{Sierra Oeste}, \text{Las Vegas}, \dots\}$.
-- **Municipios candidatos**: Conjunto de municipios pertenecientes a la comarca $M_C = \{m_1, m_2, \dots, m_k\}$.
-- **Presupuesto comarcal disponible**: $B \in \mathbb{R}^+$ (euros).
-- **Costes paramétricos unitarios de CAPEX**:
-  - Coste por dotación médica AP: $C_{\text{med}} = 450.000\text{ €}$ (médico + módulo de consulta).
-  - Coste por dotación escolar: $C_{\text{esc}} = 12.000\text{ €}$ (plaza escolar en CEIP/IES).
+### 2.1 Parámetros y Entradas
+- **Comarca**: $C \in \{\text{Sierra Oeste}, \text{Sierra Norte}, \text{Las Vegas}, \dots\}$.
+- **Municipios Candidatos**: Conjunto de municipios de la comarca $M_C = \{m_1, m_2, \dots, m_k\}$.
+- **Presupuesto Disponible**: $B \in \mathbb{R}^+$ (euros).
+- **Costes Unitarios de CAPEX**:
+  - $C_{\text{med}} = 450.000\text{ €}$ por médico de Atención Primaria (módulo de consulta).
+  - $C_{\text{esc}} = 12.000\text{ €}$ por plaza escolar pública (CEIP / IES).
 
-### 2.2 Variables de Decisión
+### 2.2 Variables de Asignación Discreta
 Para cada municipio $i \in M_C$:
-- $x_i \in \mathbb{N}_0$: número de médicos de AP adicionales asignados.
-- $y_i \in \mathbb{N}_0$: número de plazas escolares adicionales creadas.
+- $x_i \in \mathbb{N}_0$: Médicos de AP asignados.
+- $y_i \in \mathbb{N}_0$: Plazas escolares asignadas.
 
-### 2.3 Función Objetivo
-Maximizar la ganancia neta en capacidad de acogida poblacional efectiva en toda la comarca:
-$$\max_{\{x_i, y_i\}} \sum_{i \in M_C} \Delta \text{PersonasAcogibles}_i(x_i, y_i)$$
+### 2.3 Regla de Capacidad Efectiva y Poda de Ineficiencia Residencial
+La acogida neta efectiva de un municipio viene regida por el principio del mínimo de Liebig:
+$$\text{AcogidaEfectiva}_i(x_i, y_i) = \min \left( \text{abs\_sanidad}_i(x_i), \, \text{abs\_educacion}_i(y_i), \, \text{abs\_vivienda}_i \right)$$
 
-donde $\Delta \text{PersonasAcogibles}_i(x_i, y_i) = \text{AcogidaEfectiva}_i(x_i, y_i) - \text{AcogidaBase}_i$.
+donde:
+- $\text{abs\_sanidad}_i(x_i) = \max \left( 0, \, (\text{medicos}_i + x_i) \cdot 1.500 - \text{poblacion}_i \right)$
+- $\text{abs\_educacion}_i(y_i) = \max \left( 0, \, \frac{(\text{plazas}_i + y_i) \cdot 0.95 - \text{alumnos}_i}{0.17} \right)$
+- $\text{abs\_vivienda}_i = \text{capacidad habitacional fija en suelo y vivienda vacía}$
 
-### 2.4 Restricciones Obligatorias
-1. **Restricción presupuestaria dura**:
-   $$\sum_{i \in M_C} \left( C_{\text{med}} \cdot x_i + C_{\text{esc}} \cdot y_i \right) \le B$$
+$$\Delta \text{Personas}_i(x_i, y_i) = \max \left( 0, \, \text{AcogidaEfectiva}_i(x_i, y_i) - \text{AcogidaBase}_i \right)$$
 
-2. **Resolución de Cuello de Botella (Principio de No Compensatoriedad)**:
-   - Si el municipio $i$ tiene cuello de botella en **Sanidad** ($\text{hab/médico} > 1.500$), la inversión debe priorizar $x_i$ hasta situar el ratio en zona segura ($\le 1.500$). Invertir en educación o vivienda sin resolver la sanidad produce $\Delta = 0$ debido al truncamiento a BAJA ($<40$).
-   - Si el cuello de botella es **Educación** ($\text{ocupación} > 95\%$), debe priorizarse $y_i$ hasta devolver la ocupación por debajo del $95\%$.
+**Condición de Poda**:  
+Si un municipio está saturado por vivienda ($\text{factor\_limitante} == \text{"VIVIENDA"}$ y $\text{abs\_vivienda} \le \text{AcogidaBase}$), $\Delta \text{Personas}_i = 0$. El algoritmo **NO asigna presupuesto sanitario ni educativo** a dicho municipio, evitando gastos ineficientes (ej. caso Comarca Sur / Navalcarnero).
 
-3. **Techo de absorción residencial**:
-   $$\text{PersonasAcogibles}_i(x_i, y_i) \le \text{CapacidadResidencial}_i$$
-   No tiene sentido sobredotar servicios si no hay vivienda vacía movilizable o suelo vacante disponible.
-
-4. **No negatividad e integralidad**:
-   $$x_i \in \mathbb{N}_0, \quad y_i \in \mathbb{N}_0, \quad \forall i \in M_C$$
+### 2.4 Criterio Voraz de Selección
+Los municipios con ganancia neta factible se priorizan por **eficiencia marginal**:
+$$e_i = \frac{\Delta \text{Personas}_i}{\text{CosteTotal}_i}$$
+Se asignan partidas en orden decreciente de $e_i$ mientras $\sum \text{Coste}_i \le B$.
 
 ---
 
-## 3. Algoritmo de Resolución
-Dado que el espacio de búsqueda por comarca es pequeño ($k \le 7$ municipios por comarca, $n=20$ total), el algoritmo:
-1. Identifica el cuello de botella limitante de cada municipio mediante `factor_limitante`.
-2. Calcula la eficiencia marginal por euro invertido:
-   $$e_i = \frac{\Delta \text{PersonasAcogibles}_i}{\text{CosteTotal}_i}$$
-3. Asigna de forma voraz y exhaustiva (Knapsack exacto por programación dinámica / branch-and-bound) las combinaciones factibles respetando el presupuesto $B$.
-4. Aplica la salvaguarda de no compensatoriedad (`aplicar_salvaguarda_no_compensatoria`).
+## 3. Contrato JSON Devuelto (FastAPI / APEX)
 
----
-
-## 4. Salida Producida (Contrato para APEX y API FastAPI)
 ```json
 {
   "comarca": "Sierra Oeste",
   "presupuesto_total_eur": 2000000.0,
-  "presupuesto_utilizado_eur": 1824000.0,
-  "remanente_eur": 176000.0,
-  "incremento_acogida_comarcal": 1634,
+  "presupuesto_utilizado_eur": 1650000.0,
+  "remanente_eur": 350000.0,
+  "incremento_acogida_comarcal": 1336,
+  "municipios_evaluados": 3,
   "asignaciones": [
     {
-      "codigo_ine": "28125",
-      "municipio": "Robledo de Chavela",
+      "codigo_ine": "28171",
+      "municipio": "Villa del Prado",
+      "comarca": "Sierra Oeste",
       "medicos_asignados": 1,
-      "plazas_escolares_asignadas": 41,
-      "coste_eur": 942000.0,
-      "ganancia_personas": 817,
-      "nuevo_ica": 72.15,
-      "semaforo": "ALTA"
+      "plazas_escolares_asignadas": 0,
+      "coste_eur": 450000.0,
+      "ganancia_personas": 830,
+      "nuevo_ica": 37.57,
+      "semaforo": "BAJA",
+      "motivo_asignacion": "Resolución de cuello de botella en SANIDAD y absorción de hasta 830 residentes"
     }
   ],
+  "metodologia": "Heurística voraz acotada por comarca con poda de ineficiencia residencial (MVP determinista)",
+  "origen": "SIMULADO",
+  "metodo": "HEURISTICA_VORAZ_PRESUPUESTO_COMARCAL",
+  "dataset_version": "v1.0.0-F2",
   "roadmap_fase_2": "Spillover territorial continuo mediante matriz de accesibilidad intermunicipal."
 }
 ```

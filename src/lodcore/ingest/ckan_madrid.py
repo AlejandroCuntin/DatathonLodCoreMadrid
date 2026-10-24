@@ -18,11 +18,23 @@ CKAN_BASE_URL = "https://datos.comunidad.madrid/api/3/action"
 RESOURCE_ID_SANIDAD = "631ebd15-c19f-4984-9ad5-bb4b8554b5e0"   # Recursos y asistencia sanitaria por tipo
 RESOURCE_ID_EDUCACION = "28d60557-1d73-4281-ab08-6cfd3b2f5f83" # Centros educativos de la CAM
 
+# Tipos educativos que forman parte de la red de enseñanza escolar obligatoria y complementaria
+TIPOS_EDUCACION_REGLADA = {
+    "CP INF-PRI", "CP EGB", "CP INF-PRI-SEC", "IES", "SIES", "CPR INF-PRI",
+    "CPR INF-PRI-SEC", "CPR SEC", "EEI", "EEI-CN", "CN", "CRA", "CEIP",
+    "CENTRO PRIVADO DE EDUCACIÓN INFANTIL", "COLEGIO DE EDUCACIÓN INFANTIL Y PRIMARIA",
+    "INSTITUTO DE EDUCACIÓN SECUNDARIA", "ESCUELA INFANTIL-CASA DE NIÑOS",
+    "CENTRO PRIVADO DE EDUCACIÓN PRIMARIA Y SECUNDARIA", "CENTRO PRIVADO DE EDUCACIÓN SECUNDARIA",
+    "COLEGIO RURAL AGRUPADO"
+}
+
 class IngestorCKANMadrid:
     """
     Ingesta de equipamientos de Sanidad y Educación desde el CKAN de la Comunidad de Madrid.
     Garantiza:
-    - Snapshot inmutable en data/raw/ckan/
+    - Paginación completa de endpoints datastore
+    - Snapshot inmutable fechado en data/raw/ckan/ sin sobrescritura involuntaria
+    - Filtrado semántico estricto de centros activos en situación de ALTA
     - Mapeo estricto a código INE de 5 dígitos (28xxx)
     - Trazabilidad y linaje formal
     """
@@ -34,28 +46,61 @@ class IngestorCKANMadrid:
             self.raw_dir = Path(raw_dir)
         self.raw_dir.mkdir(parents=True, exist_ok=True)
 
-    def _fetch_datastore(self, resource_id: str, limit: int = 10000, timeout: int = 25) -> Dict[str, Any]:
-        url = f"{CKAN_BASE_URL}/datastore_search?resource_id={resource_id}&limit={limit}"
-        req = urllib.request.Request(
-            url,
-            headers={
-                "User-Agent": "LoDCORE-Madrid-Datathon/2.0 (UC3M-CAM; contact: lodcore@madrid.gov)",
-                "Accept": "application/json"
-            }
-        )
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            raw_bytes = resp.read()
-        return json.loads(raw_bytes.decode("utf-8", errors="replace"))
+    def _fetch_datastore_all(self, resource_id: str, batch_size: int = 5000, timeout: int = 30) -> Dict[str, Any]:
+        """
+        Descarga la totalidad de registros de un recurso datastore de CKAN mediante paginación por offset.
+        """
+        records: List[Dict[str, Any]] = []
+        offset = 0
+        total = None
 
-    def descargar_y_guardar_snapshot_sanidad(self, timeout: int = 25) -> Tuple[Path, Dict[str, Any]]:
+        while True:
+            url = f"{CKAN_BASE_URL}/datastore_search?resource_id={resource_id}&limit={batch_size}&offset={offset}"
+            req = urllib.request.Request(
+                url,
+                headers={
+                    "User-Agent": "LoDCORE-Madrid-Datathon/2.0 (UC3M-CAM; contact: lodcore@madrid.gov)",
+                    "Accept": "application/json"
+                }
+            )
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                raw_bytes = resp.read()
+            data = json.loads(raw_bytes.decode("utf-8", errors="replace"))
+            result = data.get("result", {})
+            batch = result.get("records", [])
+            if not batch:
+                break
+            records.extend(batch)
+            if total is None:
+                total = result.get("total", len(records))
+            offset += len(batch)
+            logger.debug("Descargados %d / %s registros de %s", len(records), total, resource_id)
+            if len(records) >= total:
+                break
+
+        return {
+            "help": f"{CKAN_BASE_URL}/help_show?name=datastore_search",
+            "success": True,
+            "result": {
+                "resource_id": resource_id,
+                "total": len(records),
+                "records": records
+            }
+        }
+
+    def descargar_y_guardar_snapshot_sanidad(self, timeout: int = 25, overwrite: bool = False) -> Tuple[Path, Dict[str, Any]]:
         """Descarga centros sanitarios por tipo y persiste snapshot inmutable."""
         fecha_str = date.today().strftime("%Y%m%d")
         snapshot_path = self.raw_dir / f"ckan_madrid_sanidad_snapshot_{fecha_str}.json"
 
+        if snapshot_path.exists() and not overwrite:
+            logger.info("Snapshot CKAN Sanidad existente reutilizado: %s", snapshot_path)
+            return snapshot_path, json.loads(snapshot_path.read_text(encoding="utf-8"))
+
         try:
-            payload = self._fetch_datastore(RESOURCE_ID_SANIDAD, limit=10000, timeout=timeout)
+            payload = self._fetch_datastore_all(RESOURCE_ID_SANIDAD, timeout=timeout)
             snapshot_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-            logger.info("Snapshot CKAN Sanidad guardado en: %s", snapshot_path)
+            logger.info("Snapshot CKAN Sanidad guardado en: %s (%d registros)", snapshot_path, len(payload["result"]["records"]))
             return snapshot_path, payload
         except Exception as exc:
             logger.warning("Error descargando CKAN Sanidad: %s. Buscando snapshot previo...", exc)
@@ -65,15 +110,19 @@ class IngestorCKANMadrid:
                 return previos[0], json.loads(previos[0].read_text(encoding="utf-8"))
             raise RuntimeError("No se pudo conectar a CKAN Sanidad ni hay snapshot previo.") from exc
 
-    def descargar_y_guardar_snapshot_educacion(self, timeout: int = 25) -> Tuple[Path, Dict[str, Any]]:
-        """Descarga centros educativos y persiste snapshot inmutable."""
+    def descargar_y_guardar_snapshot_educacion(self, timeout: int = 35, overwrite: bool = False) -> Tuple[Path, Dict[str, Any]]:
+        """Descarga centros educativos mediante paginación completa y persiste snapshot inmutable."""
         fecha_str = date.today().strftime("%Y%m%d")
         snapshot_path = self.raw_dir / f"ckan_madrid_educacion_snapshot_{fecha_str}.json"
 
+        if snapshot_path.exists() and not overwrite:
+            logger.info("Snapshot CKAN Educación existente reutilizado: %s", snapshot_path)
+            return snapshot_path, json.loads(snapshot_path.read_text(encoding="utf-8"))
+
         try:
-            payload = self._fetch_datastore(RESOURCE_ID_EDUCACION, limit=10000, timeout=timeout)
+            payload = self._fetch_datastore_all(RESOURCE_ID_EDUCACION, timeout=timeout)
             snapshot_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-            logger.info("Snapshot CKAN Educación guardado en: %s", snapshot_path)
+            logger.info("Snapshot CKAN Educación guardado en: %s (%d registros)", snapshot_path, len(payload["result"]["records"]))
             return snapshot_path, payload
         except Exception as exc:
             logger.warning("Error descargando CKAN Educación: %s. Buscando snapshot previo...", exc)
@@ -87,18 +136,14 @@ class IngestorCKANMadrid:
         """
         Agrupa los centros sanitarios (centros de salud y consultorios) del año más reciente
         por código INE de 5 dígitos estricto.
-        En las fuentes estadísticas de la CAM, 'Código territorio' codifica el municipio
-        con dígito de control INE (ej. 1258 -> municipio 125 -> 28125; 275 -> 27 -> 28027).
         """
         records: List[Dict[str, Any]] = payload.get("result", {}).get("records", [])
         if not records:
             return {}
 
-        # Determinar clave de año de forma tolerante a codificación de eñe
         k_anio = next((k for k in records[0].keys() if "o" in k.lower() and len(k) <= 4), "Año")
         k_cod = next((k for k in records[0].keys() if "digo" in k.lower() and "territorio" in k.lower()), "Código territorio")
 
-        # Filtrar solo registros a nivel Municipio
         recs_muni = [r for r in records if r.get("Tipo territorio") in ("Municipios", "Municipio") and r.get(k_cod) is not None]
         if not recs_muni:
             return {}
@@ -115,7 +160,6 @@ class IngestorCKANMadrid:
                 continue
 
             s = str(cod_val)
-            # El código de municipio oficial INE se obtiene retirando el dígito de control final
             if len(s) >= 2:
                 muni_num = int(s[:-1])
                 codigo_ine = f"28{muni_num:03d}"
@@ -150,9 +194,12 @@ class IngestorCKANMadrid:
 
         return sanidad_por_ine
 
-    def procesar_educacion(self, payload: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
+    def procesar_educacion(self, payload: Dict[str, Any], solo_reglada: bool = True) -> Dict[str, Dict[str, Any]]:
         """
-        Agrupa los centros educativos activos por código INE de 5 dígitos: f'28{int(CDMUNI):03d}'.
+        Agrupa los centros educativos por código INE de 5 dígitos.
+        Aplica filtros de calidad y coherencia semántica:
+        - Exclusión de centros en estado BAJA, INACTIVO, ANULACIÓN o EN TRÁMITE (solo SITUACIÓN == 'ALTA')
+        - Opcionalmente filtra centros de enseñanza escolar reglada (Infantil, Primaria, Secundaria, Bachillerato, FP).
         """
         records: List[Dict[str, Any]] = payload.get("result", {}).get("records", [])
         if not records:
@@ -160,10 +207,20 @@ class IngestorCKANMadrid:
 
         educacion_por_ine: Dict[str, Dict[str, Any]] = {}
         for r in records:
-            # Filtrar centros dados de baja si el campo SITUACIÓN está disponible
-            situacion = str(r.get("SITUACIÓN", r.get("SITUACIN", ""))).upper()
-            if "BAJA" in situacion:
+            situacion = str(r.get("SITUACIÓN", r.get("SITUACIN", ""))).strip().upper()
+            if situacion != "ALTA":
                 continue
+
+            tipo_abrv = str(r.get("TIPO_ABRV", "")).strip()
+            tipo_ext = str(r.get("TIPO_EXT", "")).strip()
+
+            if solo_reglada:
+                es_reglada = (
+                    tipo_abrv in TIPOS_EDUCACION_REGLADA or
+                    any(t in tipo_ext.upper() for t in ["INFANTIL", "PRIMARIA", "SECUNDARIA", "INSTITUTO", "COLEGIO"])
+                )
+                if not es_reglada:
+                    continue
 
             cdmuni = r.get("CDMUNI")
             if cdmuni is None:
@@ -180,8 +237,8 @@ class IngestorCKANMadrid:
                     "codigo_ine": codigo_ine,
                     "num_centros_educativos_ckan": 0,
                     "origen": "OBSERVADO",
-                    "metodo": "CKAN_MADRID_CENTROS_EDUCATIVOS",
-                    "fuente_datos": "CKAN Comunidad de Madrid (Directorio oficial de Centros Educativos)"
+                    "metodo": "CKAN_MADRID_CENTROS_EDUCATIVOS_ALTA",
+                    "fuente_datos": "CKAN Comunidad de Madrid (Directorio oficial Centros Educativos en ALTA)"
                 }
 
             educacion_por_ine[codigo_ine]["num_centros_educativos_ckan"] += 1
