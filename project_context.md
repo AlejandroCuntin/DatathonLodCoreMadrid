@@ -98,6 +98,7 @@ DATATHON/ (raíz del espacio de trabajo)
 │   ├── docs/                       #   validación, matriz de procedencia, specs y material_reto/ (PDFs oficiales)
 │   ├── PROMPTS-LoDCORE/            #   Kit de 14 prompts + AGENTS.md de la cátedra
 │   ├── .github/                    #   ISSUES_F1_F16.md (tablero documentado)
+│   ├── entrega/                    #   Paquete para el jurado (dataset + diccionario + fuentes + checksums)
 │   ├── README.md · project_context.md · estructura.md
 │   ├── params.yaml · requirements.txt · dvc.yaml · index.html
 │   └── diagrama_flujo.mmd / .png   #   Resumen visual en 7 bloques
@@ -129,6 +130,7 @@ DATATHON/ (raíz del espacio de trabajo)
 > F2 con veredicto formal APTO CON RESERVAS en `docs/validacion.md`, y
 > heurística voraz de asignación presupuestaria comarcal (M4-OPT) implementada y documentada (el spillover continuo queda como roadmap de Fase 2).
 > F3 (auditoría de fuga L1-L7) y F4 (validación cruzada espacial, 4 baselines naive y bootstrap B=1000) completadas con dictamen formal y 34 tests en verde (P2); F12 (APEX P3) y F13-F16 continúan en curso.
+> El **paquete de datos para el jurado** está en entrega/ (dataset validado + diccionario de 88 variables + catálogo de fuentes con licencias + checksums): cubre la parte de F16.2.
 
 ### Fase 0 — Fundamento y reparto (23 octubre)
 - **Responsable:** P1 (estructura), P3 (roles), TODOS (regla de contexto).

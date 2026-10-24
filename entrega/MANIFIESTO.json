@@ -1,0 +1,79 @@
+{
+  "dataset": "Panel Municipal Integrado LoDCORE Madrid",
+  "dataset_version": "v1.0.0-F2",
+  "fecha_disponible": "2026-10-24",
+  "municipios": 20,
+  "variables": 88,
+  "poblacion_total": 200267,
+  "comarcas": 8,
+  "formato": "CSV UTF-8 + JSON",
+  "entrega": [
+    {
+      "path": "CARGA_ORACLE.md",
+      "bytes": 3537,
+      "sha256": "d08d2a2ceda6418888e4723b2a67407f2fe64419bc183a136f0c49e6263b7ba6"
+    },
+    {
+      "path": "dataset/municipios_panel_validado.csv",
+      "bytes": 31970,
+      "sha256": "2d2f440fabae86edb798f0f20840ed47e7c8395728329681dc752971ceafa30a"
+    },
+    {
+      "path": "dataset/municipios_panel_validado.json",
+      "bytes": 79454,
+      "sha256": "7ab54baf9fda38f958528bd55dead528c03e8966d057427cf7e98c87d538a292"
+    },
+    {
+      "path": "docs/diccionario_datos.md",
+      "bytes": 11745,
+      "sha256": "a232e6cfaf7acfadb620c170db439b0ee90a372976c53f2463f4382093120d58"
+    },
+    {
+      "path": "docs/fuentes_oficiales.md",
+      "bytes": 5235,
+      "sha256": "20f67fa7dbdde039aaf996b92cead6dfee0230c4c6b24f2722dc084e723276c0"
+    },
+    {
+      "path": "docs/limite_no_compensatorio.md",
+      "bytes": 2525,
+      "sha256": "d9231abbf0f7c59491fa8143ba8845e9e51495a960dddcad8c05ec632fd02eaf"
+    },
+    {
+      "path": "docs/matriz_procedencia_variables.md",
+      "bytes": 6034,
+      "sha256": "b0b40e6cf8419a5cd098e4349409c1f450397a0b968c4db25d091ccd7015f297"
+    },
+    {
+      "path": "docs/validacion.md",
+      "bytes": 7866,
+      "sha256": "d73f64b9988fa464b614b5e2eaaf28856e2121eb47860a6947016d6fe92a3731"
+    },
+    {
+      "path": "FICHA_DATASET.md",
+      "bytes": 3316,
+      "sha256": "f48e4082b78bea359edb15bcece087d327048a7a632f41dc7dabae87df551ed8"
+    },
+    {
+      "path": "README_ENTREGA.md",
+      "bytes": 3387,
+      "sha256": "47618d4fcc51ce194e3a4a9ee04393af43ea06b53f664ef194a572558c334a79"
+    }
+  ],
+  "snapshots_raw_no_incluidos": [
+    {
+      "path": "data/raw/ckan/ckan_madrid_educacion_snapshot_20261024.json",
+      "bytes": 8216798,
+      "sha256": "dd211424befc941a790bfe19512e0ccc806b071e13f82083db614a071a1378ff"
+    },
+    {
+      "path": "data/raw/ckan/ckan_madrid_sanidad_snapshot_20261024.json",
+      "bytes": 3415049,
+      "sha256": "b68ef2b9c5e7977c3a0aaad19faa8d26da86bb78d8f6def40f10b4c874af4c95"
+    },
+    {
+      "path": "data/raw/ine/ine_padron_2881_snapshot_20261024.json",
+      "bytes": 511375,
+      "sha256": "5af7446723e80949a23bc49e3dd0b432883a7fdc06c864d51457ac2995b95056"
+    }
+  ]
+}
