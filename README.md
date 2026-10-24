@@ -19,7 +19,6 @@ DatathonLodCoreMadrid/
 ├── params.yaml                      # Hiperparámetros (los leen los modelos)
 ├── requirements.txt
 ├── dvc.yaml                         # Pipeline reproducible (opcional en el sprint)
-├── index.html                       # Prototipo visual estático (no consume la API)
 ├── src/lodcore/
 │   ├── config/                      # thresholds.py, weights.py, cargar_params()
 │   ├── data/                        # quality gates, punto-en-tiempo, procedencia
