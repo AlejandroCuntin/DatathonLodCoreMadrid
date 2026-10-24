@@ -90,9 +90,10 @@ Valores permitidos en `origen`: `OBSERVADO | IMPUTADO | ESTIMADO | PROYECTADO | 
 DATATHON/ (raíz del espacio de trabajo)
 ├── codigo/DatathonLodCoreMadrid/   # ÚNICO repositorio Git activo (todo el MVP vive aquí)
 │   ├── src/lodcore/                #   ingest/ (INE+CKAN), data/, models/ M1-M5, explain/, publish/, serving/
+│   ├── frontend/mapa/              #   Mapa interactivo del portal (HTML/CSS/JS)
 │   ├── scripts/                    #   run_all_models_n1_n2_n3.py + pipeline F1
 │   ├── tests/                      #   25 tests (unit + integración)
-│   ├── oracle/                     #   ddl/ (01..06; el 06 en revisión) y onnx/
+│   ├── oracle/                     #   ddl/ (01..06; el 06 en revisión), REST/ y onnx/
 │   ├── data/                       #   raw/ (snapshots INE+CKAN), processed/, validated/, output/
 │   ├── docs/                       #   validación, matriz de procedencia, specs y material_reto/ (PDFs oficiales)
 │   ├── PROMPTS-LoDCORE/            #   Kit de 14 prompts + AGENTS.md de la cátedra
