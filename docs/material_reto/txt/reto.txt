@@ -1,0 +1,180 @@
+=== PAGE 1 ===
+Reto y Normas 
+del Desafío
+II Datathon LoDCOREMadrid
+https://datathon.lodcoremadrid.es
+
+=== PAGE 2 ===
+Reto
+El propósito del reto consiste en ayudar a las Administraciones Públicas a 
+identificar qué municipios de menos de 50.000 habitantes tienen mejores 
+posibilidades para acoger la nueva población que debe absorber la Comunidad 
+de Madrid.
+
+=== PAGE 3 ===
+Ideas para 
+resolver el reto
+•Una plataforma analítica e interactiva que calcule 
+un índice sintético de capacidad de acogida para 
+cada municipio de <50k habitantes
+•Modelo predictivo/simulador que evalúa el 
+potencial de crecimiento a diferentes horizontes 
+temporales (corto, medio y largo plazo)
+•Análisis de la movilidad en diversas comarcas de la 
+Comunidad de Madrid
+•Simulador de Refuerzo de Infraestructuras y 
+Costes Asociados
+•Mapa de Holgura y Diagnóstico de Saturación de 
+los Servicios Públicos de la Comunidad de Madrid 
+(Salud, Educación, Servicios Sociales).
+•Simulador del Umbral Dotacional y Coste de 
+Ampliación
+
+=== PAGE 4 ===
+¿Qué 
+supone el 
+Reto?
+Definir una idearelevante para la resolución del 
+problema
+Establecer indicadoresy/o datasetspara que reutilicen, 
+agreguen o enriquezcan los datos públicos que se 
+utilicen como punto de partida
+Recopilar, procesar eintegrarfuentes de datos abiertas 
+que permitan resolver satisfactoriamente el problema 
+establecido en la propuesta.
+Implementarlos algoritmos que permitan establecer las 
+recomendaciones requeridas.
+Proporcionar prototipo funcional de interfazde usuario 
+para que las Administraciones Públicas y también los 
+ciudadanos puedan navegar y entender los datos
+
+=== PAGE 5 ===
+Fuentes de datos que se pueden utilizar
+Datos del 
+Ayuntamiento de 
+Madrid
+Datos relativos a la ciudad 
+y sus habitantes
+Datos Abiertos de la 
+Comunidad de 
+Madrid
+Datos relativos a empleo, 
+bienestar, ALMUDENA
+Portal Estadístico de 
+la Comunidad de 
+Madrid
+Indicadores agregados, 
+NOMECALLES
+Instituto Nacional 
+de Estadística
+Datos relativos a 
+demografía y más
+LoDCOREMadrid
+Indicadores agregados de 
+accesibilidad de servicios 
+públicos
+Y más…
+
+=== PAGE 6 ===
+¿Qué herramientas se pueden utilizar?
+No hay restricciones con 
+respecto al uso de 
+herramientas
+Oracle pone a disposición de los 
+participantes diversas 
+soluciones tecnológicas que 
+podrán ser utilizadas durante el 
+Datathonpara simplificar 
+muchas de las tareas requeridas
+
+=== PAGE 7 ===
+Fases del Datathon
+Fase de Propuesta 14 de Octubre
+Fase de Prototipo 16 de Octubre –29 de Octubre
+
+=== PAGE 8 ===
+Fase de PROPUESTA
+Plazo de Presentación 14 de Octubre de 2026
+Formalización de la presentación
+Soporte a la presentación de ideas Canal de comunicación para dudas y preguntas
+Oracle Academypara interactuar con 
+herramientas durante la fase de ideas
+Proceso de evaluación Publicación de finalistas y calendario de la              fase de proyectos: 16 de Octubre de 2026
+https://datathon.lodcoremadrid.es/index.php/participa/
+lodcoremadrid@uc3m.es
+
+=== PAGE 9 ===
+Fase PROPUESTA -¿Existe algún filtro?
+Cumplir los criterios de elegibilidad: estudiantes de universidades madrileñas. 
+Los participantes deberán facilitar documentación para acreditar esta situación.
+Límite Máximo: 15 equipos. 
+En caso de recibir más candidaturas se seleccionarán las mejores con respecto a:
+•Relevancia de las fuentes de datos consideradas
+•Complejidad de los algoritmos contemplados para generar datasets
+•Mecanismos de validación de los datos generados
+•Mecanismos de explicabilidad
+
+=== PAGE 10 ===
+Fase de PROTOTIPO
+•Hasta el 29 de Octubre de 2026Plazo de desarrollo
+•Demostración presencial el 29 de Octubre de 2026Formalización de la defensa
+•Licencias de uso Oracle Academy (250€ /equipo)
+•lodcoremadrid@uc3m.es
+Soporte al desarrollo 
+de los proyectos
+•Publicación de Ganadores y Entrega de Premios: 
+29 de Octubre de 2026Proceso de evaluación
+
+=== PAGE 11 ===
+Fase de 
+PROTOTIPO –¿Qué 
+se presenta?
+Presentación de 
+Proyectos: Sesión 
+Presencial
+Demostración: 10 minutos
+Acceso a Datasets y 
+prototipos presentados 
+durante la deliberación 
+posterior
+
+=== PAGE 12 ===
+Fase de PROTOTIPO –¿Qué se valora?
+•1.1 Nivel de corrección y adecuación del planteamiento teórico en el tratamiento 
+de los datos abiertos (hasta 25 puntos).
+•1.2 Grado de resolución del reto planteado (hasta 25 puntos).
+Hasta 50 puntos: Calidad del resultado
+•2.1 Nivel de sencillez en la obtención y comprensión de los resultados por parte de 
+los destinatarios (hasta 25 puntos).
+•2.2 Nivel de interactividad/flexibilidad de la solución para que los destinatarios 
+puedan adaptarla a su caso específico (hasta 25 puntos).
+Hasta 50 puntos: Explotabilidad/Usabilidad
+
+=== PAGE 13 ===
+¡Adelante!
+
+
+=== PAGE 14 ===
+¿Y cómo conseguimos ese 
+premio?
+
+=== PAGE 15 ===
+Valor estratégico de los datos 
+que se reutilizan y que se 
+generan
+
+=== PAGE 16 ===
+Capacidad para aplicar métodos, 
+algoritmos y herramientas
+
+=== PAGE 17 ===
+Ser capaz de asistir al usuario destino en el proceso de toma de decisiones
+
+=== PAGE 18 ===
+Ser capaz de proporcionar 
+información que es fiable
+•Datos válidos y modelos correctos y coherentes 
+con la realidad
+
+=== PAGE 19 ===
+Ideas y demostradores con capacidad de crecimiento

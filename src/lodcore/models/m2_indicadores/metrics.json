@@ -1,9 +1,9 @@
 {
   "model_name": "M2_PCA_HEURISTICA_30MIN",
   "n_municipios": 20,
-  "explained_variance_ratio_pc1": 0.7044,
+  "explained_variance_ratio_pc1": 0.7004,
   "explained_variance_por_bloque": {
-    "subindice_sanidad_educacion": 0.7263,
+    "subindice_sanidad_educacion": 0.7101,
     "subindice_conectividad": 0.7761,
     "subindice_sostenibilidad": 0.6875,
     "subindice_musculo_habitacional": 0.6277

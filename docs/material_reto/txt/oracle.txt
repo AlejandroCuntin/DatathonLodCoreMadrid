@@ -1,0 +1,239 @@
+=== PAGE 1 ===
+Uso de datos para la 
+resolución de retos de la 
+sociedad en la era de la IA
+Convirtiendo datos fiables en decisiones que mejoren 
+servicios, anticipen riesgos y generen confianza
+J. Andrés Araújo
+Master Principal Account Cloud Engineering
+
+=== PAGE 2 ===
+La IA lo cambia todo
+2 Copyright © 2026, Oracle and/or its affiliates
+
+=== PAGE 3 ===
+3 Copyright © 2026, Oracle and/or its affiliates
+
+
+=== PAGE 4 ===
+Copyright © 2026, Oracle and/or its affiliates
+No muevas datos mediante pipelines que incrementan la 
+complejidad, los costes, los riegos, y te ralentizan
+4
+
+=== PAGE 5 ===
+cuando la 
+ como 
+trabaja el negocio
+Las demostraciones impactantes no se 
+traducen en impacto en el negocio cuando la IA 
+no puede VER la foto completa, COMPRENDER 
+el contexto de negocio, o ACTUAR de forma 
+segura en los flujos de trabajo empresariales
+5 Copyright © 2026, Oracle and/or its affiliates
+03. La IA no puede ACTUAR de forma Segura dentro de 
+los flujos de trabajo reales
+Los agentes quedan inactivos cuando no pueden navegar por las 
+aprobaciones, politicas, excepciones, controles y aplicaciones de 
+negocio
+01. La IA no puede VER la foto completa
+Los datos empresariales están fragmentados entre aplicaciones, 
+bases de datos, lagos, ficheros y plataformas de proveedores
+02. La IA no COMPRENDE el contexto de negocio
+Las definiciones, relaciones, politicas, aprobaciones y procesos de 
+negocio varían según la compañía, la geografía, la función y la 
+herramienta
+Resultado: menor confianza, más comprobación manual, mayor coste e impacto 
+limitado
+
+=== PAGE 6 ===
+De datos dispersos a decisiones con impacto
+Copyright © 2026, Oracle and/or its affiliates6
+1
+Capturar
+Datos clínicos, 
+sociales, 
+ambientalesy 
+operativos
+2
+Conectar
+Identidad, 
+interoperabilid
+ady calidad
+verificable
+3
+Entender
+Analítica, IA y 
+conocimiento
+del dominio
+4
+Actuar
+Intervenciones,
+automatización
+y atención
+humana
+5
+Aprender
+Medición de 
+resultados y 
+mejora 
+continua
+Cada fase necesita responsables, controles y métricas de valor
+
+=== PAGE 7 ===
+La confianza se diseña desde el principio
+Copyright © 2026, Oracle and/or its affiliates7
+Finalidad Definirel beneficiopúblico, la población afectaday los límitesde uso
+Datos Calidad, procedencia, minimización y controles de acceso
+Modelo Pruebas de sesgo, explicabilidad suficiente y monitorización
+Personas Supervisión humana, canales de reclamación y comunicación clara
+La confianza acelera la adopción cuando las personas entienden cómo se toman las decisiones y pueden 
+cuestionarlas
+
+=== PAGE 8 ===
+Arquitectura para convertir intención en capacidad
+Copyright © 2026, Oracle and/or its affiliates8
+La confianza acelera la adopción cuando las personas entienden cómo se toman las decisiones y pueden 
+cuestionarlas
+Experienciasy servicios Canales digitales, procesosde negocioy atencióna la ciudadanía
+Decisión Analítica, IA generativa, modelos predictivos y reglas de negocio
+Datos Integración, catálogo, gobierno, calidad, datosespacialesy tiempo
+real
+Fundación Cloud segura, identidad, observabilidad, resiliencia y soberanía
+
+=== PAGE 9 ===
+Plataforma Oracle: 
+Proporciona a la IA el contexto para ver, comprender, y actuar
+Resultado: IA que opera con mayor precision, resultados más rápidos, control más Fuerte y costes más bajo y predecible
+9 Copyright © 2026, Oracle and/or its affiliates
+COMPRENDER…
+Contexto de 
+negocio
+Basa la IA en definiciones y 
+significados de forma que los 
+agentes comprendan como 
+funciona su negocio
+02
+ACTUAR…
+Seguridad a escala
+Permite a la IA y agentes 
+actuar en toda la empresa 
+con trazabilidad y control
+03
+VER…
+Datos 
+empresariales
+Conecta los datos que 
+importan entre fuentes 
+Oracle y no-Oracle
+01
+Plataforma Oracle
+ Confianza y Control
+Capa semánticaCimientos de IA y datos
+Experiencias agenticas e IA
+
+=== PAGE 10 ===
+Immediato
+ Escalable
+IA embebida, sin coste 
+adicional, ejecutánose donde 
+residen los datos
+Soporte a vectores,, sin coste 
+adicional, sobre la misma 
+plataforma
+Plataforma multimodeloque 
+permite aplicar IA y analítica a 
+todo tipo de datos y formatos
+Continuidad del negocio, 
+por diseño, para facilitar que 
+el negocio esté operativo 
+24x7
+Seguridad avanzada, 
+por diseño, para asegurar su 
+activo más valorado, 
+sus datos
+Elección del despliegue, 
+se ejecuta donde lo necesite
+Abierto, basada en estándares, 
+interoperando con cualquier 
+tecnología y datos
+Innovación continua, probada, 
+para una evolución constante 
+sin disrupción
+Facilitador para toda clase de 
+cargas de trabajo,desde 
+lakehouses a cargas de trabajo 
+transliticas
+
+
+=== PAGE 11 ===
+El reto social exige decisiones más rápidas y más justas
+Servicios bajo presión
+Salud, educación, 
+movilidad y protección 
+social compiten por 
+recursos limitados
+Riesgos interconectados
+Clima, fraude, exclusion y 
+emergencias se propagan 
+entre territorios y sistemas
+Expectativas ciudadanas
+Los ciudadanos esperan 
+servicios accesibles, 
+personalizados y 
+transparentes
+Copyright © 2026, Oracle and/or its affiliates12
+La IA amplía la capacidad de analisis, pero los resultados dependen de la Calidad de los datos, el contexto y las 
+salvaguardas
+
+
+=== PAGE 12 ===
+Cuatro ámbitos donde los datos cambian la respuesta
+Salud
+Priorizar prevención y 
+coordinar la atención de 
+personas con mayor 
+riesgo
+Ciudades
+Optimizar movilidad, 
+energia y mantenimiento 
+con datos en tiempo casí 
+real
+Sostenibilidad
+Detectar presión 
+ambiental y orientar 
+inversions hacia mayor 
+impacto
+Inclusion
+Identificar barreras de 
+acceso y acercar los 
+servicios a quien los 
+necesita
+Copyright © 2026, Oracle and/or its affiliates13
+
+
+=== PAGE 13 ===
+Como priorizar un caso de uso con valor demostrable
+Copyright © 2026, Oracle and/or its affiliates14
+Impacto para personas
+Viabilidad de datos
+Riesgo y confianza
+Capacidad para actuar
+¿Quéresultadomejoray para quién?
+¿Existen datos suficientes, legítimos y utilizables?
+¿Qué daño podría causar un error y cómo se controla?
+¿Quién usará la información y qué cambio puede ejecutar?
+
+=== PAGE 14 ===
+¿Qué decision crítica puede mejorar si 
+combinamos datos fiables, IA responsable y 
+conocimiento de las personas que prestan el 
+servicio?
+Copyright © 2026, Oracle and/or its affiliates15
+Empezad por un reto concreto y una medida de impacto compartida
+
+=== PAGE 15 ===
+Gracias
+Copyright © 2026, Oracle and/or its affiliates16
+
+=== PAGE 16 ===

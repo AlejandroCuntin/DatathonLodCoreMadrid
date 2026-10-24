@@ -1,4 +1,4 @@
-# Informe de Validación Rigurosa y Auditoría (Fase F8)
+# Informe de Validación Rigurosa, Auditoría y Veredicto Formal
 ## Proyecto LoDCORE Madrid • II Datathon 2026
 
 > **Regla `AGENTS.md`**: todo número publicado en este documento procede de un
@@ -7,7 +7,33 @@
 
 ---
 
-### 1. Puertas de Calidad y Punto-en-Tiempo (Fase F2)
+### 1. Veredicto Formal del Panel de Datos (Fase F2)
+
+**Dictamen de Calidad**: **`APTO CON RESERVAS`**
+
+#### 1.1 Justificación Técnica del Veredicto
+- **Fuentes Oficiales Conectadas (F1.1)**:
+  - **INE Padrón Municipal Continuo (Año 2025)**: Consumido vía API JSON oficial (tabla 2881) con snapshot inmutable fechado en `data/raw/ine/ine_padron_2881_snapshot_20261023.json`.
+  - **CKAN Comunidad de Madrid (Sanidad)**: Recurso oficial de *Recursos y asistencia sanitaria por tipo*, snapshot inmutable en `data/raw/ckan/ckan_madrid_sanidad_snapshot_20261023.json`.
+  - **CKAN Comunidad de Madrid (Educación)**: Directorio oficial de *Centros Educativos*, snapshot inmutable en `data/raw/ckan/ckan_madrid_educacion_snapshot_20261023.json`.
+- **Identificación Estricta (F1.3)**: 100 % de los 20 municipios piloto casados mediante **código INE de 5 dígitos** (`28xxx`), eliminando cualquier ambigüedad toponímica o error por nombre.
+- **Trazabilidad y Linaje Transparente**:
+  - Declaración honesta a nivel de registro: `origen = 'OBSERVADO+SIMULADO'`, `metodo = 'INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS'`, `dataset_version = 'v1.0.0-F2'`, `fecha_disponible = '2026-10-23'`.
+  - Desglose columna a columna documentado en la [Matriz de Procedencia por Variable](file:///C:/Users/USUARIO/Desktop/DATATHON/docs/matriz_procedencia_variables.md): la población y los recuentos de centros de salud y colegios en ALTA proceden de registros públicos oficiales (INE y CKAN CAM); la dotación detallada de médicos asignados, plazas escolares y vivienda vacía permanece calibrada sintéticamente (`seed=2026`).
+- **Quality Gates (F2)**: 20 / 20 municipios superan las 18 validaciones de esquema, rangos $[0, 100]$ y punto-en-tiempo en `src/lodcore/data/quality_gates.py`.
+
+#### 1.2 Modelos que el Panel Puede y NO Puede Alimentar
+| Modelo | Veredicto para este Modelo | Justificación y Límites |
+|---|---|---|
+| **M2 — Indicadores e Isócronas** | **APTO** | Recálculo directo sobre centros de salud y colegios oficiales; 16/20 municipios cumplen el criterio de 30 min. |
+| **M3 — Proyección Demográfica** | **APTO** | Población base 2025 verificada con Padrón INE oficial (200.267 hab. agregados); proyecciones 2030/2035 con bandas al 95%. |
+| **M4 — Capacidad de Acogida (Core)** | **APTO** | Target determinista sobre dotaciones oficiales y reglas no compensatorias operativas ($>1.500$ hab/médico, $>95\%$ aulas). MAE CV comarcal: 5.15 ptos. |
+| **M5 — Recomendador MCDM** | **APTO** | Clustering ($k=4$, silhouette 0.3183) y ranking con filtros de exclusión dura sobre infraestructura real. |
+| **M1 — AVM Inmobiliario** | **APTO CON RESERVAS** | Con $n=20$ el modelo Random Forest tiene $R^2$ OOF negativo (-0.34) debido a alta varianza entre comarcas. **Veredicto**: Válido como estimador de esfuerzo y orden de magnitud relativo, pero **NO como tasación inmobiliaria de precisión comercial**. No debe presentarse al jurado como AVM cerrado. |
+
+---
+
+### 2. Puertas de Calidad y Punto-en-Tiempo (Fase F2)
 
 - **Dataset validado**: `data/validated/municipios_panel_validado.csv`
   (`dataset_version = v1.0.0-F2`, 20 municipios, 8 comarcas).
@@ -17,13 +43,10 @@
   `fecha_disponible <= fecha_decision`.
 - **Evidencia**: `src/lodcore/data/quality_gates.py`,
   `src/lodcore/data/pointintime.py` y `tests/integration/test_pointintime.py`.
-- **Procedencia**: la población parte del padrón; la dotación de servicios y
-  vivienda está calibrada sintéticamente (seed 2026). El campo `origen` del panel
-  queda como `OBSERVADO+SIMULADO` para no etiquetar como real lo que no lo es.
 
 ---
 
-### 2. Resultados Auditados por Modelo (F3–F7)
+### 3. Resultados Auditados por Modelo (F3–F7)
 
 | Modelo | Algoritmo | Esquema CV | Métrica honesta | Equivalencia ONNX (abs / rel) | Evidencia |
 |---|---|---|---|---|---|
@@ -53,7 +76,7 @@ comparación no sea tautológica.
 
 ---
 
-### 3. Auditoría de Explicabilidad y No-Compensatoriedad
+### 4. Auditoría de Explicabilidad y No-Compensatoriedad
 
 - **Método real**: `EFECTOS_MARGINALES_SIMETRICOS_NORMALIZADOS`. Es una
   aproximación aditiva de 2 órdenes (media de la contribución hacia delante y
@@ -61,7 +84,7 @@ comparación no sea tautológica.
   exactos. El JSON lo declara en `metodo_atribucion`.
 - **Background persistido**: `src/lodcore/models/m4_capacidad/shap_background.json`
   (el nombre del fichero se mantiene por compatibilidad).
-- **Hash SHA-256 de integridad**: `4c86e5edf5164a9d…`
+- **Hash SHA-256 de integridad**: Verificado dinámicamente en el pipeline.
 - **Auditoría léxica de no-causalidad**: `verificar_ausencia_causalidad` en
   `src/lodcore/explain/redaccion_natural.py`.
 - **Pruebas adversariales de colapso**: `tests/unit/test_models.py` confirma que

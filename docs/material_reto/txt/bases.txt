@@ -1,0 +1,550 @@
+=== PAGE 1 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 1 / 11
+   
+Página 1 de 11 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+II Datathon LoDCOREMadrid 
+Pueblos con vida de la Comunidad de Madrid 
+¿A qué municipio de menos de 50.000 habitantes podría mudarme? 
+ 
+Mapas para el crecimiento demográﬁco – Propuestas para analizar el reto 
+demográﬁco de la Comunidad de Madrid 
+ 
+¿Qué municipios podrían acoger la nueva población que debe absorber la 
+Comunidad de Madrid? 
+ 
+ 
+ 
+ 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 2 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 2 / 11
+   
+Página 2 de 11 
+ 
+1 Objetivo del Datathon 
+ 
+La cátedra de la UC3M I+D+i LoDCOREMadrid ﬁnanciada por la Consejería de 
+Presidencia, Justicia y Administración Local y la Universidad Carlos III de Madrid (en 
+adelante “los organizadores”), convoca el “II DATATHON LoDCOREMadrid” con los 
+siguientes objetivos: 
+ 
+• Fomentar la cultura de la participación ciudadana. Un datathon de este tipo 
+crea espacios de "innovación ciudadana y social" donde profesionales, 
+estudiantes y ciudadanos colaboran directamente en los desafíos del sector 
+público. 
+ 
+• Atracción y detección de talento: Funciona como una plataforma de Employer 
+Branding, permitiendo a la administración identiﬁcar perﬁles técnicos brillantes 
+y creativos que podrían integrarse en proyectos públicos. 
+ 
+• Poner en valor la accesibilidad y la prestación de servicios públicos y privados 
+(educación, salud, conectividad, movilidad, cultura, etc.) como elementos 
+clave en la decisión de elegir un municipio como lugar de vida. 
+ 
+• Impulsar el uso efectivo de los datos abiertos y oﬁciales que la Comunidad de 
+Madrid ponen a disposición acerca de la cohesión territorial de la región a través 
+de los diferentes portales de estadística y de datos abiertos 
+ 
+• Identiﬁcar y establecer comunicación con posibles colectivos de reutilizadores, 
+de forma que las Universidades puedan adecuar su oferta de datos abiertos a la 
+demanda real por parte de la sociedad. 
+ 
+• Ejempliﬁcar, mediante proyectos concretos (RETOS), el valor potencial de los 
+datos abiertos visibilizados a través de la Cátedra LoDCOREMadrid. 
+ 
+• Propiciar un entorno de colaboración efectiva y de transferencia de 
+conocimiento y tecnología entre la administración pública, el entorno 
+empresarial y el mundo académico, investigador o generador de conocimiento, 
+entre otras cuestiones. 
+ 
+• Impulsar soluciones innovadoras basadas en datos que ayuden a visibilizar las 
+oportunidades de vida y desarrollo en municipios de menor tamaño, 
+favoreciendo la atracción y ﬁjación de población. 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 3 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 3 / 11
+   
+Página 3 de 11 
+2 Reto Propuesto 
+ 
+El reto propuesto consiste en prototipar soluciones tecnológicas innovadoras para 
+la ciudadanía y los gestores de políticas de la Comunidad de Madrid en el uso de 
+datos abiertos para proporcionar herramientas de diagnóstico y análisis del reto 
+demográﬁco al que se tiene que enfrentar la región en los próximos años, pudiendo 
+enriquecer los datos abiertos que las Administraciones Públicas ponen a 
+disposición con otros procedentes de otras entidades públicas. 
+ 
+El propósito del reto consiste en ayudar a las Administraciones Públicas a identiﬁcar 
+qué municipios de menos de 50.000 habitantes tienen mejores posibilidades para 
+acoger la nueva población que debe absorber la Comunidad de Madrid. 
+ 
+Son muchos y diversos los colectivos interesados en conocer una prospectiva 
+sobre la evolución de la población en un territorio. Desde las autoridades 
+responsables de vigilar y posibilitar el mejor desarrollo urbanístico y la óptima 
+calidad de vida de la ciudadanía, hasta los propios ciudadanos interesados en 
+conocer los posibles escenarios urbanísticos futuros en las zonas donde podrían 
+asentarse. Pasando, entre otros agentes involucrados, por los inversores 
+inmobiliarios y por los emprendedores, interesados en conocer las oportunidades 
+potenciales de los posibles enclaves donde establecer una empresa. 
+Los indicadores a desarrollar en este reto estarían relacionados con el potencial de 
+crecimiento demográﬁco de los distintos términos municipales de la CAM (en esta 
+convocatoria, los estudios deberán centrarse en municipalidades de hasta 50k 
+habitantes a 1 de julio de 2025), respaldando prospecciones en cualquier plazo 
+(corto/medio/largo). Los datos objetivados pueden incluir descripciones de los 
+usos actuales del suelo, y de sus posibilidades de transformación y usos futuros, 
+así como del desarrollo de infraestructuras que posibilitan esas transformaciones. 
+Esto incluye, naturalmente, el análisis de los costes asociados a estos procesos 
+(gastos ﬁnancieros y plazos de ejecución), y las posibilidades de evolución de la 
+provisión de servicios que atiendan las necesidades de esas poblaciones futuras.  
+Para ello, pueden emplearse conjuntos de datos de muy diversa índole, 
+principalmente (aunque no restringidos a) conjuntos de datos abiertos 
+proporcionados por las distintas administraciones públicas.  
+No se establecen limitaciones en la naturaleza del tratamiento (más allá de las 
+especiﬁcadas en la licencia de uso de los datasets implicados), en las tecnologías 
+implicadas ni en el formato de los resultados. 
+ 
+No se establece ningún tipo de incompatibilidad relativa a la participación en otros 
+eventos similares, por lo que los interesados podrán participar sin limitación alguna 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 4 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 4 / 11
+   
+Página 4 de 11 
+en este aspecto, así como presentar proyectos ya presentados a otras 
+convocatorias similares. 
+ 
+Se deberá proporcionar un Producto Mínimo Viable (MVP) funcional y una 
+presentación de impacto. 
+3 Organización del Datathon 
+ 
+El Datathon se organizará contemplando las siguientes fases: 
+ 
+3.1 Fase INICIAL 
+ 
+La fase de preinscripción de IDEAS constituye la primera de las dos fases en las que 
+se estructura el concurso. Esta fase se desarrolla el día del evento del lanzamiento 
+del Datathon y se recogerá información acerca de todos los interesados en 
+participar en el desarrollo del Datathon.  
+ 
+El propósito de esta fase consiste en que los participantes, organizados en equipos 
+de 4 personas como máximo, realizarán una propuesta acerca de cómo resolver el 
+reto, incluyendo la siguiente información: 
+ 
+• Título de la Propuesta. 
+• Personas que forman el equipo. 
+• Descripción de la aproximación técnica propuesta para la resolución del reto. 
+• Fuentes de datos públicas y privadas que se utilizarán para implementar la 
+solución técnica propuesta. 
+• Descripción de la utilidad de la solución propuesta para la ciudadanía y los 
+gestores de políticas de cohesión territorial. 
+• Documentación requerida para determinar la elegibilidad de los participantes 
+en el Datathon (que deberá ser enviada no más tarde del 16 de Octubre de 2026 
+a las 12:00 del mediodía) 
+ 
+Esta propuesta se formalizará utilizando el formulario establecido para este 
+propósito: https://datathon.lodcoremadrid.es. 
+ 
+a) Plazos 
+ 
+La fecha de presentación de las propuestas será el día del evento de lanzamiento 
+del Datathon (14 de octubre de 2026). En la jornada de tarde se dará espacio para 
+que los estudiantes realicen la preparación y el envío de ideas. Se proporcionarán 
+espacios para la mentoría en la preparación de ideas por parte de expertos en la 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 5 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 5 / 11
+   
+Página 5 de 11 
+problemática a resolver, las fuentes de datos a utilizar y las tecnologías que se 
+podrían usar para la resolución del reto. 
+ 
+Los organizadores se reservan el derecho de modiﬁcar alguna de las fechas aquí 
+reﬂejadas si fuera conveniente para la buena marcha del evento. 
+ 
+Las solicitudes presentadas serán revisadas por los organizadores, que veriﬁcarán 
+que se encuentran debidamente cumplimentadas y se ajustan a los requerimientos 
+recogidos en este documento. 
+ 
+Los organizadores pueden requerir, en caso de duda u omisión de algún dato, 
+información adicional a los participantes antes de tomar una decisión sobre la 
+admisión de un proyecto a concurso. 
+ 
+En cualquier caso, en esta primera fase eliminatoria no será necesario presentar 
+ningún producto acabado, sino que basta con la “idea”: la descripción textual y/o 
+audiovisual del proyecto siguiendo el formato y las preguntas del formulario 
+habilitado a tal efecto. 
+ 
+La ﬁnalización del envío de las propuestas es el 14 de octubre de 2026 a las 
+23:59. 
+ 
+Tanto los posibles requerimientos de información adicional como la comunicación 
+ﬁnal sobre la admisión o no a concurso de todo proyecto presentado a través del 
+formulario oﬁcial será comunicada a los participantes a través de los medios que 
+hayan proporcionado en el propio formulario. 
+ 
+La publicación de las propuestas aceptadas que pasarán a la siguiente fase del 
+Datathon será el 16 de octubre de 2026. 
+ 
+Debido a las limitaciones del aforo y del tiempo disponible para el evento de 
+cierre del Datathon, se establece en 15 el límite máximo de equipos que 
+pueden acceder a la fase de desarrollo. En caso de que haya más de 15 
+candidaturas que concursen a la fase de ideas, se consideran los siguientes 
+criterios para decidir cuáles pasan a la siguiente fase: 
+ 
+1. Relevancia del problema para la ciudadanía. 
+2. Deﬁnición e interés de los datasets que reutilicen, agreguen o enriquezcan los 
+datos públicos que se utilicen como punto de partida. 
+3. Disponibilidad de fuentes de datos abiertas que permitan resolver 
+satisfactoriamente el problema establecido en la propuesta. 
+4. Implementación de algoritmos o técnicas novedosas para resolver el problema 
+propuesto. 
+5. Contemplar mecanismos para validar y explicar la información proporcionada. 
+ 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 6 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 6 / 11
+   
+Página 6 de 11 
+ 
+3.2 Fase FINAL 
+ 
+Esta fase constituye la segunda de las dos fases en las que se estructura el 
+concurso. En ella, las propuestas presentadas en la fase de IDEAS que hayan sido 
+aceptadas serán desarrolladas y posteriormente evaluadas por el jurado.  
+ 
+A partir de la evaluación por el jurado, utilizando los criterios establecidos en la 
+sección 7.2, se determinarán los premiados, los cuales realizarán la presentación 
+de sus trabajos al resto de participantes del Datathon.  
+ 
+La jornada de presentación de los trabajos ﬁnalistas y entrega de premios será el 29 
+de octubre de 2026 de manera presencial en el Salón de Grados del Campus de 
+Leganés de la Universidad Carlos III de Madrid. 
+ 
+El jurado deliberará el mismo día y en la parte ﬁnal del evento se procederá al acto 
+de entrega de premios.  
+ 
+Los organizadores se reservan el derecho de modiﬁcar alguna de las fechas aquí 
+reﬂejadas si fuera conveniente para la buena marcha del evento. 
+ 
+Cada trabajo contará con 1 0 minutos de exposición. Una vez ﬁnalizada la 
+presentación, el jurado podrá realizar, por un tiempo limitado, las preguntas que 
+considere oportuno. 
+ 
+Se debe presentar el resultado de llevar a cabo la propuesta expresada en la fase 
+de ideas. Este trabajo puede consistir en un prototipo funcional de una aplicación 
+o una aplicación terminada. Debe tenerse en cuenta que el nivel de desarrollo y 
+completitud del producto presentado es uno de los criterios de valoración por parte 
+del jurado. 
+ 
+Además, de los materiales utilizados en la presentación, los equipos deberán 
+proporcionar al jurado acceso a los datasets y prototipos elaborados para que los 
+miembros del jurado puedan consultarlos durante la evaluación y deliberación.  
+ 
+Los resultados de esta fase se comunicarán a los ﬁnalistas a través de los medios 
+proporcionados en el formulario de participación en el proyecto. 
+ 
+Los organizadores se reservan el derecho de declarar alguno o varios de los premios 
+desiertos, si la calidad de los proyectos presentados no alcanza el umbral mínimo 
+de puntuación establecido por el Jurado. 
+ 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 7 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 7 / 11
+   
+Página 7 de 11 
+3.3 Tipo de premios y cuantía 
+ 
+Se convocan tres premios en modalidad única, y un accésit especial, dotados con 
+las siguientes cuantías1: 
+ 
+• PRIMER PREMIO: Dotado con 2.000 €. 
+• SEGUNDO PREMIO: Dotado con 1.000 €. 
+• TERCER PREMIO: Dotado con 600 €. 
+ 
+Tanto los premiados como los ﬁnalistas no premiados recibirán un diploma de 
+reconocimiento individual. 
+ 
+Los premios pueden quedar desiertos si ningún trabajo presenta la calidad exigida 
+al no superar el umbral mínimo de puntuación establecido por el Jurado, o si no se 
+reciben inscripciones suﬁcientes para celebrar el certamen en un contexto de 
+competitividad razonable. 
+ 
+Cada uno de los premios se repartirá, a partes iguales, entre los componentes del 
+grupo del proyecto que resulte premiado. Todos los participantes de los proyectos 
+premiados deberán aportar la documentación personal y ﬁscal necesaria para 
+poder recibir el premio correspondiente. A los premios se les aplicará la retención 
+que proceda según legislación vigente. Los presentes premios se sujetan a la 
+normativa vigente en materia ﬁscal, en cuanto a la retención a cuenta del IRPF . 
+ 
+Son obligaciones de los premiados: 
+ 
+• Facilitar cuantas actuaciones de comprobación fuesen precisas para veriﬁcar, 
+en su caso, el cumplimiento y efectividad de las condiciones determinantes de 
+la concesión del premio. 
+ 
+• Comunicar en el plazo de 10 días hábiles la eventual desaparición de las 
+circunstancias que justiﬁcaron la participación o motivaron la concesión del 
+premio. 
+3.4 Requisitos de los participantes 
+ 
+Para resultar beneﬁciario de estos premios, los solicitantes serán estudiantes de 
+las Universidades de la Comunidad de Madrid, mayores de edad, que puedan 
+acreditar su matriculación durante el curso académico 2025-2026 y 2026-2027 
+dentro de algún programa de estudios impartido en las Universidades de la 
+ 1 Se pueden considerar premios por una cuantía similar en especie que estén relacionadas con 
+actividades turísticas u orientadas a que los estudiantes puedan disfrutar de sus vacaciones que se 
+producirán después del desarrollo del Datathon. 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 8 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 8 / 11
+   
+Página 8 de 11 
+Comunidad de Madrid, pudiendo ser la nacionalidad de los premiados española o 
+extranjera. 
+ 
+3.5 Ceremonia de entrega de premios 
+ 
+La entrega de premios será presencial el 29 de octubre de 2026 a las 15:00 de 
+manera presencial en el Salón de Grados del Campus de Leganés de la 
+Universidad Carlos III de Madrid. 
+ 
+3.6 Otras Cuestiones Generales 
+La organización establecerá un canal de comunicación con los participantes a 
+través del cual podrán plantear las dudas y cuestiones que puedan surgirles 
+durante el desarrollo de los proyectos. 
+ 
+La titularidad de los derechos de propiedad intelectual de los proyectos 
+presentados será de los participantes.  No obstante, la participación en el Datathon 
+implicará, para las personas autoras de los proyectos, la cesión de los derechos de 
+explotación para su posible publicación por parte de la Universidad Carlos III de 
+Madrid y de la Comunidad de Madrid, en un plazo máximo de 24 meses desde la 
+ﬁnalización del plazo de entrega de la información para la participación en el 
+evento. Para asegurar la cesión, se incluirá la siguiente cláusula en las bases de 
+participación:  
+ 
+Al formalizar su inscripción, los participantes aceptan que su intervención en el 
+Datathon conlleva el compromiso de colaborar con la Universidad Carlos III de 
+Madrid y la Comunidad de Madrid en la difusión y posible desarrollo de los datos y 
+proyectos presentados. En este sentido, y como condición para la participación y 
+eventual recepción de premios, los participantes maniﬁestan su conformidad con 
+la cesión a favor de la Universidad Carlos III de Madrid y la Comunidad de Madrid 
+de los derechos de explotación (reproducción, comunicación pública, distribución 
+y transformación) sobre ideas/datos/proyectos presentados, de forma que las 
+entidades puedan (i) realizar actividades de difusión en web, redes sociales y otros 
+mecanismos que puedan ser necesarios para aumentar el impacto del Datathon y 
+(ii) reutilización o agregación de los datasets que se hayan generado en otros 
+proyectos de la Universidad Carlos III de Madrid o la Comunidad de Madrid. 
+ 
+Esta cesión tendrá carácter gratuito, será de naturaleza exclusiva y se aplicará 
+únicamente en el ámbito territorial de España. Asimismo, la cesión de los derechos 
+de uso de los proyectos se establece con una duración máxima de cinco años, 
+conforme a lo dispuesto en el artículo 43 del Real Decreto Legislativo 1/1996, de 12 
+de abril, sobre Propiedad Intelectual. 
+ 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 9 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 9 / 11
+   
+Página 9 de 11 
+Los participantes garantizan que los proyectos no infringen derechos de terceros, 
+ni son ofensivos, ni denigrantes, ni incitan a la violencia, racismo ni vulneran los 
+derechos fundamentales ni las libertades públicas reconocidas por la normativa 
+aplicable y sobre la protección de la infancia y la juventud, ni constituyen ni 
+suponen una intromisión en la intimidad personal o familiar de las personas físicas 
+ni una violación del derecho al honor de terceros o del secreto de las 
+comunicaciones o son contrarios a la normativa vigente en forma alguna, 
+asumiendo el participante cualquier responsabilidad legal que pudiera derivarse en 
+caso contrario. Los organizadores velarán por el cumplimiento de la legalidad 
+vigente y respeto a los derechos enunciados y quedarán exonerados de la 
+responsabilidad derivada del contenido y difusión del proyecto presentado. 
+ 
+Los organizadores se reservan el derecho de excluir de la convocatoria a aquellos 
+participantes que utilicen cualquier práctica mediante el proyecto presentado que 
+se pueda considerar contrario a la legalidad o al espíritu de la convocatoria. 
+ 
+La presentación de un proyecto a concurso supone, por parte de sus autores: 
+ 
+• La plena aceptación de las presentes bases y su convocatoria. 
+ 
+• Que todos los datos incorporados a la solicitud se ajustan a la realidad. 
+ 
+• Que tienen conocimiento de que la inexactitud en las circunstancias declaradas 
+dará lugar a la denegación, revocación o reintegro de los premios. 
+ 
+• Que conocen y aceptan que los organizadores hagan públicos la relación de 
+proyectos premiados, así como los nombres de sus autores y los importes de 
+los premios concedidos. 
+ 
+• Que autorizan el tratamiento de los datos de los solicitantes a los efectos de la 
+presente convocatoria conforme a lo indicado en la sección 8. 
+ 
+3.7 Jurado 
+ 
+Para el estudio y evaluación de los trabajos conforme a los criterios de valoración 
+establecidos en la versión deﬁnitiva de las bases. El Jurado estará constituido por 
+representantes de la UC3M y se ofrecerá la posibilidad a la Comunidad de Madrid 
+de tener representación en el Jurado en su calidad de patrocinador. 
+ 
+Las tareas del Jurado serán las siguientes: 
+ 
+• Valorar el cumplimiento de las normas de participación por parte de los 
+proyectos presentados, aprobando o denegando su admisión. 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 10 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 10 / 11
+   
+Página 10 de 11 
+ 
+• Aplicar los criterios de valoración establecidos para seleccionar los proyectos 
+ﬁnalistas. 
+ 
+• Aplicar los criterios de valoración establecidos para puntuar los proyectos 
+ﬁnalistas y establecer así los ganadores. 
+ 
+3.8 Criterios de valoración e informe del jurado 
+ 
+Los proyectos presentados serán valorados entre 0 y 100 puntos, otorgándose esta 
+valoración según los siguientes criterios: 
+ 
+1. Hasta 50 puntos: Calidad del resultado. 
+ 
+1.1 Nivel de corrección y adecuación del planteamiento teórico en el 
+tratamiento de los datos abiertos (hasta 25 puntos). 
+ 
+1.2 Grado de resolución del reto planteado (hasta 25 puntos). 
+ 
+2. Hasta 50 puntos: Explotabilidad/interactividad. 
+ 
+2.1 Nivel de sencillez en la obtención y comprensión de los resultados por parte 
+de los destinatarios (hasta 25 puntos). 
+ 
+2.2 Nivel de interactividad/ﬂexibilidad de la solución para que los destinatarios 
+puedan adaptarla a su caso especíﬁco (hasta 25 puntos). 
+ 
+En caso de empate, se desempatará en función de la puntuación obtenida en los 
+siguientes criterios por este orden: 2.2, 1.2, 1.1, 2.1.   
+ 
+No se declararán premios compartidos (ex aequo). En caso de que durante el 
+proceso de deliberación se produzca una situación de empate entre dos o más 
+proyectos, el jurado celebrará una nueva ronda de votación con voto de calidad del 
+presidente. 
+3.9 Tratamiento de datos de carácter personal 
+ 
+La inscripción en el Datathon implica la autorización para que sus datos personales 
+sean utilizados por la Universidad Carlos III de Madrid y la Comunidad de Madrid de 
+acuerdo con la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos 
+Personales y garantía de los derechos digitales. Los datos personales facilitados 
+quedarán incorporados en los ﬁcheros de usuarios, de acuerdo con lo establecido 
+en la citada Ley Orgánica. 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion
+
+=== PAGE 11 ===
+FIRMADO POR FECHA FIRMA
+GARCIA GUZMAN JAVIER 14-10-2026 09:06:32
+C/ Madrid, 126-128 GETAFE - Madrid - 28903. Tfno.: 916249500 Fax.: 916249500 - https://sede.uc3m.es
+--- Página: 11 / 11
+   
+Página 11 de 11 
+ 
+Las organizadores y los participantes (las partes) se comprometen a cumplir, en los 
+términos que sea de aplicación, lo establecido en la Ley Orgánica 3/2018, de 5 de 
+diciembre de Protección de Datos Personales y garantía de los derechos digitales, 
+así como en el Reglamento (UE) 2016/679 (RGPD) del Parlamento Europeo y del 
+Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en 
+lo que respecta al tratamiento de datos personales y a la libre circulación de estos 
+datos y por el que se deroga la Directiva 95/46/CE (Reglamento General de 
+protección de datos). 
+ 
+Los datos personales recogidos a través del formulario ubicado en la web del evento 
+tienen como ﬁnalidad exclusiva la gestión completa de la participación de los 
+interesados en el presente concurso. 
+ 
+Los datos se conservarán durante el tiempo necesario para cumplir con la ﬁnalidad 
+para la que se recabaron y para determinar las posibles responsabilidades que se 
+pudieran derivar de dicha ﬁnalidad y del tratamiento de los datos y de conformidad 
+con la normativa vigente. 
+ 
+De acuerdo con la normativa anteriormente citada, ambas partes garantizará la  
+conﬁdencialidad de los datos tratados. Para ello, adoptará las medidas técnicas y 
+organizativas necesarias para integrar en los tratamientos de datos garantías que 
+permitan aplicar de forma efectiva los principios del RGPD. 
+ 
+Se proporcionarán los mecanismos necesarios para puedan ponerse a disposición 
+de la ciudadanía mediante la iniciativa impulsada por la cátedra en colaboración 
+con Datos Abiertos de la Comunidad de Madrid mediante una Licencia Creative  
+Commons con atribuciones. 
+ 
+ 
+ID DOCUMENTO: 93VvQ34gJK
+Verificación código: https://sede.uc3m.es/verificacion

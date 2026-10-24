@@ -1,0 +1,220 @@
+=== PAGE 1 ===
+Datos abiertos
+DatathonLoDCOREMadrid
+Mariano Peñas Pérez
+SG. de Difusión y Comunicación
+14 de octubre de 2026
+
+=== PAGE 2 ===
+Introducción
+Fuentes de datos publicados por el INE Mecanismos de acceso a los datos publicados
+Datasetsmás relevantes
+
+
+=== PAGE 3 ===
+Introducción
+ElInstitutoNacionaldeEstadísticaesunorganismo
+autónomo,adscritoalMinisteriodeEconomía,Comercioy
+Empresa.
+Nuestraprincipaltareaesladeelaborarestadísticas
+públicas-estudiosoficialessobrelasituaciónyevoluciónde
+lapoblación,laeconomíaylasociedaddeEspaña.
+Elaboramos y difundimos estadísticas sobre España y sus 
+regiones. 
+Coordinamos a todas las instituciones públicas que realizan 
+estadísticas en España. 
+Representamos la Estadística española a nivel internacional.
+
+
+=== PAGE 4 ===
+Fuentes de datos publicados por el INE
+Registros administrativos
+Personas
+ Empresas
+
+=== PAGE 5 ===
+Mecanismos de acceso a los datos
+Home web INE
+
+=== PAGE 6 ===
+Portal de datos abiertos
+https://www.ine.es/dyngs/DAB/es/index.htm?cid=1722
+
+=== PAGE 7 ===
+Mecanismos de acceso
+API
+Librería R
+Bancodedatos
+Formatosdedescarga
+px
+Microdatos 
+anonimizados**Disponibles para encuestas a hogares
+Formatosdedescarga
+
+
+=== PAGE 8 ===
+Banco de datos
+Consulta de tablas
+https://www.ine.es/dynt3/inebase/index.htm?padre=11555&capsel=11532
+
+=== PAGE 9 ===
+Banco de datos
+Consulta de tablas
+https://www.ine.es/jaxiT3/Tabla.htm?t=68535&L=0
+
+
+=== PAGE 10 ===
+Banco de datos
+Consulta de tablas
+https://www.ine.es/jaxiT3/Tabla.htm?t=68535&L=0
+
+
+=== PAGE 11 ===
+Banco de datos
+Descarga de datos
+https://www.ine.es/jaxiT3/Tabla.htm?t=68535&L=0
+
+=== PAGE 12 ===
+API
+Referencia de la API
+https://www.ine.es/dyngs/DAB/index.htm?cid=1100#is1128
+
+
+=== PAGE 13 ===
+API
+Paquete R ineapir
+https://github.com/es-ine/ineapir
+
+
+=== PAGE 14 ===
+API
+INEBaseOpenAPI
+https://www.ine.es/OpenAPI/index.html
+
+
+=== PAGE 15 ===
+Microdatos anonimizados
+Acceso desde la web
+https://www.ine.es/dyngs/SER/index.htm?cid=1388
+
+=== PAGE 16 ===
+dr_EPA_2026.xlsx
+datos_t226.zip
+CSV R SAS SPSS
+STATA
+EPA_2026T2.tab
+ EPA_2026T2.RData
+ epa_2026t2.sas7bdat
+EPA_2026T2_conFor
+mato.sas
+EPA_2026T2.sav
+EPA_2026T2.dta
+ Leeme.txt md_EPA_2026T2.txtv
+Microdatos en 
+bruto
+Microdatos anonimizados
+Ficheros de microdatos
+md_EPA_2026T2
+.parquet
+dr_EPA_2026.json
+https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176918&menu=resultados&idp=1254735976595#_tabs-1254736030639
+
+=== PAGE 17 ===
+Microdatos anonimizados
+Diseño de registro
+
+=== PAGE 18 ===
+Cartografía secciones censales
+Diseño de registro
+https://www.ine.es/dyngs/DAB/index.htm?cid=1389
+NOTA: Aunque los polígonos se proporcionen a nivel de sección censal, es sencillo construir los polígonos de 
+entidades geográficas superiores agrupando por ellas con software GIS.
+
+=== PAGE 19 ===
+Datasetsmás relevantes
+Criterios de selección
+Ubicación
+Comunidad 
+de Madrid
+Población
+Menos de 
+50.000 
+habitantes
+Variables 
+de interés
+Empleo
+Migraciones
+Fenómenos demográficos
+Renta
+Secreto estadístico
+En poblaciones pequeñas, no siempre se puede desagregar por 
+las variables de interés para preservar el secreto estadístico.
+
+=== PAGE 20 ===
+Datasetsmás relevantes
+Población: Censo Anual de Población
+Desagregación territorial: hasta secciones censales
+Variables observadas:
+Edad, Sexo, Nacionalidad, País de nacimiento, Nivel de estudios, Relación con la actividad, 
+Ocupados, Lugar de residencia anterior
+https://ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176992&menu=ultiDatos&idp=1254735572981
+URL de consulta
+Microdatos disponibles
+Posibles usos:
+Obtención de la población con características determinadas en los municipios de interés 
+en instantes temporales concretos.
+
+=== PAGE 21 ===
+Datasetsmás relevantes
+Renta: Atlas de Distribución de Renta de los Hogares
+Desagregación territorial: hasta secciones censales
+Variables observadas:
+Renta media y mediana; Distribución por fuente de ingresos; Ingresos por sexo, edad, 
+nacionalidad; Indicadores demográficos
+https://ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177088&menu=ultiDatos&idp=1254735976608
+URL de consulta
+Posibles usos:
+Obtención de variables económicas diversas en los municipios de interés y posibilidad de 
+analizar la evolución del nivel de renta a lo largo del tiempo.
+
+=== PAGE 22 ===
+Datasetsmás relevantes
+Movimientos migratorios: Estadística de migraciones y cambios de residencia
+Desagregación territorial: hasta municipios
+Variables observadas:
+Edad, Sexo, Nacionalidad, País de nacimiento, Tipo de movimiento migratorio, Año de la 
+migración, Origen y destino de la migración, Saldos migratorios
+https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177098&menu=ultiDatos&idp=1254735573002
+URL de consulta
+Microdatos disponibles
+Posibles usos:
+Evaluación de la atractividad de un municipio a lo largo del tiempo: cantidad de 
+habitantes que gana o pierde y origen/destino de los mismos.
+
+=== PAGE 23 ===
+Datasetsmás relevantes
+Fenómenos demográficos: Movimiento natural de la población
+Desagregación territorial: hasta municipios
+Variables observadas:
+Nacimientos, Defunciones, Matrimonios, Crecimiento vegetativo, Causas de muerte (solo 
+en microdatos)
+URL de consulta
+Microdatos disponibles
+Posibles usos:
+Análisis de los fenómenos que hacen crecer o disminuir la población de los municipios de 
+interés. 
+Nacimientos:https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177007&menu=ultiDatos&idp=1254735573002
+Defunciones: https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177008&menu=ultiDatos&idp=1254735573002
+Matrimonios: https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736176999&menu=ultiDatos&idp=1254735573002
+
+=== PAGE 24 ===
+Flujo de trabajo recomendado
+1 Identificarla operación estadística que contiene los datos más relevantes para el análisis que se quiera realizar.
+2 Consultarlas tablas de resultados predefinidas que ofrecemos para dicha operación 
+3 Si la operación no da ninguna tabla predefinida para la combinación de variables de interés, explorarsi se proporcionan ficheros de microdatospara esa operación. 
+5 Determinarel formato de datos con el que se trabajará: descargas de ficheros de las tablas predefinidas, ficheros de microdatos anonimizados, consultas a la API.
+6 Combinardiferentes fuentes de datos para hacer un análisis profundo sobre la temática propuesta en el reto.
+4 Consultaren la metodología y las preguntas frecuentesde la operación estadística las definiciones de los conceptos se presentan en los resultados.
+
+=== PAGE 25 ===
+Muchas gracias

@@ -48,7 +48,7 @@ def consolidate_f2_dataset() -> str:
     df["dataset_version"] = "v1.0.0-F2"
 
     # Filtrar point-in-time
-    df = filtrar_point_in_time(df, fecha_decision="2026-10-22", col_fecha="fecha_disponible")
+    df = filtrar_point_in_time(df, fecha_decision="2026-10-24", col_fecha="fecha_disponible")
 
     # Validar ANTES de escribir: nunca dejar un fichero "validado" que no pasó las puertas
     ejecutar_quality_gates(df)

@@ -1,6 +1,6 @@
 """
 test_models.py - Pruebas unitarias y funcionales para M1..M5, explicabilidad sin causalidad,
-reglas duras de no-compensatoriedad y endpoints FastAPI N3 (/recomendar y /whatif).
+reglas duras de no-compensatoriedad y endpoints FastAPI N3 (/recomendar, /whatif, /optimizar-presupuesto).
 """
 
 import pytest
@@ -52,7 +52,6 @@ def test_salvaguarda_no_compensatoria_no_muta_entrada():
 def test_salvaguarda_no_compensatoria_exige_campos():
     with pytest.raises(ValueError):
         aplicar_salvaguarda_no_compensatoria({"indice_capacidad_global": 70.0})
-
 
 def test_redaccion_no_atribuye_regla_dura_por_redondeo():
     texto = redactar_explicacion_shap(
@@ -120,3 +119,17 @@ def test_fastapi_n3_whatif_municipio_inexistente_404():
     resp = client.post("/whatif", json={"id_municipio": 99999})
     assert resp.status_code == 404
     assert "No existe el municipio" in resp.json()["detail"]
+
+def test_fastapi_n3_optimizar_presupuesto_endpoint():
+    payload = {
+        "comarca": "Sierra Oeste",
+        "presupuesto_total_eur": 2500000.0
+    }
+    resp = client.post("/optimizar-presupuesto", json=payload)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["comarca"] == "Sierra Oeste"
+    assert data["presupuesto_total_eur"] == 2500000.0
+    assert data["presupuesto_utilizado_eur"] <= 2500000.0
+    assert data["origen"] == "SIMULADO"
+    assert len(data["asignaciones"]) > 0

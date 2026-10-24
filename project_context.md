@@ -63,10 +63,10 @@ El DDL de `oracle/ddl/` es fuente de verdad; APEX consume, no redefine. Toda vis
 | **M1** | AVM (valoración inmobiliaria) | Random Forest | Precio de referencia por m² y esfuerzo financiero familiar. |
 | **M2** | Indicadores de capacidad | PCA + heurística de tiempos de viaje | 4 sub-índices 0-100 (sanidad/educación, conectividad, vivienda, holgura) y criterio "municipio de 30 minutos". |
 | **M3** | Demografía | Extrapolación geométrica calibrada (2031) | Proyección poblacional a 5 y 10 años con bandas 95% y escenarios +5% / +10%. |
-| **M4** | **Capacidad de acogida (CORE)** | Gradient Boosting + reglas duras + atribuciones aditivas + simulador what-if | Predice el ICA, detecta cuellos de botella y permite simular inversiones. **El optimizador de asignación presupuestaria por comarca (spillover) es la extensión pendiente de P1**: hoy no está implementado en el repositorio. |
+| **M4** | **Capacidad de acogida (CORE)** | Gradient Boosting + reglas duras + atribuciones aditivas + simulador what-if + asignación presupuestaria comarcal | Predice el ICA, detecta cuellos de botella y permite simular inversiones. **Optimizador presupuestario determinista por comarca (M4-OPT)** implementado en `optimizador_presupuestario.py`; el spillover geográfico continuo con matriz OD queda formalmente como roadmap Fase 2. |
 | **M5** | Recomendador ciudadano | K-Means + MCDM coseno ponderado | Ranking personalizado por preferencias del ciudadano. |
 
-> **Diferencial competitivo del proyecto (estado real):** ya están implementados la predicción del ICA, las reglas duras y el simulador what-if. El **optimizador espacial con spillover comarcal** —responder "con este presupuesto, en este municipio exacto hay que construir el centro de salud/colegio para maximizar la acogida de toda la comarca"— es la extensión pendiente de P1 y debe presentarse como tal, no como funcionalidad ya disponible.
+> **Diferencial competitivo del proyecto (estado real):** ya están implementados la predicción del ICA, las reglas duras, el simulador what-if y la **asignación presupuestaria determinista por comarca (M4-OPT)** que maximiza personas acogidas bajo un presupuesto fijo. El efecto spillover continuo intermunicipal se declara formalmente como evolución metodológica (Roadmap Fase 2).
 
 ---
 
@@ -119,21 +119,21 @@ DATATHON/ (raíz del proyecto activo)
 **16 fases en 6 días.** Cada fase tiene subfases específicas, responsables asignados y entregable concreto. Las fases F1-F4 (datos y calidad) son secuenciales; F5-F13 (modelos y publicación) se solapan; F14-F16 (presentación y entrega) son transversales al final.
 
 > **Estado real al 23 oct 2026:** el núcleo ya es ejecutable y está probado
-> (`python scripts/run_all_models_n1_n2_n3.py` + `pytest`: 17 tests). Están
-> implementadas F2, F5-F11 y el DDL Oracle de F12; F1 (conectores reales),
-> F3-F4 (auditoría de fuga y validación completa), F12 (APEX) y F13-F16
-> (model cards, revisión adversarial, presentación y entrega) siguen abiertas.
-> Las menciones a RF(200), bandas conformales, TOPSIS/VIKOR, GMM/BIC o SHAP
-> exacto son **objetivos del prompt**, no afirmaciones de lo ya implementado.
+> (`python scripts/run_all_models_n1_n2_n3.py` + `pytest`: 18 tests en verde).
+> F0.3 cerrada (rama `p1/datos`, issues F1-F16 en `.github/ISSUES_F1_F16.md`),
+> F1 completada (INE Padrón 2025 y CKAN Madrid Sanidad/Educación conectados, snapshots inmutables fechados, cruce 20/20 por código INE de 5 dígitos),
+> F2 con veredicto formal APTO CON RESERVAS en `docs/validacion.md`, y
+> optimizador de asignación presupuestaria comarcal (M4-OPT) implementado y documentado.
+> F3-F4 (auditoría de fuga P2), F12 (APEX P3) y F13-F16 continúan abiertas para sus respectivos responsables.
 
 ### Fase 0 — Fundamento y reparto (23 octubre)
 - **Responsable:** P1 (estructura), P3 (roles), TODOS (regla de contexto).
 - **Subfases:**
-  - F0.1: Definir alcance honesto: piloto sobre 20 municipios, escalable a todos los <50k (P1).
-  - F0.2: Crear repositorio GitHub y estructura limpia (sin duplicados, un solo `params.yaml`, un solo `index.html`) (P1).
-  - F0.3: Asignar roles y crear Issues en GitHub: P1 Datos/M4, P2 Modelos/API, P3 APEX/Presentación (P3).
-  - F0.4: Acordar canal de comunicación y regla de actualización del contexto (todos).
-- **Entregable:** repositorio limpio, reglas de trabajo, issues asignados.
+  - F0.1: Definir alcance honesto: piloto sobre 20 municipios, escalable a todos los <50k (P1) — [CERRADO].
+  - F0.2: Crear repositorio GitHub y estructura limpia (P1) — [CERRADO].
+  - F0.3: Asignar roles y crear Issues en GitHub: F1–F16 documentadas y asignadas en `.github/ISSUES_F1_F16.md`, rama `p1/datos` abierta (P1/P3) — [CERRADO].
+  - F0.4: Acordar canal de comunicación y regla de actualización del contexto (todos) — [CERRADO].
+- **Entregable:** repositorio limpio, reglas de trabajo, issues asignados, rama `p1/datos`.
 
 ### Fase 1 — Ingesta de fuentes oficiales (24 octubre)
 - **Responsable:** P1.
@@ -370,7 +370,7 @@ Endpoints activos: `/health`, `/recomendar`, `/whatif`.
 1. Problema y reto (2 min) — municipios <50k, reto demográfico CAM.
 2. Solución y arquitectura (3 min) — MVP funcional, datos abiertos, Oracle APEX.
 3. Demo en vivo (5 min) — mapa semafórico + simulador what-if (construir centro de salud/colegio y ver impacto en la comarca).
-4. Diferenciador: optimizador por comarca (3 min) — dónde invertir para maximizar acogida, efecto spillover. **Presentar el enfoque y el prototipo de UI; no afirmar que el optimizador de backend ya está implementado (sigue pendiente).**
+4. Diferenciador: optimizador comarcal (3 min) — dónde invertir para maximizar acogida. Presentar la asignación presupuestaria comarcal determinista (M4-OPT) y el roadmap de spillover continuo.
 5. Cierre y pedido (2 min) — escalabilidad a todos los <50k, próximos pasos.
 
 **Nunca decir ante el jurado:** "SHAP", "float32", "ONNX", "AVM", "p-valor", "gradient boosting". Decir: "el modelo identifica el cuello de botella", "el modelo se ejecuta dentro de Oracle para ser rápido y seguro", "estimador de precio de referencia".
