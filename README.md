@@ -33,10 +33,11 @@ DatathonLodCoreMadrid/
 │   ├── explain/                     # atribuciones aditivas y redacción sin causalidad
 │   ├── publish/                     # bandas 95 %, escritura Oracle
 │   └── serving/fastapi/             # API N3: /recomendar, /whatif y /optimizar-presupuesto
+├── frontend/                        # portal estático (index.html), mapa y prototipo histórico
 ├── scripts/run_all_models_n1_n2_n3.py
 ├── tests/                           # unit + integración (pytest)
 ├── entrega/                         # paquete para el jurado: dataset + diccionario + fuentes + checksums
-├── oracle/ddl/                      # 01..06 DDL Oracle 23ai / APEX (06 en revisión)
+├── oracle/ddl/                      # 01..06 DDL Oracle 23ai / APEX (06 = reset opcional)
 ├── oracle/onnx/                     # binarios ONNX para N2
 ├── data/output/                     # payload de entrada y dataset ML
 ├── data/processed/                  # panel integrado F2
@@ -71,8 +72,9 @@ Endpoints:
 - `POST /optimizar-presupuesto` — heurística voraz comarcal: reparte un presupuesto cerrado entre municipios (M4-OPT).
 - `GET /docs` — Swagger autogenerado por FastAPI.
 
-> El prototipo `index.html` es **estático** y no llama a la API. La UI de entrega
-> será Oracle APEX; este HTML sirve para validar el discurso visual.
+> El prototipo `frontend/_prototype/index.html` es **estático** y no llama a la API.
+> El portal `frontend/index.html` usa datos embebidos regenerados del panel; el mapa
+> `frontend/mapa/mapa.html` consume el endpoint ORDS. La UI de entrega será Oracle APEX.
 
 ---
 
@@ -81,14 +83,15 @@ Endpoints:
 Ejecutar en orden con SQLcl, SQL Developer o APEX › SQL Workshop:
 
 1. `oracle/ddl/01-tablas_raw.sql`
-2. `oracle/ddl/02-tablas_procesadas.sql`
+2. `oracle/ddl/02-tablas_procesadas.sql` (crea `municipios_procesados` con las **88 columnas** del panel y 4 columnas virtuales de compatibilidad)
 3. `oracle/ddl/03-vistas_apex.sql`
 4. `oracle/ddl/04-indices_espaciales.sql`
 5. `oracle/ddl/05-modelos_onnx.sql`
 
-> `06-dataset_completo_APEX.sql` está **en revisión**: actualmente vuelve a
-> crear `municipios_procesados`, que ya crea el `02`. No lo ejecutes hasta
-> que se valide con P2/P3.
+> **`02` XOR `06`**: `06-dataset_completo_APEX.sql` es un script de **reset** para
+> entornos aislados: hace `DROP TABLE municipios_procesados CASCADE CONSTRAINTS`
+> y la recrea. **No lo ejecutes después del `02`** salvo que quieras borrar la
+> tabla y recargar los datos. Para la carga normal, usa solo el `02`.
 
 Para el paso 5, copiar `oracle/onnx/*.onnx` a un directorio del servidor y crear
 el objeto de directorio antes de cargar los modelos:
@@ -103,20 +106,15 @@ constantes. La equivalencia con Python se verifica con error relativo < 1e-6 y
 absoluto < 1e-3 (ONNX devuelve float32).
 
 Al cargar `data/validated/municipios_panel_validado.csv` en `municipios_procesados`
-(APEX › Data Workshop › Load Data o SQL Developer), mapear estos cuatro nombres:
+(APEX › Data Workshop › Load Data o SQL Developer), **las 88 columnas coinciden
+1:1 por nombre**. No hay que mapear nada: las cuatro columnas antiguas
+(`tiempo_madrid_min`, `plazas_escolares`, `alumnos_matriculados`, `precio_avm_m2`)
+son **virtuales** y Oracle las calcula a partir de las columnas canónicas.
 
-| Columna del CSV | Columna de la tabla |
-|---|---|
-| `tiempo_medio_madrid_minutos` | `tiempo_madrid_min` |
-| `num_plazas_escolares` | `plazas_escolares` |
-| `num_alumnos_matriculados` | `alumnos_matriculados` |
-| `precio_predicho_avm_m2` | `precio_avm_m2` |
-
-El resto de columnas de la tabla coincide por nombre. La tabla conserva un
-subconjunto de las 88 columnas del CSV; las demás se ignoran al cargar. Las
-columnas calculadas (`densidad`, `hab_por_medico`, `ocupacion_escolar_pct`) no se
-cargan: Oracle las genera. `fecha_disponible`, `origen`, `metodo`,
-`dataset_version` y `fuente_datos` son obligatorias.
+Todas las columnas del CSV se cargan, incluidas `densidad`, `hab_por_medico` y
+`ocupacion_escolar_pct` (ahora son columnas normales `NOT NULL`, no virtuales).
+`fecha_disponible`, `origen`, `metodo`, `dataset_version` y `fuente_datos` son
+obligatorias.
 
 ---
 

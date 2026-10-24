@@ -232,10 +232,10 @@ incertidumbre" y, si insisten, "calculada por bootstrap de municipios".
 
 | Fallo | Qué hace quien está delante | Frase de recurso |
 |---|---|---|
-| La web de APEX no carga | P3 salta a la tabla de asignación (o al dashboard local `index.html`) | «Os enseño el resultado en tabla, que es lo mismo.» |
+| La web de APEX no carga | P3 salta a la tabla de asignación (o al portal local `frontend/index.html`) | «Os enseño el resultado en tabla, que es lo mismo.» |
 | El simulador tarda | P1 explica la lógica mientras carga; P2 tiene la cifra de Chinchón anotada (578 de cupo, 1.160 hab./médico, 84 % aulas) | «Mientras carga, os explico qué está calculando.» |
 | El optimizador no responde | P1 tiene en una diapositiva la foto de la tabla de Sierra Oeste | «Teníamos la tabla del último ejercicio; es esta.» |
-| Se pierde la red | P3 abre `index.html` (prototipo offline) | «Esto es la versión offline que usamos para ensayar.» |
+| Se pierde la red | P3 abre `frontend/index.html` (portal offline con datos embebidos) | «Esto es la versión offline que usamos para ensayar.» |
 | Se pregunta por un municipio que no está | P1: «Está en la ampliación a 160 municipios, que es el siguiente paso.» | Nunca inventar un dato. |
 
 ---

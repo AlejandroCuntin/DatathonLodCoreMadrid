@@ -10,8 +10,8 @@
   "entrega": [
     {
       "path": "CARGA_ORACLE.md",
-      "bytes": 3537,
-      "sha256": "d08d2a2ceda6418888e4723b2a67407f2fe64419bc183a136f0c49e6263b7ba6"
+      "bytes": 3598,
+      "sha256": "1823bade6680bdb8b1e2df0d3ba27ac75275a11a742d0352a2421c14d2df4459"
     },
     {
       "path": "dataset/municipios_panel_validado.csv",
@@ -45,8 +45,8 @@
     },
     {
       "path": "docs/validacion.md",
-      "bytes": 7866,
-      "sha256": "d73f64b9988fa464b614b5e2eaaf28856e2121eb47860a6947016d6fe92a3731"
+      "bytes": 17102,
+      "sha256": "34d6b29badf27b133419458b754815b0ad50c944aa0dec9c6d6f1a942583d568"
     },
     {
       "path": "FICHA_DATASET.md",

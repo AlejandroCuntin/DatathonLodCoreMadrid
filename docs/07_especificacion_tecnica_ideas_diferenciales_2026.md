@@ -3,6 +3,13 @@
 **Competición:** II Datathon LoDCOREMadrid 2026  
 **Entorno de Ejecución:** Python 3.10+ / PostGIS u Oracle Autonomous Database / GeoPandas / Scikit-Learn / FastAPI o Streamlit
 
+> ⚠️ **AVISO DE VIGENCIA (24 oct 2026):** especificación de ideas para una edición
+> posterior. **No describe el MVP entregado**: el MVP usa Oracle APEX + FastAPI,
+> 20 municipios, panel por municipio (sin H3, GTFS ni PostGIS) y solo INE + CKAN
+> conectados. Estado real: `README.md` y `docs/validacion.md`. El checklist de
+> defensa de 10 minutos de la sección 7 no es el guion oficial: el guion es de
+> 15 minutos (`docs/guion_presentacion_15min.md`).
+
 ---
 
 ## 1. FORMULACIÓN MATEMÁTICA Y MODELADO ANALÍTICO

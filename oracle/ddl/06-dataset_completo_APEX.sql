@@ -1,6 +1,8 @@
 -- =============================================================================
 -- LoDCORE Madrid • 06-dataset_completo_APEX.sql
 -- Script alternativo para APEX / Carga directa limpia con DROP CASCADE
+-- ⚠️ DESTRUCTIVO: hace DROP TABLE ... CASCADE. NO ejecutar después del 02 si no
+-- se quiere borrar la tabla y recargar los datos. Para carga normal, usar el 02.
 -- NOTA: Si ya ejecutó `02-tablas_procesadas.sql`, no es necesario ejecutar este script.
 -- Este fichero se proporciona para recrear la tabla directamente en entornos APEX aislados.
 -- =============================================================================

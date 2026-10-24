@@ -90,17 +90,17 @@ Valores permitidos en `origen`: `OBSERVADO | IMPUTADO | ESTIMADO | PROYECTADO | 
 DATATHON/ (raíz del espacio de trabajo)
 ├── codigo/DatathonLodCoreMadrid/   # ÚNICO repositorio Git activo (todo el MVP vive aquí)
 │   ├── src/lodcore/                #   ingest/ (INE+CKAN), data/, models/ M1-M5, explain/, publish/, serving/
-│   ├── frontend/mapa/              #   Mapa interactivo del portal (HTML/CSS/JS)
+│   ├── frontend/                    #   Portal estático (index.html), mapa/ y _prototype/
 │   ├── scripts/                    #   run_all_models_n1_n2_n3.py + pipeline F1
 │   ├── tests/                      #   36 tests (unit + integración + fuga L1-L7 + baselines)
-│   ├── oracle/                     #   ddl/ (01..06; el 06 en revisión), REST/ y onnx/
+│   ├── oracle/                     #   ddl/ (01..06; 06 = reset opcional), REST/ y onnx/
 │   ├── data/                       #   raw/ (snapshots INE+CKAN), processed/, validated/, output/
 │   ├── docs/                       #   validación, matriz de procedencia, specs y material_reto/ (PDFs oficiales)
 │   ├── PROMPTS-LoDCORE/            #   Kit de 14 prompts + AGENTS.md de la cátedra
 │   ├── .github/                    #   ISSUES_F1_F16.md (tablero documentado)
 │   ├── entrega/                    #   Paquete para el jurado (dataset + diccionario + fuentes + checksums)
 │   ├── README.md · project_context.md · estructura.md
-│   ├── params.yaml · requirements.txt · dvc.yaml · index.html
+│   ├── params.yaml · requirements.txt · dvc.yaml
 │   └── diagrama_flujo.mmd / .png   #   Resumen visual en 7 bloques
 └── fases.md                        # Plan histórico original (NO MODIFICAR; sustituido por la sección 8)
 ```
@@ -115,7 +115,7 @@ DATATHON/ (raíz del espacio de trabajo)
 |---------|--------------|------------------|
 | **P1** | Datos + Optimizador M4 | Ingesta de datos (INE, CKAN, Catastro, CRTM), trazabilidad `origen`/`metodo`, reglas de no-compensatoriedad, optimizador matemático de infraestructura por comarca, efecto spillover, geometría para mapa APEX. |
 | **P2** | Modelos + API | Entrenamiento M1-M5, exportación ONNX, equivalencia ONNX/Python, FastAPI (`/recomendar`, `/whatif`, `/optimizar-presupuesto`), tests (pytest), reproducibilidad, script único de ejecución. |
-| **P3** | UI/APEX + Presentación | Oracle APEX (3 páginas en el MVP; 9 como roadmap), `index.html`, vistas APEX con trazabilidad, diseño de diapositivas, guion de 15 min, ensayo, materiales para el jurado institucional. |
+| **P3** | UI/APEX + Presentación | Oracle APEX (3 páginas en el MVP; 9 como roadmap), `frontend/`, vistas APEX con trazabilidad, diseño de diapositivas, guion de 15 min, ensayo, materiales para el jurado institucional. |
 
 ---
 
@@ -247,7 +247,7 @@ DATATHON/ (raíz del espacio de trabajo)
 ### Fase 12 — Publicación en Oracle y capa APEX (27-28 octubre)
 - **Responsable:** P3 (APEX/UI), P1 (geometría), P2 (Python→Oracle).
 - **Subfases:**
-  - F12.1: Sustituir el prototipo `index.html` estático por la aplicación Oracle APEX real (P3).
+  - F12.1: Sustituir el prototipo `frontend/_prototype/index.html` estático por la aplicación Oracle APEX real (P3).
   - F12.2: 3 páginas APEX en el MVP (dashboard+mapa, explorador, ficha+simulador); las 9 páginas del diseño original quedan como roadmap (P3).
   - F12.3: Vistas APEX con `origen`, `metodo`, `dataset_version` (P3).
   - F12.4: DDL con `CHECK`/regex de `origen` en la base de datos, no solo en Python (P1/P2) — ya implementado en `02-tablas_procesadas.sql`.
