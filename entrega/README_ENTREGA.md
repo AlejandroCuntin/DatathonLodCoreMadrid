@@ -18,6 +18,7 @@
 | `docs/fuentes_oficiales.md` | Fuentes, licencias y atribución (INE y CKAN CAM) |
 | `docs/matriz_procedencia_variables.md` | Procedencia variable a variable |
 | `docs/validacion.md` | Informe de validación y métricas de los modelos |
+| `docs/model_cards.md` | Fichas de los 5 modelos: qué hacen, límites y ejemplos donde fallan |
 | `docs/limite_no_compensatorio.md` | Reglas duras y umbrales del MVP |
 | `MANIFIESTO.json` / `MANIFIESTO.sha256` | Metadatos y checksums para verificar la entrega |
 

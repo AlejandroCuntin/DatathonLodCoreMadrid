@@ -44,6 +44,11 @@
       "sha256": "b0b40e6cf8419a5cd098e4349409c1f450397a0b968c4db25d091ccd7015f297"
     },
     {
+      "path": "docs/model_cards.md",
+      "bytes": 13366,
+      "sha256": "5e926061914bcbced3804c7ddb630f5ec214650d890b302072464516561e0b37"
+    },
+    {
       "path": "docs/validacion.md",
       "bytes": 17102,
       "sha256": "34d6b29badf27b133419458b754815b0ad50c944aa0dec9c6d6f1a942583d568"
@@ -55,8 +60,8 @@
     },
     {
       "path": "README_ENTREGA.md",
-      "bytes": 3387,
-      "sha256": "47618d4fcc51ce194e3a4a9ee04393af43ea06b53f664ef194a572558c334a79"
+      "bytes": 3485,
+      "sha256": "11ef66067fc94a2c21dfd7cb7a08052b14d41b5ea94296e2b00fd31dbc3af392"
     }
   ],
   "snapshots_raw_no_incluidos": [
