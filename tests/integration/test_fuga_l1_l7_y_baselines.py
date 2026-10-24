@@ -45,7 +45,8 @@ def test_l2_fuga_temporal_point_in_time(panel_data):
 
 def test_l3_fuga_por_variable_derivada_del_objetivo(panel_data):
     """
-    L3: Verifica que el target no esté incluido directa ni indirectamente en las features.
+    L3 (fuga directa): el target y sus derivados directos no están en las features.
+    La fuga indirecta por componentes del ICA se documenta en el test siguiente.
     """
     # M1
     assert "precio_m2_compra" not in FEATURES_M1
@@ -54,6 +55,25 @@ def test_l3_fuga_por_variable_derivada_del_objetivo(panel_data):
     assert "indice_capacidad_global" not in FEATURES_M4
     assert "nivel_idoneidad" not in FEATURES_M4
     assert "personas_acogida_efectiva" not in FEATURES_M4
+
+def test_l3_ica_es_funcion_determinista_de_los_scores(panel_data):
+    """
+    L3 (material interpretativa): 4 de los 5 componentes del ICA están en FEATURES_M4.
+    El R² de M4 mide la aproximación de una fórmula, no la predicción de un fenómeno externo.
+    """
+    df = panel_data
+    ica = (
+        0.30 * df["score_vivienda"]
+        + 0.30 * (df["score_sanidad"] + df["score_educacion"]) / 2.0
+        + 0.25 * df["score_conectividad"]
+        + 0.15 * df["score_holgura"]
+    )
+    assert (df["indice_capacidad_global"] - ica).abs().max() < 0.01
+    componentes = {
+        "score_sanidad", "score_educacion", "score_conectividad",
+        "score_vivienda", "score_holgura",
+    }
+    assert len(componentes.intersection(FEATURES_M4)) == 4
 
 def test_l4_fuga_entre_fases_m3_proyecciones_en_m4():
     """

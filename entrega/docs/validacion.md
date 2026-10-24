@@ -49,6 +49,9 @@
   matriz de procedencia.
 - **Fechas**: `fecha_disponible` se deriva del snapshot realmente consumido y
   `fecha_calculo` es el timestamp real de ejecución; no se usan fechas fijas.
+- **Auditoría de fuga (F3)**: `docs/auditoria_fuga_informacion.md` — **0 bloqueantes, 2 materiales**
+  (target determinista y sesgo de selección del piloto). CV espacial con `GroupKFold`; test que
+  impide que el target o sus derivados entren en M4.
 
 ---
 
@@ -106,23 +109,25 @@ Con un panel piloto de $n=20$ municipios, el riesgo de que el sobreajuste o la f
 
 | Código | Tipo de Fuga | Diagnóstico Técnico en LoDCORE Madrid | Impacto Cuantificado | Veredicto |
 |---|---|---|---|:---:|
-| **L1** | **CV aleatorio sobre el panel** | Si se evalúa con `KFold` aleatorio, municipios de la misma comarca comparten train y test, inflando la métrica por autocorrelación espacial. Al forzar `Spatial_GroupKFold_Comarca`, las comarcas son estrictamente disjuntas. | En M1, $R^2$ cae de $-0,2581$ a $-0,3398$ ($\Delta = 0,0817$). En M4, $R^2$ pasa de $0,7888$ a $0,7345$ ($\Delta = 0,0543$). | **CONTROLADA** (GroupKFold obligatorio) |
+| **L1** | **CV aleatorio sobre el panel** | Si se evalúa con `KFold` aleatorio, municipios de la misma comarca comparten train y test, inflando la métrica por autocorrelación espacial. Al forzar `Spatial_GroupKFold_Comarca`, las comarcas son estrictamente disjuntas. | En M1, $R^2$ cae de $-0,2581$ a $-0,3398$ ($\Delta = 0,0817$). En M4, $R^2$ pasa de $0,7888$ a $0,7345$ ($\Delta = 0,0543$). El valor exacto depende de la semilla del KFold; el rango observado es 0,045–0,082, **siempre por debajo del umbral 0,15**. | **CONTROLADA** (GroupKFold obligatorio) |
 | **L2** | **Fuga temporal (Point-in-Time)** | `filtrar_point_in_time` bloquea cualquier registro con `fecha_disponible > fecha_decision` (2026-10-24). | Cero registros futuros admitidos en el panel. | **LIMPIA** |
-| **L3** | **Variable derivada del objetivo** | Se verificó que las matrices de entrada `FEATURES_M1` y `FEATURES_M4` no contengan precios inmobiliarios ni el ICA o semáforo. | Correlación espuria descartada por contrato de características. | **LIMPIA** |
+| **L3** | **Variable derivada del objetivo** | El target ICA es una **combinación determinista** de cinco sub-índices. `FEATURES_M4` incluye 4 de esos 5 componentes (`score_sanidad`, `score_educacion`, `score_conectividad`, `score_vivienda`), por lo que el modelo aproxima una fórmula, no un fenómeno independiente. No incluye el target, `nivel_idoneidad`, `ranking_ica` ni `personas_acogida_efectiva`. | Añadir el target sube el $R^2$ OOF de 0,7355 a **0,9218**; añadir `nivel_idoneidad`+`ranking_ica`, a **0,9178**. Es la prueba de que la métrica premia la tautología. | **MATERIAL (interpretativa)** |
 | **L4** | **Fuga entre fases de la cadena** | M4 utiliza únicamente dotaciones y scores del corte estático; no consume las proyecciones demográficas 2027/2030/2035 de M3. | Intersección nula comprobada en `test_no_leakage_between_m3_future_and_m4_features`. | **LIMPIA** |
 | **L5** | **Fuga por normalización global** | M1 (Random Forest) y M4 (Gradient Boosting) son modelos basados en árboles invariantes a transformaciones monotónicas. No se aplica `MinMaxScaler`/`StandardScaler` global sobre sus features. | Sin leakage de estadísticas globales en árboles. | **LIMPIA** |
 | **L6** | **Imputación leaking** | El panel validado cuenta con 20 filas completas sin valores perdidos (`0` nulos en `quality_gates.py`), eliminando la necesidad de imputadores cruzados. | Cero leakage por imputación. | **LIMPIA** |
 | **L7** | **Duplicación de filas** | Cada observación corresponde unívocamente a un término municipal oficial identificado por su código INE de 5 dígitos (`28xxx`). | 20 registros únicos verificados. | **LIMPIA** |
 
 #### Sesgo de Selección y Representatividad
-- **Población objetivo del reto**: Municipios rurales y semiurbanos de la Comunidad de Madrid ($< 50.000$ habitantes) susceptibles de reequilibrio territorial.
-- **Alcance**: El panel de 20 municipios no representa al conjunto de grandes urbes metropolitanas (Madrid capital, Móstoles, Alcalá de Henares están deliberadamente excluidas). Las inferencias del modelo aplican estrictamente a la corona exterior y municipios rurales/periurbanos.
+- **Población objetivo del reto**: municipios de la Comunidad de Madrid con menos de 50.000 habitantes. El INE registra **179 municipios**, de los cuales **155** están por debajo de ese umbral.
+- **Cobertura del piloto**: **20 de 155** municipios (12,9 %), que suman **200.267 habitantes** (20,1 % de la población de los menores de 50k).
+- **Sesgo cuantificado**: el piloto **sobrerrepresenta los municipios medianos** y **infrarrepresenta los pequeños**. Mediana del piloto **8.219 hab.** frente a **2.964** del conjunto de menores de 50k. Por tramos: **4/20** municipios <5.000 (frente a 96/155 en el universo), **14/20** entre 5.000–20.000 (frente a 46/155) y **2/20** entre 20.000–50.000 (frente a 13/155).
+- **Consecuencia**: no es *survivorship* (no se excluyó por falta de datos, se eligió por diseño), pero **limita la validez externa**. Los resultados no se extrapolan sin más a los 155; la ampliación estratificada por tamaño es la siguiente fase.
 
 ---
 
-### 6. Validación contra 4 Baselines Naive y Bandas Bootstrap (Fase F4)
+### 6. Validación contra 4 Baselines de Referencia y Bandas Bootstrap (Fase F4)
 
-Para demostrar si los modelos aportan valor predictivo real o si se limitan a replicar heurísticas triviales, se implementaron 4 baselines estandarizados bajo el mismo esquema `Spatial_GroupKFold_Comarca`:
+Para demostrar si los modelos aportan valor predictivo real o si se limitan a replicar heurísticas triviales, se implementaron 4 baselines bajo el mismo esquema `Spatial_GroupKFold_Comarca`:
 1. `Dummy Mean`: predicción de la media histórica del conjunto de entrenamiento.
 2. `Dummy Median`: predicción de la mediana del conjunto de entrenamiento.
 3. `Linear Regression`: mínimos cuadrados ordinarios sobre las mismas features.
@@ -137,6 +142,8 @@ Para demostrar si los modelos aportan valor predictivo real o si se limitan a re
 | `Linear Regression` | 985,70 | 1.973,40 | −20,3249 | [410,20 , 1.850,30] |
 | `Ridge Regression` ($\alpha=1.0$) | 506,57 | 667,49 | −1,4397 | [345,10 , 710,80] |
 
+> **Nota metodológica:** las métricas de las tablas 6.1 y 6.2 son **out-of-fold (OOF)**. `metrics.json` publica la **media de los 5 folds** (M1 MAE 382,83; M4 MAE 5,15). Ambas son correctas, pero no deben mezclarse en una misma frase: en esta sección se usa OOF; en la sección 7, la media de folds.
+
 > **Diagnóstico M1**: M1 bate a la media naive (reduce el MAE de 422 € a 398 €) y evita el sobreajuste catastrófico de la regresión lineal desregulada. Sin embargo, con $n=20$ y 8 comarcas heterogéneas, su $R^2$ comarcal es negativo.
 
 #### 6.2 Resultados Comparativos M4 (Capacidad Core • Target: `indice_capacidad_global` en ptos 0–100)
@@ -147,7 +154,7 @@ Para demostrar si los modelos aportan valor predictivo real o si se limitan a re
 | `Dummy Median` (mediana naive) | 11,78 | 14,59 | −0,2445 | [8,35 , 15,45] |
 | `Ridge Regression` ($\alpha=1.0$) | 2,78 | 3,55 | 0,9264 | [1,85 , 3,80] |
 
-> **Diagnóstico M4**: M4 **reduce el error de predicción en un 57,2 %** respecto a predecir la media naive ($4,95$ vs $11,57$ ptos). Aunque una regresión lineal directa obtiene un $R^2$ elevado debido a la naturaleza aditiva de los subíndices, **la regresión lineal es incapaz de aplicar salvaguardas no compensatorias** (colapso por saturación sanitaria/escolar) y carece de atribución no lineal para el simulador *what-if*.
+> **Diagnóstico M4**: M4 **reduce el error de predicción en un 57,2 %** respecto a predecir la media naive ($4,95$ vs $11,57$ ptos). **Ridge obtiene mejor $R^2$ (0,9264) y menor MAE (2,78)** porque el target es una combinación aditiva de los sub-índices: es el resultado esperado y no se oculta. M4 se mantiene como **modelo de scoring** porque aporta lo que Ridge no da: la capa de reglas no compensatorias, las atribuciones para el what-if y la coherencia con el simulador. Si el jurado pregunta "¿por qué no usan Ridge?", la respuesta es: *"porque el ICA es una fórmula aditiva; Ridge la reproduce mejor, pero no aplica las reglas duras ni permite el what-if. Publicamos ambas cosas."*
 
 ---
 
@@ -157,8 +164,8 @@ Para garantizar la máxima solvencia académica ante el comité evaluador del Da
 
 | Modelo | Métrica que SÍ se debe enseñar al jurado | Métrica que NUNCA se debe enseñar | Justificación Técnica ante Preguntas del Jurado |
 |---|---|---|---|
-| **M4 (Core)** | **$R^2$ CV OOF = 0,7345**<br>MAE CV = 5,15 ptos (IC 95 %: [3,05, 6,84]) | **$R^2$ in-sample = 1,0000** | El target ICA es una formulación metodológica del MVP; un $R^2=1,0$ in-sample es un artefacto determinista, no generalización. La métrica defendible es la evaluación fuera de muestra por comarca. |
-| **M1 (AVM)** | **MAE CV = 382,83 €/m²**<br>(Gana a media naive en ~25 €/m²) | **Cualquier claim de "AVM comercial cerrado o tasación oficial"** | Con $n=20$ el $R^2$ fuera de muestra es negativo (−0,3398). Debe presentarse como un indicador de esfuerzo financiero relativo, nunca como un tasador homologado. |
+| **M4 (Core)** | **$R^2$ CV OOF = 0,7345**<br>MAE OOF = 4,95 ptos (IC 95 %: [3,05, 6,84]); media de folds = 5,15 | **$R^2$ in-sample = 1,0000** | El target ICA es una formulación metodológica del MVP; un $R^2=1,0$ in-sample es un artefacto determinista, no generalización. La métrica defendible es la evaluación fuera de muestra por comarca. |
+| **M1 (AVM)** | **MAE CV = 382,83 €/m²**<br>(OOF 398,72; gana a la media naive en ~23 €/m² OOF) | **Cualquier claim de "AVM comercial cerrado o tasación oficial"** | Con $n=20$ el $R^2$ fuera de muestra es negativo (−0,3398). Debe presentarse como un indicador de esfuerzo financiero relativo, nunca como un tasador homologado. |
 | **M2 (Isócronas)** | **Tiempos de viaje y 16/20 en umbral 30-min** | Claims de "ruteo dinámico con grafos OSM/GTFS en tiempo real" | Es una heurística de velocidad media por red viaria principal y distancia, no un ruteo multimodal en tiempo real. |
 | **M3 (Demografía)** | **Proyecciones 2030/2035 con intervalos de confianza al 95 %** | Proyecciones puntuales deterministas sin incertidumbre | Las dinámicas demográficas en municipios pequeños poseen alta volatilidad; la banda de incertidumbre es obligatoria. |
 | **M5 (Clustering)** | **Silhouette = 0,3183 ($k=4$) y centroides auditados** | Claims de "arquetipos universales automáticos" | Los arquetipos son agrupaciones empíricas interpretadas según centroides; los valores de los 4 clústeres son públicos en `clustering.json`. |
