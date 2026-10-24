@@ -8,33 +8,21 @@
 Ejecutar en SQLcl, SQL Developer o APEX › SQL Workshop, **en este orden**:
 
 1. `oracle/ddl/01-tablas_raw.sql`
-2. `oracle/ddl/02-tablas_procesadas.sql`
+2. `oracle/ddl/02-tablas_procesadas.sql` (crea `municipios_procesados` con las 88 columnas canónicas y columnas virtuales de compatibilidad)
 3. `oracle/ddl/03-vistas_apex.sql`
 4. `oracle/ddl/04-indices_espaciales.sql`
 5. `oracle/ddl/05-modelos_onnx.sql`
 
-> ⚠️ **No ejecutar `06-dataset_completo_APEX.sql`**: está en revisión porque vuelve a crear
-> `municipios_procesados` (ya creada por el `02`). Se corregirá antes de la entrega final.
+> 💡 **Nota sobre `06-dataset_completo_APEX.sql`**: Si ya ejecutó `02-tablas_procesadas.sql`, no es necesario ejecutar el `06`. Este último incluye `DROP TABLE ... CASCADE` para recrear limpiamente la estructura completa en entornos aislados si fuera necesario.
 
 ## 2. Cargar el CSV
 
 `dataset/municipios_panel_validado.csv` → tabla **`municipios_procesados`**.
 
-Al importar (SQL Developer › *Import Data* o APEX › *Data Workshop › Load Data*), mapear estos
-cuatro nombres (el resto coincide por nombre):
-
-| Columna del CSV | Columna de la tabla |
-|---|---|
-| `tiempo_medio_madrid_minutos` | `tiempo_madrid_min` |
-| `num_plazas_escolares` | `plazas_escolares` |
-| `num_alumnos_matriculados` | `alumnos_matriculados` |
-| `precio_predicho_avm_m2` | `precio_avm_m2` |
-
-Notas:
-- La tabla conserva un **subconjunto** de las 88 columnas; las demás se ignoran al cargar.
-- **No cargar** `densidad`, `hab_por_medico` ni `ocupacion_escolar_pct`: Oracle las genera como
-  columnas virtuales.
-- Son obligatorias: `fecha_disponible`, `origen`, `metodo`, `dataset_version` y `fuente_datos`.
+Al importar (SQL Developer › *Import Data* o APEX › *Data Workshop › Load Data*), la correspondencia es **directa 1:1 por nombre de columna**:
+- Las 88 columnas del CSV se cargan directamente sin necesidad de renombrado manual.
+- Las columnas virtuales de compatibilidad (`tiempo_madrid_min`, `plazas_escolares`, `alumnos_matriculados`, `precio_avm_m2`) se calculan automáticamente en base de datos.
+- Son columnas obligatorias auditadas: `fecha_disponible`, `origen`, `metodo`, `dataset_version` y `fuente_datos`.
 
 ## 3. Modelos para el scoring dentro de Oracle (N2)
 

@@ -37,7 +37,8 @@ SELECT
     m.alerta_planificacion,
     m.origen,
     m.metodo,
-    m.dataset_version
+    m.dataset_version,
+    m.fuente_datos
 FROM municipios_procesados m
 WHERE m.latitud  IS NOT NULL
   AND m.longitud IS NOT NULL

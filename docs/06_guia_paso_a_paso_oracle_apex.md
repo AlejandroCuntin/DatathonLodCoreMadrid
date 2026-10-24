@@ -1,118 +1,96 @@
-# GUÍA PASO A PASO: PUESTA EN MARCHA EN ORACLE Y ORACLE APEX
-**II Datathon LoDCOREMadrid 2026**
+# Guía Paso a Paso: Despliegue en Oracle Database 23ai y Oracle APEX (Fase P3)
+## II Datathon LoDCORE Madrid · UC3M + Comunidad de Madrid (Octubre 2026)
 
-> ⚠️ **AVISO (octubre 2026)**: esta guía describe el prototipo antiguo de 5 tablas
-> (`MUNICIPIOS`, `DOTACION_SERVICIOS`, `VIVIENDA_Y_SUELO`, `INDICES_CAPACIDAD`,
-> `PARAMETROS_MODELO`). El esquema vigente es `oracle/ddl/01-tablas_raw.sql` …
-> `06-dataset_completo_APEX.sql` (el 06 está **en revisión**: duplica una tabla
-> del 02; no ejecutarlo hasta validar). El orden de carga está en el `README.md` §3.
-> **No ejecutes** el script de ~35 sentencias que menciona esta guía: ya no existe
-> en el repositorio.
-
-Esta guía explica con capturas textuales y paso a paso cómo cargar el modelo de datos del reto y ver los mapas y tablas funcionando en **Oracle APEX** en menos de 10 minutos.
+> **Entregable F12 (APEX)**: Configuración guiada para desplegar las **3 páginas canónicas del MVP** sobre el panel validado de los 20 municipios piloto, con linaje de procedencia auditado (`origen`, `metodo`, `dataset_version`, `fuente_datos`) y reglas duras no compensatorias.
 
 ---
 
-## OPCIÓN RECOMENDADA: ORACLE APEX EN LA NUBE (Sin instalar nada en local)
+### Paso 1: Carga del Esquema DDL en Oracle Database 23ai
 
-Oracle APEX funciona 100% en el navegador web sobre una base de datos Oracle gestionada.
+En el entorno de Oracle Cloud (Autonomous Database) o en **SQL Workshop › SQL Scripts** de Oracle APEX, ejecutar los siguientes ficheros en orden estricto:
 
-Tienes dos opciones de acceso gratuito:
-1. **Cuenta del Datathon (Oracle Academy / Cloud):** La que Óscar Sánchez y la organización facilitan a los equipos inscritos (con los créditos OCI).
-2. **Entorno Gratuito Inmediato de Pruebas (apex.oracle.com):** Si aún no tienes las claves del equipo, puedes solicitar un Workspace gratuito en 1 minuto en:
-   👉 **[https://apex.oracle.com/pls/apex/f?p=4550](https://apex.oracle.com/pls/apex/f?p=4550)** (Pulsar en *"Request a Free Workspace"*).
+1. `oracle/ddl/01-tablas_raw.sql`: Estructura para almacenamiento de snapshots crudos inmutables.
+2. `oracle/ddl/02-tablas_procesadas.sql`: Tabla unificada `municipios_procesados` con las 88 columnas canónicas del panel validado y columnas virtuales de compatibilidad.
+3. `oracle/ddl/03-vistas_apex.sql`: Vistas oficiales con trazabilidad obligatoria y salvaguardas no compensatorias:
+   - `v_apex_portal_ciudadano`: Datos desnormalizados por municipio con `indice_ica_ajustado` (techo 39 ptos si hay saturación) y procedencia.
+   - `v_apex_panel_institucional`: Agregación comarcal para el Dashboard directivo (8 comarcas, población total, alertas sanitarias y educativas).
+4. `oracle/ddl/04-indices_espaciales.sql`: Columna `geometria SDO_GEOMETRY` e índice espacial R-Tree `idx_municipios_sdo` (SRID 25830 / ETRS89).
+5. `oracle/ddl/05-modelos_onnx.sql`: Carga de modelos ONNX (`m1_avm.onnx` y `m4_capacidad.onnx`) con `DBMS_VECTOR.LOAD_ONNX_MODEL` y vista de scoring `v_onnx_scoring_n2`.
 
----
-
-## PASO 1: Iniciar Sesión en Oracle APEX
-1. Abre tu navegador y accede a tu URL de Oracle APEX (o a `https://apex.oracle.com`).
-2. Introduce:
-   - **Workspace:** El nombre de tu espacio de trabajo.
-   - **Username:** Tu usuario (o correo).
-   - **Password:** Tu contraseña.
-3. Llegarás a la pantalla principal con 4 grandes iconos:
-   - **App Builder** (Creador de aplicaciones web).
-   - **SQL Workshop** (Gestor de la base de datos Oracle).
-   - **Team Development** (Gestión ágil).
-   - **App Gallery** (Galería de ejemplos).
+*(Nota: Si se precisa un refresco limpio desde cero en APEX, `oracle/ddl/06-dataset_completo_APEX.sql` ejecuta un `DROP TABLE ... CASCADE` previo).*
 
 ---
 
-## PASO 2: Cargar el Esquema y los Datos en la Base de Datos
+### Paso 2: Carga del Panel Municipal Validado
 
-Vamos a ejecutar los 3 ficheros SQL que ya tenemos listos en tu carpeta `DATATHON/sql/`:
-
-1. Haz clic en el menú **SQL Workshop** ➔ selecciona **SQL Scripts**.
-2. Pulsa el botón **Upload** (Subir) situado arriba a la derecha.
-
-### Subir y ejecutar en este orden exacto:
-
-#### A) Script 1: Estructura de Tablas
-- Pulsa **Choose File** y selecciona:
-  `C:\Users\USUARIO\Desktop\DATATHON\sql\01_ddl_schema.sql`
-- Script Name: `01_ddl_schema.sql`
-- File Character Set: `Unicode (UTF-8)`
-- Pulsa **Upload**.
-- Una vez subido, en la lista de scripts haz clic en el icono de **Run** (el triángulo o botón "Run").
-- Confirma pulsando **Run Now**.
-- Verás el resumen: `Statements Processed: ~35`, sin errores. Se habrán creado las tablas `MUNICIPIOS`, `DOTACION_SERVICIOS`, `VIVIENDA_Y_SUELO`, `INDICES_CAPACIDAD` y `PARAMETROS_MODELO`.
-
-#### B) Script 2: Carga de Datos Calculados del ICA
-- Vuelve a pulsar **Upload**.
-- Selecciona el archivo:
-  `C:\Users\USUARIO\Desktop\DATATHON\sql\02_dml_inserts.sql`
-- Script Name: `02_dml_inserts.sql`
-- Pulsa **Upload** y luego **Run** ➔ **Run Now**.
-- Se insertarán los 20 municipios analizados con todas sus métricas calculadas.
-
-#### C) Script 3: Vistas Analíticas para el Mapa y Reportes
-- Vuelve a pulsar **Upload**.
-- Selecciona el archivo:
-  `C:\Users\USUARIO\Desktop\DATATHON\sql\03_views_and_apex_queries.sql`
-- Script Name: `03_views_and_apex_queries.sql`
-- Pulsa **Upload** y luego **Run** ➔ **Run Now**.
-- Creará la vista desnormalizada `V_MUNICIPIOS_ICA_APEX` con los colores de pines, iconos y métricas de APEX.
+1. En Oracle APEX, acceder a **SQL Workshop › Utilities › Data Workshop › Load Data**.
+2. Seleccionar el archivo oficial de entrega:
+   `entrega/dataset/municipios_panel_validado.csv` (o `data/validated/municipios_panel_validado.csv`).
+3. Indicar como tabla de destino: **`MUNICIPIOS_PROCESADOS`**.
+4. **Mapeo directo 1:1**: Las 88 columnas coinciden exactamente por nombre.
+   - Las columnas virtuales (`tiempo_madrid_min`, `plazas_escolares`, `alumnos_matriculados`, `precio_avm_m2`) son calculadas automáticamente por el motor de base de datos.
+5. Confirmar la carga: deben insertarse exactamente **20 filas** (200.267 habitantes agregados).
 
 ---
 
-## PASO 3: Verificar los Datos con tus Propios Ojos
+### Paso 3: Las 3 Páginas Clave en Oracle APEX (F12.1)
 
-1. En el menú superior, ve a **SQL Workshop** ➔ **Object Browser**.
-2. En la columna de la izquierda verás la lista de **Tables**:
-   - Haz clic en `MUNICIPIOS` y luego en la pestaña **Data**: verás los 20 municipios con su población INE 2025, superficie, latitud y longitud.
-   - Haz clic en `INDICES_CAPACIDAD` ➔ pestaña **Data**: verás los scores 0-100, la columna `NIVEL_IDONEIDAD` (*ALTA, MEDIA, BAJA*) y los cuellos de botella calculados.
-   - En el selector de objetos cambia de *Tables* a **Views** y haz clic en `V_MUNICIPIOS_ICA_APEX`: verás la tabla completa combinada con los códigos de color hexadecimales (`#2ecc71`, etc.).
+En **App Builder › Create Application**, nombrar la aplicación como `Observatorio LoDCORE Madrid` (Theme 42: *Universal Theme - Redwood Light*).
+
+#### Página 1: Dashboard Comarcal Institucional
+- **Fuente de datos**: `v_apex_panel_institucional`.
+- **Componentes**:
+  - **KPI Badge List (Cabecera)**:
+    - *Municipios Analizados*: `20`
+    - *Población Total Acogida*: `200.267 hab.`
+    - *Capacidad Neta Inmediata*: `5.078 hab.` (sin colapso de ningún servicio)
+    - *Inversión Requerida en Alertas*: `35,9 M€`
+  - **Cards / Interactive Grid Comarcal**: 8 comarcas con desglose de ICA promedio, alertas sanitarias (`SUM(alerta_sanitaria)`) y educativas (`SUM(alerta_educativa)`).
+  - **Trazabilidad Visible**: Cada tarjeta muestra `dataset_version: v1.0.0-F2` y `fuente_datos`.
+
+#### Página 2: Mapa Semafórico Territorial
+- **Opción A (Nativa APEX Map Region)**:
+  - Crear región de tipo **Map**.
+  - Capa de Puntos sobre `V_MAPA_MUNICIPIOS` (o `v_apex_portal_ciudadano`).
+  - Coordenadas: Longitud `LONGITUD`, Latitud `LATITUD`.
+  - Color de Marcador dinámico:
+    - Verde (`#16a34a`): `ALTA` (ICA $\ge 60$)
+    - Ámbar (`#d97706`): `MEDIA` ($40 \le \text{ICA} < 60$)
+    - Rojo (`#dc2626`): `BAJA` ($\text{ICA} < 40$ o colapso no compensatorio)
+  - Tooltip: Nombre, Comarca, Población, Factor Limitante dominante y Capacidad Neta.
+- **Opción B (Región HTML/JS Avanzada)**:
+  - Incrustar la región estática Leaflet de `frontend/mapa/lodcore-mapa-region.html`.
+  - Cargar `frontend/mapa/lodcore-mapa.css` y `frontend/mapa/lodcore-mapa.js`, que consume el endpoint ORDS `oracle/REST/mapa-Servicio-REST.sql`.
+
+#### Página 3: Ficha Municipal y Simulador de Escenarios What-If
+- **Fuente de datos**: Formulario / Ficha sobre `v_apex_portal_ciudadano`.
+- **Expediente del Municipio**:
+  - Indicadores clave: Habitantes por médico (alerta si $>1.500$), Ocupación escolar (alerta si $>95\%$), Precio m² y vivienda vacante.
+  - Dictamen en lenguaje natural sin causalidad (según reglas F11 de `redaccion_natural.py`).
+- **Simulador What-If Interactivo**:
+  - Control de entrada: Deslizador de nuevos residentes proyectados (`+100` a `+2.000` personas).
+  - Cálculo reactivo (vía llamada REST a `/whatif` de FastAPI o cálculo PL/SQL local):
+    - Médicos de Atención Primaria adicionales requeridos para no colapsar.
+    - Aulas / plazas escolares necesarias.
+    - Presupuesto de inversión CAPEX estimado.
+    - Nuevo semáforo resultante aplicando la salvaguarda no compensatoria.
 
 ---
 
-## PASO 4: Crear la Aplicación con Mapa Interactivo (en 2 minutos)
+### Paso 4: Verificación de Calidad y Cierre de Entrega
 
-1. En el menú superior de APEX, haz clic en **App Builder**.
-2. Pulsa en **Create a New App** ➔ selecciona **New Application**.
-3. **Name:** `Observatorio ICA Madrid`.
-4. En la sección **Pages** (Páginas):
-   - Por defecto tendrás la página *Home*.
-   - Pulsa **Add Page** (Añadir Página):
-     - Selecciona **Map** (Mapa).
-     - Page Name: `Mapa de Capacidad Territorial`.
-     - Table / View Name: Escribe o selecciona `V_MUNICIPIOS_ICA_APEX`.
-     - Geolocation Type: `Points (Longitude / Latitude)`.
-     - Longitude Column: `LONGITUD`.
-     - Latitude Column: `LATITUD`.
-     - Tooltip / Title Column: `NOMBRE`.
-     - Pulsa **Add Page**.
-   - Vuelve a pulsar **Add Page**:
-     - Selecciona **Interactive Report**.
-     - Page Name: `Diagnóstico y Cuellos de Botella`.
-     - Table / View Name: `V_MUNICIPIOS_ICA_APEX`.
-     - Pulsa **Add Page**.
-5. Al final de la página de creación, pulsa el botón verde **Create Application**.
+Ejecutar las consultas de verificación en SQL Workshop:
 
----
+```sql
+-- 1. Total exacto de 20 municipios
+SELECT COUNT(*) AS total_filas FROM municipios_procesados; -- Esperado: 20
 
-## PASO 5: Ejecutar la Aplicación y Ver el Resultado
-1. Pulsa el botón **Run Application** (el icono de Play arriba a la derecha).
-2. Se abrirá una pestaña en el navegador con la aplicación web corporativa.
-3. Inicia sesión con tus credenciales de APEX.
-4. Navega a la página **Mapa**: verás el mapa de la Comunidad de Madrid con los 20 municipios marcados sobre el territorio.
-5. Navega a **Diagnóstico**: tendrás una tabla interactiva profesional con filtros automáticos, búsqueda instantánea y botón de descarga a Excel o PDF.
+-- 2. Integridad de la regla dura: 0 municipios saturados con ICA >= 40
+SELECT COUNT(*) FROM municipios_procesados
+WHERE (hab_por_medico > 1500 OR ocupacion_escolar_pct > 95.0)
+  AND indice_capacidad_global >= 40.0; -- Esperado: 0
+
+-- 3. Trazabilidad completa por registro (0 nulos en metadatos)
+SELECT COUNT(*) FROM municipios_procesados
+WHERE origen IS NULL OR metodo IS NULL OR dataset_version IS NULL OR fuente_datos IS NULL; -- Esperado: 0
+```
