@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mapa de capacidad de acogida territorial de la Comunidad de Madrid">
+  <title>Mapa de Capacidad Territorial | LoDCORE Madrid</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="mapa.css">
+</head>
+<body>
+<!-- Para APEX: el contenido reutilizable es el bloque <div id="lodcore"> ... </div>.
+     Este wrapper (head/body/scripts) es para la vista local del mapa. -->
 <!-- LoDCORE · Mapa de municipios — solo el HTML de la región (el CSS y el JS van en archivos aparte) -->
 <div id="lodcore">
   <div class="lc-bar">
@@ -52,3 +65,8 @@
     </aside>
   </div>
 </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="mapa.js"></script>
+</body>
+</html>
