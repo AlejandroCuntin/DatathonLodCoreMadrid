@@ -2,11 +2,15 @@
 
 > Contexto operativo para agentes de IA (Codex, Claude Code, Cursor, Copilot, Gemini CLI).
 > Deriva de `agents.md` (estándar abierto multi-proveedor). Si eres un humano, lee `README.md`.
+>
+> **Alcance:** este archivo es el kit de prompts de la cátedra. El estado real
+> del MVP (20 municipios, `pip`/`requirements.txt`, 4 endpoints) está en
+> `README.md` y `project_context.md` del repositorio.
 
 ## 1. Qué es este proyecto
 
 LoDCORE predice **qué municipios de la Comunidad de Madrid con menos de 50.000 habitantes**
-(41 municipios activos, INE & CAM 2026) son capaces de **acoger de forma sostenible** a la
+(piloto MVP: 20 municipios activos; objetivo de escala: 41/<50k, INE & CAM 2026) son capaces de **acoger de forma sostenible** a la
 población prevista, y lo explica de forma auditable.
 
 Stack: **datos públicos abiertos → Python → Oracle Database → Oracle APEX**.
@@ -119,9 +123,11 @@ Nunca edites `data/raw/` a mano. Es inmutable y está versionado con DVC.
 - **N1 — entrenamiento (Python, CI/CD).** N2 — **scoring de los 5 modelos dentro de Oracle**:
   el modelo se exporta a ONNX (`skl2onnx` para sklearn, `onnxmltools` para XGBoost/LightGBM) y se
   importa con `DBMS_VECTOR.LOAD_ONNX_MODEL(...)` como `MINING_MODEL`; se puntúa con `PREDICTION()`.
-- **N3 — FastAPI solo para dos cosas:** `/recomendar` (preferencias por usuario) y `/whatif`
-  (contrafactual + recálculo de SHAP). Nada más necesita Python en runtime.
-- **Test de equivalencia obligatorio en CI**: `|score_ONNX − score_Python| < 1e-6` antes de promover.
+- **N3 — FastAPI para tres cosas:** `/recomendar` (preferencias por usuario), `/whatif`
+  (contrafactual + recálculo de atribuciones) y `/optimizar-presupuesto` (heurística voraz
+  comarcal). Nada más necesita Python en runtime.
+- **Test de equivalencia obligatorio en CI**: error **relativo < 1e-6 y absoluto < 1e-3**
+  (ONNX devuelve float32; a escala de ~2.000 €/m², un error absoluto < 1e-6 no es representable).
   Los fallos típicos son dtypes (float64 vs float32) y operadores ONNX no soportados.
 - **Usa los gráficos nativos de APEX siempre que existan**: el Comparador es un chart **Radar**
   nativo (3 series, 7 ejes = las 7 capas del mapa) y el semáforo es un **Status Meter Gauge**.

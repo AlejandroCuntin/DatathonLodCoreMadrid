@@ -2,6 +2,14 @@
 ## DOCUMENTO DE ENTREGA — FASE 1: PROPUESTA DE DISEÑO E IMPLEMENTACIÓN DE LA SOLUCIÓN
 ### SISTEMA INTELIGENTE DE REEQUILIBRIO TERRITORIAL Y CAPACIDAD DE ACOGIDA BASADO EN MACHINE LEARNING
 
+> ⚠️ **AVISO DE VIGENCIA (24 oct 2026):** documento de la propuesta inicial.
+> El MVP real funciona sobre **20 municipios** (no 179), solo **INE y CKAN**
+> están conectadas como fuentes oficiales (el resto es calibración sintética;
+> ver `docs/matriz_procedencia_variables.md`), M1 es **RandomForest**
+> (MAE CV 382,83 €/m²; R² CV −0,3398), los umbrales 1.500/95 % son
+> **parámetros del MVP** (no normativos) y la defensa es de **15 minutos**.
+> Estado real: `README.md` y `docs/validacion.md`.
+
 ---
 
 ### DATOS GENERALES DE LA PROPUESTA
@@ -28,7 +36,7 @@ El **Observatorio ICA Madrid ML** transforma datos abiertos dispersos en **decis
 1. **Índice Sintético de Capacidad de Acogida (ICA):** Puntuación multidimensional objetiva (0 a 100) que relativiza y normaliza la idoneidad municipal.
 2. **Modelos de Machine Learning Supervisado y No Supervisado:**
    - *AVM Inmobiliario (Automated Valuation Model):* Predicción algorítmica del valor del $m^2$ para detectar municipios con oportunidades de asequibilidad frente a zonas tensionadas.
-   - *Clustering No Supervisado (K-Means):* Segmentación de los 179 municipios en 4 arquetipos territoriales funcionales.
+   - *Clustering No Supervisado (K-Means):* Segmentación de los 20 municipios del piloto en 4 arquetipos territoriales (escalable a los ~160 municipios <50k).
    - *Sistema de Recomendación Multicriterio para Ciudadanos:* Emparejamiento inteligente entre preferencias de vida y características municipales.
    - *Simulación Predictiva Demográfica y de Saturación:* Proyección a 2027, 2029 y 2031 que alerta del año exacto en que colapsarán los servicios si no se acometen inversiones públicas.
 3. **Optimización de Presupuestos Públicos (CAPEX):** Cuantificación económica en euros del coste de ampliar plazas escolares y cupos de médicos de Atención Primaria para acoger nueva población sin degradar los servicios existentes.
@@ -37,7 +45,7 @@ El **Observatorio ICA Madrid ML** transforma datos abiertos dispersos en **decis
 
 ## 2. INVENTARIO Y TRAZABILIDAD DE FUENTES DE DATOS OFICIALES
 
-La solución se alimenta exclusivamente de fuentes abiertas, oficiales y reproducibles presentadas en la sesión de lanzamiento del Datathon:
+La solución se diseñó sobre fuentes abiertas y oficiales presentadas en la sesión de lanzamiento. **En el MVP solo INE y CKAN están conectadas**; el resto de variables es calibración sintética declarada en la matriz de procedencia:
 
 | Organismo Oficial | Conjunto de Datos / Endpoint Específico | Variables Clave Extraídas | Frecuencia / Formato |
 |---|---|---|---|
@@ -121,7 +129,7 @@ Para asegurar que los municipios pequeños (ej. Montejo de la Sierra con 404 hab
   - Si $\text{Gap}_{\%} < -8\,\%$: **OPORTUNIDAD ASEQUIBLE** (municipio con servicios y conectividad que cotiza por debajo de su valor esperado).
   - Si $\text{Gap}_{\%} > +8\,\%$: **ZONA TENSIONADA** (sobreprecio residencial relativo).
   - En caso contrario: **PRECIO EQUILIBRADO**.
-* **Métricas de Rendimiento:** $R^2 = 0{,}33$, $\text{MAE} = 291{,}44\text{ €/m}^2$, $\text{RMSE} = 349{,}55\text{ €/m}^2$.
+* **Métricas de Rendimiento (reales, `metrics.json`):** RandomForest · MAE CV **382,83 €/m²** · $R^2$ CV **−0,3398** (módulo ilustrativo con n=20; ver `docs/validacion.md`).
 
 ---
 
@@ -149,7 +157,7 @@ Para asegurar que los municipios pequeños (ej. Montejo de la Sierra con 404 hab
 ### 4.5. Módulo de Machine Learning 4: Simulación Predictiva de Series Temporales y Cuellos de Botella
 * **Objetivo:** Proyectar la población municipal a horizontes de corto, medio y largo plazo (2027, 2029, 2031) y determinar el **Año Estimado de Saturación Dotacional**.
 * **Modelo de Saturación:**
-  - *Capacidad Sanitaria Máxima:* $(N_{\text{medicos}} \times 1.500)$ habitantes (según estándar SERMAS).
+  - *Capacidad Sanitaria Máxima:* $(N_{\text{medicos}} \times 1.500)$ habitantes (parámetro del MVP, pendiente de validación con SERMAS).
   - *Capacidad Escolar Máxima:* $\frac{\text{Plazas} \times 0{,}95 - \text{Alumnos}}{0{,}17}$ nuevos habitantes en edad escolar.
   - *Habitantes Absorbibles sin Colapso:* $\min(Cap_{\text{san}}, Cap_{\text{edu}})$.
   - *Año de Colapso:* Horizonte temporal en el que la curva de proyección de demanda cruza el techo asistencial.
@@ -169,7 +177,7 @@ Alineado con los principios de gobernanza del dato de Oracle:
 
 ## 5. DISEÑO DEL MODELO RELACIONAL EN ORACLE DATABASE 23ai
 
-El modelo de datos implementado en [`01_ddl_schema.sql`](file:///c:/Users/USUARIO/Desktop/DATATHON/sql/01_ddl_schema.sql) y [`04_ddl_ml_schema.sql`](file:///c:/Users/USUARIO/Desktop/DATATHON/sql/04_ddl_ml_schema.sql) sigue las mejores prácticas empresariales:
+El modelo de datos vigente está en `oracle/ddl/` (`01-tablas_raw.sql` … `05-modelos_onnx.sql`), con `municipios_procesados` como tabla central, y sigue las mejores prácticas empresariales:
 1. **Integridad Referencial 1:1 por Clave Compartida:** Las tablas `DOTACION_SERVICIOS`, `VIVIENDA_Y_SUELO`, `INDICES_CAPACIDAD` y `ML_INSIGHTS_MUNICIPIO` comparten `id_municipio` como Clave Primaria y Foránea simultánea, garantizando un rendimiento óptimo de *JOIN* en memoria.
 2. **Columnas Virtuales Deterministas:** Oracle calcula automáticamente en el propio motor ratios como `DENSIDAD`, `OCUPACION_ESCOLAR_PCT` y `TASA_VIVIENDA_VACIA_PCT` (`GENERATED ALWAYS AS ... VIRTUAL`).
 3. **Restricciones CHECK de Negocio:** Validación geográfica estricta dentro de los límites de la Comunidad de Madrid y coherencia lógica de predicciones.
@@ -210,8 +218,8 @@ Del análisis ejecutado sobre los municipios representativos de la región se ex
 
 | Fechas | Hitos y Entregables Clave |
 |---|---|
-| **15 – 19 de Octubre** | Carga masiva de los 179 municipios mediante cruce del Padrón INE 2025, geoservicios CRTM y Catastro. |
+| **15 – 19 de Octubre** | Carga del piloto de 20 municipios mediante cruce del Padrón INE 2025 y CKAN Madrid (escalable a los ~160 municipios <50k). |
 | **20 – 24 de Octubre** | Refinamiento de hiperparámetros de los modelos AVM y Clustering; integración del endpoint SPARQL de LoDCORE. |
 | **25 – 27 de Octubre** | Construcción de las páginas en Oracle APEX Cloud y despliegue del simulador What-If. |
-| **28 de Octubre** | Ensayos de usabilidad y preparación de la demo de 10 minutos con el guion de defensa. |
+| **28 de Octubre** | Ensayos de usabilidad y preparación de la demo de 15 minutos con el guion de defensa. |
 | **29 de Octubre** | **Defensa presencial del prototipo funcional ante el Jurado en la UC3M (Campus de Leganés).** |

@@ -196,7 +196,8 @@ Python entrena  →  skl2onnx/onnxmltools  →  model.onnx (bytes)
    →  CREATE VIEW v_prediccion AS SELECT m.codigo_ine, PREDICTION(ICA_MODEL, m.*) AS ica FROM ...
    →  APEX lee v_prediccion
 ```
-**Prueba de equivalencia obligatoria en CI**: `|score_ONNX − score_Python| < 1e-6` antes de promover
+**Prueba de equivalencia obligatoria en CI**: error relativo < 1e-6 y absoluto < 1e-3 (ONNX
+devuelve float32; a escala de ~2.000 €/m², un error absoluto < 1e-6 no es representable) antes de promover
 ningún modelo. Los fallos típicos son dtypes (float64 vs float32) y operadores no soportados.
 
 **Gráficas: usar lo nativo de APEX siempre que exista.**
@@ -277,7 +278,7 @@ funciona en vuestra BD, activad el fallback FastAPI **ahora**, no en la semana 4
 | CA-6 | El simulador What-If recalcula desde el modelo real, no desde una fórmula reimplementada. |
 | CA-7 | La app APEX funciona con datos de las 41 fichas y con los umbrales del prototipo (1500 hab/médico, 95 % aulas, 30 min). |
 | CA-8 | Cada modelo tiene su *model card* con métricas, supuestos, límites y fecha de entrenamiento. |
-| CA-9 | Cada modelo publicado existe como `MINING_MODEL` en Oracle (o, si no hay ONNX in-DB, como endpoint documentado), y `score_ONNX == score_Python` con `max abs diff < 1e-6`. |
+| CA-9 | Cada modelo publicado existe como `MINING_MODEL` en Oracle (o, si no hay ONNX in-DB, como endpoint documentado), y `score_ONNX == score_Python` con error relativo < 1e-6 y absoluto < 1e-3 (float32). |
 | CA-10 | La página "Los 5 Modelos ML" se genera desde `USER_MINING_MODELS` / el espejo del registro de MLflow: no hay texto escrito a mano. |
 | CA-11 | Toda cifra de la UI tiene `fuente_id`, `licencia` y `fecha_descarga` (atribución IGN incluida). |
 

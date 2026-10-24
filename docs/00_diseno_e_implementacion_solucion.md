@@ -103,7 +103,7 @@ Se determinan las personas adicionales que el municipio puede albergar antes de 
 
 ## 4. DISEÑO DEL MODELO RELACIONAL (ORACLE SQL)
 
-El esquema implementado en [`01_ddl_schema.sql`](file:///c:/Users/USUARIO/Desktop/DATATHON/sql/01_ddl_schema.sql) sigue los más altos estándares de modelado relacional en Oracle Database:
+El esquema vigente está en `oracle/ddl/` (`01-tablas_raw.sql` … `05-modelos_onnx.sql`), con la tabla procesada `municipios_procesados` como núcleo:
 
 ```mermaid
 erDiagram
@@ -180,7 +180,7 @@ erDiagram
 
 ## 5. PIPELINE DE DATOS Y AUTOMATIZACIÓN (PYTHON)
 
-El pipeline implementado en [`etl_pipeline.py`](file:///c:/Users/USUARIO/Desktop/DATATHON/etl/etl_pipeline.py) consta de los siguientes módulos funcionales:
+El pipeline implementado en [`scripts/run_all_models_n1_n2_n3.py`](../scripts/run_all_models_n1_n2_n3.py) consta de los siguientes módulos funcionales:
 
 1. **Módulo de Ingesta (API INE & Resiliencia):**
    - Consume en streaming el endpoint JSON de la tabla 2881 del INE.
@@ -191,17 +191,16 @@ El pipeline implementado en [`etl_pipeline.py`](file:///c:/Users/USUARIO/Desktop
 3. **Inyector de Datos Reales (`--entrada-csv`):**
    - Permite cargar cualquier CSV oficial del Datathon para reemplazar campos sintéticos sin alterar el resto del pipeline.
 4. **Módulo de Validación y Exportación:**
-   - Comprueba 15 reglas de calidad de datos antes de generar las salidas.
+   - Comprueba las reglas de calidad de datos antes de generar las salidas.
    - Genera simultáneamente:
-     * El script SQL ejecutable [`02_dml_inserts.sql`](file:///c:/Users/USUARIO/Desktop/DATATHON/sql/02_dml_inserts.sql).
-     * Los archivos analíticos [`municipios_ica.csv`](file:///c:/Users/USUARIO/Desktop/DATATHON/data/output/municipios_ica.csv) y [`municipios_ica.json`](file:///c:/Users/USUARIO/Desktop/DATATHON/data/output/municipios_ica.json).
-     * Archivos CSV individuales por tabla para carga mediante el asistente de Oracle APEX.
+      * El panel validado `data/validated/municipios_panel_validado.csv` y el payload `data/output/municipios_comunidad_madrid_completo.json`.
+      * Los binarios ONNX para Oracle (`oracle/onnx/`) y los DDL de carga (`oracle/ddl/`).
 
 ---
 
 ## 6. CAPA ANALÍTICA Y CUADRO DE MANDO (ORACLE APEX)
 
-La interfaz se despliega sobre **Oracle APEX (Universal Theme)** aprovechando las vistas analíticas de [`03_views_and_apex_queries.sql`](file:///c:/Users/USUARIO/Desktop/DATATHON/sql/03_views_and_apex_queries.sql):
+La interfaz se despliega sobre **Oracle APEX (Universal Theme)** aprovechando las vistas analíticas de `oracle/ddl/03-vistas_apex.sql`:
 
 ### 6.1. Vista Maestra `V_MUNICIPIOS_ICA_APEX`
 Centraliza los atributos de cálculo y presentación visual en una sola consulta:
@@ -228,7 +227,7 @@ Tras la ejecución del pipeline con la muestra de 20 municipios representativos,
 * **Top 3 Municipios con Mayor Capacidad (Alta Idoneidad):**
   1. **Robledo de Chavela (ICA: 66.74 | Nivel: ALTA):** Excelente equilibrio entre vivienda accesible y holgura en servicios básicos.
   2. **Buitrago del Lozoya (ICA: 62.49 | Nivel: ALTA):** Gran holgura relativa en dotación de servicios frente a su tamaño poblacional.
-  3. **Montejo de la Sierra (ICA: 59.94 | Nivel: MEDIA-ALTA):** Muy alta puntuación en vivienda y servicios, aunque limitado por conectividad y lejanía a la capital.
+  3. **Montejo de la Sierra (ICA: 59.94 | Nivel: MEDIA):** Muy alta puntuación en vivienda y servicios, aunque limitado por conectividad y lejanía a la capital.
 * **Cuellos de Botella Predominantes:**
   - En municipios periurbanos de mayor tamaño (ej. Navalcarnero, Ciempozuelos), el factor limitante principal es la **Sanidad** (cupos de médicos de Atención Primaria saturados por encima de 1.500 hab/médico).
   - En municipios de la Sierra Norte y Sierra Oeste, el factor limitante suele ser la **Educación** o la disponibilidad de **Vivienda** en mercado.
@@ -238,14 +237,15 @@ Tras la ejecución del pipeline con la muestra de 20 municipios representativos,
 
 ---
 
-## 8. PLAN DE DEFENSA ANTE EL JURADO (DEMO DE 10 MINUTOS)
+## 8. PLAN DE DEFENSA ANTE EL JURADO (DEMO DE 15 MINUTOS)
 
-Para maximizar la puntuación en los criterios de impacto, rigor técnico y usabilidad, se establece la siguiente estructura de presentación:
+Para maximizar la puntuación en los criterios de impacto, rigor técnico y usabilidad, se establece la siguiente estructura de presentación (el detalle actualizado está en `docs/04_especificacion_apex_y_demo.md`):
 
 | Bloque Temporal | Pantalla APEX | Mensaje Central y Demostración |
 |---|---|---|
 | **00:00 - 02:00** | Página 1 (Dashboard) | Justificación del reto: desequilibrio demográfico en Madrid y presentación de los 4 KPIs clave. |
 | **02:00 - 05:00** | Página 1 (Mapa APEX) | Demostración del mapa interactivo, aplicación de filtros territoriales y visualización de popups con métricas de holgura. |
 | **05:00 - 07:30** | Página 2 (Interactive Report) | Análisis de cuellos de botella: filtrado por municipios limitados por Sanidad frente a municipios limitados por Vivienda. |
-| **07:30 - 09:00** | Página 3 (Ficha y Simulador) | Demostración en vivo de la calculadora *What-If*: simulación de impacto presupuestario al acoger 500 personas en un municipio. |
-| **09:00 - 10:00** | Presentación / Conclusiones | Exposición de la arquitectura robusta (Oracle + APEX + Python), trazabilidad con datos del INE/CAM y escalabilidad inmediata a los 179 municipios. |
+| **07:30 - 10:00** | Página 3 (Ficha y Simulador) | Demostración en vivo de la calculadora *What-If*: simulación de impacto presupuestario al acoger 500 personas en un municipio. |
+| **10:00 - 13:00** | Optimizador comarcal (`/optimizar-presupuesto`) | Asignación de un presupuesto cerrado entre los municipios de una comarca priorizando cuellos de botella. |
+| **13:00 - 15:00** | Presentación / Conclusiones | Exposición de la arquitectura robusta (Oracle + APEX + Python), trazabilidad con datos del INE/CAM y escalabilidad inmediata a los ~160 municipios <50k. |

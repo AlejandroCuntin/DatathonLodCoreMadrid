@@ -41,7 +41,7 @@ El comité organizador sugirió expresamente las siguientes líneas maestras, la
 
 | Propuesta Oficial de la Organización | Implementación en Nuestra Solución | Estado |
 |---|---|:---:|
-| *"Una plataforma analítica e interactiva que calcule un índice sintético de capacidad de acogida para cada municipio de <50k habitantes"* | Algoritmo formal del **ICA** (0 a 100) implementado en `etl_pipeline.py` y almacenado en `INDICES_CAPACIDAD.INDICE_CAPACIDAD_GLOBAL`. | ✅ **Implementado** |
+| *"Una plataforma analítica e interactiva que calcule un índice sintético de capacidad de acogida para cada municipio de <50k habitantes"* | Algoritmo formal del **ICA** (0 a 100) implementado en `src/lodcore/` y almacenado en `municipios_procesados.indice_capacidad_global`. | ✅ **Implementado** |
 | *"Mapa de Holgura y Diagnóstico de Saturación de los Servicios Públicos (Salud, Educación, Servicios Sociales)"* | Componente **Oracle APEX Maps** con pines de color semafórico y tarjetas de holgura desglosando plazas sanitarias y escolares. | ✅ **Implementado** |
 | *"Simulador del Umbral Dotacional y Coste de Ampliación"* | Cálculo de nuevos habitantes absorbibles antes del colapso y estimación presupuestaria CAPEX en `INDICES_CAPACIDAD.COSTE_ESTIMADO_AMPLIACION_SERVICIOS`. | ✅ **Implementado** |
 | *"Simulador de Refuerzo de Infraestructuras y Costes Asociados"* | Página 3 de APEX: calculadora reactiva *what-if* que proyecta médicos y colegios necesarios al acoger $N$ habitantes adicionales. | ✅ **Implementado** |
@@ -56,7 +56,7 @@ El jurado evaluará las propuestas presenciales el **29 de Octubre de 2026** baj
 
 ### BLOQUE A: CALIDAD DEL RESULTADO (Hasta 50 puntos)
 * **1.1. Nivel de corrección y adecuación del planteamiento teórico (25 pts):**
-  - *Nuestra defensa:* No usamos números arbitrarios. Normalizamos mediante **Winsorización ($p_5-p_{95}$) + Min-Max**, invertimos variables de coste y aplicamos ratios oficiales de saturación (1.500 tarjetas por médico del SERMAS y 95% de aforo escolar de EduCAM).
+  - *Nuestra defensa:* No usamos números arbitrarios. Normalizamos mediante **Winsorización ($p_5-p_{95}$) + Min-Max**, invertimos variables de coste y aplicamos parámetros de saturación del MVP (1.500 hab/médico y 95 % de aforo), pendientes de validación con SERMAS y la Consejería de Educación.
 * **1.2. Grado de resolución del reto planteado (25 pts):**
   - *Nuestra defensa:* La herramienta no se limita a mostrar "dónde es bonito vivir", sino que determina con rigor matemático **cuál es el cuello de botella** que impide acoger población (Sanidad, Educación o Vivienda) y cuánto cuesta solucionarlo.
 
@@ -95,14 +95,17 @@ Con las ponencias oficiales en mano, queda definido el mapa definitivo de datos:
 
 1. **INE (Mariano Peñas Pérez):**
    - **Dataset utilizado:** Padrón continuo de habitantes a 1-enero-2025 (ambos sexos, tabla 2881).
-   - **Estado:** Conectado mediante la API Tempus3 JSON en tiempo real con *fallback* offline.
+   - **Estado:** ✅ Conectado en el MVP mediante API Tempus3 JSON con snapshot inmutable en `data/raw/ine/`.
 2. **Consorcio Regional de Transportes de Madrid (Ana Rosalía Lorenzo Lobo):**
    - **Datasets presentados:** Portal de Datos Abiertos del CRTM (`datos.crtm.es`), catálogo GTFS y geoservicios WFS de paradas y líneas.
-   - **Aplicación:** Alimenta la conectividad y accesibilidad metropolitana en `DOTACION_SERVICIOS`.
+   - **Estado:** ⏳ Pendiente de conectar en el MVP; paradas y tiempos son referencia curada.
 3. **Colegio de Notarios (Jordi Vila) & Catastro (José Alfonso Solórzano Martín):**
    - **Datasets presentados:** Portal Estadístico Notarial (precios reales de escrituración) y Servicio de Descarga Masiva del Catastro (formato CAT y Shapefiles de parcelas e inmuebles vacantes).
-   - **Aplicación:** Alimenta `VIVIENDA_Y_SUELO` (coste del metro cuadrado y capacidad física de edificación).
-4. **Oracle (Andrés Araújo y Óscar Sánchez):**
+   - **Estado:** ⏳ Pendiente de conectar en el MVP; vivienda y precios son calibración sintética (seed=2026).
+4. **CKAN Comunidad de Madrid (Datos Abiertos CAM):**
+   - **Datasets utilizados:** Recursos sanitarios por tipo y directorio de centros educativos.
+   - **Estado:** ✅ Conectado en el MVP con snapshot inmutable en `data/raw/ckan/` (solo recuentos de centros en ALTA; médicos y plazas siguen siendo calibración sintética).
+5. **Oracle (Andrés Araújo y Óscar Sánchez):**
    - **Plataforma:** Oracle Cloud Infrastructure (OCI) y Oracle APEX Application Development, respaldados con créditos y licencias para los equipos del Datathon.
 
 ---
@@ -112,5 +115,5 @@ Con las ponencias oficiales en mano, queda definido el mapa definitivo de datos:
 Nuestra solución no es una propuesta genérica: **está milimétricamente diseñada para encajar en el reto de la Cátedra LoDCOREMadrid, maximizar los 100 puntos de las bases y utilizar exactamente el ecosistema tecnológico recomendado por Oracle y la UC3M**.
 
 Todos los materiales, presentaciones descargadas y volcados de texto están preservados en:
-- `data/raw/presentaciones/` (PDFs originales)
-- `data/raw/presentaciones/txt/` (Transcripciones completas en texto plano UTF-8)
+- `docs/material_reto/` (PDFs originales)
+- `docs/material_reto/txt/` (Transcripciones completas en texto plano UTF-8)

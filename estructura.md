@@ -8,7 +8,7 @@ Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos
 > limitaciones están en `README.md`. Carpetas como `src/lodcore/ingest/`,
 > `mlruns/` o `.github/prompts/` pueden no existir todavía; las descripciones de
 > algoritmos en el árbol pueden corresponder al prompt original y no al código
-> actual. La tabla de la sección 4 es la referencia corregida.
+> actual. La tabla de la sección 2 es la referencia corregida.
 
 ---
 
@@ -65,15 +65,16 @@ Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos
 │   │   ├── 02-tablas_procesadas.sql
 │   │   ├── 03-vistas_apex.sql    # Vistas con origen, metodo, dataset_version
 │   │   ├── 04-indices_espaciales.sql
-│   │   └── 05-modelos_onnx.sql   # DBMS_VECTOR.LOAD_ONNX_MODEL + PREDICTION()
-│   ├── apex_export/             # Export del workspace APEX (9 páginas del prototipo)
+│   │   ├── 05-modelos_onnx.sql   # DBMS_VECTOR.LOAD_ONNX_MODEL + PREDICTION()
+│   │   └── 06-dataset_completo_APEX.sql  # EN REVISIÓN: duplica municipios_procesados del 02
+│   ├── apex_export/             # Export del workspace APEX (3 páginas MVP; 9 como roadmap)
 │   ├── onnx/                    # Modelos exportados a ONNX listos para Oracle
 │   └── sql/
 │       ├── queries_ciudadano.sql
 │       └── queries_institucion.sql
 ├── src/lodcore/
 │   ├── __init__.py
-│   ├── config/                  # thresholds.py, weights.py, params.yaml (única fuente de pesos/umbrales)
+│   ├── config/                  # thresholds.py, weights.py, params.yaml (raíz + copia sincronizada idéntica)
 │   ├── ingest/                  # Conectores: INE, CKAN Madrid, Catastro, GTFS/CRTM, OSM, IGN/CNIG, MITECO, Renfe, Notariado
 │   │   ├── __init__.py
 │   │   ├── base.py
@@ -142,7 +143,7 @@ Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos
 │   │   ├── to_views.py
 │   │   └── uncertainty_band.py  # Ninguna predicción sin origen y sin banda 95%
 │   └── serving/
-│       └── fastapi/             # N3: solo /recomendar y /whatif
+│       └── fastapi/             # N3: /recomendar, /whatif y /optimizar-presupuesto
 │           ├── app.py
 │           ├── recomendar.py    # Preferencias por usuario (ciudadano)
 │           └── whatif.py        # Contrafactual + recálculo SHAP (institución)
@@ -167,7 +168,7 @@ Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos
 ├── params.yaml
 ├── pyproject.toml               # Python 3.11+, uv, ruff, mypy, pytest
 ├── README.md                    # Solo para humanos; AGENTS.md es la fuente de verdad para IA
-├── AGENTS.md                    # Fuente de verdad operativa (≤ 150 líneas, ya existe)
+├── AGENTS.md                    # Vive en PROMPTS-LoDCORE/AGENTS.md (kit de la cátedra; no hay copia en raíz)
 └── LICENSE
 ```
 
@@ -196,22 +197,22 @@ Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos
 | `oracle/onnx/` | Modelos ONNX para Oracle | N2: scoring dentro de Oracle con `DBMS_VECTOR.LOAD_ONNX_MODEL` + `PREDICTION()`. Evita entrenar en APEX. |
 | `oracle/sql/queries_ciudadano.sql` | Consultas para portal ciudadano | Separación clara: consultas optimizadas para el perfil ciudadano (ranking, fichas municipales). |
 | `oracle/sql/queries_institucion.sql` | Consultas para panel institucional | Consultas agregadas por comarca, matriz de diagnóstico, simulador de inversiones. |
-| `src/lodcore/config/` | `thresholds.py`, `weights.py`, `params.yaml` | Única fuente de pesos y umbrales. No hardcodeados ni duplicados entre modelo y APP (regla de `AGENTS.md`). |
+| `src/lodcore/config/` | `thresholds.py`, `weights.py`, `params.yaml` | Fuente de pesos y umbrales. Hay dos copias idénticas de `params.yaml` (raíz y este paquete); `cargar_params()` prefiere la raíz. Mantenerlas sincronizadas. |
 | `src/lodcore/ingest/` | Conectores por fuente | Uno por fuente oficial (INE, CKAN Madrid, Catastro, CRTM GTFS, OSM, IGN/CNIG, MITECO, Renfe, Notariado, Canal Isabel II). Fácil de mantener si una API cambia. |
 | `src/lodcore/data/` | Esquemas pandera, procedencia, punto-en-tiempo | Cada celda lleva `origen` y `metodo`. `fecha_disponible` evita fuga temporal. Puertas de calidad con pandera (no Great Expectations en Oracle, que falla con `FROM DUAL`). |
 | `src/lodcore/features/` | Panel municipal + 7 bloques de factores | Implementa exactamente los 7 factores del PDF: demografía, vivienda, transporte, sanidad/educación, necesidades ciudadanas, sostenibilidad, presupuestos. Joins point-in-time. |
 | `src/lodcore/features/subindices.py` | 4 sub-índices 0–100 (MinMaxScaler) | Capacidad Sanitaria/Educativa, Conectividad y Movilidad, Sostenibilidad Ambiental, Músculo Presupuestario. Sin multicolinealidad gracias a PCA. |
-| `src/lodcore/models/m1_avm/` | Random Forest (AVM) | Estima precio de referencia por m² y esfuerzo financiero familiar. Datos: Catastro + INE renta. Con n=20 el R² fuera de muestra es negativo: módulo ilustrativo, no AVM validado. |
+| `src/lodcore/models/m1_avm/` | Random Forest (AVM) | Estima precio de referencia por m² y esfuerzo financiero familiar. Features reales del panel F2: tiempo a Madrid, densidad, fibra, paradas, viviendas vacías, médicos/1.000 hab y holgura escolar. Con n=20 el R² fuera de muestra es negativo: módulo ilustrativo, no AVM validado. |
 | `src/lodcore/models/m2_indicadores/` | PCA + heurística de tiempos | Isócronas 30 min (público vs privado) estimadas a partir del tiempo a Madrid y de la densidad de paradas; no es un cálculo de rutas sobre OSM/GTFS. |
 | `src/lodcore/models/m3_demografia/` | Extrapolación geométrica calibrada | Proyección 5 y 10 años con bandas de incertidumbre 95 %, calibrada con la proyección padronal intermedia de 2031. |
 | `src/lodcore/models/m4_capacidad/` | Gradient Boosting + atribuciones aditivas + no-compensatoriedad | Core del proyecto. Predice el índice de capacidad de acogida. Las atribuciones (aproximación de 2 órdenes, no Shapley exacto) explican por municipio, sin causalidad. Reglas duras impiden que un servicio colapsado se compense con otros. |
 | `src/lodcore/models/m5_recomendador/` | K-Means + MCDM | Segmenta municipios en 4 tipologías y genera un ranking personalizado por preferencias del ciudadano. |
 | `src/lodcore/explain/` | Atribuciones → JSON + redacción español | Las atribuciones describen el modelo, no la realidad. Redacción en español de España, sin palabras causales. JSON se publica en Oracle para que APEX lo dibuje. |
 | `src/lodcore/publish/` | Escritura Oracle (`oracledb` thin) | Ninguna predicción se publica sin origen y sin banda 95 %. Thin mode = no depende de Oracle Client thick. |
-| `src/lodcore/serving/fastapi/` | N3: `/recomendar`, `/whatif` | Solo dos endpoints en runtime Python. Todo lo demás se puntúa en Oracle (N2). Menor superficie de ataque y mantenimiento. |
+| `src/lodcore/serving/fastapi/` | N3: `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto` | Runtime Python mínimo. Todo lo demás se puntúa en Oracle (N2). Menor superficie de ataque y mantenimiento. |
 | `tests/unit/` | Pruebas unitarias por capa | Cada componente probado aisladamente. |
 | `tests/integration/test_onnx_equivalence.py` | Equivalencia ONNX (rel < 1e-6, abs < 1e-3) | Obligatorio en CI antes de promover. Detecta fallos de dtype (float64 vs float32) y operadores no soportados. |
-| `tests/integration/test_no_leakage.py` | Sin fuga temporal/espacial/fase | Con n=41 y municipios contiguos, valida `GroupKFold` + split temporal + spatial buffer 20–30 km. |
+| `tests/integration/test_no_leakage.py` | Sin fuga espacial/fase | Sobre el panel de 20 municipios: valida `GroupKFold` por comarca (train/test sin solapamiento) y que M4 no usa proyecciones futuras de M3. El buffer espacial 20–30 km queda como objetivo. |
 | `tests/fixtures/` | Datos sintéticos sin PII | Pruebas reales nunca usan datos personales. |
 | `mlruns/` | MLflow tracking | Experimentos y métricas registrados. Backend Postgres (no Oracle, issue #15195). |
 | `config/thresholds.py` | Umbrales únicos | 1.500 hab/médico, 95 % aulas, ICA <40 / 40-59 / ≥60, isócrona 30 min, estrés +5 % / +10 %. Único módulo, actualizado junto con la tabla de la UI. |
@@ -225,4 +226,4 @@ Proyecto: **Datathon LoDCORE Madrid** — dataset municipal integrado, 5 modelos
 - **Regla de oro:** `data/raw/` es inmutable; todo cambio de datos se refleja en `docs/cambios.md` y en el `dataset_version`.
 - **Procedencia obligatoria:** ninguna variable ni predicción se publica sin `origen`, `metodo` y banda de incertidumbre al 95 %.
 - **Pendiente de validación:** `docs/metrologia.md` (definición operativa de capacidad de acogida, target de M4).
-- **Fuente de verdad para agentes:** `AGENTS.md`; `README.md` es solo para humanos.
+- **Fuente de verdad para agentes:** `PROMPTS-LoDCORE/AGENTS.md` (kit de la cátedra); el estado real del MVP está en `README.md` y `project_context.md`.

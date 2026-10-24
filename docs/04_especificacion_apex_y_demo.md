@@ -59,7 +59,7 @@ Al hacer clic en un municipio desde el Mapa o el Reporte, se abre su expediente 
 - **Diagnóstico de Saturación:**
   - Barra de progreso interactiva: Población actual vs Capacidad límite sanitaria vs Capacidad escolar.
   - Indicador de alerta roja en el factor que actúa como **cuello de botella**.
-- **Calculadora / Simulador "What-If" (Dinámico con PL/SQL y Dynamic Actions):**
+- **Calculadora / Simulador "What-If" (invoca a los endpoints FastAPI `/whatif` y `/optimizar-presupuesto`; PL/SQL opcional para validaciones en BD):**
   - Selector de nuevos residentes proyectados (ej. `+500 personas`).
   - Salida reactiva:
     * ¿Colapsa la atención médica? Sí/No (¿Cuántos médicos de AP hay que contratar?).
@@ -68,12 +68,13 @@ Al hacer clic en un municipio desde el Mapa o el Reporte, se abre su expediente 
 
 ---
 
-## 3. GUION RECOMENDADO PARA LA DEMO ANTE EL JURADO (10 MINUTOS)
+## 3. GUION RECOMENDADO PARA LA DEMO ANTE EL JURADO (15 MINUTOS)
 
 | Minuto | Bloque | Acción en la Pantalla | Mensaje Clave para el Jurado |
 |---|---|---|---|
 | **00:00 - 02:00** | **Planteamiento del Reto** | Abrir Página 1 (Dashboard). Mostrar KPIs superiores. | *"El reto demográfico de Madrid no es solo despoblación, sino desequilibrio territorial. Con datos abiertos de la CAM e INE, cuantificamos exactamente qué municipios pueden absorber población sin colapsar servicios."* |
-| **02:00 - 04:30** | **Diagnóstico Territorial (Mapa)** | Interactuar con el Mapa APEX. Filtrar por `ALTA` idoneidad. Pasar el cursor por *Robledo de Chavela* y *Buitrago*. | *"Aquí vemos el semáforo territorial. No basta con que la vivienda sea asequible: si el consultorio o la escuela están al 100%, la llegada de familias provocará el colapso del servicio."* |
-| **04:30 - 06:30** | **Exploración de Cuellos de Botella** | Pasar a Página 2 (Interactive Report). Filtrar por `Factor Limitante = SANIDAD`. | *"Navalcarnero o Ciempozuelos tienen suelo y vivienda, pero sus cupos médicos están al límite. En cambio, municipios de la Sierra Norte tienen plazas escolares libres pero escasez de vivienda en mercado."* |
-| **06:30 - 08:30** | **Simulador What-If y Ficha** | Abrir la Ficha Municipal de *Chinchón* o *San Martín de Valdeiglesias*. Simular una llegada de +400 hab. | *"Nuestra herramienta no solo diagnostica: presupuesta. Para acoger a 400 nuevos vecinos, APEX calcula en tiempo real que se requieren 2 plazas médicas y 68 plazas escolares, con un CAPEX asociado."* |
-| **08:30 - 10:00** | **Cierre y Escalabilidad** | Mostrar arquitectura (Oracle Database + APEX + Python ETL). Resaltar uso de estándares abiertos. | *"Solución 100% cloud-native, escalable a los 179 municipios de la CAM, con trazabilidad desde el dato crudo de LoDCORE/INE hasta la decisión política del gestor público."* |
+| **02:00 - 05:00** | **Solución y Arquitectura** | Mostrar el flujo datos → modelos → Oracle → APEX. | *"Todo el modelo se ejecuta dentro de Oracle para ser rápido y seguro. El panel municipal combina datos oficiales del INE y de la Comunidad de Madrid."* |
+| **05:00 - 07:30** | **Diagnóstico Territorial (Mapa)** | Interactuar con el Mapa APEX. Filtrar por `ALTA` idoneidad. Pasar el cursor por *Robledo de Chavela* y *Buitrago*. | *"Aquí vemos el semáforo territorial. No basta con que la vivienda sea asequible: si el consultorio o la escuela están al 100%, la llegada de familias provocará el colapso del servicio."* |
+| **07:30 - 10:00** | **Simulador What-If y Ficha** | Abrir la Ficha Municipal de *Chinchón* o *San Martín de Valdeiglesias*. Simular una llegada de +400 hab. | *"Nuestra herramienta no solo diagnostica: presupuesta. Para acoger a 400 nuevos vecinos, el sistema calcula en tiempo real cuántos médicos y plazas escolares se requieren y con qué coste."* |
+| **10:00 - 13:00** | **Diferenciador: Optimizador Comarcal** | Llamar a `/optimizar-presupuesto` con 2 M€ en Sierra Oeste y mostrar la asignación. | *"Y si el gestor tiene una partida cerrada, no simulamos a mano: la herramienta asigna el presupuesto entre los municipios de la comarca priorizando cuellos de botella y descartando inversiones ineficientes. El efecto sobre los pueblos vecinos es la siguiente fase."* |
+| **13:00 - 15:00** | **Cierre y Escalabilidad** | Mostrar arquitectura (Oracle Database + APEX + Python). Resaltar uso de estándares abiertos. | *"Solución escalable a los ~160 municipios menores de 50.000 habitantes de la CAM, con trazabilidad desde el dato crudo hasta la decisión pública."* |

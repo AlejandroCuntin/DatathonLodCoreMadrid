@@ -2,7 +2,7 @@
 
 > Contexto operativo para el equipo (3 personas) y para las IAs de cada miembro.
 > Objetivo: ganar el II Datathon LoDCOREMadrid el 29 de octubre de 2026 con un MVP funcional orientado a instituciones (jurado: UC3M + Comunidad de Madrid).
-> **Última actualización:** 23 oct 2026 — plan ampliado a 16 fases con mapeo a los 14 prompts operativos de `PROMPTS-LoDCORE`.
+> **Última actualización:** 24 oct 2026 — plan ampliado a 16 fases con mapeo a los 14 prompts operativos de `PROMPTS-LoDCORE`; documentación alineada con el estado real (20 municipios, 4 endpoints, heurística voraz M4-OPT).
 
 ---
 
@@ -50,7 +50,7 @@ LoDCORE predice qué municipios de la Comunidad de Madrid con menos de 50.000 ha
 |-------|---------|---------|
 | **N1** | Entrenamiento (Python/CI) | Modelos entrenados y exportados a ONNX. |
 | **N2** | Scoring en Oracle Database | `DBMS_VECTOR.LOAD_ONNX_MODEL` + `PREDICTION()`. Ningún modelo se entrena dentro de APEX. |
-| **N3** | FastAPI + Oracle APEX | Solo `/recomendar` (ciudadano) y `/whatif` (institución). Interfaz visual para consulta y simulación. |
+| **N3** | FastAPI + Oracle APEX | `/recomendar` (ciudadano) y `/whatif` + `/optimizar-presupuesto` (institución). Interfaz visual para consulta y simulación. |
 
 El DDL de `oracle/ddl/` es fuente de verdad; APEX consume, no redefine. Toda vista expuesta a APEX incluye `origen`, `metodo` y `dataset_version`.
 
@@ -63,10 +63,10 @@ El DDL de `oracle/ddl/` es fuente de verdad; APEX consume, no redefine. Toda vis
 | **M1** | AVM (valoración inmobiliaria) | Random Forest | Precio de referencia por m² y esfuerzo financiero familiar. |
 | **M2** | Indicadores de capacidad | PCA + heurística de tiempos de viaje | 4 sub-índices 0-100 (sanidad/educación, conectividad, vivienda, holgura) y criterio "municipio de 30 minutos". |
 | **M3** | Demografía | Extrapolación geométrica calibrada (2031) | Proyección poblacional a 5 y 10 años con bandas 95% y escenarios +5% / +10%. |
-| **M4** | **Capacidad de acogida (CORE)** | Gradient Boosting + reglas duras + atribuciones aditivas + simulador what-if + asignación presupuestaria comarcal | Predice el ICA, detecta cuellos de botella y permite simular inversiones. **Optimizador presupuestario determinista por comarca (M4-OPT)** implementado en `optimizador_presupuestario.py`; el spillover geográfico continuo con matriz OD queda formalmente como roadmap Fase 2. |
+| **M4** | **Capacidad de acogida (CORE)** | Gradient Boosting + reglas duras + atribuciones aditivas + simulador what-if + asignación presupuestaria comarcal | Predice el ICA, detecta cuellos de botella y permite simular inversiones. **Heurística voraz de asignación presupuestaria por comarca (M4-OPT)** implementada en `optimizador_presupuestario.py`; el spillover geográfico continuo con matriz OD queda formalmente como roadmap Fase 2. |
 | **M5** | Recomendador ciudadano | K-Means + MCDM coseno ponderado | Ranking personalizado por preferencias del ciudadano. |
 
-> **Diferencial competitivo del proyecto (estado real):** ya están implementados la predicción del ICA, las reglas duras, el simulador what-if y la **asignación presupuestaria determinista por comarca (M4-OPT)** que maximiza personas acogidas bajo un presupuesto fijo. El efecto spillover continuo intermunicipal se declara formalmente como evolución metodológica (Roadmap Fase 2).
+> **Diferencial competitivo del proyecto (estado real):** ya están implementados la predicción del ICA, las reglas duras, el simulador what-if y la **heurística voraz de asignación presupuestaria por comarca (M4-OPT)**, que reparte un presupuesto cerrado priorizando cuellos de botella y podando inversiones ineficientes. El efecto spillover continuo intermunicipal se declara formalmente como evolución metodológica (Roadmap Fase 2).
 
 ---
 
@@ -76,7 +76,7 @@ El DDL de `oracle/ddl/` es fuente de verdad; APEX consume, no redefine. Toda vis
 - **Ocupación escolar crítica:** > 95% de plazas ocupadas.
 - **Semáforo ICA:** Baja < 40, Media 40-59, Alta ≥ 60.
 - **No-compensatoriedad:** si un municipio supera alguno de los umbrales críticos, su ICA se trunca a BAJA (<40) y no puede compensarse con otros factores (vivienda, suelo, conectividad).
-- **Toda predicción se publica con banda de incertidumbre al 95% y procedencia (`origen` + `metodo`).**
+- **Toda predicción de modelo (M1/M4) se publica con banda de incertidumbre al 95% y procedencia (`origen` + `metodo`).** Las simulaciones what-if y la heurística de presupuesto se publican como `SIMULADO` con `origen`/`metodo`/`dataset_version` (sin banda: no son predicciones estadísticas).
 - **Las atribuciones describen el modelo, nunca la realidad.** No usar palabras causales ("causa", "provoca") frente al usuario; usar "el modelo asocia", "según el modelo", "contribuye a".
 - **Idioma de salida al usuario final:** español de España.
 
@@ -87,20 +87,23 @@ Valores permitidos en `origen`: `OBSERVADO | IMPUTADO | ESTIMADO | PROYECTADO | 
 ## 6. Estructura del repositorio (raíz de trabajo)
 
 ```
-DATATHON/ (raíz del proyecto activo)
-├── codigo/DatathonLodCoreMadrid/   # Copia del código fuente principal (MVP actual)
-├── PROMPTS-LoDCORE/                # Prompts operativos y AGENTS.md de la cátedra
-├── project_context.md              # ESTE ARCHIVO: contexto para el equipo y las IAs
-├── diagrama_flujo.mmd              # Diagrama de fases (Mermaid)
-├── diagrama_flujo.png              # Diagrama de fases renderizado (PNG)
-├── Bases-II-Datathon-LoDCOREMadrid_justificante.pdf
-├── Diseño e Implementación de la Solucion.pdf
-├── Fuentes de datos.pdf
-├── Prototipo interfaz.pdf
-└── .git/
+DATATHON/ (raíz del espacio de trabajo)
+├── codigo/DatathonLodCoreMadrid/   # ÚNICO repositorio Git activo (todo el MVP vive aquí)
+│   ├── src/lodcore/                #   ingest/ (INE+CKAN), data/, models/ M1-M5, explain/, publish/, serving/
+│   ├── scripts/                    #   run_all_models_n1_n2_n3.py + pipeline F1
+│   ├── tests/                      #   25 tests (unit + integración)
+│   ├── oracle/                     #   ddl/ (01..06; el 06 en revisión) y onnx/
+│   ├── data/                       #   raw/ (snapshots INE+CKAN), processed/, validated/, output/
+│   ├── docs/                       #   validación, matriz de procedencia, specs y material_reto/ (PDFs oficiales)
+│   ├── PROMPTS-LoDCORE/            #   Kit de 14 prompts + AGENTS.md de la cátedra
+│   ├── .github/                    #   ISSUES_F1_F16.md (tablero documentado)
+│   ├── README.md · project_context.md · estructura.md
+│   ├── params.yaml · requirements.txt · dvc.yaml · index.html
+│   └── diagrama_flujo.mmd / .png   #   Resumen visual en 7 bloques
+└── fases.md                        # Plan histórico original (NO MODIFICAR; sustituido por la sección 8)
 ```
 
-> Nota: `codigo/DatathonLodCoreMadrid/` contiene el código fuente activo (`src/`, `data/`, `docs/`, `oracle/`, `scripts/`, `tests/`). No crear duplicados en raíz.
+> Nota: `codigo/DatathonLodCoreMadrid/` contiene el código fuente activo (`src/`, `data/`, `docs/`, `oracle/`, `scripts/`, `tests/`). No crear duplicados en raíz. Los PDFs oficiales del Datathon (Bases, Diseño, Fuentes de datos y Prototipo de interfaz) están en `docs/material_reto/`.
 
 ---
 
@@ -109,8 +112,8 @@ DATATHON/ (raíz del proyecto activo)
 | Persona | Rol principal | Áreas de trabajo |
 |---------|--------------|------------------|
 | **P1** | Datos + Optimizador M4 | Ingesta de datos (INE, CKAN, Catastro, CRTM), trazabilidad `origen`/`metodo`, reglas de no-compensatoriedad, optimizador matemático de infraestructura por comarca, efecto spillover, geometría para mapa APEX. |
-| **P2** | Modelos + API | Entrenamiento M1-M5, exportación ONNX, equivalencia ONNX/Python, FastAPI (`/recomendar`, `/whatif`), tests (pytest), reproducibilidad, script único de ejecución. |
-| **P3** | UI/APEX + Presentación | Oracle APEX (9 páginas), `index.html`, vistas APEX con trazabilidad, diseño de diapositivas, guion de 15 min, ensayo, materiales para el jurado institucional. |
+| **P2** | Modelos + API | Entrenamiento M1-M5, exportación ONNX, equivalencia ONNX/Python, FastAPI (`/recomendar`, `/whatif`, `/optimizar-presupuesto`), tests (pytest), reproducibilidad, script único de ejecución. |
+| **P3** | UI/APEX + Presentación | Oracle APEX (3 páginas en el MVP; 9 como roadmap), `index.html`, vistas APEX con trazabilidad, diseño de diapositivas, guion de 15 min, ensayo, materiales para el jurado institucional. |
 
 ---
 
@@ -141,7 +144,7 @@ DATATHON/ (raíz del proyecto activo)
   - F1.1: Conectar o embeber datos reales: INE Padrón 2025, CKAN Madrid (sanidad/educación), Catastro, CRTM, Notariado (P1).
   - F1.2: `data/raw/` inmutable; snapshot cacheado con fecha (P1).
   - F1.3: Identificar municipio por código INE de 5 dígitos, nunca por nombre (P1).
-- **Entregable:** conectores Python + esquema `pandera` + etapa DVC + `origen`/`metodo`/`fuente_datos` por celda.
+- **Entregable (MVP real):** conectores Python + snapshots inmutables fechados + matriz de procedencia por variable (`docs/matriz_procedencia_variables.md`). Pandera, DVC como etapa y procedencia celda a celda quedan fuera del alcance del MVP.
 - **Prompt asociado:** **01 · Ingesta de fuente oficial**.
 
 ### Fase 2 — Auditoría de calidad y procedencia (24 octubre)
@@ -241,7 +244,7 @@ DATATHON/ (raíz del proyecto activo)
 - **Responsable:** P3 (APEX/UI), P1 (geometría), P2 (Python→Oracle).
 - **Subfases:**
   - F12.1: Sustituir el prototipo `index.html` estático por la aplicación Oracle APEX real (P3).
-  - F12.2: 9 páginas APEX: dashboard, mapa semafórico, comparador lado a lado, simulador what-if, ficha municipal, catálogo de fuentes (P3).
+  - F12.2: 3 páginas APEX en el MVP (dashboard+mapa, explorador, ficha+simulador); las 9 páginas del diseño original quedan como roadmap (P3).
   - F12.3: Vistas APEX con `origen`, `metodo`, `dataset_version` (P3).
   - F12.4: DDL con `CHECK`/regex de `origen` en la base de datos, no solo en Python (P1/P2) — ya implementado en `02-tablas_procesadas.sql`.
   - F12.5: Geometría poblada (lat/lon o SDO_GEOMETRY) para el mapa (P1).
@@ -349,26 +352,26 @@ Para servir la API N3:
 uvicorn src.lodcore.serving.fastapi.app:app --reload
 ```
 
-Endpoints activos: `/health`, `/recomendar`, `/whatif`.
+Endpoints activos: `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto`.
 
 ---
 
 ## 11. Datos y trazabilidad
 
-- Cada columna del dataset validado debe tener `origen` y `metodo` rellenos. Una celda sin ellos es un bug, no una excepción.
+- Procedencia en dos niveles: a nivel de fila, el panel lleva `origen`/`metodo`/`fuente_datos`; a nivel de variable, el desglose fino está en `docs/matriz_procedencia_variables.md`. Publicar una variable sin procedencia declarada es un bug.
 - `fecha_disponible` por fila: punto-en-tiempo, evita fuga temporal. Se deriva
   de los snapshots realmente consumidos.
 - `fecha_decision` del MVP: `FECHA_DECISION_MVP` en
   `scripts/run_all_models_n1_n2_n3.py` (hoy `2026-10-24`). Si se actualizan los
   snapshots, hay que actualizarla de forma explícita para no usar datos futuros.
 - `dataset_version`: `v1.0.0-F2`.
-- Fuentes oficiales: INE (Padrón 2025), CKAN Comunidad de Madrid, Catastro, CRTM, Notariado, IGN/CNIG, MITECO, Renfe, Canal Isabel II (ver `Fuentes de datos.pdf`).
+- Fuentes oficiales: INE (Padrón 2025) y CKAN Comunidad de Madrid están conectadas; Catastro, CRTM, Notariado, IGN/CNIG, MITECO, Renfe y Canal Isabel II quedan como referencia/roadmap (ver `docs/material_reto/Fuentes de datos.pdf` y la matriz de procedencia).
 
 ---
 
 ## 12. Presentación final (15 min, audiencia institucional)
 
-**Mensaje central:** "No decimos solo dónde falta sanidad o educación; decimos matemáticamente en qué municipio de cada comarca hay que construir infraestructura con un presupuesto dado para maximizar la capacidad de acogida de toda la zona, con efecto en los pueblos vecinos."
+**Mensaje central:** "No decimos solo dónde falta sanidad o educación; decimos matemáticamente en qué municipio de cada comarca hay que invertir con un presupuesto dado para maximizar la capacidad de acogida de toda la zona." (El efecto en pueblos vecinos —spillover— se presenta como roadmap, no como funcionalidad.)
 
 **Estructura sugerida (15 min):**
 1. Problema y reto (2 min) — municipios <50k, reto demográfico CAM.
@@ -384,7 +387,7 @@ Endpoints activos: `/health`, `/recomendar`, `/whatif`.
 ## 13. Flujo de trabajo GitHub (3 personas)
 
 - Rama `main`: estable, solo se integra tras revisión.
-- Cada persona trabaja en su rama: `feature/p1-datos-m4`, `feature/p2-modelos-api`, `feature/p3-apex-presentacion`.
+- Cada persona trabaja en su rama propia (ramas reales del equipo: `p1/datos`, `juancho`, `fix/...`).
 - Issues por subfase (ver Fase 0 a Fase 16). Asignar issue a la persona responsable.
 - Pull Requests: revisados por al menos otro miembro antes de mergear a `main`.
 - Commits con mensaje descriptivo: `feat(p1): añade trazabilidad origen/metodo en data/validated/`.

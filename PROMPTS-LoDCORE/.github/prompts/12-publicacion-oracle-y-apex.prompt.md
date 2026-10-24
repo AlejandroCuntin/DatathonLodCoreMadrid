@@ -100,13 +100,14 @@ comentarios `COMMENT ON TABLE/COLUMN` en español.
    embeddings). Si tu BD es 19c/21c, salta a la opción B.
 3. Puntú en SQL: `SELECT municipio_ine, PREDICTION(ICA_MODEL, ...) AS ica FROM ...` y envuélvelo
    en una vista. APEX lee la vista. **Cero saltos HTTP.**
-4. **Test de equivalencia en CI**: `max|score_ONNX − score_Python| < 1e-6`. Los fallos típicos son
+4. **Test de equivalencia en CI**: error relativo < 1e-6 y absoluto < 1e-3 (ONNX devuelve float32;
+   a escala de ~2.000 €/m², un error absoluto < 1e-6 no es representable). Los fallos típicos son
    dtypes (float64 vs float32) y operadores no soportados por la versión del runtime.
 5. Genera el contenido de la página "Los 5 Modelos ML" desde `USER_MINING_MODELS` y
    `USER_MINING_MODEL_ATTRIBUTES` (o desde el espejo del registro de MLflow): **nada escrito a mano**.
 
-**Opción B — FastAPI (si la BD no soporta ONNX, o para las 2 funciones por usuario).**
-- Solo dos endpoints: `POST /recomendar` (cuerpo = perfil del ciudadano; respuesta = ranking con
+**Opción B — FastAPI (si la BD no soporta ONNX, o para las funciones por usuario).**
+- Solo los endpoints por usuario: `POST /recomendar` (cuerpo = perfil del ciudadano; respuesta = ranking con
   `rationale` por municipio) y `POST /whatif` (cuerpo = municipio + Δ de inversión; respuesta =
   ICA antes/después + waterfall SHAP).
 - APEX los consume con un **REST Data Source de tipo "Simple HTTP"**.
@@ -210,7 +211,7 @@ Crea vistas para cada página del prototipo:
 ## Quality Assurance
 
 - [ ] Cada modelo está importado en Oracle como `MINING_MODEL` (o tiene endpoint documentado si la
-      BD no soporta ONNX) y `|score_ONNX − score_Python| < 1e-6`.
+      BD no soporta ONNX) y el test de equivalencia pasa con error relativo < 1e-6 y absoluto < 1e-3 (float32).
 - [ ] La página "Los 5 Modelos ML" se **genera** desde `USER_MINING_MODELS` / MLflow, no a mano.
 - [ ] El Comparador usa el chart **Radar nativo** de APEX (7 ejes) y el semáforo un **Status Meter Gauge**.
 - [ ] La geometría está en `SDO_GEOMETRY` con índice espacial y el SRID verificado (IGN = ETRS89).

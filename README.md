@@ -23,6 +23,7 @@ DatathonLodCoreMadrid/
 ├── src/lodcore/
 │   ├── config/                      # thresholds.py, weights.py, cargar_params()
 │   ├── data/                        # quality gates, punto-en-tiempo, procedencia
+│   ├── ingest/                      # Conectores INE + CKAN Madrid (Fase F1)
 │   ├── models/
 │   │   ├── m1_avm/                  # M1 · valoración hedónica y esfuerzo familiar
 │   │   ├── m2_indicadores/          # M2 · PCA + isócronas de 30 min
@@ -31,10 +32,10 @@ DatathonLodCoreMadrid/
 │   │   └── m5_recomendador/         # M5 · K-Means + recomendación MCDM
 │   ├── explain/                     # atribuciones aditivas y redacción sin causalidad
 │   ├── publish/                     # bandas 95 %, escritura Oracle
-│   └── serving/fastapi/             # API N3: /recomendar y /whatif
+│   └── serving/fastapi/             # API N3: /recomendar, /whatif y /optimizar-presupuesto
 ├── scripts/run_all_models_n1_n2_n3.py
 ├── tests/                           # unit + integración (pytest)
-├── oracle/ddl/                      # 01..05 DDL Oracle 23ai / APEX
+├── oracle/ddl/                      # 01..06 DDL Oracle 23ai / APEX (06 en revisión)
 ├── oracle/onnx/                     # binarios ONNX para N2
 ├── data/output/                     # payload de entrada y dataset ML
 ├── data/processed/                  # panel integrado F2
@@ -63,8 +64,10 @@ uvicorn src.lodcore.serving.fastapi.app:app --reload --port 8000
 
 Endpoints:
 
+- `GET /health` — diagnóstico del servicio (versión, dataset y endpoints activos).
 - `POST /recomendar` — recomendación personalizada para un ciudadano (M5 + MCDM).
 - `POST /whatif` — simulación institucional de residentes, médicos, plazas e inversión.
+- `POST /optimizar-presupuesto` — heurística voraz comarcal: reparte un presupuesto cerrado entre municipios (M4-OPT).
 - `GET /docs` — Swagger autogenerado por FastAPI.
 
 > El prototipo `index.html` es **estático** y no llama a la API. La UI de entrega
@@ -81,6 +84,10 @@ Ejecutar en orden con SQLcl, SQL Developer o APEX › SQL Workshop:
 3. `oracle/ddl/03-vistas_apex.sql`
 4. `oracle/ddl/04-indices_espaciales.sql`
 5. `oracle/ddl/05-modelos_onnx.sql`
+
+> `06-dataset_completo_APEX.sql` está **en revisión**: actualmente vuelve a
+> crear `municipios_procesados`, que ya crea el `02`. No lo ejecutes hasta
+> que se valide con P2/P3.
 
 Para el paso 5, copiar `oracle/onnx/*.onnx` a un directorio del servidor y crear
 el objeto de directorio antes de cargar los modelos:
@@ -160,10 +167,12 @@ referencia del prototipo antiguo quedó obsoleta.
 - La parte de servicios y vivienda está calibrada sintéticamente. Antes de uso
   real hay que sustituirla por SERMAS, Consejería de Educación, CRTM, CNMC y
   Catastro.
-- El **optimizador** de asignación presupuestaria por comarca y el efecto
-  spillover **no están implementados en el backend**: el what-if evalúa
-  escenarios manuales (médicos, plazas, conectividad, residentes), no busca la
-  combinación óptima. Es la extensión pendiente de P1.
+- La **heurística voraz** de asignación presupuestaria por comarca (M4-OPT)
+  **sí está implementada** (`optimizador_presupuestario.py` + endpoint
+  `/optimizar-presupuesto`): reparte un presupuesto cerrado priorizando
+  cuellos de botella y podando inversiones de ganancia marginal nula. El
+  **spillover continuo** entre municipios vecinos **no** está implementado y
+  se presenta como roadmap. El what-if evalúa escenarios manuales.
 
 ---
 
