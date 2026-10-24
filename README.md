@@ -35,6 +35,7 @@ DatathonLodCoreMadrid/
 │   └── serving/fastapi/             # API N3: /recomendar, /whatif y /optimizar-presupuesto
 ├── scripts/run_all_models_n1_n2_n3.py
 ├── tests/                           # unit + integración (pytest)
+├── entrega/                         # paquete para el jurado: dataset + diccionario + fuentes + checksums
 ├── oracle/ddl/                      # 01..06 DDL Oracle 23ai / APEX (06 en revisión)
 ├── oracle/onnx/                     # binarios ONNX para N2
 ├── data/output/                     # payload de entrada y dataset ML
