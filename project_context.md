@@ -124,12 +124,12 @@ DATATHON/ (raíz del espacio de trabajo)
 **16 fases en 6 días.** Cada fase tiene subfases específicas, responsables asignados y entregable concreto. Las fases F1-F4 (datos y calidad) son secuenciales; F5-F13 (modelos y publicación) se solapan; F14-F16 (presentación y entrega) son transversales al final.
 
 > **Estado real al 24 oct 2026:** el núcleo ya es ejecutable y está probado
-> (`python scripts/run_all_models_n1_n2_n3.py` + `pytest`: 25 tests en verde).
+> (`python scripts/run_all_models_n1_n2_n3.py` + `pytest`: 34 tests en verde).
 > F0.3 documentada (tablero F1–F16 en `.github/ISSUES_F1_F16.md`; creación de los issues reales en GitHub pendiente),
 > F1 completada para las fuentes prioritarias (INE Padrón 2025 y CKAN Madrid Sanidad/Educación conectados, snapshots inmutables fechados, cruce 20/20 por código INE de 5 dígitos; Catastro/CRTM/Notariado quedan fuera del alcance MVP),
 > F2 con veredicto formal APTO CON RESERVAS en `docs/validacion.md`, y
 > heurística voraz de asignación presupuestaria comarcal (M4-OPT) implementada y documentada (el spillover continuo queda como roadmap de Fase 2).
-> F3 (auditoría de fuga L1-L7) y F4 (validación cruzada espacial, 4 baselines naive y bootstrap B=1000) completadas con dictamen formal y 34 tests en verde (P2); F12 (APEX P3) y F13-F16 continúan en curso.
+> F3 (auditoría de fuga L1-L7) y F4 (validación cruzada espacial, 4 baselines naive y bootstrap B=1000) completadas con dictamen formal (P2); F12 (APEX P3: DDL unificado, vistas con 4 metadatos y guía de 3 páginas) y F15 (guion de 15 min verificado) completadas en p3/apex; 34 tests en verde.
 > El **paquete de datos para el jurado** está en entrega/ (dataset validado + diccionario de 88 variables + catálogo de fuentes con licencias + checksums): cubre la parte de F16.2.
 
 ### Fase 0 — Fundamento y reparto (23 octubre)

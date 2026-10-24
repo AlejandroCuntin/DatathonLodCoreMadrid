@@ -103,7 +103,7 @@
       fib: num(it.cobertura_fibra_pct),
       patr: reparar(it.patrimonio_entorno) || '',
       alerta: it.alerta_planificacion || null,
-      origen: it.origen || '', metodo: it.metodo || '', version: it.dataset_version || ''
+      origen: it.origen || '', metodo: it.metodo || '', version: it.dataset_version || '', fuente: it.fuente_datos || ''
     };
   }
 
@@ -225,7 +225,7 @@
     var stat = function (l, v) { return '<div class="lc-stat"><div>' + l + '</div><b>' + v + '</b></div>'; };
     var al = ALERTAS[m.alerta];
     var chip = m.alerta ? '<span class="lc-chip ' + (al ? al[1] : 'gray') + '">' + esc(al ? al[0] : cap(String(m.alerta).replace(/_/g, ' '))) + '</span>' : '';
-    var proc = [m.origen, m.metodo, m.version].filter(Boolean).map(esc).join(' · ');
+    var proc = [m.origen, m.metodo, m.version, m.fuente].filter(Boolean).map(esc).join(' · ');
 
     // --- Primer campo: la métrica de la capa seleccionada ---
     var valorBarra = function (etiqueta, v, clase) {
@@ -382,7 +382,7 @@
     var visibles = M.filter(function (m) { return m.lat !== null && passFilter(m, F); }).length;
     var procs = [];
     M.forEach(function (m) {
-      var p = [m.origen, m.metodo, m.version].filter(Boolean).join(' · ');
+      var p = [m.origen, m.metodo, m.version, m.fuente].filter(Boolean).join(' · ');
       if (p && procs.indexOf(p) === -1) procs.push(p);
     });
     $('lc-estado').innerHTML = 'Mostrando <b>' + visibles + '</b> de <b>' + M.length + '</b> municipios' +

@@ -56,6 +56,7 @@ SELECT
     -- La procedencia es por municipio; en una agregación comarcal se declaran
     -- todos los orígenes presentes, no se agrupa por ellos (rompería el total).
     LISTAGG(DISTINCT m.origen, ' | ') WITHIN GROUP (ORDER BY m.origen) AS origen,
-    'AGREGACION_COMARCADA_APEX' AS metodo
+    'AGREGACION_COMARCAL_APEX' AS metodo,
+    'Población: INE 2025 | Centros: CKAN CAM | Servicios: Sintético' AS fuente_datos
 FROM municipios_procesados m
 GROUP BY m.comarca;
