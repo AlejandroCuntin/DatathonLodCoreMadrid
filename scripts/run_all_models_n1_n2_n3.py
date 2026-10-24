@@ -1,5 +1,5 @@
 """
-run_all_models_n1_n2_n3.py - Consolida el dataset F2 en `data/processed/` y `data/validated/`,
+run_all_models_n1_n2_n3.py - Consolida el dataset F2 en `data/validated/`,
 pasa las puertas de calidad, ejecuta el entrenamiento N1 de M1..M5, exporta ONNX N2 y valida N3.
 """
 
@@ -70,17 +70,13 @@ def consolidate_f2_dataset(fecha_decision: str = FECHA_DECISION_MVP) -> str:
     # Validar ANTES de escribir: nunca dejar un fichero "validado" que no pasó las puertas
     ejecutar_quality_gates(df)
 
-    # Guardar en data/processed/ y data/validated/ y sincronizar data/output/municipios_completo_ml.csv
-    Path("data/processed").mkdir(parents=True, exist_ok=True)
+    # Fuente de verdad única: data/validated/. No se duplica el panel en
+    # data/processed/ ni en data/output/ (eran copias byte a byte del mismo df).
     Path("data/validated").mkdir(parents=True, exist_ok=True)
 
-    proc_path = "data/processed/municipios_integrado_f2.csv"
     val_path = "data/validated/municipios_panel_validado.csv"
-    out_path = "data/output/municipios_completo_ml.csv"
 
-    df.to_csv(proc_path, index=False, encoding="utf-8")
     df.to_csv(val_path, index=False, encoding="utf-8")
-    df.to_csv(out_path, index=False, encoding="utf-8")
     return val_path
 
 def main() -> None:

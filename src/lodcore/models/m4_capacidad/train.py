@@ -127,7 +127,7 @@ class M4CapacidadModel(BaseLoDCOREModel):
 
 
 def run_training_m4(
-    data_path: str = "data/output/municipios_completo_ml.csv",
+    data_path: str = "data/validated/municipios_panel_validado.csv",
     out_dir: str = "src/lodcore/models/m4_capacidad",
     oracle_onnx_dir: str = "oracle/onnx"
 ) -> Dict[str, Any]:

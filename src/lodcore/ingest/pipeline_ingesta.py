@@ -49,10 +49,13 @@ def ejecutar_pipeline_ingesta_f1(actualizar_panel: bool = True) -> Dict[str, Any
     datos_edu = ingestor_ckan.procesar_educacion(raw_edu, solo_reglada=True)
     logger.info("CKAN: Sanidad (%d municipios), Educación (%d municipios en ALTA)", len(datos_san), len(datos_edu))
 
-    # 3. Cargar panel municipal base
+    # 3. Cargar panel municipal base (única fuente de verdad)
     panel_validado_path = Path("data/validated/municipios_panel_validado.csv")
     if not panel_validado_path.exists():
-        panel_validado_path = Path("data/processed/municipios_integrado_f2.csv")
+        raise FileNotFoundError(
+            f"No existe el panel base '{panel_validado_path}'. La ingesta enriquece "
+            "un panel ya existente; no lo crea desde cero."
+        )
 
     df = pd.read_csv(panel_validado_path)
     df["codigo_ine"] = df["codigo_ine"].astype(str).str.zfill(5)
@@ -134,22 +137,19 @@ def ejecutar_pipeline_ingesta_f1(actualizar_panel: bool = True) -> Dict[str, Any
     logger.info("Quality Gates superados antes de guardar: %s (%d municipios)", qg_result["status"], qg_result["filas_validadas"])
 
     if actualizar_panel:
-        out_proc = Path("data/processed/municipios_integrado_f2.csv")
         out_val = Path("data/validated/municipios_panel_validado.csv")
-        out_ml = Path("data/output/municipios_completo_ml.csv")
+        # El JSON de data/output/ es el payload que consume la consolidación F2
+        # y el frontend; serializa el mismo panel, no lo duplica en CSV.
         out_json = Path("data/output/municipios_comunidad_madrid_completo.json")
 
-        out_proc.parent.mkdir(parents=True, exist_ok=True)
         out_val.parent.mkdir(parents=True, exist_ok=True)
-        out_ml.parent.mkdir(parents=True, exist_ok=True)
+        out_json.parent.mkdir(parents=True, exist_ok=True)
 
-        df.to_csv(out_proc, index=False, encoding="utf-8")
         df.to_csv(out_val, index=False, encoding="utf-8")
-        df.to_csv(out_ml, index=False, encoding="utf-8")
 
         records = df.to_dict(orient="records")
         out_json.write_text(json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")
-        logger.info("Panel persistido en data/processed, data/validated y data/output tras validación")
+        logger.info("Panel persistido en data/validated y data/output (JSON) tras validación")
 
     logger.info("=== PIPELINE DE INGESTA F1 FINALIZADO CON ÉXITO ===")
     return {

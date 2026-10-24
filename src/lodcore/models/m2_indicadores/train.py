@@ -11,7 +11,7 @@ from src.lodcore.models.m2_indicadores.isocronas import evaluar_isocronas_30min
 from src.lodcore.data.provenance import TipoOrigen
 
 def run_training_m2(
-    data_path: str = "data/output/municipios_completo_ml.csv",
+    data_path: str = "data/validated/municipios_panel_validado.csv",
     out_dir: str = "src/lodcore/models/m2_indicadores"
 ) -> Dict[str, Any]:
     df = pd.read_csv(data_path)

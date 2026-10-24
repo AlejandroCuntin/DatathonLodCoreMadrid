@@ -132,7 +132,7 @@ class M1AVMModel(BaseLoDCOREModel):
 
 
 def run_training_m1(
-    data_path: str = "data/output/municipios_completo_ml.csv",
+    data_path: str = "data/validated/municipios_panel_validado.csv",
     out_dir: str = "src/lodcore/models/m1_avm",
     oracle_onnx_dir: str = "oracle/onnx"
 ) -> Dict[str, Any]:

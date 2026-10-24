@@ -18,7 +18,7 @@ class PreferenciasCiudadanoRequest(BaseModel):
 
 def ejecutar_recomendacion_ciudadana(
     req: PreferenciasCiudadanoRequest,
-    data_path: str = "data/output/municipios_completo_ml.csv"
+    data_path: str = "data/validated/municipios_panel_validado.csv"
 ) -> Dict[str, Any]:
     df = pd.read_csv(data_path)
     ranking = recomendar_municipios_mcdm(

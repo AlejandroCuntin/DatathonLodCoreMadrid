@@ -30,7 +30,7 @@ class SimuladorWhatIfRequest(BaseModel):
 
 def ejecutar_simulacion_whatif(
     req: SimuladorWhatIfRequest,
-    data_path: str = "data/output/municipios_completo_ml.csv",
+    data_path: str = "data/validated/municipios_panel_validado.csv",
     model_dir: str = "src/lodcore/models/m4_capacidad"
 ) -> Dict[str, Any]:
     df = pd.read_csv(data_path)

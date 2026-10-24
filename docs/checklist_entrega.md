@@ -19,7 +19,7 @@
 ## 2. Dataset y paquete del jurado
 
 - [ ] `data/validated/municipios_panel_validado.csv` es el canónico (20×88, 0 nulos).
-- [ ] `data/processed` y `data/output/municipios_completo_ml.csv` coinciden con el validado.
+- [ ] No hay copias duplicadas: el panel vive solo en `data/validated/` (se eliminaron `data/processed/` y `data/output/municipios_completo_ml.csv`).
 - [ ] `data/output/municipios_comunidad_madrid_completo.json` coincide (20 registros).
 - [ ] `entrega/` tiene dataset, diccionario, fuentes, matriz, validación, model cards, ficha y guía Oracle.
 - [ ] `entrega/MANIFIESTO.json` y `.sha256` regenerados y verificados.

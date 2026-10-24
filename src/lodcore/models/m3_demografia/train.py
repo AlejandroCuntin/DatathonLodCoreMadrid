@@ -10,7 +10,7 @@ from src.lodcore.models.m3_demografia.project import proyectar_demografia_munici
 from src.lodcore.data.provenance import TipoOrigen
 
 def run_training_m3(
-    data_path: str = "data/output/municipios_completo_ml.csv",
+    data_path: str = "data/validated/municipios_panel_validado.csv",
     out_dir: str = "src/lodcore/models/m3_demografia"
 ) -> Dict[str, Any]:
     df = pd.read_csv(data_path)

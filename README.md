@@ -18,7 +18,6 @@ simular inversiones y shocks demográficos antes de decidir.
 DatathonLodCoreMadrid/
 ├── params.yaml                      # Hiperparámetros (los leen los modelos)
 ├── requirements.txt
-├── dvc.yaml                         # Pipeline reproducible (opcional en el sprint)
 ├── src/lodcore/
 │   ├── config/                      # thresholds.py, weights.py, cargar_params()
 │   ├── data/                        # quality gates, punto-en-tiempo, procedencia
@@ -30,18 +29,17 @@ DatathonLodCoreMadrid/
 │   │   ├── m4_capacidad/            # M4 · ICA + reglas no compensatorias (core)
 │   │   └── m5_recomendador/         # M5 · K-Means + recomendación MCDM
 │   ├── explain/                     # atribuciones aditivas y redacción sin causalidad
-│   ├── publish/                     # bandas 95 %, escritura Oracle
+│   ├── publish/                     # bandas 95 %
 │   └── serving/fastapi/             # API N3: /recomendar, /whatif y /optimizar-presupuesto
-├── frontend/                        # portal estático (index.html), mapa y prototipo histórico
-├── scripts/run_all_models_n1_n2_n3.py
+├── frontend/                        # portal estático (index.html, datos embebidos)
+├── scripts/                         # run_all_models_n1_n2_n3.py + auditorías
 ├── tests/                           # unit + integración (pytest)
-├── entrega/                         # paquete para el jurado: dataset + diccionario + fuentes + checksums
-├── oracle/ddl/                      # 01..06 DDL Oracle 23ai / APEX (06 = reset opcional)
+├── oracle/ddl/                      # 01..05 DDL Oracle 23ai / APEX (reset/ = 06)
 ├── oracle/onnx/                     # binarios ONNX para N2
-├── data/output/                     # payload de entrada y dataset ML
-├── data/processed/                  # panel integrado F2
-├── data/validated/                  # panel que pasa las puertas de calidad
-└── docs/                            # informe de validación y notas de diseño
+├── data/raw/                        # descargas originales INE + CKAN (inmutables)
+├── data/output/                     # payload JSON del panel
+├── data/validated/                  # EL dataset canónico (20 × 88)
+└── docs/                            # validación y notas de diseño (docs/_archivo = histórico)
 ```
 
 ---
@@ -71,9 +69,8 @@ Endpoints:
 - `POST /optimizar-presupuesto` — heurística voraz comarcal: reparte un presupuesto cerrado entre municipios (M4-OPT).
 - `GET /docs` — Swagger autogenerado por FastAPI.
 
-> El prototipo `frontend/_prototype/index.html` es **estático** y no llama a la API.
-> El portal `frontend/index.html` usa datos embebidos regenerados del panel; el mapa
-> `frontend/mapa/mapa.html` consume el endpoint ORDS. La UI de entrega será Oracle APEX.
+> El portal `frontend/index.html` es **estático y autocontenido**: los datos van
+> embebidos en `index.js` y no llama a ninguna API. La UI de entrega será Oracle APEX.
 
 ---
 

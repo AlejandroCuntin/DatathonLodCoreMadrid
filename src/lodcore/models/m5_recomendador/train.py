@@ -36,7 +36,7 @@ NOMBRES_ARQUETIPOS = {
 }
 
 def run_training_m5(
-    data_path: str = "data/output/municipios_completo_ml.csv",
+    data_path: str = "data/validated/municipios_panel_validado.csv",
     out_dir: str = "src/lodcore/models/m5_recomendador"
 ) -> Dict[str, Any]:
     df = pd.read_csv(data_path)
