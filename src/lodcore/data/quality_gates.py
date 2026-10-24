@@ -104,5 +104,9 @@ def ejecutar_quality_gates(df: pd.DataFrame) -> Dict[str, Any]:
         "status": "PASSED",
         "filas_validadas": int(len(df)),
         "columnas_validadas": len(REQUIRED_MUNICIPAL_COLUMNS),
-        "dataset_version": "v1.0.0-F2"
+        "dataset_version": (
+            str(df["dataset_version"].iloc[0])
+            if "dataset_version" in df.columns and len(df) > 0
+            else "SIN_VERSION_DECLARADA"
+        ),
     }

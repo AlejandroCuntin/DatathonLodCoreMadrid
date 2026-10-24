@@ -38,7 +38,7 @@ DatathonLodCoreMadrid/
 ├── oracle/onnx/                     # binarios ONNX para N2
 ├── data/raw/                        # descargas originales INE + CKAN (inmutables)
 ├── data/output/                     # payload JSON del panel
-├── data/validated/                  # EL dataset canónico (20 × 88)
+├── data/validated/                  # EL dataset canónico (20 × 92)
 └── docs/                            # validación y notas de diseño (docs/_archivo = histórico)
 ```
 

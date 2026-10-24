@@ -12,6 +12,7 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 import pandas as pd
+from src.lodcore.config import FECHA_DECISION_MVP
 from src.lodcore.data.quality_gates import ejecutar_quality_gates
 from src.lodcore.data.pointintime import filtrar_point_in_time
 from src.lodcore.models.m1_avm.train import run_training_m1
@@ -19,11 +20,6 @@ from src.lodcore.models.m2_indicadores.train import run_training_m2
 from src.lodcore.models.m3_demografia.train import run_training_m3
 from src.lodcore.models.m4_capacidad.train import run_training_m4
 from src.lodcore.models.m5_recomendador.train import run_training_m5
-
-# Fecha de decisión del MVP. Debe ser >= la fecha de disponibilidad del snapshot
-# usado; se deja explícita para que el filtro de punto-en-tiempo no dependa de
-# una constante escondida dentro de la función.
-FECHA_DECISION_MVP = "2026-10-24"
 
 def consolidate_f2_dataset(fecha_decision: str = FECHA_DECISION_MVP) -> str:
     payload_path = Path("data/output/municipios_comunidad_madrid_completo.json")
@@ -57,7 +53,7 @@ def consolidate_f2_dataset(fecha_decision: str = FECHA_DECISION_MVP) -> str:
         df["origen"] = "OBSERVADO+SIMULADO"
         df["fuente_datos"] = "NO_DECLARADA: payload sin columna fuente_datos"
     df["metodo"] = "PANEL_MUNICIPAL_INTEGRADO_F2"
-    df["dataset_version"] = "v1.0.0-F2"
+    df["dataset_version"] = "v1.1.0-F2"
 
     # Filtrar point-in-time con la fecha de decisión explícita del MVP
     df = filtrar_point_in_time(df, fecha_decision=fecha_decision, col_fecha="fecha_disponible")

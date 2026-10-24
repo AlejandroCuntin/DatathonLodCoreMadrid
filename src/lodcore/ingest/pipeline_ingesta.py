@@ -119,7 +119,7 @@ def ejecutar_pipeline_ingesta_f1(actualizar_panel: bool = True) -> Dict[str, Any
     # Metadatos obligatorios y transparentes de procedencia (Fase F1 y F2)
     df["origen"] = "OBSERVADO+SIMULADO"
     df["metodo"] = "PANEL_MUNICIPAL_INTEGRADO_F2"
-    df["dataset_version"] = "v1.0.0-F2"
+    df["dataset_version"] = "v1.1.0-F2"
     df["fecha_disponible"] = fecha_real_snapshot
     df["fecha_carga"] = fecha_real_snapshot
     df["fecha_referencia"] = fecha_real_snapshot

@@ -6,6 +6,11 @@ import yaml
 from .thresholds import *
 from .weights import *
 
+# Fecha de decisión del MVP: única fuente de verdad. Debe ser >= la fecha de
+# disponibilidad del último snapshot consumido (Etapa 1: 2026-10-25). El filtro
+# punto-en-tiempo la usa para garantizar que ningún dato posterior entra al panel.
+FECHA_DECISION_MVP = "2026-10-25"
+
 @lru_cache(maxsize=1)
 def cargar_params() -> dict:
     """

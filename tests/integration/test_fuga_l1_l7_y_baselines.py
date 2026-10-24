@@ -14,6 +14,7 @@ from src.lodcore.models.m4_capacidad.train import FEATURES_M4
 from src.lodcore.models.m1_avm.evaluate import evaluar_m1_con_baselines_y_bootstrap
 from src.lodcore.models.m4_capacidad.evaluate import evaluar_m4_con_baselines_y_bootstrap
 from src.lodcore.data.pointintime import filtrar_point_in_time
+from src.lodcore.config import FECHA_DECISION_MVP
 
 @pytest.fixture
 def panel_data():
@@ -39,7 +40,7 @@ def test_l2_fuga_temporal_point_in_time(panel_data):
     """
     L2: Confirma que ningún dato de entrada tiene fecha posterior a la fecha de decisión.
     """
-    fecha_corte = "2026-10-24"
+    fecha_corte = FECHA_DECISION_MVP  # única fuente de verdad (src/lodcore/config)
     filtrado = filtrar_point_in_time(panel_data, fecha_decision=fecha_corte, col_fecha="fecha_disponible")
     assert len(filtrado) == len(panel_data), "Fuga L2: existen registros futuros para la fecha de corte"
 

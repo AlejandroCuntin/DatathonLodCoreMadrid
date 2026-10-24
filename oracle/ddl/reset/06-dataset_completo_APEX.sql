@@ -75,6 +75,13 @@ CREATE TABLE municipios_procesados (
     indice_capacidad_global NUMBER NOT NULL,
     nivel_idoneidad VARCHAR2(50) NOT NULL,
     ranking_ica NUMBER NOT NULL,
+
+    -- Etapa 1 (v1.1.0-F2): fuentes reales Catastro / INE EVR / INE padrón 6y
+    valor_catastral_residencial_eur_m2 NUMBER NOT NULL,
+    anio_valor_catastral NUMBER NOT NULL,
+    migracion_neta_externa NUMBER NOT NULL,
+    crecimiento_pob_pct_2020_2025 NUMBER NOT NULL,
+
     fuente_datos VARCHAR2(255) NOT NULL,
     fecha_carga VARCHAR2(50) NOT NULL,
     fecha_referencia VARCHAR2(50) NOT NULL,

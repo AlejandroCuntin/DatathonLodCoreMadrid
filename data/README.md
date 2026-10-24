@@ -26,17 +26,20 @@ Si dudas, usa ese fichero y olvida el resto.
 
 | Fichero | Lo escribe | Lo lee |
 |---|---|---|
-| `raw/**` | `src/lodcore/ingest/ine_padron.py`, `ckan_madrid.py` | `pipeline_ingesta.py` |
-| `validated/*.csv` | `pipeline_ingesta.py` y `scripts/run_all_models_n1_n2_n3.py` | tests, M1–M5, FastAPI |
-| `output/*.json` | `pipeline_ingesta.py` | `scripts/run_all_models_n1_n2_n3.py` |
+| `raw/**` | `ingest/ine_padron.py`, `ckan_madrid.py`, `ckan_vivienda_migracion.py` | `pipeline_ingesta.py`, `pipeline_datos_reales.py` |
+| `validated/*.csv` | `pipeline_ingesta.py`, `pipeline_datos_reales.py` y `scripts/run_all_models_n1_n2_n3.py` | tests, M1–M5, FastAPI |
+| `output/*.json` | `pipeline_ingesta.py`, `pipeline_datos_reales.py` | `scripts/run_all_models_n1_n2_n3.py` |
 
 ## Qué contiene el panel (importante)
 
-De las 88 columnas, solo **4 son datos observados**:
+De las 92 columnas, **8 son datos observados** (Etapa 1, v1.1.0-F2):
 
 - `poblacion_actual`, `anio_padron` → INE padrón 2881
 - `num_centros_salud` → CKAN sanidad (centros en ALTA)
 - `num_centros_educativos` → CKAN educación (reglada en ALTA)
+- `valor_catastral_residencial_eur_m2`, `anio_valor_catastral` → DG Catastro vía CKAN CAM (2026)
+- `migracion_neta_externa` → INE Variaciones Residenciales vía CKAN CAM (media 2017-2021; solo flujos externos)
+- `crecimiento_pob_pct_2020_2025` → INE padrón 2881 (nult=6)
 
 El resto — precios, vivienda, suelo, fibra, transporte, camas, plazas, scores,
 arquetipos y proyecciones — son **valores sintéticos calibrados con `seed=2026`**.
@@ -54,9 +57,13 @@ La columna `fuente_datos` de cada fila lo declara explícitamente.
 41 municipios, carpetas `interim/` y `external/`). **Ese plan no está implementado**:
 este README refleja lo que existe realmente.
 
-## Limitación conocida
+## Limitaciones conocidas (actualizado tras la Etapa 1)
 
-`validated/*.csv` y `output/*.json` no son perfectamente idénticos: difieren en
-la precisión decimal de `paradas_x1000`, `vacias_x1000` y `suelo_m2_x_hab`.
-Ejecutar `scripts/run_all_models_n1_n2_n3.py` reescribe el CSV a partir del JSON
-y por tanto redondea esas tres columnas. Es un efecto secundario preexistente.
+- La antigua divergencia de precisión entre el CSV y el JSON en `paradas_x1000`,
+  `vacias_x1000` y `suelo_m2_x_hab` **está resuelta**: la Etapa 1 regeneró ambos
+  desde el mismo DataFrame y ahora coinciden columna a columna.
+- `migracion_neta_externa` no incluye flujos intra-Comunidad de Madrid (el dataset
+  oficial los publica agregados sin separar dirección) ni salidas al extranjero.
+- `precio_m2_compra` sigue siendo calibrado: no existe fuente pública y gratuita
+  de precios de mercado por municipio. El valor catastral real (2026) se añade
+  como columna independiente en vez de disfrazar el precio calibrado.
