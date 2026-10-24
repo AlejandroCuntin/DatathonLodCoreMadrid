@@ -129,7 +129,7 @@ DATATHON/ (raíz del espacio de trabajo)
 > F1 completada para las fuentes prioritarias (INE Padrón 2025 y CKAN Madrid Sanidad/Educación conectados, snapshots inmutables fechados, cruce 20/20 por código INE de 5 dígitos; Catastro/CRTM/Notariado quedan fuera del alcance MVP),
 > F2 con veredicto formal APTO CON RESERVAS en `docs/validacion.md`, y
 > heurística voraz de asignación presupuestaria comarcal (M4-OPT) implementada y documentada (el spillover continuo queda como roadmap de Fase 2).
-> F3-F4 (auditoría de fuga P2), F12 (APEX P3) y F13-F16 continúan abiertas para sus respectivos responsables.
+> F3 documentada (`docs/auditoria_fuga_informacion.md`: 0 bloqueantes, 2 materiales — target determinista y sesgo de selección); F4 (validación), F12 (APEX P3) y F13-F16 continúan abiertas para sus respectivos responsables.
 > El **paquete de datos para el jurado** está en `entrega/` (dataset validado + diccionario de 88 variables + catálogo de fuentes con licencias + checksums): cubre la parte de F16.2.
 
 ### Fase 0 — Fundamento y reparto (23 octubre)
@@ -165,7 +165,7 @@ DATATHON/ (raíz del espacio de trabajo)
   - F3.1: 7 tipos de fuga (L1-L7) + sesgo de selección (P2).
   - F3.2: Test empírico: reentrenar con y sin fuga y medir la diferencia (P2).
   - F3.3: Tabla de disponibilidad (as-of date) por variable (P2).
-- **Entregable:** tabla de experimentos + dictamen de fuga.
+- **Entregable:** tabla de experimentos + dictamen de fuga (`docs/auditoria_fuga_informacion.md`).
 - **Prompt asociado:** **03 · Auditoría de fuga de información**.
 
 ### Fase 4 — Diseño de validación temporal y espacial (25 octubre)

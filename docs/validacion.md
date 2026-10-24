@@ -49,6 +49,9 @@
   matriz de procedencia.
 - **Fechas**: `fecha_disponible` se deriva del snapshot realmente consumido y
   `fecha_calculo` es el timestamp real de ejecución; no se usan fechas fijas.
+- **Auditoría de fuga (F3)**: `docs/auditoria_fuga_informacion.md` — **0 bloqueantes, 2 materiales**
+  (target determinista y sesgo de selección del piloto). CV espacial con `GroupKFold`; test que
+  impide que el target o sus derivados entren en M4.
 
 ---
 
