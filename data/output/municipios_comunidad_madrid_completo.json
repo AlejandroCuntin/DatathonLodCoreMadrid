@@ -86,7 +86,7 @@
     "observaciones_acogida": "Excelente holgura en plazas escolares (25% libres) y suelo vacante. Cuello de botella fijado en educación a medio plazo ante llegadas masivas.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -176,7 +176,7 @@
     "observaciones_acogida": "Cabecera de servicios de la Sierra Norte. Capacidad neta de +432 habitantes sustentada por su centro de salud 24h y colegio integrado.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -266,7 +266,7 @@
     "observaciones_acogida": "Entorno protegido de máxima fragilidad ambiental. Capacidad residencial vinculada a rehabilitación de vivienda tradicional sin expansión de huella.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -356,7 +356,7 @@
     "observaciones_acogida": "Alta capacidad en servicios turísticos y hosteleros. Oportunidad en captación de teletrabajadores y perfiles vinculados al sector agroalimentario.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -446,7 +446,7 @@
     "observaciones_acogida": "Nodo comarcal de la Sierra Oeste con gran dotación sanitaria y educativa. Capacidad neta estimada en más de 1.100 residentes.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -536,7 +536,7 @@
     "observaciones_acogida": "Excelente conectividad directa a Madrid por A-1. Idóneo para familias que buscan cercanía a centros laborales del norte metropolitano.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -626,7 +626,7 @@
     "observaciones_acogida": "Municipio cabecera de la comarca con suelo urbano disponible asequible y servicios públicos consolidados.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -716,7 +716,7 @@
     "observaciones_acogida": "Muy atractiva para trabajadores del corredor del Henares por proximidad a Alcalá y precios de vivienda inferiores a la media metropolitana.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -806,7 +806,7 @@
     "observaciones_acogida": "Enclave de alto valor paisajístico. El modelo favorece la fijación de población mediante teletrabajo y conservación forestal.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -896,7 +896,7 @@
     "observaciones_acogida": "Conocida como la 'Huerta de Madrid', ofrece clima templado y costes residenciales reducidos con tejido agrícola y comercial activo.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -986,7 +986,7 @@
     "observaciones_acogida": "Identidad vitivinícola y monumental única. Capacidad neta superior a 800 habitantes gracias a su holgura en dotaciones escolares y sanitarias.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -1076,7 +1076,7 @@
     "observaciones_acogida": "Muy cercana al nudo comercial y hospitalario de Arganda del Rey con precios de vivienda un 30% inferiores al núcleo metropolitano.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -1166,7 +1166,7 @@
     "observaciones_acogida": "Elevadísima demanda residencial. La restricción de parque nacional limita la expansión de suelo, reorientando el crecimiento a rehabilitación.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -1256,7 +1256,7 @@
     "observaciones_acogida": "Excelente dotación de Cercanías Renfe y proximidad a campus universitario de Alcalá. Capacidad neta de más de 1.200 nuevos habitantes.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -1346,7 +1346,7 @@
     "observaciones_acogida": "Auténtica capital comarcal con servicios de sanidad 24h, juzgado comarcal e instituto de secundaria consolidados.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -1436,7 +1436,7 @@
     "observaciones_acogida": "Inmejorable conectividad ferroviaria directa a Madrid capital y aire puro de alta montaña. Oportunidad en parque de segunda residencia.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -1526,7 +1526,7 @@
     "observaciones_acogida": "Municipio con mayor escala demográfica del panel (25.800 hab.) y conexión ferroviaria directa con Sol. Gran reserva de capacidad neta (+1.800 hab.).",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -1616,7 +1616,7 @@
     "observaciones_acogida": "Principal motor demográfico de la corona suroeste. Servicios de nivel hospitalario y educativo superiores, con capacidad neta de +2.400 residentes.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -1706,7 +1706,7 @@
     "observaciones_acogida": "Ubicación privilegiada en el eje A-6 con acceso rápido a centros empresariales de Las Rozas y Majadahonda. Hospital de Villalba a 7 minutos.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   },
   {
@@ -1796,7 +1796,7 @@
     "observaciones_acogida": "Modelo municipal de alta calidad de vida, sostenibilidad y deporte. Capacidad neta estimada en más de 950 habitantes con fuerte atractivo familiar.",
     "fecha_disponible": "2026-10-23",
     "origen": "OBSERVADO+SIMULADO",
-    "metodo": "INE_PADRON_2025+CKAN_MADRID_DATOS_ABIERTOS",
+    "metodo": "PANEL_MUNICIPAL_INTEGRADO_F2",
     "dataset_version": "v1.0.0-F2"
   }
 ]
