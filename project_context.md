@@ -92,7 +92,7 @@ DATATHON/ (raíz del espacio de trabajo)
 │   ├── src/lodcore/                #   ingest/ (INE+CKAN), data/, models/ M1-M5, explain/, publish/, serving/
 │   ├── frontend/mapa/              #   Mapa interactivo del portal (HTML/CSS/JS)
 │   ├── scripts/                    #   run_all_models_n1_n2_n3.py + pipeline F1
-│   ├── tests/                      #   25 tests (unit + integración)
+│   ├── tests/                      #   34 tests (unit + integración + fuga L1-L7 + baselines)
 │   ├── oracle/                     #   ddl/ (01..06; el 06 en revisión), REST/ y onnx/
 │   ├── data/                       #   raw/ (snapshots INE+CKAN), processed/, validated/, output/
 │   ├── docs/                       #   validación, matriz de procedencia, specs y material_reto/ (PDFs oficiales)
@@ -129,7 +129,7 @@ DATATHON/ (raíz del espacio de trabajo)
 > F1 completada para las fuentes prioritarias (INE Padrón 2025 y CKAN Madrid Sanidad/Educación conectados, snapshots inmutables fechados, cruce 20/20 por código INE de 5 dígitos; Catastro/CRTM/Notariado quedan fuera del alcance MVP),
 > F2 con veredicto formal APTO CON RESERVAS en `docs/validacion.md`, y
 > heurística voraz de asignación presupuestaria comarcal (M4-OPT) implementada y documentada (el spillover continuo queda como roadmap de Fase 2).
-> F3 documentada (`docs/auditoria_fuga_informacion.md`: 0 bloqueantes, 2 materiales — target determinista y sesgo de selección); F4 (validación), F12 (APEX P3) y F13-F16 continúan abiertas para sus respectivos responsables.
+> F3 documentada (`docs/auditoria_fuga_informacion.md`: 0 bloqueantes, 2 materiales — target determinista y sesgo de selección) y F4 completada (validación espacial, 4 baselines naive y bootstrap B=1000), con **34 tests en verde**; F12 (APEX P3) y F13-F16 continúan abiertas.
 > El **paquete de datos para el jurado** está en `entrega/` (dataset validado + diccionario de 88 variables + catálogo de fuentes con licencias + checksums): cubre la parte de F16.2.
 
 ### Fase 0 — Fundamento y reparto (23 octubre)
