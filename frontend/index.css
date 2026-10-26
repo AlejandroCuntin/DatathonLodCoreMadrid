@@ -5,8 +5,8 @@
   --font-primary: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-serif: 'IBM Plex Serif', Georgia, serif;
   --font-mono: 'IBM Plex Mono', monospace;
-  --madrid-red: #477edc; --madrid-red-dark: #295c84; --madrid-red-light: #FDF2F3; --madrid-red-border: #F7B5BD;
-  --madrid-blue: #204655; --madrid-blue-light: #F0F7FB; --madrid-blue-dark: #00567A;
+  --madrid-red: #477edc; --madrid-red-dark: #295c84; --madrid-red-light: #FDF2F3; 
+  --madrid-red-border: #b5f2f7; --madrid-blue: #204655; --madrid-blue-light: #F0F7FB; --madrid-blue-dark: #00567A
   --text-main: #232323; --text-secondary: #4A5568; --text-muted: #718096;
   --bg-page: #F8F9FA; --bg-surface: #FFFFFF; --bg-subtle: #F1F3F5; --bg-tinted: #F4F6F8;
   --border-main: #D9D9D9; --border-subtle: #E2E8F0; --border-dark: #A0AEC0;
@@ -18,6 +18,32 @@
   font-family: var(--font-primary); font-size: 15px; line-height: 1.5;
   background-color: var(--bg-page); color: var(--text-main);
   -webkit-font-smoothing: antialiased; color-scheme: light;
+}
+/* Expandir el footer al 100% de la pantalla rompiendo el contenedor de APEX */
+#lodcore-home {
+  width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+}
+
+#lodcore-home .home-footer {
+  width: 100% !important;
+}
+/* 1. Forzar que el contenedor nativo del Footer de APEX ocupe el 100% sin márgenes blancos */
+.t-Footer {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+/* 2. Ocultar el texto "Release 1.0" (versión de la aplicación) */
+.t-Footer-version,
+.t-Footer-customize {
+    display: none !important;
 }
 #lodcore-home *, #lodcore-home *::before, #lodcore-home *::after { box-sizing: border-box; margin: 0; padding: 0; }
 #lodcore-home [hidden] { display: none !important; }
