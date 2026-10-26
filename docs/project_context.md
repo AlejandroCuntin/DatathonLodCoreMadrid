@@ -26,8 +26,9 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Columnas del panel | **92** |
 | Columnas observadas (reales) | **8** |
 | Dataset version | `v1.1.0-F2` |
-| Perfil ciudadano | **C1 completado** (C2-C7 pendientes) |
-| Tests | **36 en verde** |
+| Perfil ciudadano | **C1 y C2 hechos** (C3-C7 pendientes) |
+| Ranking Oracle | `04-perfiles_y_ranking.sql` (tablas + 2 funciones) |
+| Tests | **57 en verde** |
 | Modelos ONNX en Oracle | M1 y M4 |
 | API | `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto` |
 | DDL Oracle | `02-tablas_procesadas.sql`, `03-vistas_apex.sql`, `05-modelos_onnx.sql` |
@@ -193,10 +194,10 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 | Etapa | Contenido | Estado |
 |---|---|---|
 | **C1** | Modelo de preferencias: entradas, pesos, filtros y fórmula de esfuerzo | ✅ **Hecho**: `docs/perfil_ciudadano.md` + `src/lodcore/config/perfiles.py` (verificado) |
-| **C2** | Motor de ranking con pesos del perfil y filtros duros | Pendiente |
+| **C2** | Motor de ranking con pesos del perfil y filtros duros | ✅ **Hecho**: `m5_recomendador/ranking.py` + 12 tests |
 | **C3** | Asequibilidad: cuota, esfuerzo financiero y gap de mercado (M1) | Pendiente |
 | **C4** | Explicación por municipio: desglose de afinidad, fortalezas y carencias | Pendiente |
-| **C5** | Capa Oracle: tabla `PERFILES_PESOS` + función de ranking | Pendiente |
+| **C5** | Capa Oracle: `PERFILES_PARAMETROS`, `PERFILES_BASE`, `PERFILES_AJUSTES` y `f_ranking_ciudadano` | 🟡 **Hecho el SQL** (`04-perfiles_y_ranking.sql`); falta probarlo contra Oracle |
 | **C6** | API N3 equivalente a la función SQL | Pendiente |
 | **C7** | Página APEX del ciudadano: formulario, resultados, mapa y comparador | Pendiente |
 
@@ -221,7 +222,8 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 - Filtros duros: precio y tiempo se respetan siempre.
 - Regla dura: un municipio colapsado no entra en el top aunque sus pesos le favorezcan.
 - Determinismo: mismos parámetros, mismo orden.
-- Equivalencia SQL ↔ Python del ranking.
+- Equivalencia SQL ↔ Python del ranking: `tests/unit/test_perfiles_sql_sync.py`
+  (9 comprobaciones de parametros, pesos base, reglas y topes). No necesita Oracle.
 - Equivalencia ONNX ↔ Python (`< 1e-6` relativo).
 
 ---
@@ -229,7 +231,8 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 ## 12. Qué está hecho, qué falta y qué no se hará
 
 **Hecho:** panel con datos reales, índice documentado, reglas duras, simulador,
-optimizador por eficiencia, ONNX en Oracle, mapa ORDS, portal estático, 36 tests.
+optimizador por eficiencia, ONNX en Oracle, mapa ORDS, portal estático,
+perfil ciudadano C1-C2 con ranking por perfiles y su capa Oracle (04), 57 tests.
 
 **Falta:** C1-C7, I1-I6, backtest de M3, validación ICA vs crecimiento real,
 regeneración del paquete de entrega.
