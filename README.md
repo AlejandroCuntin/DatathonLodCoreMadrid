@@ -34,7 +34,7 @@ DatathonLodCoreMadrid/
 ├── frontend/                        # portal estático (index.html, datos embebidos)
 ├── scripts/                         # run_all_models_n1_n2_n3.py + auditorías
 ├── tests/                           # unit + integración (pytest)
-├── oracle/ddl/                      # 01..05 DDL Oracle 23ai / APEX (reset/ = 06)
+├── oracle/ddl/                      # 02 tabla, 03 vistas APEX, 05 modelos ONNX
 ├── oracle/onnx/                     # binarios ONNX para N2
 ├── data/raw/                        # descargas originales INE + CKAN (inmutables)
 ├── data/output/                     # payload JSON del panel
@@ -78,18 +78,15 @@ Endpoints:
 
 Ejecutar en orden con SQLcl, SQL Developer o APEX › SQL Workshop:
 
-1. `oracle/ddl/01-tablas_raw.sql`
-2. `oracle/ddl/02-tablas_procesadas.sql` (crea `municipios_procesados` con las **88 columnas** del panel y 4 columnas virtuales de compatibilidad)
-3. `oracle/ddl/03-vistas_apex.sql`
-4. `oracle/ddl/04-indices_espaciales.sql`
-5. `oracle/ddl/05-modelos_onnx.sql`
+1. `oracle/ddl/02-tablas_procesadas.sql` (crea `municipios_procesados` con las **92 columnas** del panel y 4 columnas virtuales de compatibilidad)
+2. `oracle/ddl/03-vistas_apex.sql`
+3. `oracle/ddl/05-modelos_onnx.sql`
 
-> **`02` XOR `06`**: `06-dataset_completo_APEX.sql` es un script de **reset** para
-> entornos aislados: hace `DROP TABLE municipios_procesados CASCADE CONSTRAINTS`
-> y la recrea. **No lo ejecutes después del `02`** salvo que quieras borrar la
-> tabla y recargar los datos. Para la carga normal, usa solo el `02`.
+> Se retiraron `01-tablas_raw.sql` (tres tablas crudas que nadie rellenaba y que
+> declaraban plazas y médicos inexistentes en las fuentes) y `04-indices_espaciales.sql`
+> (columna SDO_GEOMETRY que nunca se poblaba; el mapa trabaja con latitud/longitud).
 
-Para el paso 5, copiar `oracle/onnx/*.onnx` a un directorio del servidor y crear
+Para el paso 3, copiar `oracle/onnx/*.onnx` a un directorio del servidor y crear
 el objeto de directorio antes de cargar los modelos:
 
 ```sql

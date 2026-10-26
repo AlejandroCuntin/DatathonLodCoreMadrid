@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-check_model_cards.py - Cross-check de las cifras publicadas en docs/model_cards.md.
+check_model_cards.py - Cross-check de las cifras de los modelos contra metrics.json.
 
 Verifica:
   1. Métricas principales de M1-M5 contra sus metrics.json.
@@ -120,7 +120,7 @@ def main() -> None:
         assert row["nombre"] in expected4, row["nombre"]
         assert abs(row["error"] - expected4[row["nombre"]]) <= 0.1, (row["nombre"], row["error"])
 
-    print("OK: métricas M1-M5, clústeres y peores errores OOF coinciden con docs/model_cards.md")
+    print("OK: métricas M1-M5, clústeres y peores errores OOF son coherentes con metrics.json")
     print("M1 peores:", [(r.nombre, round(r.error, 1)) for r in worst1.itertuples()])
     print("M4 peores:", [(r.nombre, round(r.error, 2)) for r in worst4.itertuples()])
 
