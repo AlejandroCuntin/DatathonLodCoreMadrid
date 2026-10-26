@@ -6,8 +6,7 @@
   /* Paleta y medidas de la aplicación */
   --font-primary: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
-  --madrid-red:#C8102E; --madrid-red-dark:#9F0B22; --madrid-red-light:#FDF2F3; --madrid-red-border:#F7B5BD;
-  --madrid-blue:#0078A8; --madrid-blue-light:#F0F7FB; --madrid-blue-dark:#00567A;
+  --madrid-red: #477edc; --madrid-red-dark: #295c84; --madrid-red-light: #FDF2F3; --madrid-red-border: #b5f2f7; --madrid-blue: #204655; --madrid-blue-light: #F0F7FB; --madrid-blue-dark: #00567A;
   --text-main:#232323; --text-secondary:#4A5568; --text-muted:#718096;
   --bg-page:#F8F9FA; --bg-subtle:#F1F3F5; --bg-tinted:#F4F6F8;
   --border-main:#D9D9D9; --border-subtle:#E2E8F0; --border-dark:#A0AEC0;
