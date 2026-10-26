@@ -1,478 +1,147 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Observatorio de Capacidad de Acogida Territorial de la Comunidad de Madrid">
-  <title>Observatorio de Capacidad de Acogida Territorial | Comunidad de Madrid</title>
-  <link rel="stylesheet" href="index.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Simulador de capacidad de acogida territorial de la Comunidad de Madrid: proyecciones 2030-2040 para ciudadanía, gestión pública e inversores">
+<title>Simulador de Capacidad de Acogida Territorial | Comunidad de Madrid</title>
+<link rel="stylesheet" href="index.css">
 </head>
-<body>
-<!-- Para APEX: el contenido reutilizable es el bloque <div id="lodcore-obs"> ... </div>.
-     Este wrapper (head/body/script) es para la vista local del portal. -->
-<!-- LoDCORE · Observatorio Territorial — contenido (sin barra superior ni menú). CSS: index.css · JS: index.js -->
-<div id="lodcore-obs">
-<div class="gov-breadcrumb-bar">
-<div class="container breadcrumb-trail">
-<a href="https://www.comunidad.madrid/">Inicio</a>
-<span class="breadcrumb-sep">&gt;</span>
-<a href="#">Medio Ambiente, Agricultura e Interior</a>
-<span class="breadcrumb-sep">&gt;</span>
-<a href="#">Dirección General de Urbanismo y Territorio</a>
-<span class="breadcrumb-sep">&gt;</span>
-<span class="breadcrumb-current">Observatorio de Capacidad de Acogida Territorial (&lt; 50.000 habitantes)</span>
-<button type="button" class="lc-export-btn" onclick="downloadOfficialCSV()">
-<svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-Exportar CSV Oficial
-</button>
-</div>
-</div>
-<section class="gov-hero">
-<div class="container">
-<div class="hero-pretitle">
-<svg class="svg-icon" viewBox="0 0 24 24" style="color:var(--madrid-red)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-II Datathon LoDCOREMadrid 2026 • Universidad Carlos III & Comunidad de Madrid
-</div>
-<h1 class="hero-title">Capacidad de Acogida Municipal y Planificación Territorial</h1>
-<p class="hero-lead">
-Herramienta de diagnóstico para evaluar la absorción residencial sostenible en municipios menores de 50.000 habitantes. Integra modelos de valoración automatizada (AVM), holguras de la red de colegios y centros de salud del SERMAS, e infraestructuras del Consorcio Regional de Transportes de Madrid (CRTM).
-</p>
-<div class="kpi-strip">
-<div class="kpi-box">
-<div class="kpi-box-label">Municipios Analizados</div>
-<div class="kpi-box-num">20</div>
-<div class="kpi-box-sub">Población &lt;50.000 habitantes</div>
-</div>
-<div class="kpi-box green-left">
-<div class="kpi-box-label">Capacidad de Acogida Neta</div>
-<div class="kpi-box-num">+108.400</div>
-<div class="kpi-box-sub">Nuevos residentes sin colapsar servicios</div>
-</div>
-<div class="kpi-box blue-left">
-<div class="kpi-box-label">Precio Medio Estimado (AVM)</div>
-<div class="kpi-box-num">1.842 <span style="font-size:15px; font-weight:600">€/m²</span></div>
-<div class="kpi-box-sub">Modelo hedónico calibrado (R²=0.33)</div>
-</div>
-<div class="kpi-box ochre-left">
-<div class="kpi-box-label">Inversión Dotacional Requerida</div>
-<div class="kpi-box-num">12,4 <span style="font-size:15px; font-weight:600">M€</span></div>
-<div class="kpi-box-sub">Para solventar cuellos de botella</div>
-</div>
+<body style="margin:0;background:#F8F9FA;">
+<!-- LoDCORE · Página principal. Contenido: bloque <div id="lodcore-home"> ... </div> · Estilos: index.css · Script: index.js -->
+<div id="lodcore-home">
+
+<section class="home-hero">
+<div class="container"> 
+<h1 class="hero-title">MadridNext • Predice, Conecta, Transforma</h1>
+<h2 class="hero-subtitle"> Simulación de capacidad de acogida territorial</h2>
+<p class="hero-lead">¿Qué ocurrirá en los municipios de menos de 50.000 habitantes de la Comunidad de Madrid si crece su población? Define un escenario, el modelo se ejecuta en tiempo real y obtienes las métricas proyectadas para el año que elijas, entre 2030 y 2040.</p>
+<div class="hero-actions">
+<a class="btn-primary" href="f?p=&APP_ID.:simulador:&SESSION.">Abrir el simulador<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+<a class="btn-secondary" href="f?p=&APP_ID.:mapa-interactivo:&SESSION."><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>Ver el mapa interactivo</a>
 </div>
 </div>
 </section>
-<main class="main-body container">
-<div id="view-catalogo" class="view-panel active">
-<div class="official-header">
-<div>
-<h2 class="official-title">Catálogo Oficial de Municipios y Diagnóstico Dotacional</h2>
-<p class="official-desc">Fotografías reales y características técnicas de cada municipio registradas en los sistemas de información regional.</p>
-</div>
-</div>
-<div class="filter-panel">
-<div class="search-input-box">
-<svg class="svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-<input type="text" id="filterSearch" placeholder="Buscar por nombre de municipio, comarca, carretera o hito..." oninput="applyFilters()">
-</div>
-<select id="filterComarca" class="select-filter" onchange="applyFilters()">
-<option value="">Todas las comarcas</option>
-<option value="Sierra de Guadarrama">Sierra de Guadarrama</option>
-<option value="Sierra Norte">Sierra Norte</option>
-<option value="Sierra Oeste">Sierra Oeste</option>
-<option value="Comarca de las Vegas">Comarca de las Vegas</option>
-<option value="Cuenca del Alberche">Cuenca del Alberche</option>
-<option value="Cuenca del Henares">Cuenca del Henares</option>
-<option value="Comarca Sur">Comarca Sur</option>
-</select>
-<select id="filterZonaCrtm" class="select-filter" onchange="applyFilters()">
-<option value="">Todas las zonas CRTM</option>
-<option value="B3">Zona B3</option>
-<option value="C1">Zona C1</option>
-<option value="C2">Zona C2</option>
-</select>
-<select id="filterIdoneidad" class="select-filter" onchange="applyFilters()">
-<option value="">Cualquier Idoneidad</option>
-<option value="ALTA">Idoneidad ALTA</option>
-<option value="MEDIA">Idoneidad MEDIA</option>
-<option value="BAJA">Idoneidad BAJA</option>
-</select>
-</div>
-<div class="muni-cards-grid" id="muniCardsGrid"></div>
-</div>
-<div id="view-comparador" class="view-panel">
-<div class="official-header">
-<div>
-<h2 class="official-title">Comparador Lado a Lado de Municipios (Página 3 APEX)</h2>
-<p class="official-desc">Compara simultáneamente hasta 3 municipios sobre 7 capas territoriales con gráfico Radar analítico.</p>
-</div>
-</div>
-<div class="comparador-controls">
-<div class="comparador-slot">
-<label class="comparador-slot-label" style="color:var(--madrid-red);">Municipio 1 (Serie Roja)</label>
-<select id="compSelect1" class="select-filter" onchange="updateComparator()"></select>
-</div>
-<div class="comparador-slot">
-<label class="comparador-slot-label" style="color:var(--madrid-blue);">Municipio 2 (Serie Azul)</label>
-<select id="compSelect2" class="select-filter" onchange="updateComparator()"></select>
-</div>
-<div class="comparador-slot">
-<label class="comparador-slot-label" style="color:var(--status-alta);">Municipio 3 (Serie Verde)</label>
-<select id="compSelect3" class="select-filter" onchange="updateComparator()"></select>
-</div>
-</div>
-<div class="radar-container">
-<h3 style="font-size:16px; font-weight:700; margin-bottom:12px;">Perfil Multidimensional de Capacidad (7 Ejes)</h3>
-<div class="radar-svg-wrap" id="radarSvgContainer">
-</div>
-<div class="radar-legend">
-<div class="radar-legend-item">
-<span class="legend-color-dot" style="background:var(--madrid-red);"></span>
-<span id="legendName1">Municipio 1</span>
-</div>
-<div class="radar-legend-item">
-<span class="legend-color-dot" style="background:var(--madrid-blue);"></span>
-<span id="legendName2">Municipio 2</span>
-</div>
-<div class="radar-legend-item">
-<span class="legend-color-dot" style="background:var(--status-alta);"></span>
-<span id="legendName3">Municipio 3</span>
-</div>
-</div>
-</div>
-<div class="comparison-grid" id="compDetailGrid">
-</div>
-</div>
-<div id="view-recomendador" class="view-panel">
-<div class="official-header">
-<div>
-<h2 class="official-title">Buscador y Recomendador de Empadronamiento por Perfil Familiar</h2>
-<p class="official-desc">Algoritmo de casación multidimensional para orientar a nuevos residentes hacia municipios con holgura dotacional y precios acordes.</p>
-</div>
-</div>
-<div class="rec-wizard-card">
-<div class="rec-wizard-grid">
-<div>
-<div class="rec-criteria-title">
-<svg class="svg-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-1. Estructura del Hogar
-</div>
-<div class="rec-option-item active" onclick="setRecCriteria('perfil', 'familia', this)">
-<div class="rec-option-name">Familia con Hijos Escolares</div>
-<div class="rec-option-sub">Prioriza holgura en plazas escolares (CEIP/IES) y pediatría</div>
-</div>
-<div class="rec-option-item" onclick="setRecCriteria('perfil', 'teletrabajo', this)">
-<div class="rec-option-name">Profesional / Teletrabajo</div>
-<div class="rec-option-sub">Prioriza fibra óptica, cercanía a autovía y vivienda asequible</div>
-</div>
-<div class="rec-option-item" onclick="setRecCriteria('perfil', 'senior', this)">
-<div class="rec-option-name">Sénior / Jubilación</div>
-<div class="rec-option-sub">Prioriza centro de salud 24h, hospital cercano y tranquilidad</div>
-</div>
-</div>
-<div>
-<div class="rec-criteria-title">
-<svg class="svg-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-2. Rango de Precio (€/m²)
-</div>
-<div class="rec-option-item active" onclick="setRecCriteria('precio', 'economico', this)">
-<div class="rec-option-name">Asequible (&lt; 1.600 €/m²)</div>
-<div class="rec-option-sub">Comarca de las Vegas, Sureste y Sierra Norte tradicional</div>
-</div>
-<div class="rec-option-item" onclick="setRecCriteria('precio', 'medio', this)">
-<div class="rec-option-name">Medio (1.600 – 2.100 €/m²)</div>
-<div class="rec-option-sub">Corredor del Henares, Sierra Oeste y Comarca Sur</div>
-</div>
-<div class="rec-option-item" onclick="setRecCriteria('precio', 'alto', this)">
-<div class="rec-option-name">Residencial Sierra (&gt; 2.100 €/m²)</div>
-<div class="rec-option-sub">Sierra de Guadarrama y Cuenca Alta del Manzanares</div>
-</div>
-</div>
-<div>
-<div class="rec-criteria-title">
-<svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-3. Conectividad con Madrid
-</div>
-<div class="rec-option-item active" onclick="setRecCriteria('tiempo', 'rapido', this)">
-<div class="rec-option-name">Menos de 45 minutos</div>
-<div class="rec-option-sub">Acceso diario rápido en Cercanías Renfe o autobús directo</div>
-</div>
-<div class="rec-option-item" onclick="setRecCriteria('tiempo', 'medio', this)">
-<div class="rec-option-name">Entre 45 y 65 minutos</div>
-<div class="rec-option-sub">Equilibrio entre distancia metropolitana y entorno rural</div>
-</div>
-<div class="rec-option-item" onclick="setRecCriteria('tiempo', 'indiferente', this)">
-<div class="rec-option-name">Indiferente</div>
-<div class="rec-option-sub">Máxima prioridad a calidad paisajística y espacio habitable</div>
-</div>
-</div>
-</div>
-<button class="btn-official-calc" onclick="runRecommendation()">
-<svg class="svg-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-Calcular Coincidencias de Empadronamiento
-</button>
-</div>
-<div class="muni-cards-grid" id="recResultsGrid"></div>
-</div>
-<div id="view-simulador" class="view-panel">
-<div class="official-header">
-<div>
-<h2 class="official-title">Simulador de Demanda Poblacional e Impacto en Servicios (What-If)</h2>
-<p class="official-desc">Cálculo prospectivo del esfuerzo inversor en colegios, plazas sanitarias y presión sobre precios inmobiliarios ante nuevas llegadas de población.</p>
-</div>
-</div>
-<div class="simulator-grid-panel">
-<div class="sim-card-controls">
-<h3 style="font-size:16px; font-weight:700; margin-bottom:18px; border-bottom:1px solid var(--border-main); padding-bottom:8px;">
-Parámetros del Plan Poblacional
-</h3>
-<div style="margin-bottom:20px;">
-<label style="display:block; font-size:12px; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">
-Municipio a Simular
-</label>
-<select id="simSelectMuni" class="select-filter" style="width:100%;" onchange="executeSimulation()"></select>
-</div>
-<div style="margin-bottom:24px;">
-<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-<label style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--text-muted);">
-Incremento de Habitantes
-</label>
-<span id="simHabDisplay" style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--madrid-red); background:var(--madrid-red-light); padding:2px 8px; border-radius:var(--radius-sm);">
-+1.000 hab.
-</span>
-</div>
-<input type="range" id="simSliderHab" min="100" max="5000" step="50" value="1000" style="width:100%; accent-color:var(--madrid-red);" oninput="updateSimHab(this.value)">
-<div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-top:4px;">
-<span>+100 hab.</span>
-<span>+2.500 hab.</span>
-<span>+5.000 hab.</span>
-</div>
-</div>
-<div style="background:var(--bg-subtle); border-left:3px solid var(--madrid-blue); padding:12px; font-size:12px; color:var(--text-secondary); line-height:1.5;">
-<strong>Módulos de Coste Oficiales:</strong><br>
-• Razón Médica: 1 médico AP cada 1.250 habitantes (SERMAS).<br>
-• Razón Escolar: 1 aula (25 plazas) por cada 150 nuevos residentes.<br>
-• CAPEX Estimado: 2.400 € / plaza escolar + 120.000 € / consulta médica.
-</div>
-</div>
-<div class="sim-card-results">
-<h3 style="font-size:16px; font-weight:700; margin-bottom:18px; border-bottom:1px solid var(--border-main); padding-bottom:8px;">
-Impacto Dotacional y Presupuestario Proyectado
-</h3>
-<div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; margin-bottom:24px;">
-<div style="background:var(--bg-subtle); padding:16px; border:1px solid var(--border-subtle); border-radius:var(--radius-sm);">
-<div style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--text-muted);">Médicos AP Requeridos</div>
-<div id="simResMedicos" style="font-family:var(--font-mono); font-size:24px; font-weight:700; color:var(--madrid-red); margin:4px 0;">+0.8</div>
-<div style="font-size:12px; color:var(--text-secondary);">Para mantener ratio de cobertura</div>
-</div>
-<div style="background:var(--bg-subtle); padding:16px; border:1px solid var(--border-subtle); border-radius:var(--radius-sm);">
-<div style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--text-muted);">Plazas Escolares Requeridas</div>
-<div id="simResEscuelas" style="font-family:var(--font-mono); font-size:24px; font-weight:700; color:var(--madrid-blue-dark); margin:4px 0;">+160 plazas</div>
-<div id="simResAulasSub" style="font-size:12px; color:var(--text-secondary);">Equivalente a 7 aulas completas</div>
-</div>
-<div style="background:var(--bg-subtle); padding:16px; border:1px solid var(--border-subtle); border-radius:var(--radius-sm);">
-<div style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--text-muted);">Presupuesto Dotacional (CAPEX)</div>
-<div id="simResCapex" style="font-family:var(--font-mono); font-size:24px; font-weight:700; color:var(--text-main); margin:4px 0;">480.000 €</div>
-<div style="font-size:12px; color:var(--text-secondary);">Inversión pública necesaria</div>
-</div>
-<div style="background:var(--bg-subtle); padding:16px; border:1px solid var(--border-subtle); border-radius:var(--radius-sm);">
-<div style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--text-muted);">Presión en Precios Vivienda</div>
-<div id="simResShock" style="font-family:var(--font-mono); font-size:24px; font-weight:700; color:var(--status-media); margin:4px 0;">+3.2 %</div>
-<div style="font-size:12px; color:var(--text-secondary);">Elasticidad AVM estimada</div>
-</div>
-</div>
-<div id="simDiagnosticBox" style="padding:16px; border-radius:var(--radius-sm); font-size:13px; line-height:1.6; border:1px solid transparent;"></div>
-</div>
-</div>
-</div>
-<div id="view-matriz" class="view-panel">
-<div class="official-header">
-<div>
-<h2 class="official-title">Matriz Territorial de Indicadores y Modelo AVM</h2>
-<p class="official-desc">Panel de 20 municipios con datos de Padrón INE 2025, SERMAS, CRTM, Catastro y Valoración Hedónica Automatizada.</p>
-</div>
-</div>
-<div class="gov-table-wrap">
-<table class="gov-table" id="matrixTable">
-<thead>
-<tr>
-<th onclick="sortMatrix(0)">Municipio</th>
-<th onclick="sortMatrix(1)">Código INE</th>
-<th onclick="sortMatrix(2)">Comarca</th>
-<th onclick="sortMatrix(3)">Población 2025</th>
-<th onclick="sortMatrix(4)">Zona CRTM</th>
-<th onclick="sortMatrix(5)">Índice ICA</th>
-<th onclick="sortMatrix(6)">Capacidad Neta</th>
-<th onclick="sortMatrix(7)">Factor Limitante</th>
-<th onclick="sortMatrix(8)">Precio Real €/m²</th>
-<th onclick="sortMatrix(9)">Precio AVM €/m²</th>
-<th onclick="sortMatrix(10)">Gap Mercado</th>
-</tr>
-</thead>
-<tbody id="matrixTbody"></tbody>
-</table>
-</div>
-</div>
-<div id="view-fuentes" class="view-panel">
-<div class="official-header">
-<div>
-<h2 class="official-title">Catálogo de Fuentes Oficiales, Licencias y Metrología (Página 9 APEX)</h2>
-<p class="official-desc">Trazabilidad exhaustiva de los conjuntos de datos públicos utilizados en cumplimiento de las directrices del Datathon LoDCORE.</p>
-</div>
-</div>
-<div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:20px; margin-bottom:28px;">
-<div class="dossier-block">
-<div class="dossier-block-header">
-<svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-Fuentes Demográficas y Cartográficas
-</div>
-<ul style="list-style:none; line-height:1.8; font-size:13px;">
-<li><strong>INE (Instituto Nacional de Estadística):</strong> Padrón Continuo municipal a 1 de enero de 2025 (Tabla 2881) y Atlas de Distribución de Renta de los Hogares.</li>
-<li><strong>IGN / CNIG (Instituto Geográfico Nacional):</strong> Límites municipales oficiales y CartoBase (Licencia CC BY 4.0). Sistema Geodésico ETRS89 (EPSG:25830).</li>
-<li><strong>OpenStreetMap / Geofabrik:</strong> Red viaria y tiempos de desplazamiento en vehículo privado.</li>
-</ul>
-</div>
-<div class="dossier-block">
-<div class="dossier-block-header">
-<svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-Fuentes Sectoriales y Dotacionales
-</div>
-<ul style="list-style:none; line-height:1.8; font-size:13px;">
-<li><strong>datos.comunidad.madrid (CKAN):</strong> Catálogo de Centros Sanitarios del SERMAS, Registro de Centros Docentes no universitarios y presupuestos municipales.</li>
-<li><strong>CRTM (Consorcio Regional de Transportes de Madrid):</strong> Zonas tarifarias, paradas de autobús interurbano y datos GTFS.</li>
-<li><strong>Dirección General del Catastro:</strong> Estadísticas de bienes inmuebles urbanos y rústicos, superficies y valores catastrales.</li>
-</ul>
-</div>
-</div>
-<div style="background:var(--bg-subtle); border-left:4px solid var(--madrid-red); padding:16px; border-radius:var(--radius-sm);">
-<h4 style="font-size:13px; font-weight:700; text-transform:uppercase; color:var(--madrid-red); margin-bottom:4px;">
-Cláusula Metodológica de No-Compensatoriedad
-</h4>
-<p style="font-size:13px; line-height:1.6; color:var(--text-main);">
-En estricto cumplimiento de la hipótesis central de LoDCORE Madrid, ningún municipio con ratio sanitario superior a 1.500 hab/médico o saturación escolar superior al 95% puede recibir una calificación favorable, quedando automáticamente limitado a nivel de alerta baja (&lt; 40 puntos ICA) independientemente de su puntuación inmobiliaria o presupuestaria.
-</p>
-</div>
-</div>
-</main>
-<div class="gov-modal-backdrop" id="govDetailModal" onclick="closeModalOnBackdrop(event)">
-<div class="gov-modal-window">
-<div class="modal-cover-wrap">
-<img class="modal-cover-img" id="modalImg" src="" alt="Fotografía del Municipio">
-<button class="modal-close-button" onclick="closeGovModal()" title="Cerrar Ficha">&times;</button>
-<span class="card-badge-comarca" id="modalComarcaBadge" style="top:16px; left:16px; font-size:12px; padding:6px 12px;">Comarca</span>
-</div>
-<div class="modal-body-content">
-<div class="modal-title-row">
-<div>
-<h2 class="modal-muni-name" id="modalTitle">Municipio</h2>
-<div class="modal-muni-comarca" id="modalGeoSub">INE • Altitud • Conexión</div>
-</div>
-<div id="modalIcaPill" class="badge-status alta" style="font-size:14px; padding:6px 12px;">
-ICA 75.2 • Idoneidad ALTA
-</div>
-</div>
-<p id="modalDescription" style="font-family:var(--font-serif); font-size:15px; color:var(--text-secondary); line-height:1.6; margin-bottom:20px;">
-Descripción técnica del municipio.
-</p>
-<div class="dossier-grid">
-<div class="dossier-block">
-<div class="dossier-block-header">
-<svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-1. Sanidad y Salud Pública (SERMAS)
-</div>
-<div class="dossier-text" id="modalSanidadText"></div>
-<div style="margin-top:8px;">
-<div class="dossier-row"><span class="card-specs-label">Hospital Referencia:</span><span class="card-specs-val" id="modalHospital"></span></div>
-<div class="dossier-row"><span class="card-specs-label">Camas Hospitalarias:</span><span class="card-specs-val" id="modalCamas"></span></div>
-<div class="dossier-row"><span class="card-specs-label">Médicos de Atención Primaria:</span><span class="card-specs-val" id="modalMedicos"></span></div>
-</div>
-</div>
-<div class="dossier-block">
-<div class="dossier-block-header">
-<svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-2. Red Educativa y Escolar
-</div>
-<div class="dossier-text" id="modalEducacionText"></div>
-<div style="margin-top:8px;">
-<div class="dossier-row"><span class="card-specs-label">Plazas Escolares:</span><span class="card-specs-val" id="modalPlazasEsc"></span></div>
-<div class="dossier-row"><span class="card-specs-label">Ocupación Escolar:</span><span class="card-specs-val" id="modalOcupacionEsc"></span></div>
-<div class="dossier-row"><span class="card-specs-label">Plazas Libres:</span><span class="card-specs-val" id="modalHolguraEsc" style="color:var(--status-alta)"></span></div>
-</div>
-</div>
-<div class="dossier-block">
-<div class="dossier-block-header">
-<svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 3v18"></path><path d="M15 3v18"></path></svg>
-3. Transporte y Movilidad (CRTM)
-</div>
-<div class="dossier-text" id="modalTransporteText"></div>
-<div style="margin-top:8px;">
-<div class="dossier-row"><span class="card-specs-label">Zona Tarifaria:</span><span class="card-specs-val" id="modalZonaCrtm"></span></div>
-<div class="dossier-row"><span class="card-specs-label">Acceso por Carretera:</span><span class="card-specs-val" id="modalCarretera"></span></div>
-<div class="dossier-row"><span class="card-specs-label">Tiempo a Madrid:</span><span class="card-specs-val" id="modalTiempo"></span></div>
-</div>
-</div>
-<div class="dossier-block">
-<div class="dossier-block-header">
-<svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-4. Vivienda y Modelo AVM
-</div>
-<div class="dossier-text" id="modalViviendaText"></div>
-<div style="margin-top:8px;">
-<div class="dossier-row"><span class="card-specs-label">Precio Mercado Real:</span><span class="card-specs-val" id="modalPrecioReal"></span></div>
-<div class="dossier-row"><span class="card-specs-label">Precio AVM Estimado:</span><span class="card-specs-val" id="modalPrecioAvm"></span></div>
-<div class="dossier-row"><span class="card-specs-label">Diagnóstico Mercado:</span><span class="card-specs-val" id="modalDiagMercado"></span></div>
-</div>
-</div>
-</div>
-<div style="background:var(--bg-subtle); border-left:4px solid var(--madrid-red); padding:14px; border-radius:var(--radius-sm); margin-bottom:20px;">
-<h4 style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--madrid-red); margin-bottom:4px;">
-Síntesis del Índice de Capacidad de Acogida (ICA)
-</h4>
-<p id="modalObservaciones" style="font-size:13px; line-height:1.5; color:var(--text-main);"></p>
-</div>
-<div style="display:flex; justify-content:flex-end; gap:12px;">
-<button onclick="closeGovModal()" style="background:#FFFFFF; border:1px solid var(--border-main); color:var(--text-main); padding:8px 16px; font-family:var(--font-primary); font-size:13px; font-weight:600; border-radius:var(--radius-sm); cursor:pointer;">
-Cerrar Ficha
-</button>
-<button onclick="sendToSimulador()" style="background:var(--madrid-red); border:none; color:#FFFFFF; padding:8px 16px; font-family:var(--font-primary); font-size:13px; font-weight:700; border-radius:var(--radius-sm); cursor:pointer;">
-Simular Escenario en What-If
-</button>
-</div>
-</div>
-</div>
-</div>
-<footer class="gov-footer">
+
+<section class="home-section" id="como-funciona">
 <div class="container">
-<div class="footer-content">
-<div>
-<div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-<img src="#APP_FILES#svg/logo_comunidad_madrid.svg" style="height:36px; filter:brightness(0) invert(1);" alt="Comunidad de Madrid">
-<span style="font-size:16px; font-weight:700; color:#FFFFFF;">Comunidad de Madrid</span>
+<div class="section-eyebrow">Uso de la herramienta</div>
+<h2 class="section-title">Cómo funciona</h2>
+<p class="section-desc">Tres pasos, sin instalar nada: la simulación se calcula en el momento con los parámetros que elijas.</p>
+<ol class="steps">
+<li class="step-card">
+<div class="step-head"><span class="step-num">1</span><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg></div>
+<h3>Configura el escenario</h3>
+<p>Elige un perfil precargado o ajusta los parámetros tú mismo: año de proyección (2030–2040), crecimiento de la población, inversión disponible y preferencias.</p>
+</li>
+<li class="step-card">
+<div class="step-head"><span class="step-num">2</span><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+<h3>Ejecutamos el modelo</h3>
+<p>Al lanzar la simulación ejecutamos el modelo con los parámetros que has elegido y calculamos el escenario en tiempo real.</p>
+</li>
+<li class="step-card">
+<div class="step-head"><span class="step-num">3</span><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg></div>
+<h3>Consulta las métricas proyectadas</h3>
+<p>Recibes, para el año elegido, las métricas de cada municipio: población, capacidad de acogida, necesidades de servicios, precio y rentabilidad.</p>
+</li>
+</ol>
 </div>
-<p style="color:#A0AEC0; max-width:560px; line-height:1.6; font-size:12px;">
-Plataforma desarrollada para el <strong>II Datathon LoDCOREMadrid 2026</strong> en colaboración con la Universidad Carlos III de Madrid (UC3M). Basada en datos abiertos del Instituto Nacional de Estadística (INE), Servicio Madrileño de Salud (SERMAS), Consorcio Regional de Transportes de Madrid (CRTM) y Dirección General del Catastro.
-</p>
+</section>
+
+<section class="home-section alt" id="perfiles">
+<div class="container">
+<div class="section-eyebrow">Perfiles preconfigurados</div>
+<h2 class="section-title">Elige tu perfil</h2>
+<p class="section-desc">Cada perfil precarga los parámetros habituales de su caso de uso. Puedes modificarlos antes de lanzar la simulación.</p>
+<div class="profile-tabs" role="tablist" aria-label="Perfiles de uso">
+<button type="button" class="profile-tab" role="tab" id="tab-ciudadania" aria-controls="perfil-ciudadania" aria-selected="true" tabindex="0"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Ciudadanía</button>
+<button type="button" class="profile-tab" role="tab" id="tab-gestion" aria-controls="perfil-gestion" aria-selected="false" tabindex="-1"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>Gestión de la Comunidad</button>
+<button type="button" class="profile-tab" role="tab" id="tab-inversion" aria-controls="perfil-inversion" aria-selected="false" tabindex="-1"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>Inversores</button>
 </div>
-<div>
-<div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#FFFFFF; margin-bottom:10px;">
-Estructura Oficial LoDCORE
+<div class="profile-panel" role="tabpanel" id="perfil-ciudadania" aria-labelledby="tab-ciudadania">
+<div class="profile-main">
+<p class="profile-who">Personas y familias que se plantean empadronarse o cambiar de municipio y quieren saber cómo estará de dotado en el futuro.</p>
+<h3 class="block-label">Preguntas que responde</h3>
+<ul class="q-list">
+<li><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¿Seguirá habiendo plazas escolares y atención sanitaria cuando lleguen más vecinos?</span></li>
+<li><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¿Cuánto costará la vivienda y cuánto tardaré en llegar a Madrid?</span></li>
+<li><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¿Qué municipios encajan con mi hogar en el año que me interesa?</span></li>
+</ul>
 </div>
-<ul style="list-style:none; line-height:2; font-size:12px; color:#A0AEC0;">
-<li><a href="#" onclick="switchGovView('catalogo'); return false;" style="color:#CBD5E0; text-decoration:none;">Catálogo Oficial de Municipios</a></li>
-<li><a href="#" onclick="switchGovView('comparador'); return false;" style="color:#CBD5E0; text-decoration:none;">Comparador Lado a Lado (Radar)</a></li>
-<li><a href="#" onclick="switchGovView('recomendador'); return false;" style="color:#CBD5E0; text-decoration:none;">Recomendador de Empadronamiento</a></li>
-<li><a href="#" onclick="switchGovView('simulador'); return false;" style="color:#CBD5E0; text-decoration:none;">Simulador Dotacional What-If</a></li>
-<li><a href="#" onclick="switchGovView('matriz'); return false;" style="color:#CBD5E0; text-decoration:none;">Matriz de Indicadores y AVM</a></li>
-<li><a href="#" onclick="switchGovView('fuentes'); return false;" style="color:#CBD5E0; text-decoration:none;">Fuentes Oficiales y Licencias</a></li>
-<li><a href="mapa/mapa.html" target="_blank" rel="noopener" style="color:#CBD5E0; text-decoration:none;">Mapa Interactivo de Municipios (datos en vivo desde Oracle)</a></li>
+<div class="profile-side">
+<h3 class="block-label">Parámetros que se precargan</h3>
+<ul class="chip-list"><li class="chip chip-in">Año de proyección (2030–2040)</li><li class="chip chip-in">Composición del hogar</li><li class="chip chip-in">Presupuesto de vivienda (€/m²)</li><li class="chip chip-in">Tiempo máximo a Madrid</li><li class="chip chip-in">Prioridades: sanidad, educación, conectividad</li></ul>
+<h3 class="block-label">Métricas que obtienes</h3>
+<ul class="chip-list"><li class="chip chip-out">Municipios recomendados</li><li class="chip chip-out">Índice de capacidad de acogida (ICA)</li><li class="chip chip-out">Holgura sanitaria y escolar</li><li class="chip chip-out">Precio estimado (€/m²)</li><li class="chip chip-out">Tiempo a Madrid</li></ul>
+<a class="btn-primary" href="f?p=&APP_ID.:simulador:&SESSION.:PERFIL_CIUDADANIA">Simular como ciudadano o ciudadana<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+</div>
+<div class="profile-panel" role="tabpanel" id="perfil-gestion" aria-labelledby="tab-gestion">
+<div class="profile-main">
+<p class="profile-who">Responsables de planificación territorial, sanidad, educación y urbanismo que necesitan anticipar dónde y cuánto invertir.</p>
+<h3 class="block-label">Preguntas que responde</h3>
+<ul class="q-list">
+<li><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¿Cuándo se saturarán la sanidad y la educación de cada municipio si crece la población?</span></li>
+<li><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¿Cuántos médicos y plazas escolares harán falta, y con qué coste?</span></li>
+<li><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¿Cómo repartir un presupuesto cerrado entre municipios para ganar la máxima capacidad?</span></li>
+</ul>
+</div>
+<div class="profile-side">
+<h3 class="block-label">Parámetros que se precargan</h3>
+<ul class="chip-list"><li class="chip chip-in">Año de proyección (2030–2040)</li><li class="chip chip-in">Escenario de crecimiento demográfico (p. ej. +5 % o +10 %)</li><li class="chip chip-in">Presupuesto de inversión disponible</li><li class="chip chip-in">Comarcas o municipios a analizar</li></ul>
+<h3 class="block-label">Métricas que obtienes</h3>
+<ul class="chip-list"><li class="chip chip-out">Población proyectada</li><li class="chip chip-out">Año estimado de saturación</li><li class="chip chip-out">Médicos y plazas escolares adicionales</li><li class="chip chip-out">Coste estimado de ampliación</li><li class="chip chip-out">Reparto del presupuesto por municipio</li></ul>
+<a class="btn-primary" href="f?p=&APP_ID.:simulador:&SESSION.:PERFIL_GESTION">Simular como gestión pública<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+</div>
+<div class="profile-panel" role="tabpanel" id="perfil-inversion" aria-labelledby="tab-inversion">
+<div class="profile-main">
+<p class="profile-who">Promotores, inversores y entidades financieras que buscan municipios con demanda residencial futura y un mercado todavía por desarrollar.</p>
+<h3 class="block-label">Preguntas que responde</h3>
+<ul class="q-list">
+<li><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¿Dónde crecerá la población y habrá suelo urbano disponible?</span></li>
+<li><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¿Está el precio actual por debajo o por encima del que estima el modelo?</span></li>
+<li><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>¿Qué rentabilidad bruta de alquiler cabe esperar?</span></li>
+</ul>
+</div>
+<div class="profile-side">
+<h3 class="block-label">Parámetros que se precargan</h3>
+<ul class="chip-list"><li class="chip chip-in">Año de proyección (2030–2040)</li><li class="chip chip-in">Tipo de municipio y comarca</li><li class="chip chip-in">Rango de precio de compra y alquiler (€/m²)</li><li class="chip chip-in">Rentabilidad mínima exigida</li></ul>
+<h3 class="block-label">Métricas que obtienes</h3>
+<ul class="chip-list"><li class="chip chip-out">Población proyectada</li><li class="chip chip-out">Precio estimado frente a precio de mercado</li><li class="chip chip-out">Rentabilidad bruta de alquiler</li><li class="chip chip-out">Suelo urbano y vivienda vacía disponibles</li><li class="chip chip-out">Riesgo de saturación (ICA)</li></ul>
+<a class="btn-primary" href="f?p=&APP_ID.:simulador:&SESSION.:PERFIL_INVERSION">Simular como inversor o inversora<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+</div>
+<p class="legend-line"><span class="chip chip-in">Parámetros</span> lo que tú defines · <span class="chip chip-out">Métricas</span> lo que devuelve el modelo</p>
+</div>
+</section>
+
+<section class="home-section" id="modelos">
+<div class="container">
+<div class="section-eyebrow">Metodología</div>
+<h2 class="section-title">Modelos de datos utilizados</h2>
+<p class="section-desc">Modelos que intervienen en la simulación y qué aporta cada uno.</p>
+<div class="todo-box">
+<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+<div><span class="todo-tag">TODO</span>
+<p>Enumerar y explicar brevemente los modelos de datos usados en la simulación.</p></div>
+</div>
+</div>
+</section>
+
+<section class="home-section alt" id="alcance">
+<div class="container">
+<div class="note-box">
+<h2 class="note-title"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>Antes de interpretar los resultados</h2>
+<ul>
+<li>Las proyecciones son <strong>escenarios</strong>, no predicciones: dependen de los parámetros que introduzcas.</li>
+<li>Cada resultado se publica con su <strong>procedencia</strong> (origen, método y versión del conjunto de datos) y su <strong>banda de incertidumbre</strong>.</li>
 </ul>
 </div>
 </div>
-<div class="footer-legal">
-<span>© 2026 Comunidad de Madrid. Todos los derechos reservados.</span>
-<span>Aviso Legal • Política de Privacidad • Accesibilidad • Mapa del Sitio</span>
-</div>
-</div>
-</footer>
+</section>
+
+
 </div>
 
 <script src="index.js" defer></script>
