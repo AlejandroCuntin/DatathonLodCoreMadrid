@@ -34,7 +34,7 @@ DatathonLodCoreMadrid/
 ├── frontend/                        # portal estático (index.html, datos embebidos)
 ├── scripts/                         # run_all_models_n1_n2_n3.py + auditorías
 ├── tests/                           # unit + integración (pytest)
-├── oracle/ddl/                      # 02 tabla, 03 vistas APEX, 04 ranking, 05 ONNX
+├── oracle/ddl/                      # 01 tabla, 02 vistas APEX, 03 ONNX, 04 ranking
 ├── oracle/onnx/                     # binarios ONNX para N2
 ├── data/raw/                        # descargas originales INE + CKAN (inmutables)
 ├── data/output/                     # payload JSON del panel
@@ -78,17 +78,17 @@ Endpoints:
 
 Ejecutar en orden con SQLcl, SQL Developer o APEX › SQL Workshop:
 
-1. `oracle/ddl/02-tablas_procesadas.sql` (crea `municipios_procesados` con las **92 columnas** del panel y 4 columnas virtuales de compatibilidad)
-2. `oracle/ddl/03-vistas_apex.sql`
-3. `oracle/ddl/04-perfiles_y_ranking.sql` (perfiles, pesos y función de ranking del ciudadano)
-4. `oracle/ddl/05-modelos_onnx.sql`
+1. `oracle/ddl/01-tablas_procesadas.sql` (crea `municipios_procesados` con las **92 columnas** del panel y 4 columnas virtuales de compatibilidad)
+2. `oracle/ddl/02-vistas_apex.sql`
+3. `oracle/ddl/03-modelos_onnx.sql`
+4. `oracle/ddl/04-perfiles_y_ranking.sql` (perfiles, pesos y función de ranking del ciudadano)
 
 > Se retiraron `01-tablas_raw.sql` (tres tablas crudas que nadie rellenaba y que
-> declaraban plazas y médicos inexistentes en las fuentes) y `06-dataset_completo_APEX.sql`
-> (reset destructivo). El antiguo `04-indices_espaciales.sql` también se retiró:
-> la columna SDO_GEOMETRY nunca se poblaba y el mapa trabaja con latitud/longitud.
+> declaraban plazas y médicos inexistentes en las fuentes), el antiguo script de
+> índices espaciales y `06-dataset_completo_APEX.sql` (reset destructivo).
+> La columna SDO_GEOMETRY nunca se poblaba: el mapa trabaja con latitud/longitud.
 
-Para el paso 4, copiar `oracle/onnx/*.onnx` a un directorio del servidor y crear
+Para el paso 3, copiar `oracle/onnx/*.onnx` a un directorio del servidor y crear
 el objeto de directorio antes de cargar los modelos:
 
 ```sql

@@ -1,5 +1,5 @@
 -- =============================================================================
--- LoDCORE Madrid • 02-tablas_procesadas.sql
+-- LoDCORE Madrid • 01-tablas_procesadas.sql
 -- Dataset integrado municipal (Fase F2/F3) con 92 columnas del panel validado,
 -- (88 originales + 4 reales de la Etapa 1: Catastro, INE EVR, INE padrón 6y)
 -- trazabilidad obligatoria y columnas virtuales para vistas APEX y scoring ONNX

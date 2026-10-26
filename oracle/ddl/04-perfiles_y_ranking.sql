@@ -8,7 +8,7 @@
 --   tests/unit/test_perfiles_sql_sync.py compara ambos lados y falla si divergen.
 --   Si cambias un numero, cambialo en los dos sitios.
 --
--- Orden de ejecucion: 02 (tabla) -> 03 (vistas) -> 04 (este) -> 05 (ONNX)
+-- Orden de ejecucion: 01 (tabla) -> 02 (vistas) -> 03 (ONNX) -> 04 (este)
 -- =============================================================================
 
 -- ---------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 -- =============================================================================
--- LoDCORE Madrid • 03-vistas_apex.sql
+-- LoDCORE Madrid • 02-vistas_apex.sql
 -- Vistas con origen, metodo, dataset_version y salvaguarda no-compensatoria
 -- =============================================================================
 

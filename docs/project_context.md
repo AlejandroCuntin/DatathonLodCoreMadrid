@@ -31,7 +31,7 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Tests | **57 en verde** |
 | Modelos ONNX en Oracle | M1 y M4 |
 | API | `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto` |
-| DDL Oracle | `02-tablas_procesadas.sql`, `03-vistas_apex.sql`, `05-modelos_onnx.sql` |
+| DDL Oracle | `01-tablas_procesadas.sql`, `02-vistas_apex.sql`, `03-modelos_onnx.sql`, `04-perfiles_y_ranking.sql` |
 
 **Ejecutar:**
 ```powershell
