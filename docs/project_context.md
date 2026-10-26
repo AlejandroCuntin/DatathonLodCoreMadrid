@@ -26,6 +26,7 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Columnas del panel | **92** |
 | Columnas observadas (reales) | **8** |
 | Dataset version | `v1.1.0-F2` |
+| Perfil ciudadano | **C1 completado** (C2-C7 pendientes) |
 | Tests | **36 en verde** |
 | Modelos ONNX en Oracle | M1 y M4 |
 | API | `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto` |
@@ -158,6 +159,15 @@ Orden obligatorio de cálculo:
 3. Ranking según pesos del perfil (solo entre municipios ya evaluados)
 ```
 
+### Construcción de pesos (decisión C1)
+```
+Pesos base = iguales (0,25 cada dimensión): no hay evidencia para preferir
+Ajustes personales = supuestos declarados y acotados
+Aplicación = transferencia (el total suma 1,0; tope del 20 % por perfil)
+Sensibilidad = ±20 % por dimensión; se reporta Spearman y estabilidad del top-5
+```
+No se afirma que exista un peso correcto: se mide cuánto importa equivocarse.
+
 ### Umbrales
 Viven en `src/lodcore/config/thresholds.py`. Una sola fuente de verdad.
 La fecha de decisión vive en `src/lodcore/config` (`FECHA_DECISION_MVP`).
@@ -182,7 +192,7 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 
 | Etapa | Contenido | Estado |
 |---|---|---|
-| **C1** | Modelo de preferencias: entradas, pesos, filtros y fórmula de esfuerzo | Especificado en `docs/perfil_ciudadano.md`; falta el módulo ejecutable |
+| **C1** | Modelo de preferencias: entradas, pesos, filtros y fórmula de esfuerzo | ✅ **Hecho**: `docs/perfil_ciudadano.md` + `src/lodcore/config/perfiles.py` (verificado) |
 | **C2** | Motor de ranking con pesos del perfil y filtros duros | Pendiente |
 | **C3** | Asequibilidad: cuota, esfuerzo financiero y gap de mercado (M1) | Pendiente |
 | **C4** | Explicación por municipio: desglose de afinidad, fortalezas y carencias | Pendiente |
