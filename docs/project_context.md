@@ -26,8 +26,8 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Columnas del panel | **92** |
 | Columnas observadas (reales) | **8** |
 | Dataset version | `v1.1.0-F2` |
-| Perfil ciudadano | **C1 y C2 hechos** (C3-C7 pendientes) |
-| Ranking Oracle | `04-perfiles_y_ranking.sql` (tablas + 2 funciones) |
+| Perfil ciudadano | **C1 y C2 hechos**; C3/C4 parciales; C5 verificado en Oracle |
+| Ranking Oracle | `04-perfiles_y_ranking.sql` ejecutado: pesos y ranking coinciden con Python |
 | Tests | **57 en verde** |
 | Modelos ONNX en Oracle | M1 y M4 |
 | API | `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto` |
@@ -194,10 +194,10 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 | Etapa | Contenido | Estado |
 |---|---|---|
 | **C1** | Modelo de preferencias: entradas, pesos, filtros y fórmula de esfuerzo | ✅ **Hecho**: `docs/perfil_ciudadano.md` + `src/lodcore/config/perfiles.py` (verificado) |
-| **C2** | Motor de ranking con pesos del perfil y filtros duros | ✅ **Hecho**: `m5_recomendador/ranking.py` + 12 tests |
+| **C2** | Motor de ranking con pesos del perfil y filtros duros | ✅ **Hecho y verificado**: `m5_recomendador/ranking.py`, 12 tests y coincidencia con Oracle |
 | **C3** | Asequibilidad: cuota, esfuerzo financiero y gap de mercado (M1) | Pendiente |
 | **C4** | Explicación por municipio: desglose de afinidad, fortalezas y carencias | Pendiente |
-| **C5** | Capa Oracle: `PERFILES_PARAMETROS`, `PERFILES_BASE`, `PERFILES_AJUSTES` y `f_ranking_ciudadano` | 🟡 **Hecho el SQL** (`04-perfiles_y_ranking.sql`); falta probarlo contra Oracle |
+| **C5** | Capa Oracle: `PERFILES_PARAMETROS`, `PERFILES_BASE`, `PERFILES_AJUSTES` y `f_ranking_ciudadano` | ✅ **Ejecutado en Oracle**: 8 parámetros, 4 pesos base, 6 reglas; pesos y ranking coinciden con Python |
 | **C6** | API N3 equivalente a la función SQL | Pendiente |
 | **C7** | Página APEX del ciudadano: formulario, resultados, mapa y comparador | Pendiente |
 
@@ -258,3 +258,53 @@ causal/ATE, spillover medido, perfil empresario, panel de 179 municipios.
 Todo número publicado debe poder rastrearse a un fichero o a una función.
 Si una variable es calibrada, se declara en `fuente_datos` y se dice en la
 presentación. Es mejor un sistema pequeño y comprobable que uno grande y falso.
+
+---
+
+## 15. Ordenar, predecir y simular: tres cosas distintas
+
+| Operación | Pregunta | ¿Usa datos del futuro? | Dónde está |
+|---|---|---|---|
+| **Evaluar / ordenar** | ¿Qué municipio encaja con lo que pido? | No | Ranking (C2) |
+| **Predecir** | ¿Qué pasará en este municipio en 2030? | Sí | M3 (población y saturación) |
+| **Simular** | ¿Qué pasa si invierto X o llegan N personas? | No | What-if y optimizador |
+
+**Importante:** el formulario del ciudadano no alimenta una predicción: son sus
+preferencias. El ranking evalúa una realidad ya presente en los datos.
+
+**La predicción honesta que falta (E6):** comprobar si el ICA anticipa el
+crecimiento real. Se hace con backtest: indicadores de 2015 -> predecir 2020 ->
+comparar con el crecimiento observado. Eso permite decir "el índice acierta",
+no "el índice predice".
+
+**Lo que no se puede predecir:** "¿seré feliz viviendo ahí?". No existe ninguna
+etiqueta pública de satisfacción por municipio y perfil. Sin `y` no hay modelo.
+
+---
+
+## 16. Ampliación a 179 municipios (E4, no C6)
+
+Hoy el panel tiene 20 municipios porque son los únicos con las 92 columnas.
+
+**El código no asume 20:** el ranking usa `len(aceptados)` y las funciones SQL
+recorren las filas de la tabla. Añadir municipios no requiere cambiar el motor.
+
+**Lo que sí habría que actualizar al ampliar:**
+
+| Elemento | Cambio |
+|---|---|
+| `tests/unit/test_ingest.py` (72, 98) | Asserts que fijan 20 |
+| `tests/integration/test_fuga_l1_l7_y_baselines.py` (99-100) | Asserts que fijan 20 |
+| `tests/unit/test_ranking_ciudadano.py` (255) | Assert que fija 20 |
+| `scripts/check_model_cards.py` (61) | Población agregada (200.267) |
+| `frontend/index.js` | Datos embebidos |
+| Oracle | `TRUNCATE` + recarga del CSV |
+
+**Decisión:** no se amplía inventando las 84 columnas calibradas. Se añade una
+**capa real** de 179 municipios con ~10 columnas oficiales (población, valor
+catastral, migración, crecimiento, centros sanitarios y educativos) como dataset
+separado para el mapa y el diagnóstico. La capa de 20 mantiene el método completo.
+
+**Frase para el jurado:** "El método está validado en 20 municipios; la capa
+oficial cubre 179; extender el modelo es sustituir variables calibradas por
+SERMAS y Educación, no escribir más código."
