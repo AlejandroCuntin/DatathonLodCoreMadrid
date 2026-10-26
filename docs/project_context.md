@@ -308,3 +308,47 @@ separado para el mapa y el diagnóstico. La capa de 20 mantiene el método compl
 **Frase para el jurado:** "El método está validado en 20 municipios; la capa
 oficial cubre 179; extender el modelo es sustituir variables calibradas por
 SERMAS y Educación, no escribir más código."
+
+---
+
+## 17. Validación (E6)
+
+**Qué mide:** si el índice se corresponde con el crecimiento real, y cuánto
+acierta la proyección demográfica. **Qué no mide:** predicción. El ICA es actual
+(2024-2026) y el crecimiento es histórico: son asociaciones, no pronósticos.
+
+**Cómo se regenera:**
+```
+python -m src.lodcore.validation.validacion_ica
+```
+Salida: `data/output/validacion_ica.json`
+
+### Resultados
+
+| Prueba | Resultado |
+|---|---|
+| ICA vs crecimiento 2020-2025 | ρ = **+0,101** (p = 0,673); IC95 % [−0,333, +0,555] |
+| ICA vs crecimiento 2015-2020 | ρ = −0,367 (p = 0,112) |
+| ICA vs crecimiento 2010-2015 | ρ = −0,156 (p = 0,510) |
+| Indicadores reales vs crecimiento | Ninguno significativo (valor catastral −0,295; migración +0,072) |
+| Regla no compensatoria | Sin alerta +6,95 % · Con alerta +7,58 % |
+| Backtest M3 2020→2025 | Error mediano **1,55 %** · persistencia 7,02 % · base comarca 2,87 % |
+| Backtest M3 2015→2020 | Error mediano 4,29 % · persistencia 4,91 % · base comarca 3,83 % |
+| Coincidencia top-5 ICA / crecimiento | **2 de 5** (Montejo y Robledo) |
+
+### Hallazgo principal
+
+Los municipios que más crecieron son los que menos capacidad tienen:
+
+| Municipio | Crecimiento 2020-2025 | ICA |
+|---|---|---|
+| Villa del Prado | +16,2 % | 36,9 |
+| Colmenar de Oreja | +11,9 % | 35,3 |
+| Navalcarnero | +11,2 % | 24,5 |
+
+**Lectura:** el ICA mide capacidad disponible, no atractivo. El crecimiento real
+no sigue a la capacidad, lo que confirma el problema territorial que justifica
+la herramienta.
+
+**Pendiente:** elegir el enfoque del pitch (A negativo / B diferencial / C mixto).
+
