@@ -74,14 +74,14 @@ flowchart TD
   - **CAM:** Datos abiertos de la Comunidad (CKAN). Centros de salud en alta (SERMAS) y centros educativos.
   - **Catastro:** Dirección General del Catastro, 2026. Valor catastral medio (€/m²) y volumen edificado.
   - **CRTM:** Consorcio Regional de Transportes. Zonas tarifarias e isócronas medias a Madrid.
-  - *Regla de honestidad:* Cada variable lleva su etiqueta REAL o ESTIMADO.
+  - *Regla de honestidad:* Cada variable lleva su etiqueta REAL o ESTIMADO. Control activo de overfitting desde la ingesta.
 * **Fase 2 · Control de Calidad:**
   - **92** columnas del panel verificadas.
   - **0** valores ausentes en las variables de modelado.
-  - **20** códigos INE únicos, sin repetidos.
+  - **20** códigos INE únicos, sin repetidos (piloto metodológico con 92 variables y modelos M1-M5).
   - **73** pruebas unitarias y de integración (100% pasando).
-  - Todos los municipios tienen entre 1 y 49.999 habitantes, y precios, ocupaciones y cupos son positivos.
-  - `data/validated/municipios_panel_validado.csv`.
+  - **Ampliación Regional en Git:** Cobertura de **155 municipios < 50.000 hab.** (997.059 habitantes, 0 nulos) y **179 municipios de la CAM** con datos 100% oficiales mediante pipeline automatizado (`pipeline_179.py`).
+  - `data/validated/municipios_panel_validado.csv` y `panel_menores_50k_real.csv`.
 
 ---
 
@@ -142,29 +142,29 @@ flowchart TD
   - *Hero interactivo* con 4 KPIs comarcales (+108.400 hab., 12,4 M€ inversión necesaria).
   - *Recomendador ciudadano:* Simulación de perfiles y pesos sin almacenar datos personales.
   - *Mapa comarcal:* Semáforo dotacional y filtro de cuellos de botella.
-* **Tarjeta Derecha · Dataset Certificado (`data/validated/municipios_panel_validado.csv`):**
+* **Tarjeta Derecha · Dataset Certificado (`municipios_panel_validado.csv` · `panel_menores_50k_real.csv`):**
   - Espacio para captura o muestra tabular del panel de datos.
-  - *20 municipios piloto* en las 8 comarcas (200.267 habitantes cubiertos).
-  - *92 variables verificadas* (8 datos reales observados y etiquetados).
-  - *0 valores ausentes ni repetidos* con 73 tests continuos en verde.
+  - *20 municipios piloto:* 92 variables completas, 0 nulos, modelos M1-M5 y ranking.
+  - *Extensión regional Git:* Capa real de **155 municipios < 50.000 hab. (997.059 habitantes, 0 nulos)** y **179 municipios región completa** ingestados con fuentes oficiales (`pipeline_179.py`).
+  - *Garantía anti-overfitting:* 73 tests continuos en verde (fugas L1 a L7) y validación espacial GroupKFold por comarca.
 
 ---
 
 ### Slide 8: 6 · Validación Científica
-* **¿Cómo sabemos que el modelo es bueno?**
-* Proyectamos de 2020 a 2025 sin ver el dato real y lo comparamos con el padrón oficial
+* **Validación con Backtesting histórico (2015–2025)**
+* Backtest temporal ciego: medimos el error proyectando 2020–2025 frente al padrón oficial del INE
 * **Metodología en 5 pasos:**
   1. Población real de 2015 y 2020 (INE)
   2. Tasa anual geométrica de crecimiento
-  3. Proyección a 2025 sin ver el dato real
-  4. Contraste con el padrón oficial de 2025
+  3. Proyección a 2025 sin ver el dato real (Backtest ciego)
+  4. Contraste con el padrón oficial de 2025 y cálculo del acierto
   5. Error en porcentaje y en habitantes
 * **Métricas centrales:**
-  - **1,55%** error mediano de nuestra proyección a 5 años.
+  - **1,55%** error mediano de nuestra proyección a 5 años (frente a 7,02% naive).
   - **7,02%** error mediano si se asume que nada cambia.
 * **Error de la proyección 2020 → 2025 (%):**
   - Gráfico nativo horizontal de barras con los 7 municipios (Robledo 0,06%, Manzanares 0,39%, Buitrago 1,17%, Meco 1,86%, Chinchón 7,07%, Villa del Prado 10,66%, Montejo 12,31%).
-  - *La mitad de los municipios queda por debajo del 1,55%. En uno de 5.000 habitantes, el desvío típico ronda las 78 personas.*
+  - *Backtest riguroso: la mitad de los municipios tiene un error inferior al 1,55% a 5 años. En 5.000 hab., el desvío mediano ronda las 78 personas.*
 
 ---
 
@@ -196,17 +196,17 @@ flowchart TD
 ---
 
 ### Slide 11: 9 · Robustez Metodológica
-* **El modelo aprende, no memoriza**
-* Garantías contra la fuga de datos y validación espacial sin atajos
-* **Tres formas de hacer trampa:**
+* **Control de Overfitting: el modelo aprende, no memoriza**
+* Prevención activa de sobreajuste (overfitting), blindaje contra fugas L1-L7 y validación espacial
+* **Tres formas de hacer trampa / sobreajuste:**
   - *Mirar al futuro:* Usar la población proyectada a 2031 para predecir 2025 infla las métricas y deja el modelo inservible en producción.
-  - *Mezclar vecinos:* Repartir al azar municipios contiguos entre entrenamiento y prueba filtra información.
-  - *Memorizar:* Con N = 20, un modelo demasiado complejo memoriza filas en lugar de aprender patrones.
+  - *Mezclar vecinos:* Repartir al azar municipios contiguos entre entrenamiento y prueba filtra información geográfica.
+  - *Overfitting / Memorizar:* Con N = 20 evitamos redes neuronales complejas o deep learning que memorizarían filas. Usamos árboles regularizados, Ridge y exportación ONNX.
 * **Cómo lo comprobamos:**
-  - Comparativa adversarial: Versiones con y sin fuga deliberada, para confirmar que las métricas son generalización real.
-  - Validación espacial GroupKFold: Los municipios de una misma comarca van juntos a entrenamiento o a prueba.
-  - Control point-in-time: Ningún dato de entrada es posterior a la fecha de decisión del MVP.
-  - **73 tests unitarios y de integración:** Auditan las 7 fugas posibles (L1 a L7) con pytest.
+  - *Comparativa adversarial:* Versiones con y sin fuga deliberada para confirmar que el R² honesto generaliza sin sobreajuste.
+  - *Validación espacial GroupKFold:* Los municipios de una misma comarca van juntos a entrenamiento o a prueba.
+  - *Control point-in-time:* Ningún dato de entrada es posterior a la fecha de decisión del MVP.
+  - *73 tests continuos en verde:* Auditan las 7 fugas de overfitting (L1 a L7) con pytest.
 
 ---
 
@@ -227,9 +227,9 @@ flowchart TD
 
 ### Slide 13: 11 · Conclusiones y Transferencia
 * **Del piloto de 20 municipios a toda la región**
-* 1. **Resolución empírica:** Sustituimos la especulación por un marco cuantitativo verificado con backtest real (1,55% de error mediano) que integra capacidad dotacional y precios.
+* 1. **Resolución empírica y Backtest:** Sustituimos la especulación por un marco cuantitativo verificado con backtesting histórico (1,55% de error mediano) evitando cualquier overfitting.
 * 2. **Doble utilidad:** Sirve a las familias que planifican su traslado y a los gestores públicos que reparten recursos con rigor.
-* 3. **Escalable en Oracle 23ai:** Listo para los 155 municipios en cuanto la Comunidad de Madrid incorpore los registros internos de centros y plazas.
+* 3. **Cobertura regional en Git (¡Ya implementada!):** Capa real de **155 municipios < 50k hab. (997.059 hab., 0 nulos)** y **179 municipios de la CAM** ya ingestada con datos 100% oficiales (`pipeline_179.py`) y lista para Oracle 23ai.
 * *«No venimos a decir que nuestro índice predice el futuro: venimos a demostrar cuánto acierta, para qué sirve y cómo optimiza cada euro público invertido en la Comunidad de Madrid.»*
 
 ---
@@ -238,6 +238,9 @@ flowchart TD
 * **Anexo: preguntas que puede hacer el jurado**
 * Respuestas técnicas a las preguntas más probables:
   - *¿Cómo sé que el índice sirve?* $\rightarrow$ Mide capacidad de carga, no atractivo residencial. Contrastado con el crecimiento real, los pueblos que más crecen son los que ya están saturados, lo que justifica intervenir.
+  - *¿Son fiables las proyecciones demográficas?* $\rightarrow$ Error mediano del 1,55% a 5 años en ventanas históricas (INE 2015-2025), frente al 7,02% de suponer que nada cambia.
+  - *¿Por qué no usáis deep learning / Cómo evitáis el overfitting?* $\rightarrow$ Con 20 municipios, el deep learning causaría un severo overfitting. Empleamos modelos regularizados, validación GroupKFold por comarca y árboles exportados a ONNX con tolerancia < 1e-6.
+  - *¿Qué no habéis validado?* $\rightarrow$ Que el índice anticipe por sí solo el crecimiento espontáneo ($\rho = 0,10$). No lo afirmamos: mide capacidad dotacional objetiva.
   - *¿Son fiables las proyecciones demográficas?* $\rightarrow$ Error mediano del 1,55% a 5 años en ventanas históricas (INE 2015-2025), frente al 7,02% de suponer que nada cambia.
   - *¿Por qué no usáis deep learning?* $\rightarrow$ Con 20 municipios y sin etiquetas arbitrarias, una red neuronal sobreajustaría. Usamos árboles regularizados exportados a ONNX con tolerancia < 1e-6.
   - *¿Qué no habéis validado?* $\rightarrow$ Que el índice anticipe por sí solo el crecimiento espontáneo ($\rho = 0,10$). No lo afirmamos: mide capacidad dotacional objetiva.
