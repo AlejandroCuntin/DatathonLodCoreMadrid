@@ -166,7 +166,54 @@
     seguirá teniendo margen en 5-10 años. No son cinco opiniones: es una cadena.
   </p>
 
-  <h2><span class="num">4.</span>Qué es real y qué está calibrado</h2>
+  <h2><span class="num">4.</span>Tres perfiles, tres formas de usar el sistema</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Ciudadano</h3>
+      <div class="q">¿Dónde me conviene vivir?</div>
+      <dl>
+        <dt>Entradas</dt><dd>Presupuesto, ingresos, tiempo máximo, hijos, edad, transporte y tenencia</dd>
+        <dt>Qué hace</dt><dd>Deriva los pesos de tus preferencias y ordena los municipios</dd>
+        <dt>Qué recibe</dt><dd>Ranking con encaje, cuota, entrada, esfuerzo financiero y explicación</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3>Institución pública</h3>
+      <div class="q">¿Dónde invertir sin dejar municipios atrás?</div>
+      <dl>
+        <dt>Entradas</dt><dd>Presupuesto cerrado, comarca y objetivo (eficiencia o equidad)</dd>
+        <dt>Qué hace</dt><dd>Reparte la inversión priorizando cuellos de botella</dd>
+        <dt>Qué recibe</dt><dd>Asignación por municipio y comparativa entre objetivos</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3>Empresario <span class="tag support">roadmap</span></h3>
+      <div class="q">¿Dónde instalar actividad?</div>
+      <dl>
+        <dt>Estado</dt><dd>No implementado</dd>
+        <dt>Por qué</dt><dd>Requiere suelo industrial, empresas por CNAE y afiliación por municipio, que hoy no están integrados</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="rule">
+    <strong>Regla común:</strong> los pesos del perfil cambian el <em>ranking</em>, nunca el ICA ni la regla dura.
+    Primero se calcula la capacidad objetiva; después se ordena según tus preferencias.
+  </div>
+
+  <h2><span class="num">5.</span>Dónde se ejecuta cada cosa</h2>
+  <div class="chain">
+    <div class="step"><strong>N1 · Python</strong>entrena, valida y exporta a ONNX</div>
+    <div class="arrow">→</div>
+    <div class="step"><strong>N2 · Oracle</strong>carga el ONNX y puntúa con <code>PREDICTION()</code></div>
+    <div class="arrow">→</div>
+    <div class="step"><strong>N3 · APEX / API</strong>muestra el ranking y la ficha</div>
+  </div>
+  <p class="lead" style="margin-top:12px">
+    El modelo no se llama desde fuera: <strong>vive dentro de la base de datos</strong>.
+    Eso permite puntuar miles de filas sin mover datos y demuestra el despliegue en Oracle.
+  </p>
+
+  <h2><span class="num">6.</span>Qué es real y qué está calibrado</h2>
   <table>
     <thead><tr><th>Dato</th><th>Origen</th><th>Estado</th></tr></thead>
     <tbody>
@@ -185,7 +232,7 @@
     Es mejor un sistema pequeño y comprobable que uno grande y falso.
   </div>
 
-  <h2><span class="num">5.</span>Qué hemos validado y qué no</h2>
+  <h2><span class="num">7.</span>Qué hemos validado y qué no</h2>
   <table>
     <thead><tr><th>Prueba</th><th>Resultado</th><th>Lectura</th></tr></thead>
     <tbody>
@@ -201,7 +248,7 @@
     El crecimiento no sigue a la capacidad: justo el problema que la herramienta ayuda a corregir.
   </div>
 
-  <h2><span class="num">6.</span>Qué no hacemos (y por qué)</h2>
+  <h2><span class="num">8.</span>Qué no hacemos (y por qué)</h2>
   <table>
     <thead><tr><th>Técnica</th><th>¿La usamos?</th><th>Motivo</th></tr></thead>
     <tbody>
@@ -214,7 +261,24 @@
     </tbody>
   </table>
 
-  <h2><span class="num">7.</span>Privacidad</h2>
+  <h2><span class="num">9.</span>Cómo leer una ficha</h2>
+  <table>
+    <thead><tr><th>Término</th><th>Qué significa</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ICA</strong></td><td>Índice de Capacidad de Acogida, de 0 a 100. Mide cuánto margen tiene el municipio.</td></tr>
+      <tr><td><strong>Capacidad (semáforo)</strong></td><td>ALTA ≥ 60 · MEDIA 40–59 · BAJA &lt; 40.</td></tr>
+      <tr><td><strong>Servicio crítico saturado</strong></td><td>Sí cuando supera 1.500 hab/médico o 95 % de ocupación escolar. Si es Sí, el ICA se trunca por debajo de 40.</td></tr>
+      <tr><td><strong>Se rompe primero</strong></td><td>El servicio que limita la acogida: sanidad, educación o vivienda.</td></tr>
+      <tr><td><strong>Encaje (%)</strong></td><td>Puntuación del ranking para tus preferencias. No es el ICA: dos personas pueden ver encajes distintos del mismo municipio.</td></tr>
+      <tr><td><strong>Esfuerzo financiero</strong></td><td>Porcentaje de tus ingresos que se va en la cuota: ≤ 30 % asequible · 30–35 % ajustado · 35–45 % alto · &gt; 45 % no asequible.</td></tr>
+      <tr><td><strong>Entrada</strong></td><td>El 20 % del precio que no se financia.</td></tr>
+      <tr><td><strong>Tu máximo sostenible</strong></td><td>Precio por m² que puedes pagar sin superar el 30 % de esfuerzo.</td></tr>
+      <tr><td><strong>Gap de mercado</strong></td><td>Diferencia entre el precio de referencia y el valor estimado por M1. Negativo = por debajo del valor del modelo.</td></tr>
+      <tr><td><strong>Riesgo futuro</strong></td><td>Población proyectada a 2031 y año estimado de saturación (M3).</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">10.</span>Privacidad</h2>
   <p class="lead">
     El formulario del ciudadano no guarda datos personales. Presupuesto, ingresos, edad o hijos
     se usan solo para calcular el ranking en el momento y no se almacenan.
