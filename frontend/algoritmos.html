@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoDCORE Madrid · Cómo funciona</title>
+<style>
+  :root {
+    --blue: #477edc; --blue-dark: #295c84; --blue-deep: #204655;
+    --bg: #F7F9FC; --surface: #FFFFFF; --border: #DDE5EE;
+    --text: #232323; --text-2: #4A5568; --muted: #718096;
+    --green: #1f8a5b; --amber: #b7791f; --red: #c53030;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px; line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-dark));
+    color: #fff; padding: 46px 24px 40px;
+  }
+  header .wrap { max-width: 1080px; margin: 0 auto; }
+  header .pretitle { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  header h1 { margin: 8px 0 10px; font-size: 30px; line-height: 1.2; }
+  header p { margin: 0; max-width: 760px; color: #DCE7F5; }
+  header a { color: #fff; font-weight: 600; }
+  main { max-width: 1080px; margin: 0 auto; padding: 32px 24px 60px; }
+  h2 { font-size: 21px; margin: 38px 0 14px; color: var(--blue-deep); }
+  h2 .num { color: var(--blue); margin-right: 8px; }
+  p.lead { color: var(--text-2); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px 20px; border-top: 4px solid var(--blue);
+  }
+  .card h3 { margin: 0 0 4px; font-size: 16px; }
+  .card .q { color: var(--muted); font-size: 13px; font-style: italic; margin-bottom: 10px; }
+  .card dl { margin: 0; display: grid; grid-template-columns: 92px 1fr; gap: 4px 10px; font-size: 13.5px; }
+  .card dt { color: var(--muted); font-weight: 600; }
+  .card dd { margin: 0; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+  .tag.core { background: #E3EEFF; color: var(--blue-dark); }
+  .tag.support { background: #FFF4E0; color: var(--amber); }
+  .chain {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 22px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center;
+  }
+  .chain .step { background: #EEF4FF; border: 1px solid #C9D9F5; border-radius: 8px; padding: 10px 14px; font-size: 13px; text-align: center; }
+  .chain .step strong { display: block; color: var(--blue-dark); }
+  .chain .arrow { color: var(--blue); font-size: 20px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  th { background: #F0F5FC; color: var(--blue-deep); font-size: 13px; }
+  tr:last-child td { border-bottom: none; }
+  .ok { color: var(--green); font-weight: 700; }
+  .warn { color: var(--amber); font-weight: 700; }
+  .no { color: var(--red); font-weight: 700; }
+  .note { background: #FFF8E6; border-left: 4px solid var(--amber); padding: 14px 18px; border-radius: 6px; font-size: 14px; }
+  .rule { background: #EEF4FF; border-left: 4px solid var(--blue); padding: 14px 18px; border-radius: 6px; font-size: 14px; }
+  code { background: #F0F3F7; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+  footer { border-top: 1px solid var(--border); background: var(--surface); padding: 24px; text-align: center; color: var(--muted); font-size: 13px; }
+  footer a { color: var(--blue-dark); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="pretitle">II Datathon LoDCOREMadrid 2026 · UC3M + Comunidad de Madrid</div>
+    <h1>Cómo funciona LoDCORE Madrid</h1>
+    <p>Qué algoritmos usamos, con qué datos y para qué. Sin tecnicismos innecesarios
+       y diciendo también lo que <strong>no</strong> hacemos.</p>
+  </div>
+</header>
+
+<main>
+
+  <h2><span class="num">1.</span>La pregunta que responde el sistema</h2>
+  <p class="lead">
+    ¿Qué municipios de la Comunidad de Madrid con menos de 50.000 habitantes pueden
+    acoger nueva población sin colapsar sanidad, educación y vivienda, y cuánto cuesta
+    ampliar su capacidad?
+  </p>
+  <div class="rule">
+    <strong>Regla que ordena todo el sistema:</strong> si un municipio supera
+    <code>1.500 hab/médico</code> o el <code>95 %</code> de ocupación escolar, su capacidad
+    se trunca por debajo de 40 aunque el resto de factores sea excelente.
+    Una carencia crítica <strong>no se compensa</strong> con otros indicadores.
+  </div>
+
+  <h2><span class="num">2.</span>Los cinco módulos</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3>M1 · Valoración y asequibilidad <span class="tag support">apoyo</span></h3>
+      <div class="q">¿Puedo permitírmelo?</div>
+      <dl>
+        <dt>Algoritmo</dt><dd>Random Forest (scikit-learn), 7 variables</dd>
+        <dt>Datos</dt><dd>Tiempo a Madrid, densidad, fibra, paradas, viviendas vacías, médicos, holgura escolar</dd>
+        <dt>Salida</dt><dd>Precio de referencia €/m², gap de mercado y esfuerzo financiero familiar</dd>
+        <dt>Límite</dt><dd>Con 20 municipios no generaliza: R² fuera de muestra −0,34 y error de 383 €/m². Es <strong>ilustrativo</strong>, no una tasación</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3>M2 · Indicadores de capacidad <span class="tag core">núcleo</span></h3>
+      <div class="q">¿Qué tal están los servicios y la conexión?</div>
+      <dl>
+        <dt>Algoritmo</dt><dd>PCA + normalización Min-Max</dd>
+        <dt>Datos</dt><dd>Centros sanitarios y educativos reales + dotación calibrada</dd>
+        <dt>Salida</dt><dd>4 sub-índices de 0 a 100: sanidad/educación, conectividad, vivienda y holgura</dd>
+        <dt>Límite</dt><dd>Las isócronas son una estimación por tiempo a Madrid y densidad de paradas, no rutas reales sobre GTFS/OSM</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3>M3 · Proyección demográfica <span class="tag support">apoyo</span></h3>
+      <div class="q">¿Va a crecer o a vaciarse?</div>
+      <dl>
+        <dt>Algoritmo</dt><dd>Extrapolación geométrica calibrada con el padrón 2031</dd>
+        <dt>Datos</dt><dd>Padrón del INE 2010-2025 (179 municipios)</dd>
+        <dt>Salida</dt><dd>Población a 5 y 10 años, banda 95 % y año estimado de saturación</dd>
+        <dt>Validación</dt><dd>Backtest real: error mediano del <strong>1,55 % a 5 años</strong>, frente al 7,02 % de asumir que nada cambia</dd>
+        <dt>Límite</dt><dd>No es SARIMAX ni Prophet; el horizonte de 10 años no está validado</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3>M4 · Capacidad de acogida <span class="tag core">núcleo</span></h3>
+      <div class="q">¿Cuánta gente cabe y qué se rompe antes?</div>
+      <dl>
+        <dt>Algoritmo</dt><dd>Gradient boosting (scikit-learn) + reglas duras no compensatorias</dd>
+        <dt>Datos</dt><dd>Los 4 sub-índices de M2 + ratios de saturación y vivienda</dd>
+        <dt>Salida</dt><dd>Índice de Capacidad de Acogida (ICA), banda 95 %, factor limitante y coste de ampliación</dd>
+        <dt>Despliegue</dt><dd>El modelo se exporta a ONNX y se ejecuta <strong>dentro de Oracle Database</strong> con <code>PREDICTION()</code></dd>
+        <dt>Límite</dt><dd>El ICA es una fórmula conocida; el modelo la reproduce. No es XGBoost ni hace inferencia causal</dd>
+      </dl>
+    </div>
+
+    <div class="card">
+      <h3>M5 · Recomendador <span class="tag core">núcleo</span></h3>
+      <div class="q">¿Cuál encaja conmigo?</div>
+      <dl>
+        <dt>Algoritmo</dt><dd>K-Means (4 arquetipos) + ranking por suma ponderada</dd>
+        <dt>Datos</dt><dd>Los 4 sub-índices + preferencias del ciudadano</dd>
+        <dt>Salida</dt><dd>Ranking personalizado con desglose, fortalezas, carencias y esfuerzo financiero</dd>
+        <dt>Límite</dt><dd>Los pesos se derivan de supuestos declarados; el ranking se prueba con ±20 % y el top-5 se mantiene</dd>
+      </dl>
+    </div>
+
+  </div>
+
+  <h2><span class="num">3.</span>Cómo se encadenan</h2>
+  <div class="chain">
+    <div class="step"><strong>M2</strong>construye los 4 sub-índices</div>
+    <div class="arrow">→</div>
+    <div class="step"><strong>M4</strong>los combina y aplica la regla dura</div>
+    <div class="arrow">→</div>
+    <div class="step"><strong>M5</strong>ordena según tu perfil</div>
+  </div>
+  <p class="lead" style="margin-top:12px">
+    En paralelo, <strong>M1</strong> responde si es asequible y <strong>M3</strong> si el municipio
+    seguirá teniendo margen en 5-10 años. No son cinco opiniones: es una cadena.
+  </p>
+
+  <h2><span class="num">4.</span>Qué es real y qué está calibrado</h2>
+  <table>
+    <thead><tr><th>Dato</th><th>Origen</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td>Población y año del padrón</td><td>INE, tabla 2881</td><td class="ok">Observado</td></tr>
+      <tr><td>Nº de centros sanitarios y educativos</td><td>CKAN Comunidad de Madrid (en ALTA)</td><td class="ok">Observado</td></tr>
+      <tr><td>Valor catastral residencial</td><td>Dirección General del Catastro (2026)</td><td class="ok">Observado</td></tr>
+      <tr><td>Migración externa</td><td>INE, Variaciones Residenciales (2017-2021)</td><td class="ok">Observado</td></tr>
+      <tr><td>Crecimiento 2020-2025</td><td>INE, padrón (nult=6)</td><td class="ok">Observado</td></tr>
+      <tr><td>Precios, viviendas vacías, suelo, médicos, plazas, camas, transporte, fibra</td><td>Calibración con semilla 2026</td><td class="warn">Calibrado y declarado</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <strong>Por qué hay datos calibrados:</strong> el número de médicos y de plazas escolares
+    por municipio no existe en datos abiertos (SERMAS y Educación no lo publican desagregado).
+    Se declara en la columna <code>fuente_datos</code> de cada fila y se dice en la presentación.
+    Es mejor un sistema pequeño y comprobable que uno grande y falso.
+  </div>
+
+  <h2><span class="num">5.</span>Qué hemos validado y qué no</h2>
+  <table>
+    <thead><tr><th>Prueba</th><th>Resultado</th><th>Lectura</th></tr></thead>
+    <tbody>
+      <tr><td>Proyección demográfica a 5 años</td><td class="ok">1,55 % de error mediano</td><td>Bate a la persistencia (7,02 %)</td></tr>
+      <tr><td>ICA frente al crecimiento real</td><td class="warn">ρ = 0,10 (no significativo)</td><td>El ICA mide <strong>capacidad</strong>, no atractivo</td></tr>
+      <tr><td>Regla no compensatoria</td><td class="warn">Sin diferencia de crecimiento</td><td>Mide saturación de servicios, no popularidad</td></tr>
+      <tr><td>Ranking frente a pesos ±20 %</td><td class="ok">Top-5 estable</td><td>La recomendación no depende de afinar los pesos</td></tr>
+    </tbody>
+  </table>
+  <div class="rule">
+    <strong>Hallazgo principal:</strong> los municipios que más crecieron (Villa del Prado +16,2 %,
+    Colmenar de Oreja +11,9 %, Navalcarnero +11,2 %) son los que <strong>menos capacidad</strong> tienen.
+    El crecimiento no sigue a la capacidad: justo el problema que la herramienta ayuda a corregir.
+  </div>
+
+  <h2><span class="num">6.</span>Qué no hacemos (y por qué)</h2>
+  <table>
+    <thead><tr><th>Técnica</th><th>¿La usamos?</th><th>Motivo</th></tr></thead>
+    <tbody>
+      <tr><td>XGBoost / LightGBM</td><td class="no">No</td><td>Con 20 municipios no mejora a un gradient boosting estándar</td></tr>
+      <tr><td>SHAP como librería</td><td class="no">No</td><td>Se usan atribuciones aditivas de segundo orden, declaradas como tales</td></tr>
+      <tr><td>SARIMAX / Prophet</td><td class="no">No</td><td>La serie es demasiado corta; se usa extrapolación validada por backtest</td></tr>
+      <tr><td>Rutas reales GTFS/OSM</td><td class="no">No</td><td>Las isócronas son una estimación; las rutas reales son la fase 2</td></tr>
+      <tr><td>Inferencia causal / ATE</td><td class="no">No</td><td>Requiere historial de intervenciones que no es público</td></tr>
+      <tr><td>Efecto spillover medido</td><td class="no">No</td><td>Se ofrece como supuesto configurable, nunca como causalidad</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">7.</span>Privacidad</h2>
+  <p class="lead">
+    El formulario del ciudadano no guarda datos personales. Presupuesto, ingresos, edad o hijos
+    se usan solo para calcular el ranking en el momento y no se almacenan.
+  </p>
+
+</main>
+
+<footer>
+  LoDCORE Madrid · II Datathon 2026 · <a href="index.html">Volver al portal</a>
+</footer>
+
+</body>
+</html>

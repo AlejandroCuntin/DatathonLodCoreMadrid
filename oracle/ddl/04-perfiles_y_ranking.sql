@@ -1,18 +1,49 @@
 -- =============================================================================
 -- LoDCORE Madrid - 04-perfiles_y_ranking.sql
--- Perfil ciudadano en Oracle: reglas como datos + pesos + ranking por perfil.
+-- Perfil ciudadano en Oracle: reglas como datos + pesos + ranking + asequibilidad.
 --
 -- SINCRONIZACION OBLIGATORIA:
 --   Los valores de esta cabecera se replican desde src/lodcore/config/perfiles.py
---   y desde src/lodcore/config/thresholds.py. El test
+--   y src/lodcore/config/thresholds.py. El test
 --   tests/unit/test_perfiles_sql_sync.py compara ambos lados y falla si divergen.
---   Si cambias un numero, cambialo en los dos sitios.
 --
--- Orden de ejecucion: 01 (tabla) -> 02 (vistas) -> 03 (ONNX) -> 04 (este)
+-- SCRIPT REEJECUTABLE: borra y recrea sus propios objetos al principio.
+-- Orden de ejecucion: 01 -> 02 -> 03 (ONNX) -> 04 (este)
 -- =============================================================================
 
 -- ---------------------------------------------------------------------------
--- 1. Parametros del perfil (numeros unicos, en datos y no escondidos en codigo)
+-- 0. Limpieza idempotente (permite relanzar el script sin errores)
+-- ---------------------------------------------------------------------------
+BEGIN
+    FOR r IN (
+        SELECT object_name, object_type
+          FROM user_objects
+         WHERE object_type IN ('VIEW', 'FUNCTION', 'TABLE')
+           AND object_name IN (
+               'V_RANKING_CIUDADANO_DEMO', 'F_RANKING_CIUDADANO', 'F_PESOS_CIUDADANO',
+               'PERFILES_PARAMETROS', 'PERFILES_BASE', 'PERFILES_AJUSTES'
+           )
+    ) LOOP
+        BEGIN
+            EXECUTE IMMEDIATE 'DROP ' || r.object_type || ' ' || r.object_name
+                || CASE WHEN r.object_type = 'TABLE' THEN ' CASCADE CONSTRAINTS' ELSE '' END;
+        EXCEPTION WHEN OTHERS THEN NULL;
+        END;
+    END LOOP;
+END;
+/
+
+BEGIN EXECUTE IMMEDIATE 'DROP TYPE t_ranking FORCE'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP TYPE t_ranking_row FORCE'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP TYPE t_pesos FORCE'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP TYPE t_peso FORCE'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+
+-- ---------------------------------------------------------------------------
+-- 1. Parametros (numeros unicos, en datos y no escondidos en codigo)
 -- ---------------------------------------------------------------------------
 CREATE TABLE PERFILES_PARAMETROS (
     nombre      VARCHAR2(50) PRIMARY KEY,
@@ -20,14 +51,22 @@ CREATE TABLE PERFILES_PARAMETROS (
     descripcion VARCHAR2(200)
 );
 
-INSERT INTO PERFILES_PARAMETROS (nombre, valor, descripcion) VALUES ('max_transferencia_total', 0.20, 'Tope de masa que un perfil puede transferir entre dimensiones');
-INSERT INTO PERFILES_PARAMETROS (nombre, valor, descripcion) VALUES ('peso_min', 0.05, 'Peso minimo de una dimension tras los ajustes');
-INSERT INTO PERFILES_PARAMETROS (nombre, valor, descripcion) VALUES ('peso_max', 0.60, 'Peso maximo de una dimension tras los ajustes');
-INSERT INTO PERFILES_PARAMETROS (nombre, valor, descripcion) VALUES ('max_hab_por_medico', 1500, 'Regla dura: colapso sanitario si se supera');
-INSERT INTO PERFILES_PARAMETROS (nombre, valor, descripcion) VALUES ('max_ocupacion_escolar_pct', 95, 'Regla dura: colapso educativo si se supera');
-INSERT INTO PERFILES_PARAMETROS (nombre, valor, descripcion) VALUES ('umbral_ica_baja', 40, 'Por debajo de este ICA el semaforo es BAJA');
-INSERT INTO PERFILES_PARAMETROS (nombre, valor, descripcion) VALUES ('umbral_ica_media', 60, 'A partir de este ICA el semaforo es ALTA');
-INSERT INTO PERFILES_PARAMETROS (nombre, valor, descripcion) VALUES ('techo_afinidad_alerta', 39, 'Techo de afinidad si el municipio colapsa');
+INSERT INTO PERFILES_PARAMETROS VALUES ('max_transferencia_total', 0.20, 'Tope de masa que un perfil puede transferir');
+INSERT INTO PERFILES_PARAMETROS VALUES ('peso_min', 0.05, 'Peso minimo de una dimension');
+INSERT INTO PERFILES_PARAMETROS VALUES ('peso_max', 0.60, 'Peso maximo de una dimension');
+INSERT INTO PERFILES_PARAMETROS VALUES ('max_hab_por_medico', 1500, 'Colapso sanitario si se supera');
+INSERT INTO PERFILES_PARAMETROS VALUES ('max_ocupacion_escolar_pct', 95, 'Colapso educativo si se supera');
+INSERT INTO PERFILES_PARAMETROS VALUES ('umbral_ica_baja', 40, 'Por debajo, semaforo BAJA');
+INSERT INTO PERFILES_PARAMETROS VALUES ('umbral_ica_media', 60, 'Desde aqui, semaforo ALTA');
+INSERT INTO PERFILES_PARAMETROS VALUES ('techo_afinidad_alerta', 39, 'Techo de afinidad si colapsa');
+INSERT INTO PERFILES_PARAMETROS VALUES ('entrada_pct', 0.20, 'Fraccion del precio no financiada');
+INSERT INTO PERFILES_PARAMETROS VALUES ('esfuerzo_maximo_pct', 30, 'Esfuerzo maximo para el precio sostenible');
+INSERT INTO PERFILES_PARAMETROS VALUES ('tipo_interes_anual', 0.035, 'Tipo fijo declarado de la hipoteca');
+INSERT INTO PERFILES_PARAMETROS VALUES ('anios_hipoteca', 30, 'Plazo de la hipoteca en anios');
+INSERT INTO PERFILES_PARAMETROS VALUES ('financiacion_pct', 0.80, 'Fraccion del precio financiada');
+INSERT INTO PERFILES_PARAMETROS VALUES ('umbral_asequible', 30, 'Esfuerzo <= 30: Asequible');
+INSERT INTO PERFILES_PARAMETROS VALUES ('umbral_ajustado', 35, 'Esfuerzo <= 35: Ajustado');
+INSERT INTO PERFILES_PARAMETROS VALUES ('umbral_alto', 45, 'Esfuerzo <= 45: Alto; por encima: No asequible');
 
 -- ---------------------------------------------------------------------------
 -- 2. Pesos base por perfil (ciudadano: pesos iguales)
@@ -40,14 +79,13 @@ CREATE TABLE PERFILES_BASE (
     CONSTRAINT ck_perfiles_dim CHECK (dimension IN ('vivienda','educacion','conectividad','sanidad'))
 );
 
-INSERT INTO PERFILES_BASE (perfil, dimension, peso) VALUES ('ciudadano', 'vivienda', 0.25);
-INSERT INTO PERFILES_BASE (perfil, dimension, peso) VALUES ('ciudadano', 'educacion', 0.25);
-INSERT INTO PERFILES_BASE (perfil, dimension, peso) VALUES ('ciudadano', 'conectividad', 0.25);
-INSERT INTO PERFILES_BASE (perfil, dimension, peso) VALUES ('ciudadano', 'sanidad', 0.25);
+INSERT INTO PERFILES_BASE VALUES ('ciudadano', 'vivienda', 0.25);
+INSERT INTO PERFILES_BASE VALUES ('ciudadano', 'educacion', 0.25);
+INSERT INTO PERFILES_BASE VALUES ('ciudadano', 'conectividad', 0.25);
+INSERT INTO PERFILES_BASE VALUES ('ciudadano', 'sanidad', 0.25);
 
 -- ---------------------------------------------------------------------------
 -- 3. Reglas de ajuste personal (supuestos declarados, no verdades)
---    tope NULL = sin tope propio (solo aplica el tope global de transferencia)
 -- ---------------------------------------------------------------------------
 CREATE TABLE PERFILES_AJUSTES (
     regla              VARCHAR2(30) PRIMARY KEY,
@@ -58,12 +96,12 @@ CREATE TABLE PERFILES_AJUSTES (
     justificacion      VARCHAR2(200)
 );
 
-INSERT INTO PERFILES_AJUSTES (regla, dimension, delta, tope, rango_sensibilidad, justificacion) VALUES ('hijo', 'educacion', 0.05, 0.15, 0.02, 'La escolarizacion es la primera restriccion de una familia');
-INSERT INTO PERFILES_AJUSTES (regla, dimension, delta, tope, rango_sensibilidad, justificacion) VALUES ('edad_joven', 'educacion', 0.05, NULL, 0.02, 'Etapa de formacion de hogar (edad <= 45)');
-INSERT INTO PERFILES_AJUSTES (regla, dimension, delta, tope, rango_sensibilidad, justificacion) VALUES ('edad_senior', 'sanidad', 0.10, NULL, 0.03, 'Uso sanitario creciente (edad >= 65)');
-INSERT INTO PERFILES_AJUSTES (regla, dimension, delta, tope, rango_sensibilidad, justificacion) VALUES ('edad_media', 'sanidad', 0.05, NULL, 0.02, 'Transicion (46 <= edad < 65)');
-INSERT INTO PERFILES_AJUSTES (regla, dimension, delta, tope, rango_sensibilidad, justificacion) VALUES ('transporte_publico', 'conectividad', 0.05, NULL, 0.02, 'Dependencia real de la red de transporte');
-INSERT INTO PERFILES_AJUSTES (regla, dimension, delta, tope, rango_sensibilidad, justificacion) VALUES ('alquiler', 'vivienda', 0.05, NULL, 0.02, 'Sensibilidad al mercado de alquiler');
+INSERT INTO PERFILES_AJUSTES VALUES ('hijo', 'educacion', 0.05, 0.15, 0.02, 'La escolarizacion es la primera restriccion de una familia');
+INSERT INTO PERFILES_AJUSTES VALUES ('edad_joven', 'educacion', 0.05, NULL, 0.02, 'Etapa de formacion de hogar (edad <= 45)');
+INSERT INTO PERFILES_AJUSTES VALUES ('edad_senior', 'sanidad', 0.10, NULL, 0.03, 'Uso sanitario creciente (edad >= 65)');
+INSERT INTO PERFILES_AJUSTES VALUES ('edad_media', 'sanidad', 0.05, NULL, 0.02, 'Transicion (46 <= edad < 65)');
+INSERT INTO PERFILES_AJUSTES VALUES ('transporte_publico', 'conectividad', 0.05, NULL, 0.02, 'Dependencia real de la red de transporte');
+INSERT INTO PERFILES_AJUSTES VALUES ('alquiler', 'vivienda', 0.05, NULL, 0.02, 'Sensibilidad al mercado de alquiler');
 
 COMMIT;
 
@@ -90,7 +128,17 @@ CREATE OR REPLACE TYPE t_ranking_row AS OBJECT (
     indice_ica_ajustado     NUMBER,
     semaforo_ica            VARCHAR2(10),
     alerta_no_compensatoria CHAR(1),
-    factor_limitante        VARCHAR2(50)
+    factor_limitante        VARCHAR2(50),
+    precio_m2               NUMBER,
+    cuota_mensual_eur       NUMBER,
+    entrada_eur             NUMBER,
+    ingresos_necesarios_eur NUMBER,
+    precio_max_sostenible_m2 NUMBER,
+    esfuerzo_pct            NUMBER,
+    etiqueta_esfuerzo       VARCHAR2(20),
+    precio_avm_eur_m2       NUMBER,
+    gap_mercado_pct         NUMBER,
+    diagnostico_mercado     VARCHAR2(50)
 );
 /
 
@@ -134,13 +182,11 @@ BEGIN
     SELECT valor INTO v_max_transf FROM PERFILES_PARAMETROS WHERE nombre = 'max_transferencia_total';
     SELECT valor INTO v_peso_max   FROM PERFILES_PARAMETROS WHERE nombre = 'peso_max';
 
-    -- Hijos: delta por hijo, con tope propio
     IF p_hijos > 0 THEN
         SELECT delta, tope INTO v_delta, v_tope FROM PERFILES_AJUSTES WHERE regla = 'hijo';
         v_inc_edu := v_inc_edu + LEAST(NVL(v_tope, 99), v_delta * p_hijos);
     END IF;
 
-    -- Edad
     IF p_edad <= 45 THEN
         SELECT delta INTO v_delta FROM PERFILES_AJUSTES WHERE regla = 'edad_joven';
         v_inc_edu := v_inc_edu + v_delta;
@@ -152,7 +198,6 @@ BEGIN
         v_inc_san := v_inc_san + v_delta;
     END IF;
 
-    -- Transporte y tenencia
     IF LOWER(p_transporte) = 'publico' THEN
         SELECT delta INTO v_delta FROM PERFILES_AJUSTES WHERE regla = 'transporte_publico';
         v_inc_con := v_inc_con + v_delta;
@@ -163,18 +208,10 @@ BEGIN
     END IF;
 
     -- Tope individual de la dimension receptora
-    IF v_inc_viv > 0 AND v_viv + v_inc_viv > v_peso_max THEN
-        v_inc_viv := GREATEST(0, v_peso_max - v_viv);
-    END IF;
-    IF v_inc_edu > 0 AND v_edu + v_inc_edu > v_peso_max THEN
-        v_inc_edu := GREATEST(0, v_peso_max - v_edu);
-    END IF;
-    IF v_inc_con > 0 AND v_con + v_inc_con > v_peso_max THEN
-        v_inc_con := GREATEST(0, v_peso_max - v_con);
-    END IF;
-    IF v_inc_san > 0 AND v_san + v_inc_san > v_peso_max THEN
-        v_inc_san := GREATEST(0, v_peso_max - v_san);
-    END IF;
+    IF v_inc_viv > 0 AND v_viv + v_inc_viv > v_peso_max THEN v_inc_viv := GREATEST(0, v_peso_max - v_viv); END IF;
+    IF v_inc_edu > 0 AND v_edu + v_inc_edu > v_peso_max THEN v_inc_edu := GREATEST(0, v_peso_max - v_edu); END IF;
+    IF v_inc_con > 0 AND v_con + v_inc_con > v_peso_max THEN v_inc_con := GREATEST(0, v_peso_max - v_con); END IF;
+    IF v_inc_san > 0 AND v_san + v_inc_san > v_peso_max THEN v_inc_san := GREATEST(0, v_peso_max - v_san); END IF;
 
     -- Tope global de transferencia
     v_total := v_inc_viv + v_inc_edu + v_inc_con + v_inc_san;
@@ -195,20 +232,17 @@ BEGIN
     IF v_inc_san = 0 THEN v_pool := v_pool + v_san; END IF;
 
     IF v_total > 0 AND v_pool > 0 THEN
-        -- Transferencia: se resta a las no ajustadas en proporcion a su peso
         IF v_inc_viv > 0 THEN v_viv := v_viv + v_inc_viv; ELSE v_viv := v_viv - v_total * (v_viv / v_pool); END IF;
         IF v_inc_edu > 0 THEN v_edu := v_edu + v_inc_edu; ELSE v_edu := v_edu - v_total * (v_edu / v_pool); END IF;
         IF v_inc_con > 0 THEN v_con := v_con + v_inc_con; ELSE v_con := v_con - v_total * (v_con / v_pool); END IF;
         IF v_inc_san > 0 THEN v_san := v_san + v_inc_san; ELSE v_san := v_san - v_total * (v_san / v_pool); END IF;
     ELSIF v_total > 0 THEN
-        -- Caso limite: las cuatro dimensiones reciben. Se suma y se normaliza.
         v_viv := v_viv + v_inc_viv;
         v_edu := v_edu + v_inc_edu;
         v_con := v_con + v_inc_con;
         v_san := v_san + v_inc_san;
     END IF;
 
-    -- Normalizacion final
     v_total := v_viv + v_edu + v_con + v_san;
     IF v_total > 0 THEN
         v_viv := v_viv / v_total;
@@ -226,9 +260,9 @@ END;
 /
 
 -- ---------------------------------------------------------------------------
--- 6. Ranking del perfil ciudadano
+-- 6. Ranking del perfil ciudadano con asequibilidad
 --    Formula: suma ponderada de los 4 sub-indices (igual que ranking.py).
---    El colapso no excluye: se marca y se aplica el techo de afinidad.
+--    Presupuesto efectivo = minimo(declarado, sostenible segun ingresos).
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION f_ranking_ciudadano (
     p_presupuesto_m2 IN NUMBER,
@@ -236,7 +270,9 @@ CREATE OR REPLACE FUNCTION f_ranking_ciudadano (
     p_hijos          IN NUMBER   DEFAULT 0,
     p_edad           IN NUMBER   DEFAULT 35,
     p_transporte     IN VARCHAR2 DEFAULT 'publico',
-    p_tenencia       IN VARCHAR2 DEFAULT 'compra'
+    p_tenencia       IN VARCHAR2 DEFAULT 'compra',
+    p_ingresos       IN NUMBER   DEFAULT 2500,
+    p_m2             IN NUMBER   DEFAULT 90
 ) RETURN t_ranking PIPELINED
 IS
     v_viv NUMBER;
@@ -248,6 +284,27 @@ IS
     v_umbral_baja NUMBER;
     v_umbral_media NUMBER;
     v_techo NUMBER;
+    v_entrada_pct NUMBER;
+    v_esf_max NUMBER;
+    v_tipo NUMBER;
+    v_anios NUMBER;
+    v_financiacion NUMBER;
+    v_u_aseq NUMBER;
+    v_u_ajus NUMBER;
+    v_u_alto NUMBER;
+    v_ingresos NUMBER;
+    v_m2 NUMBER;
+    v_tenencia VARCHAR2(20);
+    v_factor NUMBER;
+    v_cuota_max NUMBER;
+    v_precio_max NUMBER;
+    v_presupuesto NUMBER;
+    v_precio NUMBER;
+    v_cuota NUMBER;
+    v_entrada NUMBER;
+    v_esf NUMBER;
+    v_ing_nec NUMBER;
+    v_etiqueta VARCHAR2(20);
     v_alerta CHAR(1);
     v_af NUMBER;
     v_ica NUMBER;
@@ -260,11 +317,37 @@ BEGIN
       INTO v_viv, v_edu, v_con, v_san
       FROM TABLE(f_pesos_ciudadano(p_hijos, p_edad, p_transporte, p_tenencia));
 
-    SELECT valor INTO v_max_hab      FROM PERFILES_PARAMETROS WHERE nombre = 'max_hab_por_medico';
-    SELECT valor INTO v_max_ocup     FROM PERFILES_PARAMETROS WHERE nombre = 'max_ocupacion_escolar_pct';
-    SELECT valor INTO v_umbral_baja  FROM PERFILES_PARAMETROS WHERE nombre = 'umbral_ica_baja';
-    SELECT valor INTO v_umbral_media FROM PERFILES_PARAMETROS WHERE nombre = 'umbral_ica_media';
-    SELECT valor INTO v_techo        FROM PERFILES_PARAMETROS WHERE nombre = 'techo_afinidad_alerta';
+    SELECT valor INTO v_max_hab       FROM PERFILES_PARAMETROS WHERE nombre = 'max_hab_por_medico';
+    SELECT valor INTO v_max_ocup      FROM PERFILES_PARAMETROS WHERE nombre = 'max_ocupacion_escolar_pct';
+    SELECT valor INTO v_umbral_baja   FROM PERFILES_PARAMETROS WHERE nombre = 'umbral_ica_baja';
+    SELECT valor INTO v_umbral_media  FROM PERFILES_PARAMETROS WHERE nombre = 'umbral_ica_media';
+    SELECT valor INTO v_techo         FROM PERFILES_PARAMETROS WHERE nombre = 'techo_afinidad_alerta';
+    SELECT valor INTO v_entrada_pct   FROM PERFILES_PARAMETROS WHERE nombre = 'entrada_pct';
+    SELECT valor INTO v_esf_max       FROM PERFILES_PARAMETROS WHERE nombre = 'esfuerzo_maximo_pct';
+    SELECT valor INTO v_tipo          FROM PERFILES_PARAMETROS WHERE nombre = 'tipo_interes_anual';
+    SELECT valor INTO v_anios         FROM PERFILES_PARAMETROS WHERE nombre = 'anios_hipoteca';
+    SELECT valor INTO v_financiacion  FROM PERFILES_PARAMETROS WHERE nombre = 'financiacion_pct';
+    SELECT valor INTO v_u_aseq        FROM PERFILES_PARAMETROS WHERE nombre = 'umbral_asequible';
+    SELECT valor INTO v_u_ajus        FROM PERFILES_PARAMETROS WHERE nombre = 'umbral_ajustado';
+    SELECT valor INTO v_u_alto        FROM PERFILES_PARAMETROS WHERE nombre = 'umbral_alto';
+
+    v_ingresos := NVL(p_ingresos, 2500);
+    IF v_ingresos <= 0 THEN v_ingresos := 2500; END IF;
+    v_m2 := NVL(p_m2, 90);
+    IF v_m2 <= 0 THEN v_m2 := 90; END IF;
+    v_tenencia := LOWER(NVL(p_tenencia, 'compra'));
+
+    -- Cuota por euro prestado (sistema frances)
+    v_factor := (v_tipo / 12) / (1 - POWER(1 + (v_tipo / 12), -1 * v_anios * 12));
+
+    -- Precio maximo sostenible y presupuesto efectivo
+    v_cuota_max := v_ingresos * (v_esf_max / 100);
+    IF v_tenencia = 'compra' THEN
+        v_precio_max := (v_cuota_max / v_factor) / v_financiacion / v_m2;
+    ELSE
+        v_precio_max := v_cuota_max / v_m2;
+    END IF;
+    v_presupuesto := LEAST(p_presupuesto_m2, v_precio_max);
 
     FOR r IN (
         SELECT * FROM (
@@ -278,14 +361,19 @@ BEGIN
                    m.ocupacion_escolar_pct,
                    m.indice_capacidad_global,
                    m.factor_limitante,
+                   m.precio_m2_compra,
+                   m.precio_m2_alquiler,
+                   m.precio_predicho_avm_m2,
+                   m.gap_mercado_pct,
+                   m.diagnostico_mercado,
                    (v_viv * m.score_vivienda
                     + v_edu * m.score_educacion
                     + v_con * m.score_conectividad
                     + v_san * m.score_sanidad) AS afinidad
               FROM municipios_procesados m
-             WHERE (CASE WHEN LOWER(p_tenencia) = 'compra'
+             WHERE (CASE WHEN v_tenencia = 'compra'
                          THEN m.precio_m2_compra
-                         ELSE m.precio_m2_alquiler END) <= p_presupuesto_m2
+                         ELSE m.precio_m2_alquiler END) <= v_presupuesto
                AND m.tiempo_medio_madrid_minutos <= p_tiempo_max
         )
         ORDER BY CASE WHEN hab_por_medico > v_max_hab OR ocupacion_escolar_pct > v_max_ocup
@@ -294,6 +382,25 @@ BEGIN
                  indice_capacidad_global DESC,
                  nombre
     ) LOOP
+        -- Asequibilidad
+        IF v_tenencia = 'compra' THEN
+            v_precio := r.precio_m2_compra;
+            v_cuota := v_precio * v_m2 * v_financiacion * v_factor;
+            v_entrada := v_precio * v_m2 * v_entrada_pct;
+        ELSE
+            v_precio := r.precio_m2_alquiler;
+            v_cuota := v_precio * v_m2;
+            v_entrada := 0;
+        END IF;
+        v_esf := (v_cuota / v_ingresos) * 100;
+        v_ing_nec := v_cuota / (v_esf_max / 100);
+
+        IF v_esf <= v_u_aseq THEN v_etiqueta := 'Asequible';
+        ELSIF v_esf <= v_u_ajus THEN v_etiqueta := 'Ajustado';
+        ELSIF v_esf <= v_u_alto THEN v_etiqueta := 'Alto';
+        ELSE v_etiqueta := 'No asequible'; END IF;
+
+        -- Regla no compensatoria
         IF r.hab_por_medico > v_max_hab OR r.ocupacion_escolar_pct > v_max_ocup THEN
             v_alerta := 'S';
             v_af := LEAST(r.afinidad, v_techo);
@@ -323,7 +430,17 @@ BEGIN
             ROUND(v_ica, 2),
             v_semaforo,
             v_alerta,
-            r.factor_limitante
+            r.factor_limitante,
+            ROUND(v_precio, 2),
+            ROUND(v_cuota, 2),
+            ROUND(v_entrada, 2),
+            ROUND(v_ing_nec, 2),
+            ROUND(v_precio_max, 2),
+            ROUND(v_esf, 2),
+            v_etiqueta,
+            ROUND(r.precio_predicho_avm_m2, 2),
+            ROUND(r.gap_mercado_pct, 2),
+            r.diagnostico_mercado
         ));
     END LOOP;
     RETURN;
@@ -331,21 +448,24 @@ END;
 /
 
 -- ---------------------------------------------------------------------------
--- 7. Vista de apoyo para APEX (ranking con los parametros por defecto)
+-- 7. Vista de apoyo para APEX (parametros por defecto)
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE VIEW v_ranking_ciudadano_demo AS
-SELECT nombre, comarca, afinidad, semaforo_ica,
-       alerta_no_compensatoria, factor_limitante, indice_ica_ajustado
+SELECT nombre, comarca, afinidad, semaforo_ica, alerta_no_compensatoria,
+       factor_limitante, indice_ica_ajustado, precio_m2, cuota_mensual_eur,
+       entrada_eur, esfuerzo_pct, etiqueta_esfuerzo, gap_mercado_pct
   FROM TABLE(f_ranking_ciudadano(
            p_presupuesto_m2 => 2500,
            p_tiempo_max     => 90,
            p_hijos          => 0,
            p_edad           => 35,
            p_transporte     => 'publico',
-           p_tenencia       => 'compra'
+           p_tenencia       => 'compra',
+           p_ingresos       => 2500,
+           p_m2             => 90
        ));
 
 COMMENT ON TABLE PERFILES_AJUSTES IS
     'Reglas del perfil ciudadano. Replicadas desde src/lodcore/config/perfiles.py; test de sincronizacion obligatorio.';
 COMMENT ON FUNCTION f_ranking_ciudadano IS
-    'Ranking por perfil. Formula: suma ponderada de sub-indices + techo no compensatorio. Equivalente a m5_recomendador/ranking.py.';
+    'Ranking por perfil con asequibilidad. Equivalente a m5_recomendador/ranking.py y config/perfiles.py.';

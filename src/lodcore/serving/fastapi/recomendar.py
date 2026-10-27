@@ -93,6 +93,7 @@ def ejecutar_recomendacion_ciudadana(
         "top_k": req.top_k,
         "preferencias_aplicadas": req.model_dump(),
         "pesos_aplicados": resultado["pesos"],
+        "presupuesto_efectivo_m2": resultado["presupuesto_efectivo_m2"],
         "ranking": resultado["ranking"],
         "excluidos": resultado["excluidos"],
         "sensibilidad": sensibilidad,

@@ -21,10 +21,16 @@ import pandas as pd
 import pytest
 
 from src.lodcore.config.perfiles import (
+    ENTRADA_PCT,
+    ESFUERZO_MAXIMO_PCT,
     PESO_MAX,
     PESO_MIN,
     PreferenciasCiudadano,
+    entrada_eur,
+    ingresos_necesarios_eur,
     pesos_ciudadano,
+    precio_max_sostenible_m2,
+    presupuesto_efectivo_m2,
 )
 from src.lodcore.models.m5_recomendador.ranking import (
     TECHO_AFINIDAD_ALERTA,
@@ -73,6 +79,9 @@ def _fila(
         "poblacion_2031": 1000,
         "anio_estimado_saturacion": 2045,
         "alerta_planificacion": "ESTABLE",
+        "precio_predicho_avm_m2": round(precio * 1.1, 2),
+        "gap_mercado_pct": round((precio / (precio * 1.1) - 1) * 100, 2),
+        "diagnostico_mercado": "OPORTUNIDAD_ASEQUIBLE",
     }
 
 
@@ -151,8 +160,12 @@ def test_bajar_presupuesto_no_incorpora_municipios_mas_caros():
         _fila("B", precio=1700),
         _fila("C", precio=2400),
     ]
-    amplio = rankear_municipios(filas, _perfil(presupuesto_max_m2_eur=2500))
-    estrecho = rankear_municipios(filas, _perfil(presupuesto_max_m2_eur=1800))
+    amplio = rankear_municipios(
+        filas, _perfil(presupuesto_max_m2_eur=2500, ingresos_netos_hogar_eur=4000)
+    )
+    estrecho = rankear_municipios(
+        filas, _perfil(presupuesto_max_m2_eur=1800, ingresos_netos_hogar_eur=4000)
+    )
     precios_estrecho = {m["nombre"]: m["precio_m2"] for m in estrecho["ranking"]}
     assert "C" not in precios_estrecho
     assert len(estrecho["ranking"]) < len(amplio["ranking"])
@@ -218,11 +231,57 @@ def test_salida_tiene_los_campos_prometidos():
         "alerta_no_compensatoria", "esfuerzo_financiero_pct",
         "etiqueta_esfuerzo", "fortalezas", "carencias",
         "riesgo_futuro", "motivo_recomendacion",
+        "cuota_mensual_eur", "entrada_eur", "ingresos_necesarios_eur",
+        "precio_max_sostenible_m2", "precio_avm_eur_m2",
+        "gap_mercado_pct", "diagnostico_mercado",
     ):
         assert clave in m
     assert abs(sum(m["desglose"].values()) - sum(
         v for k, v in m["desglose"].items()
     )) < 1e-9
+
+
+# ---------------------------------------------------------------------------
+# C3 · Asequibilidad
+# ---------------------------------------------------------------------------
+
+def test_entrada_es_el_20_por_ciento_del_precio():
+    assert entrada_eur(1500, 100) == pytest.approx(1500 * 100 * ENTRADA_PCT)
+
+
+def test_ingresos_necesarios_para_no_superar_el_esfuerzo_maximo():
+    assert ingresos_necesarios_eur(600) == pytest.approx(
+        600 / (ESFUERZO_MAXIMO_PCT / 100.0)
+    )
+
+
+def test_precio_max_sostenible_compra():
+    # 2.500 EUR/mes, 100 m2, 30 % de esfuerzo -> en torno a 2.000-2.150 EUR/m2
+    p = precio_max_sostenible_m2(2500, 100, "compra")
+    assert 2000.0 < p < 2150.0
+
+
+def test_presupuesto_efectivo_limita_por_ingresos():
+    prefs = _perfil(presupuesto_max_m2_eur=4000, ingresos_netos_hogar_eur=1500)
+    efectivo = presupuesto_efectivo_m2(prefs)
+    assert efectivo < 4000
+    assert efectivo == pytest.approx(
+        precio_max_sostenible_m2(1500, prefs.m2_deseados, prefs.tenencia)
+    )
+
+
+def test_el_filtro_usa_el_presupuesto_efectivo():
+    filas = [
+        _fila("Barato", precio=900),
+        _fila("Medio", precio=1900),
+    ]
+    # Declara 4.000 pero gana 1.200 -> el efectivo ronda 1.100
+    res = rankear_municipios(
+        filas, _perfil(presupuesto_max_m2_eur=4000, ingresos_netos_hogar_eur=1200)
+    )
+    assert res["presupuesto_efectivo_m2"] < 1500
+    assert [m["nombre"] for m in res["ranking"]] == ["Barato"]
+    assert res["excluidos"][0]["motivo"] == "PRECIO"
 
 
 # ---------------------------------------------------------------------------

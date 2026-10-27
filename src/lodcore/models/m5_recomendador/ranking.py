@@ -31,6 +31,7 @@ from src.lodcore.config.perfiles import (
     evaluar_asequibilidad,
     filtrar_municipios,
     pesos_ciudadano,
+    presupuesto_efectivo_m2,
     variantes_pesos,
 )
 from src.lodcore.models.m4_capacidad.reglas_no_compensatorias import (
@@ -139,8 +140,23 @@ def rankear_municipios(
                 "motivo_colapso": evaluado["motivo_colapso"],
                 "factor_limitante": str(evaluado.get("factor_limitante", "")),
                 "precio_m2": asequibilidad["precio_m2_evaluado"],
+                "cuota_mensual_eur": asequibilidad["cuota_mensual_eur"],
+                "entrada_eur": asequibilidad["entrada_eur"],
+                "ingresos_necesarios_eur": asequibilidad["ingresos_necesarios_eur"],
+                "precio_max_sostenible_m2": asequibilidad["precio_max_sostenible_m2"],
                 "esfuerzo_financiero_pct": asequibilidad["esfuerzo_financiero_pct"],
                 "etiqueta_esfuerzo": asequibilidad["etiqueta_esfuerzo"],
+                "precio_avm_eur_m2": (
+                    round(float(evaluado["precio_predicho_avm_m2"]), 2)
+                    if evaluado.get("precio_predicho_avm_m2") is not None
+                    else None
+                ),
+                "gap_mercado_pct": (
+                    round(float(evaluado["gap_mercado_pct"]), 2)
+                    if evaluado.get("gap_mercado_pct") is not None
+                    else None
+                ),
+                "diagnostico_mercado": evaluado.get("diagnostico_mercado"),
                 "fortalezas": texto["fortalezas"],
                 "carencias": texto["carencias"],
                 "riesgo_futuro": _riesgo_futuro(evaluado),
@@ -158,6 +174,7 @@ def rankear_municipios(
 
     return {
         "pesos": {d: round(pesos[d], 4) for d in DIMENSIONES},
+        "presupuesto_efectivo_m2": round(presupuesto_efectivo_m2(prefs), 2),
         "ranking": ranking,
         "excluidos": excluidos,
         "n_aceptados": len(aceptados),

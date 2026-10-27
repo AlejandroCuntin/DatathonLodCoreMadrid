@@ -26,11 +26,12 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Columnas del panel | **92** |
 | Columnas observadas (reales) | **8** |
 | Dataset version | `v1.1.0-F2` |
-| Perfil ciudadano | **C1 y C2 hechos**; C3/C4 parciales; C5 verificado en Oracle |
+| Perfil ciudadano | **C1, C2, C3, C5 y C6 hechos**; C4 y C7 parciales |
 | Ranking Oracle | `04-perfiles_y_ranking.sql` ejecutado: pesos y ranking coinciden con Python |
-| Tests | **57 en verde** |
+| Tests | **67 en verde** |
 | Modelos ONNX en Oracle | M1 y M4 |
 | API | `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto` |
+| Página de algoritmos | `frontend/algoritmos.html` (explica los 5 módulos, qué es real y qué no) |
 | DDL Oracle | `01-tablas_procesadas.sql`, `02-vistas_apex.sql`, `03-modelos_onnx.sql`, `04-perfiles_y_ranking.sql` |
 
 **Ejecutar:**
@@ -115,7 +116,7 @@ de datos. Ese es el argumento Oracle del proyecto.
 
 | Modelo | Algoritmo real | Pregunta que responde | Estado |
 |---|---|---|---|
-| **M1 · AVM** | Random Forest (sklearn) | ¿Puedo permitírmelo? Precio €/m² y gap de mercado | Ilustrativo: R² fuera de muestra inestable |
+| **M1 · AVM** | Random Forest (sklearn) | ¿Puedo permitírmelo? Precio €/m² y gap de mercado | Ilustrativo: R² fuera de muestra −0,34. Diagnóstico 27-10: Ridge, RF simple y KNN tampoco logran R² positivo; el límite es la muestra, no el algoritmo |
 | **M2 · Indicadores** | PCA + StandardScaler + MinMax | ¿Qué tal servicios y conexión? 4 sub-índices 0-100 | Determinista |
 | **M3 · Demografía** | Extrapolación geométrica calibrada (CAGR) | ¿Va a crecer o vaciarse? | Determinista; pendiente backtest |
 | **M4 · Capacidad** | GradientBoostingRegressor (sklearn) | ¿Cuánta gente cabe y qué se rompe antes? | Core; reproduce la fórmula del ICA |
@@ -195,7 +196,7 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 |---|---|---|
 | **C1** | Modelo de preferencias: entradas, pesos, filtros y fórmula de esfuerzo | ✅ **Hecho**: `docs/perfil_ciudadano.md` + `src/lodcore/config/perfiles.py` (verificado) |
 | **C2** | Motor de ranking con pesos del perfil y filtros duros | ✅ **Hecho y verificado**: `m5_recomendador/ranking.py`, 12 tests y coincidencia con Oracle |
-| **C3** | Asequibilidad: cuota, esfuerzo financiero y gap de mercado (M1) | Pendiente |
+| **C3** | Asequibilidad: cuota, entrada, ingresos necesarios, precio sostenible y gap de M1 | ✅ **Hecho**: funciones en `perfiles.py`, campos en `ranking.py` y en la función SQL |
 | **C4** | Explicación por municipio: desglose de afinidad, fortalezas y carencias | Pendiente |
 | **C5** | Capa Oracle: `PERFILES_PARAMETROS`, `PERFILES_BASE`, `PERFILES_AJUSTES` y `f_ranking_ciudadano` | ✅ **Ejecutado en Oracle**: 8 parámetros, 4 pesos base, 6 reglas; pesos y ranking coinciden con Python |
 | **C6** | API N3 equivalente a la función SQL | ✅ **Hecho**: `/recomendar` usa `ranking.py` + `perfiles.py`; mismo resultado que APEX |

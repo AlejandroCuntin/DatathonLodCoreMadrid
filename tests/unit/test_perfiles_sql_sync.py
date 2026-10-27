@@ -17,12 +17,20 @@ from pathlib import Path
 import pytest
 
 from src.lodcore.config.perfiles import (
+    ANIOS_HIPOTECA,
     DIMENSIONES,
+    ENTRADA_PCT,
+    ESFUERZO_MAXIMO_PCT,
+    FINANCIACION_COMPRA,
     MAX_TRANSFERENCIA_TOTAL,
     PESO_MAX,
     PESO_MIN,
     PESOS_BASE_IGUALES,
     SUPUESTOS_AJUSTES,
+    TIPO_INTERES_ANUAL,
+    UMBRAL_AJUSTADO,
+    UMBRAL_ALTO,
+    UMBRAL_ASEQUIBLE,
 )
 from src.lodcore.config.thresholds import (
     MAX_HABITANTES_POR_MEDICO_AP,
@@ -100,6 +108,18 @@ def test_umbrales_de_la_regla_dura_coinciden_con_thresholds():
     assert p["umbral_ica_media"] == pytest.approx(UMBRAL_ICA_MEDIA)
     # El techo debe ser coherente con la regla no compensatoria
     assert p["techo_afinidad_alerta"] == pytest.approx(UMBRAL_ICA_BAJA - 1)
+
+
+def test_parametros_de_asequibilidad_coinciden():
+    p = _parametros()
+    assert p["entrada_pct"] == pytest.approx(ENTRADA_PCT)
+    assert p["esfuerzo_maximo_pct"] == pytest.approx(ESFUERZO_MAXIMO_PCT)
+    assert p["tipo_interes_anual"] == pytest.approx(TIPO_INTERES_ANUAL)
+    assert p["anios_hipoteca"] == pytest.approx(ANIOS_HIPOTECA)
+    assert p["financiacion_pct"] == pytest.approx(FINANCIACION_COMPRA)
+    assert p["umbral_asequible"] == pytest.approx(UMBRAL_ASEQUIBLE)
+    assert p["umbral_ajustado"] == pytest.approx(UMBRAL_AJUSTADO)
+    assert p["umbral_alto"] == pytest.approx(UMBRAL_ALTO)
 
 
 # ---------------------------------------------------------------------------
