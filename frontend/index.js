@@ -1,6 +1,7 @@
 /* LoDCORE · Página principal (index.js)
    - Perfiles como pestañas accesibles (flechas, Inicio/Fin) con enlace directo: #perfil-ciudadania, #perfil-gestion, #perfil-inversion.
    - Desplazamiento suave a los apartados de la propia página.
+   - Detección inteligente de entorno: enlaces APEX en producción o navegación local en demo.
    Sin JavaScript todos los perfiles se muestran uno debajo de otro. */
 (function () {
   'use strict';
@@ -12,6 +13,27 @@
     var tabs = Array.prototype.slice.call(raiz.querySelectorAll('[role="tab"]'));
     var paneles = Array.prototype.slice.call(raiz.querySelectorAll('[role="tabpanel"]'));
     var reducir = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---------- Detección de entorno (APEX vs Local) ----------
+    var esApex = (typeof window.apex !== 'undefined') || (window.location.search.indexOf('p=') !== -1);
+    if (!esApex) {
+      // Si estamos en entorno local / demo, adaptar enlaces APEX para que funcionen con un clic
+      var enlaces = Array.prototype.slice.call(raiz.querySelectorAll('a[href^="f?p="]'));
+      enlaces.forEach(function (enlace) {
+        var href = enlace.getAttribute('href');
+        if (href.indexOf('mapa') !== -1) {
+          enlace.setAttribute('href', 'mapa/mapa.html');
+        } else if (href.indexOf('PERFIL_CIUDADANIA') !== -1) {
+          enlace.setAttribute('href', '#perfil-ciudadania');
+        } else if (href.indexOf('PERFIL_GESTION') !== -1) {
+          enlace.setAttribute('href', '#perfil-gestion');
+        } else if (href.indexOf('PERFIL_INVERSION') !== -1) {
+          enlace.setAttribute('href', '#perfil-inversion');
+        } else if (href.indexOf('simulador') !== -1) {
+          enlace.setAttribute('href', '#perfiles');
+        }
+      });
+    }
 
     // ---------- Pestañas de perfil ----------
     function activar(tab, enfocar) {

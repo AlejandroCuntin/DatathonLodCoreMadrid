@@ -6,7 +6,7 @@
   --font-serif: 'IBM Plex Serif', Georgia, serif;
   --font-mono: 'IBM Plex Mono', monospace;
   --madrid-red: #477edc; --madrid-red-dark: #295c84; --madrid-red-light: #FDF2F3; 
-  --madrid-red-border: #b5f2f7; --madrid-blue: #204655; --madrid-blue-light: #F0F7FB; --madrid-blue-dark: #00567A
+  --madrid-red-border: #b5f2f7; --madrid-blue: #204655; --madrid-blue-light: #F0F7FB; --madrid-blue-dark: #00567A;
   --text-main: #232323; --text-secondary: #4A5568; --text-muted: #718096;
   --bg-page: #F8F9FA; --bg-surface: #FFFFFF; --bg-subtle: #F1F3F5; --bg-tinted: #F4F6F8;
   --border-main: #D9D9D9; --border-subtle: #E2E8F0; --border-dark: #A0AEC0;
@@ -18,33 +18,29 @@
   font-family: var(--font-primary); font-size: 15px; line-height: 1.5;
   background-color: var(--bg-page); color: var(--text-main);
   -webkit-font-smoothing: antialiased; color-scheme: light;
-}
-/* Expandir el footer al 100% de la pantalla rompiendo el contenedor de APEX */
-#lodcore-home {
-  width: 100vw !important;
-  position: relative !important;
-  left: 50% !important;
-  right: 50% !important;
-  margin-left: -50vw !important;
-  margin-right: -50vw !important;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-#lodcore-home .home-footer {
-  width: 100% !important;
+/* En Universal Theme de APEX, contenedor limpio sin márgenes indeseados */
+.t-Body-content #lodcore-home {
+  width: 100%;
 }
-/* 1. Forzar que el contenedor nativo del Footer de APEX ocupe el 100% sin márgenes blancos */
+
 .t-Footer {
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
 
-/* 2. Ocultar el texto "Release 1.0" (versión de la aplicación) */
 .t-Footer-version,
 .t-Footer-customize {
-    display: none !important;
+  display: none !important;
 }
+
 #lodcore-home *, #lodcore-home *::before, #lodcore-home *::after { box-sizing: border-box; margin: 0; padding: 0; }
 #lodcore-home [hidden] { display: none !important; }
 #lodcore-home ul, #lodcore-home ol { list-style: none; }
@@ -53,19 +49,25 @@
 #lodcore-home .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 #lodcore-home .svg-icon { width: 16px; height: 16px; flex: 0 0 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
 
-/* ---- Portada ---- */
+/* ---- Portada (Hero) ---- */
 #lodcore-home .home-hero { background: #FFFFFF; border-bottom: 1px solid var(--border-main); padding: 44px 0 36px; }
 #lodcore-home .hero-pretitle { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--madrid-red); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
 #lodcore-home .hero-title { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 14px; max-width: 820px; }
-#lodcore-home .hero-subtitle { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 14px; max-width: 820px; }
+#lodcore-home .hero-subtitle { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 14px; max-width: 820px; color: var(--madrid-blue); }
 #lodcore-home .hero-lead { font-family: var(--font-serif); font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 820px; margin-bottom: 26px; }
 #lodcore-home .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
-#lodcore-home .hero-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-#lodcore-home .fact { background: var(--bg-subtle); border: 1px solid var(--border-main); border-left: 4px solid var(--madrid-red); border-radius: var(--radius-sm); padding: 14px 18px; display: flex; flex-direction: column; gap: 2px; }
+
+/* ---- KPIs de Impacto (Hero Facts) ---- */
+#lodcore-home .hero-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 6px; }
+#lodcore-home .fact { background: var(--bg-subtle); border: 1px solid var(--border-main); border-left: 4px solid var(--madrid-red); border-radius: var(--radius-sm); padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+#lodcore-home .fact:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 #lodcore-home .fact.fact-blue { border-left-color: var(--madrid-blue); }
 #lodcore-home .fact.fact-green { border-left-color: var(--status-alta); }
-#lodcore-home .fact strong { font-family: var(--font-mono); font-size: 20px; font-weight: 700; line-height: 1.2; }
-#lodcore-home .fact span { font-size: 12px; color: var(--text-secondary); }
+#lodcore-home .fact.fact-ochre { border-left-color: var(--status-media); }
+#lodcore-home .fact-header { display: flex; align-items: center; justify-content: space-between; color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+#lodcore-home .fact-header .svg-icon { width: 14px; height: 14px; flex-basis: 14px; }
+#lodcore-home .fact strong { font-family: var(--font-mono); font-size: 23px; font-weight: 700; line-height: 1.2; color: var(--text-main); }
+#lodcore-home .fact span.fact-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.35; }
 
 /* ---- Botones ---- */
 #lodcore-home .btn-primary, #lodcore-home .btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-primary); font-size: 14px; font-weight: 700; line-height: 1.3; padding: 12px 22px; border-radius: var(--radius-sm); cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
@@ -110,11 +112,106 @@
 #lodcore-home .profile-side .btn-primary { margin-top: 22px; width: 100%; }
 #lodcore-home .legend-line { font-size: 12.5px; color: var(--text-muted); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 
-/* ---- Modelos (pendiente) ---- */
-#lodcore-home .todo-box { display: flex; align-items: flex-start; gap: 16px; background: var(--bg-tinted); border: 2px dashed var(--border-dark); border-radius: var(--radius-sm); padding: 28px; color: var(--text-secondary); }
-#lodcore-home .todo-box .svg-icon { width: 28px; height: 28px; flex-basis: 28px; color: var(--text-muted); }
-#lodcore-home .todo-tag { display: inline-block; font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: var(--radius-sm); background: var(--status-media-bg); color: var(--status-media); border: 1px solid #FCD34D; margin-bottom: 6px; }
-#lodcore-home .todo-box p { font-size: 15px; }
+/* ---- Modelos de Datos (M1-M5) ---- */
+#lodcore-home .models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 20px;
+}
+#lodcore-home .model-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-main);
+  border-radius: var(--radius-sm);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+#lodcore-home .model-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--madrid-red);
+}
+#lodcore-home .model-card-top {
+  margin-bottom: 14px;
+}
+#lodcore-home .model-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+#lodcore-home .model-code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  color: #FFFFFF;
+  background: var(--madrid-red);
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+}
+#lodcore-home .model-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+#lodcore-home .model-tag.tag-oracle {
+  background: #FEF3C7;
+  color: #92400E;
+  border-color: #FDE68A;
+  font-weight: 700;
+}
+#lodcore-home .model-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+#lodcore-home .model-algo {
+  font-size: 12.5px;
+  color: var(--madrid-blue);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+#lodcore-home .model-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+#lodcore-home .model-io {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+}
+#lodcore-home .io-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+#lodcore-home .io-label {
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 58px;
+  text-transform: uppercase;
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+#lodcore-home .io-content {
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
 
 /* ---- Alcance y límites ---- */
 #lodcore-home .note-box { background: var(--madrid-blue-light); border: 1px solid #B8E0F2; border-left: 4px solid var(--madrid-blue); border-radius: var(--radius-sm); padding: 20px 24px; }
@@ -122,28 +219,41 @@
 #lodcore-home .note-box ul { display: flex; flex-direction: column; gap: 8px; list-style: disc; padding-left: 20px; }
 #lodcore-home .note-box li { font-size: 14px; line-height: 1.6; color: var(--text-secondary); }
 
-/* ---- Pie ---- */
-#lodcore-home .home-footer { background: #232323; color: #D9D9D9; border-top: 4px solid var(--madrid-red); padding: 36px 0 20px; font-size: 13px; }
-#lodcore-home .footer-content { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 20px; }
-#lodcore-home .footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-#lodcore-home .footer-brand img { height: 36px; filter: brightness(0) invert(1); }
-#lodcore-home .footer-brand span { font-size: 16px; font-weight: 700; color: #FFFFFF; }
-#lodcore-home .footer-text { color: #A0AEC0; max-width: 560px; line-height: 1.6; font-size: 12px; }
-#lodcore-home .footer-title { font-size: 12px; font-weight: 700; text-transform: uppercase; color: #FFFFFF; margin-bottom: 10px; }
-#lodcore-home .footer-links { line-height: 2; font-size: 12px; }
-#lodcore-home .footer-links a { color: #CBD5E0; }
+/* ---- Pie Institucional (Footer) ---- */
+#lodcore-home .home-footer {
+  background: #1c232b;
+  color: #D9D9D9;
+  border-top: 4px solid var(--madrid-red);
+  padding: 40px 0 24px;
+  font-size: 13px;
+  margin-top: 30px;
+}
+#lodcore-home .footer-content { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 24px; }
+#lodcore-home .footer-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+#lodcore-home .footer-brand img { height: 38px; width: auto; display: block; }
+#lodcore-home .footer-brand-title { display: block; font-size: 16px; font-weight: 700; color: #FFFFFF; line-height: 1.2; }
+#lodcore-home .footer-brand-subtitle { display: block; font-size: 12px; color: #A0AEC0; margin-top: 2px; }
+#lodcore-home .footer-text { color: #A0AEC0; max-width: 620px; line-height: 1.6; font-size: 12.5px; }
+#lodcore-home .footer-title { font-size: 12px; font-weight: 700; text-transform: uppercase; color: #FFFFFF; margin-bottom: 12px; letter-spacing: 0.05em; }
+#lodcore-home .footer-links { display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; }
+#lodcore-home .footer-links a { color: #CBD5E0; transition: color 0.15s ease; }
 #lodcore-home .footer-links a:hover { color: #FFFFFF; text-decoration: underline; }
-#lodcore-home .footer-legal { border-top: 1px solid #444444; padding-top: 14px; font-size: 11px; color: #999999; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+#lodcore-home .footer-legal { border-top: 1px solid #313a44; padding-top: 16px; font-size: 11px; color: #8c9ba5; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
 /* ---- Adaptación a pantallas pequeñas ---- */
+@media (max-width: 960px) {
+  #lodcore-home .hero-facts { grid-template-columns: repeat(2, 1fr); }
+  #lodcore-home .models-grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 900px) {
   #lodcore-home .hero-title { font-size: 28px; }
-  #lodcore-home .hero-facts, #lodcore-home .steps { grid-template-columns: 1fr; }
+  #lodcore-home .steps { grid-template-columns: 1fr; }
   #lodcore-home .profile-panel { grid-template-columns: 1fr; gap: 22px; padding: 20px; }
   #lodcore-home .footer-content { flex-direction: column; gap: 24px; }
 }
 @media (max-width: 640px) {
   #lodcore-home .home-hero { padding: 32px 0 28px; }
+  #lodcore-home .hero-facts { grid-template-columns: 1fr; }
   #lodcore-home .hero-actions .btn-primary, #lodcore-home .hero-actions .btn-secondary { width: 100%; }
   #lodcore-home .profile-tab { flex: 1 1 100%; justify-content: flex-start; }
 }

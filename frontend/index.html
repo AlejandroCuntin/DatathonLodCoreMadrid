@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Simulador de capacidad de acogida territorial de la Comunidad de Madrid: proyecciones 2030-2040 para ciudadanía, gestión pública e inversores">
-<title>Simulador de Capacidad de Acogida Territorial | Comunidad de Madrid</title>
+<title>MadridNext · Capacidad de Acogida Territorial | Comunidad de Madrid</title>
 <link rel="stylesheet" href="index.css">
 </head>
 <body style="margin:0;background:#F8F9FA;">
@@ -13,13 +13,55 @@
 
 <section class="home-hero">
 <div class="container"> 
+<div class="hero-pretitle">
+  <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+  II Datathon LoDCOREMadrid 2026 • UC3M & Comunidad de Madrid
+</div>
 <h1 class="hero-title">MadridNext • Predice, Conecta, Transforma</h1>
-<h2 class="hero-subtitle"> Simulación de capacidad de acogida territorial</h2>
+<h2 class="hero-subtitle">Simulación de capacidad de acogida territorial sostenible</h2>
 <p class="hero-lead">¿Qué ocurrirá en los municipios de menos de 50.000 habitantes de la Comunidad de Madrid si crece su población? Define un escenario, el modelo se ejecuta en tiempo real y obtienes las métricas proyectadas para el año que elijas, entre 2030 y 2040.</p>
+
 <div class="hero-actions">
 <a class="btn-primary" href="f?p=&APP_ID.:simulador:&SESSION.">Abrir el simulador<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
 <a class="btn-secondary" href="f?p=&APP_ID.:mapa-interactivo:&SESSION."><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>Ver el mapa interactivo</a>
 </div>
+
+<!-- Franja de KPIs de impacto regional -->
+<div class="hero-facts">
+  <div class="fact fact-blue">
+    <div class="fact-header">
+      <span>Panel de Estudio</span>
+      <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+    </div>
+    <strong>20 Municipios</strong>
+    <span class="fact-desc">&lt; 50.000 hab. representativos en 8 comarcas</span>
+  </div>
+  <div class="fact fact-green">
+    <div class="fact-header">
+      <span>Capacidad Neta</span>
+      <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+    </div>
+    <strong>+108.400 hab.</strong>
+    <span class="fact-desc">Acogida sostenible sin saturar servicios públicos</span>
+  </div>
+  <div class="fact">
+    <div class="fact-header">
+      <span>Precio Medio Proyectado</span>
+      <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+    </div>
+    <strong>1.842 €/m²</strong>
+    <span class="fact-desc">Estimación hedónica AVM con control de brecha</span>
+  </div>
+  <div class="fact fact-ochre">
+    <div class="fact-header">
+      <span>Inversión Dotacional</span>
+      <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+    </div>
+    <strong>12,4 M€</strong>
+    <span class="fact-desc">Inversión requerida para desatascar cuellos de botella</span>
+  </div>
+</div>
+
 </div>
 </section>
 
@@ -116,16 +158,130 @@
 </div>
 </section>
 
+<!-- Sección Modelos de Datos M1-M5 (Completa) -->
 <section class="home-section" id="modelos">
 <div class="container">
-<div class="section-eyebrow">Metodología</div>
+<div class="section-eyebrow">Arquitectura Analítica</div>
 <h2 class="section-title">Modelos de datos utilizados</h2>
-<p class="section-desc">Modelos que intervienen en la simulación y qué aporta cada uno.</p>
-<div class="todo-box">
-<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-<div><span class="todo-tag">TODO</span>
-<p>Enumerar y explicar brevemente los modelos de datos usados en la simulación.</p></div>
+<p class="section-desc">Cinco modelos matemáticos y de Machine Learning integrados directamente en Oracle Database 23ai para resolver el reto de planificación territorial sostenible.</p>
+
+<div class="models-grid">
+  <!-- M1 -->
+  <div class="model-card">
+    <div class="model-card-top">
+      <div class="model-badge-row">
+        <span class="model-code">M1</span>
+        <span class="model-tag tag-oracle">ONNX In-Database 23ai</span>
+      </div>
+      <h3 class="model-title">Valoración Inmobiliaria (AVM)</h3>
+      <div class="model-algo">Random Forest Hedónico (Scikit-Learn → ONNX)</div>
+      <p class="model-desc">¿Puedo permitírmelo? Predice el precio hedónico de la vivienda (€/m²) en función del catastro, ubicación y servicios, calculando la brecha de mercado y el esfuerzo de acceso.</p>
+    </div>
+    <div class="model-io">
+      <div class="io-row">
+        <span class="io-label">Entrada:</span>
+        <span class="io-content">Valor catastral, comarca, altitud, distancia a Madrid, renta bruta media</span>
+      </div>
+      <div class="io-row">
+        <span class="io-label">Salida:</span>
+        <span class="io-content">Precio predicho (€/m²), brecha vs. mercado actual (% sobrecoste u oportunidad)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M2 -->
+  <div class="model-card">
+    <div class="model-card-top">
+      <div class="model-badge-row">
+        <span class="model-code">M2</span>
+        <span class="model-tag">Determinista / Multicriterio</span>
+      </div>
+      <h3 class="model-title">Indicadores Dotacionales Sintéticos</h3>
+      <div class="model-algo">PCA + Normalización Min-Max (4 Subíndices 0–100)</div>
+      <p class="model-desc">¿Qué calidad de vida ofrece? Reduce decenas de variables a cuatro dimensiones comparables: Sanidad, Educación, Conectividad de transporte y Calidad residencial.</p>
+    </div>
+    <div class="model-io">
+      <div class="io-row">
+        <span class="io-label">Entrada:</span>
+        <span class="io-content">Centros de salud, red educativa, tiempos CRTM, cobertura fibra y zonas verdes</span>
+      </div>
+      <div class="io-row">
+        <span class="io-label">Salida:</span>
+        <span class="io-content">4 sub-índices (0 a 100) y radar dotacional comparativo por comarca</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M3 -->
+  <div class="model-card">
+    <div class="model-card-top">
+      <div class="model-badge-row">
+        <span class="model-code">M3</span>
+        <span class="model-tag">Series Demográficas</span>
+      </div>
+      <h3 class="model-title">Proyección Demográfica 2026–2040</h3>
+      <div class="model-algo">Extrapolación Geométrica Calibrada (CAGR + Migraciones)</div>
+      <p class="model-desc">¿Va a crecer o a perder vecinos? Proyecta el padrón hasta 2040 combinando tendencias históricas del INE con variaciones residenciales y dinamismo comarcal.</p>
+    </div>
+    <div class="model-io">
+      <div class="io-row">
+        <span class="io-label">Entrada:</span>
+        <span class="io-content">Serie histórica Padrón INE (tabla 2881), saldos migratorios y crecimiento 2020-2025</span>
+      </div>
+      <div class="io-row">
+        <span class="io-label">Salida:</span>
+        <span class="io-content">Población proyectada anualizada y ritmo tendencial de absorción</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M4 -->
+  <div class="model-card">
+    <div class="model-card-top">
+      <div class="model-badge-row">
+        <span class="model-code">M4</span>
+        <span class="model-tag tag-oracle">Core ONNX In-DB</span>
+      </div>
+      <h3 class="model-title">Capacidad de Acogida Neta (ICA)</h3>
+      <div class="model-algo">Gradient Boosting Regressor (ONNX 23ai)</div>
+      <p class="model-desc">¿Cuántos caben y qué se satura primero? Evalúa la holgura en cupos médicos (SERMAS 1.500 hab/médico), plazas escolares y parque de viviendas, identificando el cuello de botella.</p>
+    </div>
+    <div class="model-io">
+      <div class="io-row">
+        <span class="io-label">Entrada:</span>
+        <span class="io-content">Médicos de primaria, centros educativos, suelo residencial y viviendas vacías</span>
+      </div>
+      <div class="io-row">
+        <span class="io-label">Salida:</span>
+        <span class="io-content">Capacidad efectiva de acogida (habitantes netos) y factor limitante crítico</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M5 -->
+  <div class="model-card">
+    <div class="model-card-top">
+      <div class="model-badge-row">
+        <span class="model-code">M5</span>
+        <span class="model-tag">Optimización Matemática</span>
+      </div>
+      <h3 class="model-title">Optimizador Presupuestario</h3>
+      <div class="model-algo">Programación Lineal Acotada (Solucionador Simplex)</div>
+      <p class="model-desc">¿Cómo repartir el presupuesto disponible? Resuelve la asignación matemática óptima de fondos públicos entre municipios para maximizar la capacidad de acogida regional.</p>
+    </div>
+    <div class="model-io">
+      <div class="io-row">
+        <span class="io-label">Entrada:</span>
+        <span class="io-content">Presupuesto público (€), coste unitario de ampliación (médicos, aulas, urbanización)</span>
+      </div>
+      <div class="io-row">
+        <span class="io-label">Salida:</span>
+        <span class="io-content">Reparto de inversión por municipio (€) y ganancia neta de habitantes acogibles</span>
+      </div>
+    </div>
+  </div>
 </div>
+
 </div>
 </section>
 
@@ -134,13 +290,45 @@
 <div class="note-box">
 <h2 class="note-title"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>Antes de interpretar los resultados</h2>
 <ul>
-<li>Las proyecciones son <strong>escenarios</strong>, no predicciones: dependen de los parámetros que introduzcas.</li>
-<li>Cada resultado se publica con su <strong>procedencia</strong> (origen, método y versión del conjunto de datos) y su <strong>banda de incertidumbre</strong>.</li>
+<li>Las proyecciones son <strong>escenarios</strong>, no predicciones absolutas: dependen de los parámetros de simulación que introduzcas.</li>
+<li>Cada resultado se publica con su <strong>procedencia</strong> (origen oficial, método y versión del conjunto de datos <code>v1.1.0-F2</code>) y su <strong>banda de incertidumbre</strong>.</li>
+<li>El modelo no accede a datos externos: los algoritmos ONNX se ejecutan <strong>dentro del motor relacional de Oracle Database 23ai</strong> para máxima velocidad y trazabilidad.</li>
 </ul>
 </div>
 </div>
 </section>
 
+<!-- Footer Institucional Integrado -->
+<footer class="home-footer">
+<div class="container">
+<div class="footer-content">
+<div>
+<div class="footer-brand">
+<img src="assets/img/logo_comunidad_madrid.svg" alt="Comunidad de Madrid" class="footer-logo" />
+<div>
+<span class="footer-brand-title">MadridNext • LoDCORE Madrid</span>
+<span class="footer-brand-subtitle">Simulador de Capacidad de Acogida Territorial</span>
+</div>
+</div>
+<p class="footer-text">Plataforma desarrollada para el <strong>II Datathon LoDCOREMadrid 2026</strong> en colaboración con la Universidad Carlos III de Madrid (UC3M) y la Comunidad de Madrid. Basada en datos abiertos del Instituto Nacional de Estadística (INE), Servicio Madrileño de Salud (SERMAS), Consorcio Regional de Transportes de Madrid (CRTM) y Dirección General del Catastro.</p>
+</div>
+<div>
+<div class="footer-title">Navegación</div>
+<ul class="footer-links">
+<li><a href="#como-funciona">Cómo funciona</a></li>
+<li><a href="#perfiles">Perfiles preconfigurados</a></li>
+<li><a href="#modelos">Modelos de datos utilizados</a></li>
+<li><a href="#alcance">Alcance y límites</a></li>
+<li><a href="mapa/mapa.html">Mapa Interactivo de Municipios</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-legal">
+<span>© 2026 MadridNext · Consejería de Medio Ambiente, Agricultura e Interior</span>
+<span>Datos Abiertos • Metodología Reproducible • Sin Fuga de Información</span>
+</div>
+</div>
+</footer>
 
 </div>
 

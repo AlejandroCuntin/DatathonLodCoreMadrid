@@ -17,4 +17,5 @@ mlruns/
 # Archivos temporales de sistema y Office
 .DS_Store
 Thumbs.db
-~$*.docx
+~$*
+*.tmp
