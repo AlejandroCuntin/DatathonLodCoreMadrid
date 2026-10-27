@@ -1,0 +1,70 @@
+{
+  "version": "1.0.0",
+  "generado": "2026-10-27",
+  "padron": {
+    "municipios": 179,
+    "anio_min": 1998,
+    "anio_max": 2025,
+    "celdas_vacias_pct": 0.0,
+    "saltos_anuales_extremos": 0
+  },
+  "parametros": {
+    "h_max": 15,
+    "n_estimators": 300,
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "min_samples_leaf": 20,
+    "seed": 2026,
+    "cv_folds": 5,
+    "anios_backtest": 5,
+    "min_anios": 12,
+    "min_municipios": 100,
+    "target_opset": 15
+  },
+  "backtest": {
+    "anio_corte": 2020,
+    "n_train": 26850,
+    "n_test": 895,
+    "mape_pct_por_horizonte": {
+      "1": {
+        "modelo": 2.482063409712595,
+        "cagr5": 2.7110730001427923,
+        "sin_cambio": 3.1583471379827324
+      },
+      "2": {
+        "modelo": 3.311580661344206,
+        "cagr5": 3.624837733761789,
+        "sin_cambio": 4.491886451663008
+      },
+      "3": {
+        "modelo": 4.109020355956801,
+        "cagr5": 4.796384346499784,
+        "sin_cambio": 6.655948608099107
+      },
+      "4": {
+        "modelo": 4.738271208115644,
+        "cagr5": 5.247135421048172,
+        "sin_cambio": 8.017240177187494
+      },
+      "5": {
+        "modelo": 5.419065248113516,
+        "cagr5": 6.006637210008653,
+        "sin_cambio": 9.516613895838416
+      }
+    },
+    "mape_pct_medio": {
+      "modelo": 4.012000176648552,
+      "cagr5": 4.477213542292239,
+      "sin_cambio": 6.368007254154152
+    },
+    "bate_cagr5": true,
+    "bate_sin_cambio": true
+  },
+  "validacion_cruzada": {
+    "r2_cv_oof": 0.36524350439211317,
+    "folds": 5
+  },
+  "sin_cruce_panel": [],
+  "segundos": 51.7
+}

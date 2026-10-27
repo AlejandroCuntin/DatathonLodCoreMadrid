@@ -30,9 +30,15 @@ import pandas as pd
 INE_URL = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/{tabla}"
 TABLA_PADRON = 2881
 FUENTE = "INE Padrón continuo"
-# Partes del nombre de la serie que significan "sin desglose" (se descartan las series por sexo, edad, etc.)
-TOTALES = {"total", "todas las edades", "ambos sexos", "poblacion", "habitantes", "personas"}
+# Las series del INE llevan en "Nombre" varias dimensiones (municipio, sexo, edad...) en un orden que depende de la
+# tabla. Se clasifica cada parte del nombre en lugar de suponer su posición.
+SEXO_TOTAL = {"total", "ambos sexos", "ambos"}
+SEXO_OTRO = {"hombres", "mujeres", "varones", "hombre", "mujer"}
+EDAD_TOTAL = {"todas las edades", "total edades", "todas edades"}
+MEDIDAS = {"poblacion", "personas", "habitantes", "dato base", "valor", "numero de personas"}
 MUNICIPIOS_NO_VALIDOS = {"total", "total provincia", "total nacional"}
+_RE_EDAD = re.compile(r"\b(anos?|edades?)\b|\by mas\b|^\d+\s*(-|a)\s*\d+|^\d+$")
+_RE_PREFIJO = re.compile(r"^(sexo|edad|municipios?|periodo|nacionalidad|medida)\s*:\s*")
 
 
 def raiz_proyecto(inicio: Path | None = None) -> Path:
@@ -94,36 +100,63 @@ def _anio(d: dict) -> int:
     raise ValueError("Dato sin año (ni 'Anyo' ni 'Fecha')")
 
 
-def parsear_padron(series: list, snapshot: str = "") -> pd.DataFrame:
+def clasificar_serie(nombre: str) -> tuple[str | None, bool]:
+    """Devuelve (municipio, es_total). municipio es None si no se identifica exactamente uno.
+    es_total es False si la serie está desglosada por sexo o por grupo de edad."""
+    municipios, es_total = [], True
+    for parte in _partes(nombre):
+        q = _RE_PREFIJO.sub("", _plano(parte)).strip()
+        if not q or q in MEDIDAS or q in SEXO_TOTAL or q in EDAD_TOTAL or q.startswith("total "):
+            continue
+        if q in SEXO_OTRO or _RE_EDAD.search(q):
+            es_total = False
+            continue
+        municipios.append(re.sub(r"^(sexo|edad|municipios?|periodo|nacionalidad|medida)\s*:\s*", "", parte.strip(), flags=re.I))
+    if len(municipios) != 1 or _plano(municipios[0]) in MUNICIPIOS_NO_VALIDOS:
+        return None, False
+    return municipios[0], es_total
+
+
+def _muestra_series(series: list, n: int = 8) -> str:
+    claves = sorted(series[0].keys()) if series and isinstance(series[0], dict) else type(series[0]).__name__
+    nombres = [str(s.get("Nombre")) if isinstance(s, dict) else repr(s)[:80] for s in series[:n]]
+    return (f"{len(series)} series; claves de la primera: {claves}\n  - " + "\n  - ".join(nombres))
+
+
+def parsear_padron(series: list, snapshot: str = "", avisos: list | None = None) -> pd.DataFrame:
     """Series Tempus -> DataFrame largo (municipio, año, población) usando solo las series 'Total'."""
-    filas = []
+    candidatas: dict[str, list] = {}
     for s in series:
-        partes = _partes(str(s.get("Nombre", "")))
-        if not partes:
-            continue
-        municipio, resto = partes[0], partes[1:]
-        if _plano(municipio) in MUNICIPIOS_NO_VALIDOS:
-            continue
-        if any(_plano(p) not in TOTALES for p in resto):
+        municipio, es_total = clasificar_serie(str(s.get("Nombre", "")))
+        if municipio is None or not es_total:
             continue
         codigo = None
         m = re.match(r"^(\d{5})\s+(.*)$", municipio)
         if m:
             codigo, municipio = int(m.group(1)), m.group(2)
+        filas = []
         for d in s.get("Data") or []:
             valor = d.get("Valor")
             if valor is None or d.get("Secreto"):
                 continue
             filas.append((_anio(d), municipio, codigo, float(valor)))
-    if not filas:
-        raise ValueError("No se reconoció ninguna serie 'Total' por municipio. Ejecuta --inspeccionar sobre el JSON "
-                         "y revisa el formato del campo 'Nombre'.")
+        if filas:
+            candidatas.setdefault(normalizar_nombre(municipio), []).append((max(f[3] for f in filas), municipio, filas))
+    if not candidatas:
+        raise ValueError("No se reconoció ninguna serie 'Total' por municipio. Primeras series recibidas del INE:\n  - "
+                         + _muestra_series(series) + "\nCopia estas líneas para ajustar el filtro de series.")
+    filas = []
+    for clave, lst in candidatas.items():
+        lst.sort(key=lambda x: x[0])
+        if len(lst) > 1:
+            if lst[0][0] == lst[1][0]:
+                raise ValueError(f"Hay varias series 'Total' idénticas para '{lst[0][1]}'; revisar el filtro de series")
+            if avisos is not None:
+                avisos.append(f"'{lst[0][1]}' aparece {len(lst)} veces: se usa la de menor población "
+                              f"({lst[0][0]:,.0f}) y se descarta la de {lst[-1][0]:,.0f} (total provincial)")
+        filas.extend(lst[0][2])
     df = pd.DataFrame(filas, columns=["anio", "municipio", "codigo_ine", "poblacion"])
     df["clave"] = df["municipio"].map(normalizar_nombre)
-    dup = df[df.duplicated(["clave", "anio"], keep=False)]
-    if not dup.empty:
-        ej = dup.sort_values(["clave", "anio"]).head(6)[["municipio", "anio", "poblacion"]].to_string(index=False)
-        raise ValueError("Hay varias series 'Total' para el mismo municipio y año; revisar el filtro de series:\n" + ej)
     df["fuente"] = FUENTE
     df["tabla_ine"] = TABLA_PADRON
     df["snapshot"] = snapshot
@@ -151,10 +184,14 @@ def inspeccionar(ruta: Path, log=print) -> None:
         d = s.get("Data") or []
         log(f"  Nombre={s.get('Nombre')!r}  puntos={len(d)}  claves_dato={sorted(d[0].keys()) if d else []}")
     try:
-        df = parsear_padron(series)
+        avisos: list = []
+        df = parsear_padron(series, avisos=avisos)
         log(f"OK: {df['clave'].nunique()} municipios, años {df['anio'].min()}-{df['anio'].max()}")
+        for a in avisos:
+            log(f"  AVISO: {a}")
     except ValueError as e:
         log(f"FALLO de parseo: {e}")
+        log(_muestra_series(series, 15))
 
 
 def main(argv: list[str] | None = None, log=print) -> int:
@@ -179,7 +216,10 @@ def main(argv: list[str] | None = None, log=print) -> int:
         ruta = guardar_snapshot(series, raiz / "data" / "raw" / "ine", TABLA_PADRON, a.anios)
         log(f"  snapshot crudo: {ruta}")
 
-    df = parsear_padron(series, snapshot=ruta.name)
+    avisos: list = []
+    df = parsear_padron(series, snapshot=ruta.name, avisos=avisos)
+    for aviso in avisos:
+        log(f"  AVISO: {aviso}")
     escritos = escribir_csv_por_anio(df, raiz / "data" / "raw", forzar=a.forzar, log=log)
     log(f"{df['clave'].nunique()} municipios · años {df['anio'].min()}-{df['anio'].max()} · "
         f"{len(escritos)} CSV nuevos en data/raw/")

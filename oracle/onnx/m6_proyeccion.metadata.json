@@ -1,0 +1,109 @@
+{
+  "modelo": "m6_proyeccion",
+  "version": "1.0.0",
+  "generado": "2026-10-27",
+  "descripcion": "Predicción de tendencia de población a un año objetivo (horizonte directo)",
+  "entradas": [
+    "ln_pob",
+    "g1",
+    "g3",
+    "g5",
+    "vol5",
+    "h"
+  ],
+  "tensor_entrada": "float_input",
+  "salida": "variable",
+  "objetivo": "ln(poblacion[t+h] / poblacion[t])",
+  "uso": "poblacion_objetivo = poblacion_actual * EXP(prediccion); h = anio_objetivo - anio_origen",
+  "anio_origen": 2025,
+  "h_min": 1,
+  "h_max": 15,
+  "anio_max_proyectable": 2040,
+  "bandas_residuo_log_95": {
+    "1": [
+      -0.11470023937715196,
+      0.09412639268752626
+    ],
+    "2": [
+      -0.1286976543070182,
+      0.14264699545058795
+    ],
+    "3": [
+      -0.1626701925098992,
+      0.18819669044479345
+    ],
+    "4": [
+      -0.1889903755430461,
+      0.22515915454807334
+    ],
+    "5": [
+      -0.22087002938721398,
+      0.26446618369213837
+    ],
+    "6": [
+      -0.24208490728894358,
+      0.2861709091037275
+    ],
+    "7": [
+      -0.26235546669279414,
+      0.3133826289024714
+    ],
+    "8": [
+      -0.2892576889210356,
+      0.3268847036488604
+    ],
+    "9": [
+      -0.30076319397502543,
+      0.3251799891169266
+    ],
+    "10": [
+      -0.3120718005082473,
+      0.34637452561406695
+    ],
+    "11": [
+      -0.3171482952005011,
+      0.3449025227518484
+    ],
+    "12": [
+      -0.3250254331629359,
+      0.36819918646931366
+    ],
+    "13": [
+      -0.31385813718316946,
+      0.389944558223713
+    ],
+    "14": [
+      -0.32376951899129824,
+      0.41819642573894483
+    ],
+    "15": [
+      -0.33174132777080617,
+      0.4430468015521561
+    ]
+  },
+  "origen": "PROYECTADO",
+  "metodo": "GradientBoostingRegressor de horizonte directo sobre el log-crecimiento del Padrón (INE 2881)",
+  "dataset_version": "padron-1998-2025",
+  "target_opset": 15,
+  "metricas": {
+    "backtest": {
+      "modelo": 4.012000176648552,
+      "cagr5": 4.477213542292239,
+      "sin_cambio": 6.368007254154152
+    },
+    "bate_cagr5": true,
+    "r2_cv_oof": 0.36524350439211317,
+    "folds": 5
+  },
+  "verificacion_onnx": {
+    "max_abs": 1.6371830213746108e-07,
+    "max_rel": 6.001160870277529e-05,
+    "filas": 2000,
+    "ok": true
+  },
+  "limitaciones": [
+    "Predicción de tendencia a partir de la serie de población del Padrón",
+    "No modela inversiones, políticas ni cambios en los servicios",
+    "No calcula el ICA (corresponde al simulador completo)"
+  ]
+}

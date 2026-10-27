@@ -28,6 +28,18 @@ def cargar_padron_raw(dir_raw: Path) -> pd.DataFrame:
     return pd.concat((pd.read_csv(p, dtype={"clave": str}) for p in ficheros), ignore_index=True)
 
 
+def recortar_a_tramo_contiguo(df: pd.DataFrame) -> tuple[pd.DataFrame, list[int]]:
+    """Si la serie tiene huecos de años (el INE no publica el Padrón de 1997), se usa solo el tramo contiguo
+    más reciente en lugar de inventar los años que faltan. Devuelve (datos, años_descartados)."""
+    anios = sorted(int(a) for a in df["anio"].unique())
+    inicio = anios[-1]
+    for a in reversed(anios[:-1]):
+        if a != inicio - 1:
+            break
+        inicio = a
+    return df[df["anio"] >= inicio].copy(), [a for a in anios if a < inicio]
+
+
 def validar_padron(df: pd.DataFrame, min_anios: int = 12, min_municipios: int = 100,
                    max_vacios: float = 0.05, max_salto: float = 0.7) -> dict:
     """Puertas de calidad. Lanza ValueError con todos los problemas encontrados."""

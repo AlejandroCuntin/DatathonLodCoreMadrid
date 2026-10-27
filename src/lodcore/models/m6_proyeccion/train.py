@@ -1,4 +1,4 @@
-"""M6 · Proyección de población a un año objetivo (modelo ONNX).
+"""M6 · Predicción de tendencia de población a un año objetivo (modelo ONNX).
 
 Idea: un único modelo de horizonte directo. Dado el estado actual de un municipio (características en el año
 de origen t) y un horizonte h (años hasta el año objetivo), predice y = ln(P[t+h] / P[t]).
@@ -15,8 +15,8 @@ Salidas:
     data/validated/m6_entradas_actuales.csv   datos actuales (características en el último año) por municipio
     data/output/m6_metricas.json              métricas del entrenamiento
 
-Limitación declarada: solo usa la serie histórica de población. Los servicios (médicos, plazas) no tienen
-histórico abierto y se mantienen constantes al proyectar las demás métricas.
+Alcance: es una predicción de tendencias a partir de la serie histórica de población. No simula inversiones ni
+cambios en los servicios y no calcula el ICA (eso corresponde al simulador completo, en una fase posterior).
 """
 from __future__ import annotations
 
@@ -29,7 +29,8 @@ import numpy as np
 import pandas as pd
 
 from ...data.panel_proyeccion import (FEATURES, a_ancho, cargar_padron_raw, entradas_actuales,
-                                      pares_entrenamiento, unir_codigo_ine, validar_padron)
+                                      pares_entrenamiento, recortar_a_tramo_contiguo, unir_codigo_ine,
+                                      validar_padron)
 from ...ingest.descarga_historica import raiz_proyecto
 
 VERSION = "1.0.0"
@@ -152,6 +153,10 @@ def ejecutar(raiz: Path | None = None, params: dict | None = None, exportar: boo
 
     log("[M6 1/5] Cargando y validando el padrón histórico")
     df = cargar_padron_raw(raiz / "data" / "raw")
+    df, descartados = recortar_a_tramo_contiguo(df)
+    if descartados:
+        log(f"         AVISO: hueco en la serie del INE; se usa el tramo contiguo {int(df['anio'].min())}-"
+            f"{int(df['anio'].max())} y se descartan los años {descartados} (no se inventan datos)")
     informe = validar_padron(df, min_anios=int(p["min_anios"]), min_municipios=int(p["min_municipios"]))
     log(f"         {informe['municipios']} municipios · {informe['anio_min']}-{informe['anio_max']} · "
         f"{informe['celdas_vacias_pct']} % celdas vacías")
@@ -202,7 +207,7 @@ def ejecutar(raiz: Path | None = None, params: dict | None = None, exportar: boo
             raise RuntimeError(f"El ONNX no reproduce al modelo de Python: {ver}")
         meta = {
             "modelo": "m6_proyeccion", "version": VERSION, "generado": date.today().isoformat(),
-            "descripcion": "Proyección de población a un año objetivo (horizonte directo)",
+            "descripcion": "Predicción de tendencia de población a un año objetivo (horizonte directo)",
             "entradas": FEATURES, "tensor_entrada": "float_input", "salida": "variable",
             "objetivo": "ln(poblacion[t+h] / poblacion[t])",
             "uso": "poblacion_objetivo = poblacion_actual * EXP(prediccion); h = anio_objetivo - anio_origen",
@@ -214,8 +219,9 @@ def ejecutar(raiz: Path | None = None, params: dict | None = None, exportar: boo
             "target_opset": int(p["target_opset"]),
             "metricas": {"backtest": bt["mape_pct_medio"], "bate_cagr5": bt["bate_cagr5"], **cv},
             "verificacion_onnx": ver,
-            "limitaciones": ["Solo usa la serie de población del Padrón",
-                             "Médicos, plazas y vivienda no tienen histórico abierto y se mantienen constantes"],
+            "limitaciones": ["Predicción de tendencia a partir de la serie de población del Padrón",
+                             "No modela inversiones, políticas ni cambios en los servicios",
+                             "No calcula el ICA (corresponde al simulador completo)"],
         }
         (raiz / "oracle" / "onnx" / "m6_proyeccion.metadata.json").write_text(
             json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -66,11 +66,51 @@ def test_parsear_padron_usa_solo_series_total():
 
 
 def test_parsear_padron_detecta_series_duplicadas_y_vacias():
-    dup = [_serie("Alcobendas. Total.", [(2025, 1)]), _serie("Alcobendas. Total. Total.", [(2025, 2)])]
+    dup = [_serie("Alcobendas. Total.", [(2025, 5)]), _serie("Alcobendas. Total. Total.", [(2025, 5)])]
     with pytest.raises(ValueError):
         desc.parsear_padron(dup)
     with pytest.raises(ValueError):
         desc.parsear_padron([_serie("Alcobendas. Hombres.", [(2025, 1)])])
+
+
+def test_parsear_padron_formato_real_del_ine_2881():
+    """Formato recibido del INE: '<Municipio>. <Sexo>. Total habitantes. Personas.' y 'Madrid' repetido
+    (total provincial + capital)."""
+    sufijo = "Total habitantes. Personas."
+    series = [
+        _serie(f"Madrid. Total. {sufijo}", [(2024, 7000000), (2025, 7100000)]),   # total provincial
+        _serie(f"Madrid. Hombres. {sufijo}", [(2025, 3400000)]),
+        _serie(f"Madrid. Mujeres. {sufijo}", [(2025, 3700000)]),
+        _serie(f"Acebeda, La. Total. {sufijo}", [(2024, 60), (2025, 61)]),
+        _serie(f"Acebeda, La. Hombres. {sufijo}", [(2025, 30)]),
+        _serie(f"Ajalvir. Total. {sufijo}", [(2024, 4900), (2025, 5000)]),
+        _serie(f"Madrid. Total. {sufijo}", [(2024, 3300000), (2025, 3350000)]),   # capital
+    ]
+    avisos = []
+    df = desc.parsear_padron(series, avisos=avisos)
+    assert sorted(df["clave"].unique()) == ["ajalvir", "la acebeda", "madrid"]
+    assert float(df.loc[(df["clave"] == "madrid") & (df["anio"] == 2025), "poblacion"].iloc[0]) == 3350000
+    assert len(avisos) == 1 and "provincial" in avisos[0]
+
+
+def test_parsear_padron_no_depende_del_orden_de_las_dimensiones():
+    series = [
+        _serie("Total. 28006 Alcobendas. Todas las edades.", [(2025, 121000)]),       # sexo, municipio, edad
+        _serie("Hombres. 28006 Alcobendas. Todas las edades.", [(2025, 58000)]),      # se descarta
+        _serie("Total. 28006 Alcobendas. De 0 a 4 años.", [(2025, 5000)]),            # se descarta (grupo de edad)
+        _serie("Sexo: Total. Municipios: Molar (El). Edad: Todas las edades. Población.", [(2025, 10000)]),
+        _serie("Cercedilla, Total, Todas las edades", [(2025, 7772)]),
+    ]
+    df = desc.parsear_padron(series)
+    assert sorted(df["clave"]) == ["alcobendas", "cercedilla", "el molar"]
+    assert int(df.loc[df["clave"] == "alcobendas", "codigo_ine"].iloc[0]) == 28006
+    assert float(df.loc[df["clave"] == "alcobendas", "poblacion"].iloc[0]) == 121000
+
+
+def test_error_de_parseo_muestra_los_nombres_recibidos():
+    with pytest.raises(ValueError) as e:
+        desc.parsear_padron([_serie("Hombres. De 0 a 4 años.", [(2025, 1)]), _serie("Mujeres. De 5 a 9 años.", [(2025, 2)])])
+    assert "De 0 a 4 años" in str(e.value) and "Nombre" in str(e.value)
 
 
 def test_validar_padron_acepta_datos_buenos_y_rechaza_malos():
@@ -111,6 +151,29 @@ def test_backtest_mejora_a_no_cambiar_nada():
     assert bt["anio_corte"] == 2020
     assert bt["bate_sin_cambio"] is True
     assert set(bt["mape_pct_medio"]) == {"modelo", "cagr5", "sin_cambio"}
+
+
+def test_recorta_al_tramo_contiguo_mas_reciente():
+    df = padron_sintetico(n=5)
+    df = df[df["anio"] != 1997]                      # el INE no publica el Padrón de 1997
+    recortado, descartados = panel.recortar_a_tramo_contiguo(df)
+    assert descartados == [1996]
+    assert int(recortado["anio"].min()) == 1998 and int(recortado["anio"].max()) == 2025
+    sin_huecos, nada = panel.recortar_a_tramo_contiguo(padron_sintetico(n=5))
+    assert nada == [] and len(sin_huecos) == 5 * 30
+
+
+def test_pipeline_con_hueco_en_la_serie(tmp_path):
+    raw = tmp_path / "data" / "raw"
+    raw.mkdir(parents=True)
+    (tmp_path / "params.yaml").write_text("m6_proyeccion: {}\n", encoding="utf-8")
+    df = padron_sintetico(n=40)
+    for anio, g in df[df["anio"] != 1997].groupby("anio"):
+        g.to_csv(raw / f"{anio}_raw_ine_padron.csv", index=False)
+    mensajes = []
+    m6.ejecutar(raiz=tmp_path, params=PARAMS_RAPIDOS, exportar=False, log=mensajes.append)
+    assert any("hueco" in m for m in mensajes)
+    assert (tmp_path / "data" / "output" / "m6_metricas.json").exists()
 
 
 def test_pipeline_completo_sin_onnx(tmp_path):

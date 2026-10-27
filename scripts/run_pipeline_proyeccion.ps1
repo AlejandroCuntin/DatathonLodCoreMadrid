@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Ejecuta el pipeline completo del modelo M6 (proyección de población):
+    Ejecuta el pipeline completo del modelo M6 (predicción de tendencia de población):
     descarga INE -> validación -> entrenamiento -> ONNX (oracle\onnx\m6_proyeccion.onnx).
 
 .EXAMPLE
