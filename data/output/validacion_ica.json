@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "fecha": "2026-10-27",
+    "n_municipios": 20,
+    "panel": "data\\validated\\municipios_panel_validado.csv",
+    "padron": "data\\raw\\ine\\ine_padron_2881_16y_snapshot_20261027.json",
+    "ventanas": [
+      "2010-2015",
+      "2015-2020",
+      "2020-2025"
+    ],
+    "seed_bootstrap": 2026,
+    "aviso": "El ICA es actual (2024-2026) y el crecimiento es histórico: las correlaciones son asociación, no predicción."
+  },
+  "A_ica_vs_crecimiento": {
+    "2010_2015": {
+      "n": 20,
+      "spearman": -0.156,
+      "p_valor": 0.51,
+      "pearson": -0.252
+    },
+    "2015_2020": {
+      "n": 20,
+      "spearman": -0.367,
+      "p_valor": 0.112,
+      "pearson": -0.204
+    },
+    "2020_2025": {
+      "n": 20,
+      "spearman": 0.101,
+      "p_valor": 0.673,
+      "pearson": 0.102,
+      "bootstrap_ic95": {
+        "ic95_inferior": -0.333,
+        "ic95_superior": 0.555
+      }
+    }
+  },
+  "B_indicadores_reales_vs_crecimiento": {
+    "valor_catastral_residencial_eur_m2": {
+      "n": 20,
+      "spearman": -0.295,
+      "p_valor": 0.207,
+      "pearson": -0.364
+    },
+    "migracion_neta_externa": {
+      "n": 20,
+      "spearman": 0.072,
+      "p_valor": 0.762,
+      "pearson": 0.118
+    },
+    "densidad": {
+      "n": 20,
+      "spearman": -0.059,
+      "p_valor": 0.806,
+      "pearson": -0.05
+    },
+    "tiempo_medio_madrid_minutos": {
+      "n": 20,
+      "spearman": 0.108,
+      "p_valor": 0.652,
+      "pearson": 0.031
+    },
+    "poblacion_actual": {
+      "n": 20,
+      "spearman": 0.132,
+      "p_valor": 0.578,
+      "pearson": 0.164
+    }
+  },
+  "C_regla_no_compensatoria": {
+    "sin_alerta": {
+      "n": 10,
+      "crecimiento_medio_2020_2025": 6.95
+    },
+    "con_alerta": {
+      "n": 10,
+      "crecimiento_medio_2020_2025": 7.58
+    }
+  },
+  "D_backtest_m3": {
+    "2015->2020": {
+      "m3_individual": {
+        "n": 20,
+        "mae_hab": 362.76,
+        "error_mediano_pct": 4.29,
+        "sesgo_hab": -227.72
+      },
+      "base_comarca": {
+        "n": 20,
+        "mae_hab": 363.15,
+        "error_mediano_pct": 3.83,
+        "sesgo_hab": -239.49
+      },
+      "persistencia": {
+        "n": 20,
+        "mae_hab": 585.8,
+        "error_mediano_pct": 4.91,
+        "sesgo_hab": -576.7
+      }
+    },
+    "2020->2025": {
+      "m3_individual": {
+        "n": 20,
+        "mae_hab": 273.61,
+        "error_mediano_pct": 1.55,
+        "sesgo_hab": -80.96
+      },
+      "base_comarca": {
+        "n": 20,
+        "mae_hab": 282.21,
+        "error_mediano_pct": 2.87,
+        "sesgo_hab": -86.64
+      },
+      "persistencia": {
+        "n": 20,
+        "mae_hab": 715.65,
+        "error_mediano_pct": 7.02,
+        "sesgo_hab": -712.65
+      }
+    }
+  },
+  "E_coincidencia_top5": {
+    "k": 5,
+    "top_ica": [
+      "Robledo de Chavela",
+      "Buitrago del Lozoya",
+      "Montejo de la Sierra",
+      "Chinchón",
+      "San Martín de Valdeiglesias"
+    ],
+    "top_crecimiento": [
+      "Villa del Prado",
+      "Colmenar de Oreja",
+      "Navalcarnero",
+      "Montejo de la Sierra",
+      "Robledo de Chavela"
+    ],
+    "coinciden": [
+      "Montejo de la Sierra",
+      "Robledo de Chavela"
+    ],
+    "n_coinciden": 2
+  }
+}

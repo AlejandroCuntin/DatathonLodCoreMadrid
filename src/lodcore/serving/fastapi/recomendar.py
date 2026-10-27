@@ -1,42 +1,103 @@
 """
-recomendar.py - Endpoint lógico N3 para el perfil Ciudadano: Recomendación personalizada MCDM.
+recomendar.py - Endpoint lógico N3 del perfil Ciudadano.
+
+Recibe las preferencias del ciudadano (presupuesto, ingresos, tiempo, hijos,
+edad, transporte y tenencia), deriva los pesos con `config/perfiles.py` y
+ordena los municipios con `m5_recomendador/ranking.py`.
+
+Misma lógica que la página APEX (`oracle/ddl/04-perfiles_y_ranking.sql`):
+formulario -> pesos -> ranking. Una sola verdad, dos caminos.
 """
 
-from typing import List, Dict, Any
+from typing import Any, Dict
+
 import pandas as pd
 from pydantic import BaseModel, Field
-from src.lodcore.models.m5_recomendador.recommend import recomendar_municipios_mcdm
+
+from src.lodcore.config.perfiles import PreferenciasCiudadano
+from src.lodcore.models.m5_recomendador.ranking import (
+    analisis_sensibilidad,
+    rankear_municipios,
+)
+
 
 class PreferenciasCiudadanoRequest(BaseModel):
-    peso_sanidad: float = Field(default=0.30, ge=0.0, le=1.0, description="Importancia relativa de la cobertura sanitaria AP")
-    peso_educacion: float = Field(default=0.30, ge=0.0, le=1.0, description="Importancia relativa de las plazas escolares")
-    peso_conectividad: float = Field(default=0.20, ge=0.0, le=1.0, description="Importancia de fibra y transporte público CRTM")
-    peso_vivienda: float = Field(default=0.20, ge=0.0, le=1.0, description="Importancia de vivienda disponible y asequibilidad")
-    presupuesto_max_m2: float = Field(default=2000.0, gt=500.0, le=6000.0, description="Precio máximo de compra admisible (€/m²)")
-    tiempo_max_madrid_min: int = Field(default=60, ge=15, le=120, description="Tiempo máximo de desplazamiento a Madrid capital (min)")
-    top_k: int = Field(default=3, ge=1, le=20, description="Número de municipios a retornar en el ranking")
+    """Entrada del perfil ciudadano. Los rangos replican config/perfiles.py."""
+
+    presupuesto_max_m2_eur: float = Field(
+        default=2000.0, ge=300.0, le=6000.0,
+        description="Precio máximo admisible (€/m² en compra; €/m²/mes en alquiler)",
+    )
+    ingresos_netos_hogar_eur: float = Field(
+        default=2500.0, ge=500.0, le=20000.0,
+        description="Ingresos netos mensuales del hogar (€/mes)",
+    )
+    tiempo_max_commute_min: int = Field(
+        default=90, ge=10, le=120,
+        description="Tiempo máximo de desplazamiento a Madrid (min)",
+    )
+    modo_transporte: str = Field(
+        default="publico", pattern="^(publico|privado)$",
+        description="Modo de transporte habitual",
+    )
+    num_hijos: int = Field(default=0, ge=0, le=6, description="Número de hijos")
+    edad: int = Field(default=35, ge=18, le=90, description="Edad del solicitante")
+    tenencia: str = Field(
+        default="compra", pattern="^(compra|alquiler)$", description="Régimen de tenencia"
+    )
+    m2_deseados: float = Field(default=90.0, ge=40.0, le=250.0, description="Superficie deseada (m²)")
+    top_k: int = Field(default=5, ge=1, le=20, description="Número de municipios a devolver")
+    incluir_sensibilidad: bool = Field(
+        default=False,
+        description="Si es true, añade el análisis de sensibilidad de los pesos (±20 %)",
+    )
+
 
 def ejecutar_recomendacion_ciudadana(
     req: PreferenciasCiudadanoRequest,
-    data_path: str = "data/validated/municipios_panel_validado.csv"
+    data_path: str = "data/validated/municipios_panel_validado.csv",
 ) -> Dict[str, Any]:
+    """Construye el ranking del perfil ciudadano y lo devuelve con su explicación."""
     df = pd.read_csv(data_path)
-    ranking = recomendar_municipios_mcdm(
-        df=df,
-        peso_sanidad=req.peso_sanidad,
-        peso_educacion=req.peso_educacion,
-        peso_conectividad=req.peso_conectividad,
-        peso_vivienda=req.peso_vivienda,
-        presupuesto_max_m2=req.presupuesto_max_m2,
-        tiempo_max_madrid_min=req.tiempo_max_madrid_min,
-        top_k=req.top_k
+    filas = df.to_dict(orient="records")
+
+    prefs = PreferenciasCiudadano(
+        presupuesto_max_m2_eur=req.presupuesto_max_m2_eur,
+        ingresos_netos_hogar_eur=req.ingresos_netos_hogar_eur,
+        tiempo_max_commute_min=req.tiempo_max_commute_min,
+        modo_transporte=req.modo_transporte,
+        num_hijos=req.num_hijos,
+        edad=req.edad,
+        tenencia=req.tenencia,
+        m2_deseados=req.m2_deseados,
     )
+
+    resultado = rankear_municipios(filas, prefs, top_k=req.top_k)
+
+    sensibilidad = None
+    if req.incluir_sensibilidad:
+        sensibilidad = analisis_sensibilidad(
+            filas, prefs, delta=0.20, top_k=min(req.top_k, 5)
+        )
+
+    dataset_version = (
+        str(df["dataset_version"].iloc[0])
+        if "dataset_version" in df.columns and len(df) > 0
+        else "SIN_VERSION_DECLARADA"
+    )
+
     return {
         "total_evaluados": int(len(df)),
+        "n_aceptados": int(resultado["n_aceptados"]),
+        "n_excluidos": int(resultado["n_excluidos"]),
         "top_k": req.top_k,
         "preferencias_aplicadas": req.model_dump(),
-        "ranking": ranking,
+        "pesos_aplicados": resultado["pesos"],
+        "presupuesto_efectivo_m2": resultado["presupuesto_efectivo_m2"],
+        "ranking": resultado["ranking"],
+        "excluidos": resultado["excluidos"],
+        "sensibilidad": sensibilidad,
         "origen": "ESTIMADO",
-        "metodo": "M5_MCDM_WEIGHTED_COSINE_NON_COMPENSATORY",
-        "dataset_version": "v1.0.0-F2"
+        "metodo": "PERFIL_CIUDADANO_SUMA_PONDERADA",
+        "dataset_version": dataset_version,
     }

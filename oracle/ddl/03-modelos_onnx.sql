@@ -1,5 +1,5 @@
 -- =============================================================================
--- LoDCORE Madrid • 05-modelos_onnx.sql
+-- LoDCORE Madrid • 03-modelos_onnx.sql
 -- Nivel N2: Scoring en motor Oracle Database 23ai con DBMS_VECTOR.LOAD_ONNX_MODEL
 -- Artefactos exportados en `oracle/onnx/m1_avm.onnx` y `oracle/onnx/m4_capacidad.onnx`
 -- Equivalencia verificada en CI: error relativo < 1e-6 y error absoluto < 1e-3

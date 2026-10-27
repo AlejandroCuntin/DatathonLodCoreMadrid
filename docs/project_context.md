@@ -26,11 +26,13 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Columnas del panel | **92** |
 | Columnas observadas (reales) | **8** |
 | Dataset version | `v1.1.0-F2` |
-| Perfil ciudadano | **C1 completado** (C2-C7 pendientes) |
-| Tests | **36 en verde** |
+| Perfil ciudadano | **C1-C6 hechos**; C7 (página APEX completa) pendiente |
+| Ranking Oracle | `04-perfiles_y_ranking.sql` ejecutado: pesos y ranking coinciden con Python |
+| Tests | **73 en verde** |
 | Modelos ONNX en Oracle | M1 y M4 |
 | API | `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto` |
-| DDL Oracle | `02-tablas_procesadas.sql`, `03-vistas_apex.sql`, `05-modelos_onnx.sql` |
+| Página de algoritmos | `frontend/algoritmos.html`, enlazada desde la sección "Modelos de datos utilizados" del portal |
+| DDL Oracle | `01-tablas_procesadas.sql`, `02-vistas_apex.sql`, `03-modelos_onnx.sql`, `04-perfiles_y_ranking.sql` |
 
 **Ejecutar:**
 ```powershell
@@ -114,7 +116,7 @@ de datos. Ese es el argumento Oracle del proyecto.
 
 | Modelo | Algoritmo real | Pregunta que responde | Estado |
 |---|---|---|---|
-| **M1 · AVM** | Random Forest (sklearn) | ¿Puedo permitírmelo? Precio €/m² y gap de mercado | Ilustrativo: R² fuera de muestra inestable |
+| **M1 · AVM** | Random Forest (sklearn) | ¿Puedo permitírmelo? Precio €/m² y gap de mercado | Ilustrativo: R² fuera de muestra −0,34. Diagnóstico 27-10: Ridge, RF simple y KNN tampoco logran R² positivo; el límite es la muestra, no el algoritmo |
 | **M2 · Indicadores** | PCA + StandardScaler + MinMax | ¿Qué tal servicios y conexión? 4 sub-índices 0-100 | Determinista |
 | **M3 · Demografía** | Extrapolación geométrica calibrada (CAGR) | ¿Va a crecer o vaciarse? | Determinista; pendiente backtest |
 | **M4 · Capacidad** | GradientBoostingRegressor (sklearn) | ¿Cuánta gente cabe y qué se rompe antes? | Core; reproduce la fórmula del ICA |
@@ -193,12 +195,12 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 | Etapa | Contenido | Estado |
 |---|---|---|
 | **C1** | Modelo de preferencias: entradas, pesos, filtros y fórmula de esfuerzo | ✅ **Hecho**: `docs/perfil_ciudadano.md` + `src/lodcore/config/perfiles.py` (verificado) |
-| **C2** | Motor de ranking con pesos del perfil y filtros duros | Pendiente |
-| **C3** | Asequibilidad: cuota, esfuerzo financiero y gap de mercado (M1) | Pendiente |
-| **C4** | Explicación por municipio: desglose de afinidad, fortalezas y carencias | Pendiente |
-| **C5** | Capa Oracle: tabla `PERFILES_PESOS` + función de ranking | Pendiente |
-| **C6** | API N3 equivalente a la función SQL | Pendiente |
-| **C7** | Página APEX del ciudadano: formulario, resultados, mapa y comparador | Pendiente |
+| **C2** | Motor de ranking con pesos del perfil y filtros duros | ✅ **Hecho y verificado**: `m5_recomendador/ranking.py`, 12 tests y coincidencia con Oracle |
+| **C3** | Asequibilidad: cuota, entrada, ingresos necesarios, precio sostenible y gap de M1 | ✅ **Hecho**: funciones en `perfiles.py`, campos en `ranking.py` y en la función SQL |
+| **C4** | Explicación por municipio: desglose, comparación con la media, fortalezas, carencias y texto sin causalidad | ✅ **Hecho**: `desglose_pct`, `comparacion_media`, `posicion` y motivo ampliado |
+| **C5** | Capa Oracle: `PERFILES_PARAMETROS`, `PERFILES_BASE`, `PERFILES_AJUSTES` y `f_ranking_ciudadano` | ✅ **Ejecutado en Oracle**: 8 parámetros, 4 pesos base, 6 reglas; pesos y ranking coinciden con Python |
+| **C6** | API N3 equivalente a la función SQL | ✅ **Hecho**: `/recomendar` usa `ranking.py` + `perfiles.py`; mismo resultado que APEX |
+| **C7** | Página APEX del ciudadano: formulario, resultados, mapa y comparador | 🟡 SQL listo (`codigo_ine` en el ranking); falta la página de detalle |
 
 ---
 
@@ -221,7 +223,8 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 - Filtros duros: precio y tiempo se respetan siempre.
 - Regla dura: un municipio colapsado no entra en el top aunque sus pesos le favorezcan.
 - Determinismo: mismos parámetros, mismo orden.
-- Equivalencia SQL ↔ Python del ranking.
+- Equivalencia SQL ↔ Python del ranking: `tests/unit/test_perfiles_sql_sync.py`
+  (9 comprobaciones de parametros, pesos base, reglas y topes). No necesita Oracle.
 - Equivalencia ONNX ↔ Python (`< 1e-6` relativo).
 
 ---
@@ -229,7 +232,8 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 ## 12. Qué está hecho, qué falta y qué no se hará
 
 **Hecho:** panel con datos reales, índice documentado, reglas duras, simulador,
-optimizador por eficiencia, ONNX en Oracle, mapa ORDS, portal estático, 36 tests.
+optimizador por eficiencia, ONNX en Oracle, mapa ORDS, portal estático,
+perfil ciudadano C1-C4 y C6 con ranking por perfiles, capa Oracle (04) y 73 tests.
 
 **Falta:** C1-C7, I1-I6, backtest de M3, validación ICA vs crecimiento real,
 regeneración del paquete de entrega.
@@ -255,3 +259,97 @@ causal/ATE, spillover medido, perfil empresario, panel de 179 municipios.
 Todo número publicado debe poder rastrearse a un fichero o a una función.
 Si una variable es calibrada, se declara en `fuente_datos` y se dice en la
 presentación. Es mejor un sistema pequeño y comprobable que uno grande y falso.
+
+---
+
+## 15. Ordenar, predecir y simular: tres cosas distintas
+
+| Operación | Pregunta | ¿Usa datos del futuro? | Dónde está |
+|---|---|---|---|
+| **Evaluar / ordenar** | ¿Qué municipio encaja con lo que pido? | No | Ranking (C2) |
+| **Predecir** | ¿Qué pasará en este municipio en 2030? | Sí | M3 (población y saturación) |
+| **Simular** | ¿Qué pasa si invierto X o llegan N personas? | No | What-if y optimizador |
+
+**Importante:** el formulario del ciudadano no alimenta una predicción: son sus
+preferencias. El ranking evalúa una realidad ya presente en los datos.
+
+**La predicción honesta que falta (E6):** comprobar si el ICA anticipa el
+crecimiento real. Se hace con backtest: indicadores de 2015 -> predecir 2020 ->
+comparar con el crecimiento observado. Eso permite decir "el índice acierta",
+no "el índice predice".
+
+**Lo que no se puede predecir:** "¿seré feliz viviendo ahí?". No existe ninguna
+etiqueta pública de satisfacción por municipio y perfil. Sin `y` no hay modelo.
+
+---
+
+## 16. Ampliación a 179 municipios (E4, no C6)
+
+Hoy el panel tiene 20 municipios porque son los únicos con las 92 columnas.
+
+**El código no asume 20:** el ranking usa `len(aceptados)` y las funciones SQL
+recorren las filas de la tabla. Añadir municipios no requiere cambiar el motor.
+
+**Lo que sí habría que actualizar al ampliar:**
+
+| Elemento | Cambio |
+|---|---|
+| `tests/unit/test_ingest.py` (72, 98) | Asserts que fijan 20 |
+| `tests/integration/test_fuga_l1_l7_y_baselines.py` (99-100) | Asserts que fijan 20 |
+| `tests/unit/test_ranking_ciudadano.py` (255) | Assert que fija 20 |
+| `scripts/check_model_cards.py` (61) | Población agregada (200.267) |
+| `frontend/index.js` | Datos embebidos |
+| Oracle | `TRUNCATE` + recarga del CSV |
+
+**Decisión:** no se amplía inventando las 84 columnas calibradas. Se añade una
+**capa real** de 179 municipios con ~10 columnas oficiales (población, valor
+catastral, migración, crecimiento, centros sanitarios y educativos) como dataset
+separado para el mapa y el diagnóstico. La capa de 20 mantiene el método completo.
+
+**Frase para el jurado:** "El método está validado en 20 municipios; la capa
+oficial cubre 179; extender el modelo es sustituir variables calibradas por
+SERMAS y Educación, no escribir más código."
+
+---
+
+## 17. Validación (E6)
+
+**Qué mide:** si el índice se corresponde con el crecimiento real, y cuánto
+acierta la proyección demográfica. **Qué no mide:** predicción. El ICA es actual
+(2024-2026) y el crecimiento es histórico: son asociaciones, no pronósticos.
+
+**Cómo se regenera:**
+```
+python -m src.lodcore.validation.validacion_ica
+```
+Salida: `data/output/validacion_ica.json`
+
+### Resultados
+
+| Prueba | Resultado |
+|---|---|
+| ICA vs crecimiento 2020-2025 | ρ = **+0,101** (p = 0,673); IC95 % [−0,333, +0,555] |
+| ICA vs crecimiento 2015-2020 | ρ = −0,367 (p = 0,112) |
+| ICA vs crecimiento 2010-2015 | ρ = −0,156 (p = 0,510) |
+| Indicadores reales vs crecimiento | Ninguno significativo (valor catastral −0,295; migración +0,072) |
+| Regla no compensatoria | Sin alerta +6,95 % · Con alerta +7,58 % |
+| Backtest M3 2020→2025 | Error mediano **1,55 %** · persistencia 7,02 % · base comarca 2,87 % |
+| Backtest M3 2015→2020 | Error mediano 4,29 % · persistencia 4,91 % · base comarca 3,83 % |
+| Coincidencia top-5 ICA / crecimiento | **2 de 5** (Montejo y Robledo) |
+
+### Hallazgo principal
+
+Los municipios que más crecieron son los que menos capacidad tienen:
+
+| Municipio | Crecimiento 2020-2025 | ICA |
+|---|---|---|
+| Villa del Prado | +16,2 % | 36,9 |
+| Colmenar de Oreja | +11,9 % | 35,3 |
+| Navalcarnero | +11,2 % | 24,5 |
+
+**Lectura:** el ICA mide capacidad disponible, no atractivo. El crecimiento real
+no sigue a la capacidad, lo que confirma el problema territorial que justifica
+la herramienta.
+
+**Pendiente:** elegir el enfoque del pitch (A negativo / B diferencial / C mixto).
+

@@ -73,6 +73,10 @@ FINANCIACION_COMPRA: float = 0.80
 TIPO_INTERES_ANUAL: float = 0.035
 ANIOS_HIPOTECA: int = 30
 
+# Asequibilidad (C3)
+ENTRADA_PCT: float = 0.20          # % del precio que no se financia
+ESFUERZO_MAXIMO_PCT: float = 30.0  # % máximo de ingresos destinado a vivienda
+
 # Umbrales de esfuerzo financiero (% sobre ingresos netos).
 UMBRAL_ASEQUIBLE: float = 30.0
 UMBRAL_AJUSTADO: float = 35.0
@@ -228,6 +232,61 @@ def esfuerzo_financiero_pct(cuota_mensual: float, ingresos_netos_mes_eur: float)
     return (cuota_mensual / ingresos_netos_mes_eur) * 100.0
 
 
+def factor_hipotecario(
+    tipo_anual: float = TIPO_INTERES_ANUAL, anios: int = ANIOS_HIPOTECA
+) -> float:
+    """Cuota mensual por cada euro prestado (sistema francés)."""
+    r = tipo_anual / 12.0
+    n = int(anios * 12)
+    if r <= 0.0:
+        return 1.0 / n
+    return r / (1.0 - (1.0 + r) ** (-n))
+
+
+def entrada_eur(precio_m2_eur: float, m2: float, entrada_pct: float = ENTRADA_PCT) -> float:
+    """Entrada no financiada (20 % por defecto)."""
+    return precio_m2_eur * m2 * entrada_pct
+
+
+def ingresos_necesarios_eur(
+    cuota_mensual_eur: float, esfuerzo_maximo_pct: float = ESFUERZO_MAXIMO_PCT
+) -> float:
+    """Ingresos mensuales que harían falta para que la cuota no supere el esfuerzo máximo."""
+    return cuota_mensual_eur / (esfuerzo_maximo_pct / 100.0)
+
+
+def precio_max_sostenible_m2(
+    ingresos_netos_mes_eur: float,
+    m2: float,
+    tenencia: str = "compra",
+    esfuerzo_maximo_pct: float = ESFUERZO_MAXIMO_PCT,
+    financiacion: float = FINANCIACION_COMPRA,
+    tipo_anual: float = TIPO_INTERES_ANUAL,
+    anios: int = ANIOS_HIPOTECA,
+) -> float:
+    """Precio máximo por m2 que el hogar puede pagar sin superar el esfuerzo máximo."""
+    if ingresos_netos_mes_eur <= 0 or m2 <= 0:
+        return float("nan")
+    cuota_max = ingresos_netos_mes_eur * (esfuerzo_maximo_pct / 100.0)
+    if tenencia == "alquiler":
+        return cuota_max / m2
+    prestamo_max = cuota_max / factor_hipotecario(tipo_anual, anios)
+    precio_vivienda_max = prestamo_max / financiacion
+    return precio_vivienda_max / m2
+
+
+def presupuesto_efectivo_m2(prefs: PreferenciasCiudadano) -> float:
+    """Presupuesto aplicado: el menor entre lo declarado y lo que el hogar puede pagar.
+
+    Evita mostrar municipios que el ciudadano no podría pagar aunque los declare
+    como admisibles.
+    """
+    sostenible = precio_max_sostenible_m2(
+        prefs.ingresos_netos_hogar_eur, prefs.m2_deseados, prefs.tenencia
+    )
+    return min(prefs.presupuesto_max_m2_eur, sostenible)
+
+
 def etiqueta_esfuerzo(esfuerzo_pct: float) -> str:
     if esfuerzo_pct <= UMBRAL_ASEQUIBLE:
         return "Asequible"
@@ -239,22 +298,28 @@ def etiqueta_esfuerzo(esfuerzo_pct: float) -> str:
 
 
 def evaluar_asequibilidad(prefs: PreferenciasCiudadano, fila: Dict[str, object]) -> Dict[str, object]:
-    """Calcula cuota y esfuerzo para una fila del panel (compra o alquiler)."""
+    """Calcula cuota, entrada, esfuerzo y precio sostenible para una fila del panel."""
     if prefs.tenencia == "compra":
         precio_m2 = float(fila["precio_m2_compra"])
         cuota = cuota_mensual_compra(precio_m2, prefs.m2_deseados)
-        precio_referencia = precio_m2
+        entrada = entrada_eur(precio_m2, prefs.m2_deseados)
     else:
         precio_m2 = float(fila["precio_m2_alquiler"])
         cuota = cuota_mensual_alquiler(precio_m2, prefs.m2_deseados)
-        precio_referencia = precio_m2
+        entrada = 0.0
 
     esfuerzo = esfuerzo_financiero_pct(cuota, prefs.ingresos_netos_hogar_eur)
+    sostenible = precio_max_sostenible_m2(
+        prefs.ingresos_netos_hogar_eur, prefs.m2_deseados, prefs.tenencia
+    )
     return {
-        "precio_m2_evaluado": round(precio_referencia, 2),
+        "precio_m2_evaluado": round(precio_m2, 2),
         "cuota_mensual_eur": round(cuota, 2),
+        "entrada_eur": round(entrada, 2),
         "esfuerzo_financiero_pct": round(esfuerzo, 2),
         "etiqueta_esfuerzo": etiqueta_esfuerzo(esfuerzo),
+        "ingresos_necesarios_eur": round(ingresos_necesarios_eur(cuota), 2),
+        "precio_max_sostenible_m2": round(sostenible, 2),
     }
 
 
@@ -272,6 +337,7 @@ def filtrar_municipios(
     """
     aceptados: List[Dict[str, object]] = []
     excluidos: List[Dict[str, object]] = []
+    presupuesto = presupuesto_efectivo_m2(prefs)
 
     for fila in filas:
         nombre = str(fila.get("nombre", "?"))
@@ -282,12 +348,12 @@ def filtrar_municipios(
 
         tiempo = int(fila["tiempo_medio_madrid_minutos"])
 
-        if precio > prefs.presupuesto_max_m2_eur:
+        if precio > presupuesto:
             excluidos.append(
                 {
                     "nombre": nombre,
                     "motivo": "PRECIO",
-                    "detalle": f"{precio:.0f} €/m² > presupuesto {prefs.presupuesto_max_m2_eur:.0f}",
+                    "detalle": f"{precio:.0f} €/m² > presupuesto efectivo {presupuesto:.0f}",
                 }
             )
             continue

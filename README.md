@@ -34,7 +34,7 @@ DatathonLodCoreMadrid/
 ├── frontend/                        # portal estático (index.html, datos embebidos)
 ├── scripts/                         # run_all_models_n1_n2_n3.py + auditorías
 ├── tests/                           # unit + integración (pytest)
-├── oracle/ddl/                      # 02 tabla, 03 vistas APEX, 05 modelos ONNX
+├── oracle/ddl/                      # 01 tabla, 02 vistas APEX, 03 ONNX, 04 ranking
 ├── oracle/onnx/                     # binarios ONNX para N2
 ├── data/raw/                        # descargas originales INE + CKAN (inmutables)
 ├── data/output/                     # payload JSON del panel
@@ -64,10 +64,27 @@ uvicorn src.lodcore.serving.fastapi.app:app --reload --port 8000
 Endpoints:
 
 - `GET /health` — diagnóstico del servicio (versión, dataset y endpoints activos).
-- `POST /recomendar` — recomendación personalizada para un ciudadano (M5 + MCDM).
+- `POST /recomendar` — ranking del perfil ciudadano. Acepta presupuesto, ingresos, tiempo máximo, hijos, edad, transporte y tenencia; deriva los pesos y devuelve encaje, desglose, esfuerzo financiero y riesgo.
 - `POST /whatif` — simulación institucional de residentes, médicos, plazas e inversión.
 - `POST /optimizar-presupuesto` — heurística voraz comarcal: reparte un presupuesto cerrado entre municipios (M4-OPT).
 - `GET /docs` — Swagger autogenerado por FastAPI.
+
+Ejemplo de `/recomendar`:
+
+```json
+{
+  "presupuesto_max_m2_eur": 2000,
+  "ingresos_netos_hogar_eur": 2500,
+  "tiempo_max_commute_min": 90,
+  "modo_transporte": "publico",
+  "num_hijos": 2,
+  "edad": 40,
+  "tenencia": "compra",
+  "m2_deseados": 100,
+  "top_k": 5,
+  "incluir_sensibilidad": false
+}
+```
 
 > El portal `frontend/index.html` es **estático y autocontenido**: los datos van
 > embebidos en `index.js` y no llama a ninguna API. La UI de entrega será Oracle APEX.
@@ -78,13 +95,15 @@ Endpoints:
 
 Ejecutar en orden con SQLcl, SQL Developer o APEX › SQL Workshop:
 
-1. `oracle/ddl/02-tablas_procesadas.sql` (crea `municipios_procesados` con las **92 columnas** del panel y 4 columnas virtuales de compatibilidad)
-2. `oracle/ddl/03-vistas_apex.sql`
-3. `oracle/ddl/05-modelos_onnx.sql`
+1. `oracle/ddl/01-tablas_procesadas.sql` (crea `municipios_procesados` con las **92 columnas** del panel y 4 columnas virtuales de compatibilidad)
+2. `oracle/ddl/02-vistas_apex.sql`
+3. `oracle/ddl/03-modelos_onnx.sql`
+4. `oracle/ddl/04-perfiles_y_ranking.sql` (perfiles, pesos y función de ranking del ciudadano)
 
 > Se retiraron `01-tablas_raw.sql` (tres tablas crudas que nadie rellenaba y que
-> declaraban plazas y médicos inexistentes en las fuentes) y `04-indices_espaciales.sql`
-> (columna SDO_GEOMETRY que nunca se poblaba; el mapa trabaja con latitud/longitud).
+> declaraban plazas y médicos inexistentes en las fuentes), el antiguo script de
+> índices espaciales y `06-dataset_completo_APEX.sql` (reset destructivo).
+> La columna SDO_GEOMETRY nunca se poblaba: el mapa trabaja con latitud/longitud.
 
 Para el paso 3, copiar `oracle/onnx/*.onnx` a un directorio del servidor y crear
 el objeto de directorio antes de cargar los modelos:
