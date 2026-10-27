@@ -234,6 +234,7 @@ def test_salida_tiene_los_campos_prometidos():
         "cuota_mensual_eur", "entrada_eur", "ingresos_necesarios_eur",
         "precio_max_sostenible_m2", "precio_avm_eur_m2",
         "gap_mercado_pct", "diagnostico_mercado",
+        "desglose_pct", "comparacion_media", "posicion",
     ):
         assert clave in m
     assert abs(sum(m["desglose"].values()) - sum(
@@ -282,6 +283,59 @@ def test_el_filtro_usa_el_presupuesto_efectivo():
     assert res["presupuesto_efectivo_m2"] < 1500
     assert [m["nombre"] for m in res["ranking"]] == ["Barato"]
     assert res["excluidos"][0]["motivo"] == "PRECIO"
+
+
+# ---------------------------------------------------------------------------
+# C4 · Explicación por municipio
+# ---------------------------------------------------------------------------
+
+def test_desglose_porcentual_suma_100():
+    res = rankear_municipios([_fila("A")], _perfil())
+    m = res["ranking"][0]
+    assert abs(sum(m["desglose_pct"].values()) - 100.0) <= 0.2
+
+
+def test_comparacion_con_la_media_del_panel():
+    filas = [
+        _fila("Alto", educacion=90),
+        _fila("Medio", educacion=60),
+        _fila("Bajo", educacion=30),
+    ]
+    res = rankear_municipios(filas, _perfil())
+    alto = next(m for m in res["ranking"] if m["nombre"] == "Alto")
+    bajo = next(m for m in res["ranking"] if m["nombre"] == "Bajo")
+    assert alto["comparacion_media"]["educacion"] > 0
+    assert bajo["comparacion_media"]["educacion"] < 0
+
+
+def test_motivo_menciona_el_factor_limitante():
+    res = rankear_municipios([_fila("A", factor="SANIDAD")], _perfil())
+    texto = res["ranking"][0]["motivo_recomendacion"].lower()
+    assert "se rompe primero" in texto
+    assert "sanidad" in texto
+
+
+def test_motivo_menciona_el_gap_de_mercado():
+    # El fixture fija un gap de -9,09 % (precio por debajo del valor del modelo)
+    res = rankear_municipios([_fila("A")], _perfil())
+    assert "por encima del precio" in res["ranking"][0]["motivo_recomendacion"]
+
+
+def test_motivo_sin_lenguaje_causal():
+    from src.lodcore.explain.redaccion_natural import verificar_ausencia_causalidad
+
+    res = rankear_municipios([_fila("A")], _perfil())
+    # Lanza ValueError si aparece un verbo causal prohibido
+    assert verificar_ausencia_causalidad(res["ranking"][0]["motivo_recomendacion"])
+
+
+def test_posicion_es_correlativa():
+    filas = [
+        _fila("A", educacion=90),
+        _fila("B", educacion=30),
+    ]
+    res = rankear_municipios(filas, _perfil())
+    assert [m["posicion"] for m in res["ranking"]] == [1, 2]
 
 
 # ---------------------------------------------------------------------------

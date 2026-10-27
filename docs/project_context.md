@@ -26,9 +26,9 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Columnas del panel | **92** |
 | Columnas observadas (reales) | **8** |
 | Dataset version | `v1.1.0-F2` |
-| Perfil ciudadano | **C1, C2, C3, C5 y C6 hechos**; C4 y C7 parciales |
+| Perfil ciudadano | **C1-C6 hechos**; C7 (página APEX completa) pendiente |
 | Ranking Oracle | `04-perfiles_y_ranking.sql` ejecutado: pesos y ranking coinciden con Python |
-| Tests | **67 en verde** |
+| Tests | **73 en verde** |
 | Modelos ONNX en Oracle | M1 y M4 |
 | API | `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto` |
 | Página de algoritmos | `frontend/algoritmos.html`, enlazada desde la sección "Modelos de datos utilizados" del portal |
@@ -197,7 +197,7 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 | **C1** | Modelo de preferencias: entradas, pesos, filtros y fórmula de esfuerzo | ✅ **Hecho**: `docs/perfil_ciudadano.md` + `src/lodcore/config/perfiles.py` (verificado) |
 | **C2** | Motor de ranking con pesos del perfil y filtros duros | ✅ **Hecho y verificado**: `m5_recomendador/ranking.py`, 12 tests y coincidencia con Oracle |
 | **C3** | Asequibilidad: cuota, entrada, ingresos necesarios, precio sostenible y gap de M1 | ✅ **Hecho**: funciones en `perfiles.py`, campos en `ranking.py` y en la función SQL |
-| **C4** | Explicación por municipio: desglose de afinidad, fortalezas y carencias | Pendiente |
+| **C4** | Explicación por municipio: desglose, comparación con la media, fortalezas, carencias y texto sin causalidad | ✅ **Hecho**: `desglose_pct`, `comparacion_media`, `posicion` y motivo ampliado |
 | **C5** | Capa Oracle: `PERFILES_PARAMETROS`, `PERFILES_BASE`, `PERFILES_AJUSTES` y `f_ranking_ciudadano` | ✅ **Ejecutado en Oracle**: 8 parámetros, 4 pesos base, 6 reglas; pesos y ranking coinciden con Python |
 | **C6** | API N3 equivalente a la función SQL | ✅ **Hecho**: `/recomendar` usa `ranking.py` + `perfiles.py`; mismo resultado que APEX |
 | **C7** | Página APEX del ciudadano: formulario, resultados, mapa y comparador | Pendiente |
@@ -233,7 +233,7 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 
 **Hecho:** panel con datos reales, índice documentado, reglas duras, simulador,
 optimizador por eficiencia, ONNX en Oracle, mapa ORDS, portal estático,
-perfil ciudadano C1-C2 con ranking por perfiles y su capa Oracle (04), 57 tests.
+perfil ciudadano C1-C4 y C6 con ranking por perfiles, capa Oracle (04) y 73 tests.
 
 **Falta:** C1-C7, I1-I6, backtest de M3, validación ICA vs crecimiento real,
 regeneración del paquete de entrega.

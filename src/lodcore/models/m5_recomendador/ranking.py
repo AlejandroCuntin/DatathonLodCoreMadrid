@@ -37,6 +37,7 @@ from src.lodcore.config.perfiles import (
 from src.lodcore.models.m4_capacidad.reglas_no_compensatorias import (
     aplicar_salvaguarda_no_compensatoria,
 )
+from src.lodcore.explain.redaccion_natural import verificar_ausencia_causalidad
 
 # Techo de afinidad para un municipio con alerta no compensatoria.
 # Debe ser UMBRAL_ICA_BAJA - 1 (coherente con reglas_no_compensatorias).
@@ -48,6 +49,14 @@ ETIQUETAS_DIMENSION: Dict[str, str] = {
     "educacion": "educación",
     "conectividad": "conectividad",
     "sanidad": "sanidad",
+}
+
+# Etiquetas del factor limitante que llega del panel (en mayusculas).
+ETIQUETAS_FACTOR: Dict[str, str] = {
+    "SANIDAD": "sanidad",
+    "EDUCACION": "educación",
+    "EDUCACIÓN": "educación",
+    "VIVIENDA": "vivienda",
 }
 
 
@@ -80,7 +89,12 @@ def _fortalezas_y_carencias(scores: Dict[str, float]) -> Dict[str, List[str]]:
 
 
 def _motivo_recomendacion(
-    scores: Dict[str, float], pesos: Dict[str, float], alerta: bool, motivo_colapso: str | None
+    scores: Dict[str, float],
+    pesos: Dict[str, float],
+    alerta: bool,
+    motivo_colapso: str | None,
+    factor_limitante: str | None = None,
+    gap_mercado_pct: float | None = None,
 ) -> str:
     """Texto en espanol sin atribuir causalidad."""
     ordenadas = sorted(DIMENSIONES, key=lambda d: pesos[d] * scores[d], reverse=True)
@@ -92,9 +106,43 @@ def _motivo_recomendacion(
         f"{ETIQUETAS_DIMENSION[segunda]} ({scores[segunda]:.0f}/100). "
         f"Su punto más débil es {ETIQUETAS_DIMENSION[peor]} ({scores[peor]:.0f}/100)."
     )
+
+    factor = ETIQUETAS_FACTOR.get(str(factor_limitante).upper()) if factor_limitante else None
+    if factor:
+        base += f" El servicio que se rompe primero es la {factor}."
+
+    if gap_mercado_pct is not None:
+        if gap_mercado_pct <= -5.0:
+            base += (
+                f" El modelo valora el m² un {abs(gap_mercado_pct):.0f} % por encima "
+                "del precio de referencia."
+            )
+        elif gap_mercado_pct >= 5.0:
+            base += (
+                f" El modelo valora el m² un {gap_mercado_pct:.0f} % por debajo "
+                "del precio de referencia."
+            )
+        else:
+            base += " El precio de referencia está en línea con el valor del modelo."
+
     if alerta:
-        return f"{base} Atención: {motivo_colapso}"
+        base += f" Atención: {motivo_colapso}"
+
+    verificar_ausencia_causalidad(base)
     return base
+
+
+def _medias_panel(filas: Iterable[Dict[str, Any]]) -> Dict[str, float]:
+    """Media de los 4 sub-indices en el panel, para comparar cada municipio."""
+    valores: Dict[str, List[float]] = {d: [] for d in DIMENSIONES}
+    for fila in filas:
+        try:
+            scores = _scores(fila)
+        except (KeyError, TypeError, ValueError):
+            continue
+        for d in DIMENSIONES:
+            valores[d].append(scores[d])
+    return {d: (float(np.mean(v)) if v else 0.0) for d, v in valores.items()}
 
 
 def rankear_municipios(
@@ -113,15 +161,28 @@ def rankear_municipios(
     filas_lista = list(filas)
     aceptados, excluidos = filtrar_municipios(filas_lista, prefs)
     pesos = pesos_ciudadano(prefs)
+    medias = _medias_panel(filas_lista)
 
     ranking: List[Dict[str, Any]] = []
     for fila in aceptados:
         evaluado = aplicar_salvaguarda_no_compensatoria(dict(fila))
         scores = _scores(evaluado)
         desglose = {d: round(pesos[d] * scores[d], 2) for d in DIMENSIONES}
-        afinidad = sum(desglose.values())
-        if evaluado["alerta_no_compensatoria"]:
-            afinidad = min(afinidad, TECHO_AFINIDAD_ALERTA)
+        afinidad_raw = sum(desglose.values())
+        afinidad = (
+            min(afinidad_raw, TECHO_AFINIDAD_ALERTA)
+            if evaluado["alerta_no_compensatoria"]
+            else afinidad_raw
+        )
+        desglose_pct = {
+            d: (round(desglose[d] / afinidad_raw * 100, 1) if afinidad_raw > 0 else 0.0)
+            for d in DIMENSIONES
+        }
+        gap_val = (
+            float(evaluado["gap_mercado_pct"])
+            if evaluado.get("gap_mercado_pct") is not None
+            else None
+        )
 
         asequibilidad = evaluar_asequibilidad(prefs, evaluado)
         texto = _fortalezas_y_carencias(scores)
@@ -134,6 +195,10 @@ def rankear_municipios(
                 "comarca": str(evaluado.get("comarca", "")),
                 "afinidad_pct": round(float(afinidad), 2),
                 "desglose": desglose,
+                "desglose_pct": desglose_pct,
+                "comparacion_media": {
+                    d: round(scores[d] - medias[d], 1) for d in DIMENSIONES
+                },
                 "semaforo_ica": evaluado["semaforo_ica"],
                 "indice_ica_ajustado": evaluado["indice_capacidad_ajustado"],
                 "alerta_no_compensatoria": bool(evaluado["alerta_no_compensatoria"]),
@@ -151,23 +216,26 @@ def rankear_municipios(
                     if evaluado.get("precio_predicho_avm_m2") is not None
                     else None
                 ),
-                "gap_mercado_pct": (
-                    round(float(evaluado["gap_mercado_pct"]), 2)
-                    if evaluado.get("gap_mercado_pct") is not None
-                    else None
-                ),
+                "gap_mercado_pct": round(gap_val, 2) if gap_val is not None else None,
                 "diagnostico_mercado": evaluado.get("diagnostico_mercado"),
                 "fortalezas": texto["fortalezas"],
                 "carencias": texto["carencias"],
                 "riesgo_futuro": _riesgo_futuro(evaluado),
                 "motivo_recomendacion": _motivo_recomendacion(
-                    scores, pesos, bool(evaluado["alerta_no_compensatoria"]), evaluado["motivo_colapso"]
+                    scores,
+                    pesos,
+                    bool(evaluado["alerta_no_compensatoria"]),
+                    evaluado["motivo_colapso"],
+                    factor_limitante=evaluado.get("factor_limitante"),
+                    gap_mercado_pct=gap_val,
                 ),
             }
         )
 
     # Determinista: afinidad, luego ICA ajustado, luego nombre.
     ranking.sort(key=lambda x: (-x["afinidad_pct"], -x["indice_ica_ajustado"], x["nombre"]))
+    for i, item in enumerate(ranking, 1):
+        item["posicion"] = i
 
     if top_k is not None:
         ranking = ranking[:top_k]
