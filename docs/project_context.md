@@ -26,6 +26,7 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Columnas del panel | **92** |
 | Columnas observadas (reales) | **8** |
 | Dataset version | `v1.1.0-F2` |
+| Capa real 179 | `data/validated/panel_179_real.csv` (10 columnas oficiales; 156 completos) |
 | Perfil ciudadano | **C1-C6 hechos**; C7 (página APEX completa) pendiente |
 | Ranking Oracle | `04-perfiles_y_ranking.sql` ejecutado: pesos y ranking coinciden con Python |
 | Tests | **73 en verde** |
@@ -305,6 +306,11 @@ recorren las filas de la tabla. Añadir municipios no requiere cambiar el motor.
 **capa real** de 179 municipios con ~10 columnas oficiales (población, valor
 catastral, migración, crecimiento, centros sanitarios y educativos) como dataset
 separado para el mapa y el diagnóstico. La capa de 20 mantiene el método completo.
+
+**Estado:** ✅ dataset construido con `python -m src.lodcore.ingest.pipeline_179`
+(179 filas, 16 columnas, 156 municipios con todas las fuentes; 23 pueblos
+pequeños sin centros educativos en ALTA). Falta cargarlo en Oracle y pintarlo
+en el mapa.
 
 **Frase para el jurado:** "El método está validado en 20 municipios; la capa
 oficial cubre 179; extender el modelo es sustituir variables calibradas por
