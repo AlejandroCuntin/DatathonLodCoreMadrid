@@ -13,24 +13,20 @@
 
 -- ---------------------------------------------------------------------------
 -- 0. Limpieza idempotente (permite relanzar el script sin errores)
+--    Sentencias individuales: no se recorre user_objects mientras se borran
+--    objetos (eso puede invalidar el cursor).
 -- ---------------------------------------------------------------------------
-BEGIN
-    FOR r IN (
-        SELECT object_name, object_type
-          FROM user_objects
-         WHERE object_type IN ('VIEW', 'FUNCTION', 'TABLE')
-           AND object_name IN (
-               'V_RANKING_CIUDADANO_DEMO', 'F_RANKING_CIUDADANO', 'F_PESOS_CIUDADANO',
-               'PERFILES_PARAMETROS', 'PERFILES_BASE', 'PERFILES_AJUSTES'
-           )
-    ) LOOP
-        BEGIN
-            EXECUTE IMMEDIATE 'DROP ' || r.object_type || ' ' || r.object_name
-                || CASE WHEN r.object_type = 'TABLE' THEN ' CASCADE CONSTRAINTS' ELSE '' END;
-        EXCEPTION WHEN OTHERS THEN NULL;
-        END;
-    END LOOP;
-END;
+BEGIN EXECUTE IMMEDIATE 'DROP VIEW v_ranking_ciudadano_demo'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP FUNCTION f_ranking_ciudadano'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP FUNCTION f_pesos_ciudadano'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE perfiles_ajustes CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE perfiles_base CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP TABLE perfiles_parametros CASCADE CONSTRAINTS'; EXCEPTION WHEN OTHERS THEN NULL; END;
 /
 
 BEGIN EXECUTE IMMEDIATE 'DROP TYPE t_ranking FORCE'; EXCEPTION WHEN OTHERS THEN NULL; END;
