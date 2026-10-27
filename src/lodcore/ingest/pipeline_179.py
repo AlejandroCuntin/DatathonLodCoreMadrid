@@ -1,5 +1,5 @@
 """
-pipeline_179.py - Capa REAL de los 179 municipios de Madrid (E4).
+pipeline_179.py - Capa REAL de los municipios de Madrid (E4).
 
 Construye un dataset separado del panel de 20, con SOLO datos oficiales:
 
@@ -8,13 +8,17 @@ Construye un dataset separado del panel de 20, con SOLO datos oficiales:
   valor_catastral_residencial_eur_m2, anio_valor_catastral,
   migracion_neta_externa, crecimiento_pob_pct_2020_2025
 
+Genera dos salidas:
+  - panel_179_real: los 179 municipios de la Comunidad de Madrid
+  - panel_menores_50k_real: solo los que tienen menos de 50.000 habitantes
+    (el ámbito del reto)
+
 NO inventa las columnas calibradas del panel de 20 (precios, medicos, plazas,
 vivienda, suelo, transporte...). Esa capa es para el mapa y el diagnostico,
 no para entrenar el modelo de 92 columnas.
 
-Salida:
-  data/validated/panel_179_real.csv
-  data/output/panel_179_real.json
+Los centros sin dato en CKAN se rellenan con 0 (municipio sin centros en la
+fuente), nunca se dejan como nulos.
 
 Uso:
   python -m src.lodcore.ingest.pipeline_179
@@ -43,6 +47,11 @@ RAW_CKAN = Path("data/raw/ckan")
 RAW_INE = Path("data/raw/ine")
 OUT_CSV = Path("data/validated/panel_179_real.csv")
 OUT_JSON = Path("data/output/panel_179_real.json")
+OUT_CSV_50K = Path("data/validated/panel_menores_50k_real.csv")
+OUT_JSON_50K = Path("data/output/panel_menores_50k_real.json")
+
+# Ámbito del reto: municipios de menos de 50.000 habitantes
+UMBRAL_POBLACION = 50000
 
 FUENTE_DATOS = (
     "Población: INE Padrón 2881 | "
@@ -107,12 +116,21 @@ def ejecutar_pipeline_179(escribir: bool = True) -> Dict[str, Any]:
         )
 
     df = pd.DataFrame(filas)
+
+    # Centros sin dato en CKAN = 0 centros en la fuente (nunca nulos)
+    for col in ("num_centros_salud", "num_centros_educativos"):
+        df[col] = df[col].fillna(0).astype(int)
+
     df["origen"] = "OBSERVADO"
     df["metodo"] = "PANEL_179_CAPA_REAL"
     df["dataset_version"] = "v1.1.0-F2"
     df["fecha_disponible"] = "2026-10-27"
     df["fecha_calculo"] = datetime.now().replace(microsecond=0).isoformat()
     df["fuente_datos"] = FUENTE_DATOS
+
+    # Capa del reto: municipios de menos de 50.000 habitantes
+    df_50k = df[df["poblacion_actual"] < UMBRAL_POBLACION].copy()
+    df_50k["metodo"] = "PANEL_MENORES_50K_CAPA_REAL"
 
     # 5. Cobertura real
     clave = [
@@ -133,14 +151,25 @@ def ejecutar_pipeline_179(escribir: bool = True) -> Dict[str, Any]:
             json.dumps(df.to_dict(orient="records"), ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
+        df_50k.to_csv(OUT_CSV_50K, index=False, encoding="utf-8")
+        OUT_JSON_50K.write_text(
+            json.dumps(df_50k.to_dict(orient="records"), ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
 
     resumen = {
-        "municipios": int(len(df)),
+        "municipios_179": int(len(df)),
+        "municipios_menores_50k": int(len(df_50k)),
+        "poblacion_menores_50k": int(df_50k["poblacion_actual"].sum()),
         "columnas": int(len(df.columns)),
+        "nulos_totales_179": int(df.isna().sum().sum()),
+        "nulos_totales_50k": int(df_50k.isna().sum().sum()),
         "cobertura_por_fuente": cobertura,
         "municipios_con_todas_las_fuentes": completos,
         "salida_csv": str(OUT_CSV),
         "salida_json": str(OUT_JSON),
+        "salida_csv_50k": str(OUT_CSV_50K),
+        "salida_json_50k": str(OUT_JSON_50K),
     }
     logger.info("Capa 179: %s municipios · cobertura %s", len(df), cobertura)
     return resumen

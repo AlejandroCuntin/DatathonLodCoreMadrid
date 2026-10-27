@@ -5,7 +5,7 @@
     "poblacion_actual": 70,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 46.61,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": -0.8,
@@ -14,7 +14,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -23,7 +23,7 @@
     "poblacion_actual": 4868,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 85.28,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 67.6,
@@ -32,7 +32,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -41,7 +41,7 @@
     "poblacion_actual": 267,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 73.26,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 15.6,
@@ -50,7 +50,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -59,7 +59,7 @@
     "poblacion_actual": 10594,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 5.0,
+    "num_centros_educativos": 5,
     "valor_catastral_residencial_eur_m2": 60.36,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 119.8,
@@ -68,7 +68,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -77,7 +77,7 @@
     "poblacion_actual": 203208,
     "anio_padron": 2025,
     "num_centros_salud": 10,
-    "num_centros_educativos": 85.0,
+    "num_centros_educativos": 85,
     "valor_catastral_residencial_eur_m2": 94.2,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2504.4,
@@ -86,7 +86,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -95,7 +95,7 @@
     "poblacion_actual": 123342,
     "anio_padron": 2025,
     "num_centros_salud": 5,
-    "num_centros_educativos": 59.0,
+    "num_centros_educativos": 59,
     "valor_catastral_residencial_eur_m2": 145.12,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2736.2,
@@ -104,7 +104,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -113,7 +113,7 @@
     "poblacion_actual": 175719,
     "anio_padron": 2025,
     "num_centros_salud": 8,
-    "num_centros_educativos": 78.0,
+    "num_centros_educativos": 78,
     "valor_catastral_residencial_eur_m2": 113.11,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1495.6,
@@ -122,7 +122,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -131,7 +131,7 @@
     "poblacion_actual": 3503,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 78.77,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 36.0,
@@ -140,7 +140,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -149,7 +149,7 @@
     "poblacion_actual": 21144,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 14.0,
+    "num_centros_educativos": 14,
     "valor_catastral_residencial_eur_m2": 114.24,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 188.6,
@@ -158,7 +158,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -167,7 +167,7 @@
     "poblacion_actual": 15686,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 11.0,
+    "num_centros_educativos": 11,
     "valor_catastral_residencial_eur_m2": 110.72,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 116.8,
@@ -176,7 +176,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -185,7 +185,7 @@
     "poblacion_actual": 732,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 46.42,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": -1.6,
@@ -194,7 +194,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -203,7 +203,7 @@
     "poblacion_actual": 1414,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 59.39,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 4.4,
@@ -212,7 +212,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -221,7 +221,7 @@
     "poblacion_actual": 63040,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 23.0,
+    "num_centros_educativos": 23,
     "valor_catastral_residencial_eur_m2": 91.64,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 591.6,
@@ -230,7 +230,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -239,7 +239,7 @@
     "poblacion_actual": 60419,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 26.0,
+    "num_centros_educativos": 26,
     "valor_catastral_residencial_eur_m2": 101.89,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 775.0,
@@ -248,7 +248,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -257,7 +257,7 @@
     "poblacion_actual": 38075,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 20.0,
+    "num_centros_educativos": 20,
     "valor_catastral_residencial_eur_m2": 128.5,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 195.2,
@@ -266,7 +266,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -275,7 +275,7 @@
     "poblacion_actual": 110,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 46.61,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2.8,
@@ -284,7 +284,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -293,7 +293,7 @@
     "poblacion_actual": 1976,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 141.55,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 11.4,
@@ -302,7 +302,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -311,7 +311,7 @@
     "poblacion_actual": 6737,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 125.93,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 49.4,
@@ -320,7 +320,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -329,7 +329,7 @@
     "poblacion_actual": 1955,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 69.71,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 6.0,
@@ -338,7 +338,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -347,7 +347,7 @@
     "poblacion_actual": 242,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 64.59,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2.6,
@@ -356,7 +356,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -365,7 +365,7 @@
     "poblacion_actual": 795,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 69.43,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 4.0,
@@ -374,7 +374,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -383,7 +383,7 @@
     "poblacion_actual": 66349,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 31.0,
+    "num_centros_educativos": 31,
     "valor_catastral_residencial_eur_m2": 231.68,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 851.0,
@@ -392,7 +392,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -401,7 +401,7 @@
     "poblacion_actual": 8770,
     "anio_padron": 2025,
     "num_centros_salud": 3,
-    "num_centros_educativos": 8.0,
+    "num_centros_educativos": 8,
     "valor_catastral_residencial_eur_m2": 105.03,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 50.4,
@@ -410,7 +410,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -419,7 +419,7 @@
     "poblacion_actual": 233,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 54.87,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": -0.6,
@@ -428,7 +428,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -437,7 +437,7 @@
     "poblacion_actual": 577,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 43.01,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2.2,
@@ -446,7 +446,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -455,7 +455,7 @@
     "poblacion_actual": 11287,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 6.0,
+    "num_centros_educativos": 6,
     "valor_catastral_residencial_eur_m2": 109.37,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 149.6,
@@ -464,7 +464,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -473,7 +473,7 @@
     "poblacion_actual": 2034,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 70.97,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 78.2,
@@ -482,7 +482,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -491,7 +491,7 @@
     "poblacion_actual": 2870,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 74.25,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 18.0,
@@ -500,7 +500,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -509,7 +509,7 @@
     "poblacion_actual": 961,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 98.1,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 7.6,
@@ -518,7 +518,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -527,7 +527,7 @@
     "poblacion_actual": 2889,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 91.78,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 32.0,
@@ -536,7 +536,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -545,7 +545,7 @@
     "poblacion_actual": 3372,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 45.22,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 39.4,
@@ -554,7 +554,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -563,7 +563,7 @@
     "poblacion_actual": 8331,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 91.69,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 50.2,
@@ -572,7 +572,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -581,7 +581,7 @@
     "poblacion_actual": 6974,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 61.94,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 84.0,
@@ -590,7 +590,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -599,7 +599,7 @@
     "poblacion_actual": 475,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 58.71,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 0.2,
@@ -608,7 +608,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -617,7 +617,7 @@
     "poblacion_actual": 2451,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 44.77,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 24.0,
@@ -626,7 +626,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -635,7 +635,7 @@
     "poblacion_actual": 4323,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 88.54,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 9.0,
@@ -644,7 +644,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -653,7 +653,7 @@
     "poblacion_actual": 2152,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 50.95,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 19.2,
@@ -662,7 +662,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -671,7 +671,7 @@
     "poblacion_actual": 7772,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 98.64,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 76.0,
@@ -680,7 +680,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -689,7 +689,7 @@
     "poblacion_actual": 165,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 44.28,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1.2,
@@ -698,7 +698,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -707,7 +707,7 @@
     "poblacion_actual": 26350,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 11.0,
+    "num_centros_educativos": 11,
     "valor_catastral_residencial_eur_m2": 93.4,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 358.4,
@@ -716,7 +716,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -725,7 +725,7 @@
     "poblacion_actual": 7670,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 99.85,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 57.4,
@@ -734,7 +734,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -743,7 +743,7 @@
     "poblacion_actual": 2044,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 69.74,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 22.6,
@@ -752,7 +752,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -761,7 +761,7 @@
     "poblacion_actual": 9127,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 63.52,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 48.2,
@@ -770,7 +770,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -779,7 +779,7 @@
     "poblacion_actual": 9640,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 5.0,
+    "num_centros_educativos": 5,
     "valor_catastral_residencial_eur_m2": 110.88,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 92.6,
@@ -788,7 +788,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -797,7 +797,7 @@
     "poblacion_actual": 58730,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 29.0,
+    "num_centros_educativos": 29,
     "valor_catastral_residencial_eur_m2": 125.83,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 675.0,
@@ -806,7 +806,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -815,7 +815,7 @@
     "poblacion_actual": 7722,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 108.97,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 60.2,
@@ -824,7 +824,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -833,7 +833,7 @@
     "poblacion_actual": 67274,
     "anio_padron": 2025,
     "num_centros_salud": 3,
-    "num_centros_educativos": 30.0,
+    "num_centros_educativos": 30,
     "valor_catastral_residencial_eur_m2": 81.48,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 873.6,
@@ -842,7 +842,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -851,7 +851,7 @@
     "poblacion_actual": 832,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 83.88,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 4.0,
@@ -860,7 +860,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -869,7 +869,7 @@
     "poblacion_actual": 80512,
     "anio_padron": 2025,
     "num_centros_salud": 5,
-    "num_centros_educativos": 40.0,
+    "num_centros_educativos": 40,
     "valor_catastral_residencial_eur_m2": 100.14,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 646.4,
@@ -878,7 +878,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -887,7 +887,7 @@
     "poblacion_actual": 7238,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 131.99,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 25.2,
@@ -896,7 +896,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -905,7 +905,7 @@
     "poblacion_actual": 2705,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 71.48,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 25.0,
@@ -914,7 +914,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -923,7 +923,7 @@
     "poblacion_actual": 5800,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 53.88,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 49.2,
@@ -932,7 +932,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -941,7 +941,7 @@
     "poblacion_actual": 10764,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 6.0,
+    "num_centros_educativos": 6,
     "valor_catastral_residencial_eur_m2": 129.66,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 31.4,
@@ -950,7 +950,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -959,7 +959,7 @@
     "poblacion_actual": 17171,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 5.0,
+    "num_centros_educativos": 5,
     "valor_catastral_residencial_eur_m2": 92.81,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 129.8,
@@ -968,7 +968,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -977,7 +977,7 @@
     "poblacion_actual": 1473,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 61.11,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 9.8,
@@ -986,7 +986,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -995,7 +995,7 @@
     "poblacion_actual": 1883,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 80.36,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 24.8,
@@ -1004,7 +1004,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1013,7 +1013,7 @@
     "poblacion_actual": 2561,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 107.4,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 11.6,
@@ -1022,7 +1022,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1031,7 +1031,7 @@
     "poblacion_actual": 190076,
     "anio_padron": 2025,
     "num_centros_salud": 7,
-    "num_centros_educativos": 92.0,
+    "num_centros_educativos": 92,
     "valor_catastral_residencial_eur_m2": 79.9,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 963.6,
@@ -1040,7 +1040,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1049,7 +1049,7 @@
     "poblacion_actual": 7413,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 107.87,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 93.4,
@@ -1058,7 +1058,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1067,7 +1067,7 @@
     "poblacion_actual": 2372,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 71.99,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 19.8,
@@ -1076,7 +1076,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1085,7 +1085,7 @@
     "poblacion_actual": 36758,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 15.0,
+    "num_centros_educativos": 15,
     "valor_catastral_residencial_eur_m2": 117.58,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 388.2,
@@ -1094,7 +1094,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1103,7 +1103,7 @@
     "poblacion_actual": 441,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 63.96,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 4.0,
@@ -1112,7 +1112,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1121,7 +1121,7 @@
     "poblacion_actual": 396,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 56.43,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": -0.4,
@@ -1130,7 +1130,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1139,7 +1139,7 @@
     "poblacion_actual": 252,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 62.92,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1.2,
@@ -1148,7 +1148,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1157,7 +1157,7 @@
     "poblacion_actual": 193238,
     "anio_padron": 2025,
     "num_centros_salud": 9,
-    "num_centros_educativos": 88.0,
+    "num_centros_educativos": 88,
     "valor_catastral_residencial_eur_m2": 101.01,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1920.2,
@@ -1166,7 +1166,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1175,7 +1175,7 @@
     "poblacion_actual": 10799,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 7.0,
+    "num_centros_educativos": 7,
     "valor_catastral_residencial_eur_m2": 144.35,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 46.8,
@@ -1184,7 +1184,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1193,7 +1193,7 @@
     "poblacion_actual": 6993,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 83.14,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 52.4,
@@ -1202,7 +1202,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1211,7 +1211,7 @@
     "poblacion_actual": 17547,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 10.0,
+    "num_centros_educativos": 10,
     "valor_catastral_residencial_eur_m2": 119.39,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 187.2,
@@ -1220,7 +1220,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1229,7 +1229,7 @@
     "poblacion_actual": 88,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 52.14,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1.8,
@@ -1238,7 +1238,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1247,7 +1247,7 @@
     "poblacion_actual": 219,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 48.63,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2.4,
@@ -1256,7 +1256,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1265,7 +1265,7 @@
     "poblacion_actual": 104,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 56.73,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1.2,
@@ -1274,7 +1274,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1283,7 +1283,7 @@
     "poblacion_actual": 9310,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 97.83,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 78.0,
@@ -1292,7 +1292,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1301,7 +1301,7 @@
     "poblacion_actual": 20500,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 12.0,
+    "num_centros_educativos": 12,
     "valor_catastral_residencial_eur_m2": 72.96,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 131.8,
@@ -1310,7 +1310,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1319,7 +1319,7 @@
     "poblacion_actual": 195734,
     "anio_padron": 2025,
     "num_centros_salud": 9,
-    "num_centros_educativos": 89.0,
+    "num_centros_educativos": 89,
     "valor_catastral_residencial_eur_m2": 69.69,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2128.8,
@@ -1328,7 +1328,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1337,7 +1337,7 @@
     "poblacion_actual": 9261,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 7.0,
+    "num_centros_educativos": 7,
     "valor_catastral_residencial_eur_m2": 88.97,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 48.4,
@@ -1346,7 +1346,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1355,7 +1355,7 @@
     "poblacion_actual": 598,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 69.86,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 8.8,
@@ -1364,7 +1364,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1373,7 +1373,7 @@
     "poblacion_actual": 69,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 44.84,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 0.8,
@@ -1382,7 +1382,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1391,7 +1391,7 @@
     "poblacion_actual": 3506730,
     "anio_padron": 2025,
     "num_centros_salud": 129,
-    "num_centros_educativos": 1236.0,
+    "num_centros_educativos": 1236,
     "valor_catastral_residencial_eur_m2": 119.8,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 88754.8,
@@ -1400,7 +1400,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1409,7 +1409,7 @@
     "poblacion_actual": 73625,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 30.0,
+    "num_centros_educativos": 30,
     "valor_catastral_residencial_eur_m2": 180.57,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1231.8,
@@ -1418,7 +1418,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1427,7 +1427,7 @@
     "poblacion_actual": 9648,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 85.57,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 76.8,
@@ -1436,7 +1436,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1445,7 +1445,7 @@
     "poblacion_actual": 15922,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 8.0,
+    "num_centros_educativos": 8,
     "valor_catastral_residencial_eur_m2": 100.76,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 83.0,
@@ -1454,7 +1454,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1463,7 +1463,7 @@
     "poblacion_actual": 25049,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 10.0,
+    "num_centros_educativos": 10,
     "valor_catastral_residencial_eur_m2": 82.7,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 204.0,
@@ -1472,7 +1472,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1481,7 +1481,7 @@
     "poblacion_actual": 7350,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 105.81,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 101.6,
@@ -1490,7 +1490,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1499,7 +1499,7 @@
     "poblacion_actual": 9999,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 6.0,
+    "num_centros_educativos": 6,
     "valor_catastral_residencial_eur_m2": 84.37,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 206.0,
@@ -1508,7 +1508,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1517,7 +1517,7 @@
     "poblacion_actual": 4781,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 122.59,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 49.8,
@@ -1526,7 +1526,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1535,7 +1535,7 @@
     "poblacion_actual": 404,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 61.37,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 7.6,
@@ -1544,7 +1544,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1553,7 +1553,7 @@
     "poblacion_actual": 5580,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 118.43,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 9.8,
@@ -1562,7 +1562,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1571,7 +1571,7 @@
     "poblacion_actual": 14772,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 8.0,
+    "num_centros_educativos": 8,
     "valor_catastral_residencial_eur_m2": 104.0,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 83.6,
@@ -1580,7 +1580,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1589,7 +1589,7 @@
     "poblacion_actual": 8397,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 75.71,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 103.2,
@@ -1598,7 +1598,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1607,7 +1607,7 @@
     "poblacion_actual": 214817,
     "anio_padron": 2025,
     "num_centros_salud": 9,
-    "num_centros_educativos": 88.0,
+    "num_centros_educativos": 88,
     "valor_catastral_residencial_eur_m2": 83.65,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1886.4,
@@ -1616,7 +1616,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1625,7 +1625,7 @@
     "poblacion_actual": 3311,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 109.99,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 21.4,
@@ -1634,7 +1634,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1643,7 +1643,7 @@
     "poblacion_actual": 1693,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 88.94,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 24.6,
@@ -1652,7 +1652,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1661,7 +1661,7 @@
     "poblacion_actual": 3169,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 78.36,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 23.8,
@@ -1670,7 +1670,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1679,7 +1679,7 @@
     "poblacion_actual": 33331,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 17.0,
+    "num_centros_educativos": 17,
     "valor_catastral_residencial_eur_m2": 89.23,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 275.4,
@@ -1688,7 +1688,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1697,7 +1697,7 @@
     "poblacion_actual": 163,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 51.18,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 0.2,
@@ -1706,7 +1706,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1715,7 +1715,7 @@
     "poblacion_actual": 3420,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 55.54,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 42.4,
@@ -1724,7 +1724,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1733,7 +1733,7 @@
     "poblacion_actual": 7429,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 105.57,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 55.2,
@@ -1742,7 +1742,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1751,7 +1751,7 @@
     "poblacion_actual": 429,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 75.1,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2.0,
@@ -1760,7 +1760,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1769,7 +1769,7 @@
     "poblacion_actual": 1531,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 51.69,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 12.0,
@@ -1778,7 +1778,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1787,7 +1787,7 @@
     "poblacion_actual": 27650,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 13.0,
+    "num_centros_educativos": 13,
     "valor_catastral_residencial_eur_m2": 146.79,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 375.2,
@@ -1796,7 +1796,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1805,7 +1805,7 @@
     "poblacion_actual": 137471,
     "anio_padron": 2025,
     "num_centros_salud": 4,
-    "num_centros_educativos": 52.0,
+    "num_centros_educativos": 52,
     "valor_catastral_residencial_eur_m2": 75.82,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2079.2,
@@ -1814,7 +1814,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1823,7 +1823,7 @@
     "poblacion_actual": 617,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 67.21,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 4.4,
@@ -1832,7 +1832,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1841,7 +1841,7 @@
     "poblacion_actual": 6606,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 6.0,
+    "num_centros_educativos": 6,
     "valor_catastral_residencial_eur_m2": 102.8,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 51.2,
@@ -1850,7 +1850,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1859,7 +1859,7 @@
     "poblacion_actual": 3195,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 55.98,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 55.6,
@@ -1868,7 +1868,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1877,7 +1877,7 @@
     "poblacion_actual": 3260,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 67.29,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 32.6,
@@ -1886,7 +1886,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1895,7 +1895,7 @@
     "poblacion_actual": 1008,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 72.85,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 8.6,
@@ -1904,7 +1904,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1913,7 +1913,7 @@
     "poblacion_actual": 200,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 65.5,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2.4,
@@ -1922,7 +1922,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1931,7 +1931,7 @@
     "poblacion_actual": 56651,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 21.0,
+    "num_centros_educativos": 21,
     "valor_catastral_residencial_eur_m2": 67.28,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 468.8,
@@ -1940,7 +1940,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1949,7 +1949,7 @@
     "poblacion_actual": 183,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 53.01,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1.8,
@@ -1958,7 +1958,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1967,7 +1967,7 @@
     "poblacion_actual": 89770,
     "anio_padron": 2025,
     "num_centros_salud": 3,
-    "num_centros_educativos": 43.0,
+    "num_centros_educativos": 43,
     "valor_catastral_residencial_eur_m2": 162.66,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1436.0,
@@ -1976,7 +1976,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -1985,7 +1985,7 @@
     "poblacion_actual": 1302,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 68.01,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 9.8,
@@ -1994,7 +1994,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2003,7 +2003,7 @@
     "poblacion_actual": 146,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 54.86,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": -0.4,
@@ -2012,7 +2012,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2021,7 +2021,7 @@
     "poblacion_actual": 98,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 48.81,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 0.2,
@@ -2030,7 +2030,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2039,7 +2039,7 @@
     "poblacion_actual": 4044,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 102.65,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 42.8,
@@ -2048,7 +2048,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2057,7 +2057,7 @@
     "poblacion_actual": 1704,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 100.47,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 10.6,
@@ -2066,7 +2066,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2075,7 +2075,7 @@
     "poblacion_actual": 288,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 70.89,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 6.0,
@@ -2084,7 +2084,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2093,7 +2093,7 @@
     "poblacion_actual": 905,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 88.99,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 8.6,
@@ -2102,7 +2102,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2111,7 +2111,7 @@
     "poblacion_actual": 103148,
     "anio_padron": 2025,
     "num_centros_salud": 3,
-    "num_centros_educativos": 48.0,
+    "num_centros_educativos": 48,
     "valor_catastral_residencial_eur_m2": 138.13,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 805.0,
@@ -2120,7 +2120,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2129,7 +2129,7 @@
     "poblacion_actual": 118,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 61.95,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 3.4,
@@ -2138,7 +2138,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2147,7 +2147,7 @@
     "poblacion_actual": 4818,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 75.93,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 31.8,
@@ -2156,7 +2156,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2165,7 +2165,7 @@
     "poblacion_actual": 79,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 48.05,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": -0.4,
@@ -2174,7 +2174,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2183,7 +2183,7 @@
     "poblacion_actual": 99037,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 44.0,
+    "num_centros_educativos": 44,
     "valor_catastral_residencial_eur_m2": 176.84,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1104.6,
@@ -2192,7 +2192,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2201,7 +2201,7 @@
     "poblacion_actual": 579,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 49.72,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 5.0,
@@ -2210,7 +2210,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2219,7 +2219,7 @@
     "poblacion_actual": 13825,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 7.0,
+    "num_centros_educativos": 7,
     "valor_catastral_residencial_eur_m2": 130.69,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 109.4,
@@ -2228,7 +2228,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2237,7 +2237,7 @@
     "poblacion_actual": 39059,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 17.0,
+    "num_centros_educativos": 17,
     "valor_catastral_residencial_eur_m2": 88.66,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 232.2,
@@ -2246,7 +2246,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2255,7 +2255,7 @@
     "poblacion_actual": 18872,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 12.0,
+    "num_centros_educativos": 12,
     "valor_catastral_residencial_eur_m2": 98.24,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 166.2,
@@ -2264,7 +2264,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2273,7 +2273,7 @@
     "poblacion_actual": 21010,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 12.0,
+    "num_centros_educativos": 12,
     "valor_catastral_residencial_eur_m2": 92.96,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 265.0,
@@ -2282,7 +2282,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2291,7 +2291,7 @@
     "poblacion_actual": 9324,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 5.0,
+    "num_centros_educativos": 5,
     "valor_catastral_residencial_eur_m2": 55.0,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 96.8,
@@ -2300,7 +2300,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2309,7 +2309,7 @@
     "poblacion_actual": 96992,
     "anio_padron": 2025,
     "num_centros_salud": 3,
-    "num_centros_educativos": 47.0,
+    "num_centros_educativos": 47,
     "valor_catastral_residencial_eur_m2": 96.38,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1354.2,
@@ -2318,7 +2318,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2327,7 +2327,7 @@
     "poblacion_actual": 1584,
     "anio_padron": 2025,
     "num_centros_salud": 4,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 63.36,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 21.2,
@@ -2336,7 +2336,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2345,7 +2345,7 @@
     "poblacion_actual": 1011,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 70.16,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 4.0,
@@ -2354,7 +2354,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2363,7 +2363,7 @@
     "poblacion_actual": 2867,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 74.77,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 9.2,
@@ -2372,7 +2372,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2381,7 +2381,7 @@
     "poblacion_actual": 110,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 54.12,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2.0,
@@ -2390,7 +2390,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2399,7 +2399,7 @@
     "poblacion_actual": 4670,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 135.62,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": -1.4,
@@ -2408,7 +2408,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2417,7 +2417,7 @@
     "poblacion_actual": 9802,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 6.0,
+    "num_centros_educativos": 6,
     "valor_catastral_residencial_eur_m2": 105.27,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 47.8,
@@ -2426,7 +2426,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2435,7 +2435,7 @@
     "poblacion_actual": 93,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 53.44,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1.0,
@@ -2444,7 +2444,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2453,7 +2453,7 @@
     "poblacion_actual": 9400,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 7.0,
+    "num_centros_educativos": 7,
     "valor_catastral_residencial_eur_m2": 129.43,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 86.6,
@@ -2462,7 +2462,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2471,7 +2471,7 @@
     "poblacion_actual": 4607,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 77.46,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 55.2,
@@ -2480,7 +2480,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2489,7 +2489,7 @@
     "poblacion_actual": 2964,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 47.94,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 40.6,
@@ -2498,7 +2498,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2507,7 +2507,7 @@
     "poblacion_actual": 1389,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 64.29,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2.2,
@@ -2516,7 +2516,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2525,7 +2525,7 @@
     "poblacion_actual": 143526,
     "anio_padron": 2025,
     "num_centros_salud": 6,
-    "num_centros_educativos": 59.0,
+    "num_centros_educativos": 59,
     "valor_catastral_residencial_eur_m2": 65.31,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 1522.4,
@@ -2534,7 +2534,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2543,7 +2543,7 @@
     "poblacion_actual": 10653,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 5.0,
+    "num_centros_educativos": 5,
     "valor_catastral_residencial_eur_m2": 132.67,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 43.2,
@@ -2552,7 +2552,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2561,7 +2561,7 @@
     "poblacion_actual": 4900,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 76.91,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 9.0,
@@ -2570,7 +2570,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2579,7 +2579,7 @@
     "poblacion_actual": 5081,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 63.36,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 44.8,
@@ -2588,7 +2588,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2597,7 +2597,7 @@
     "poblacion_actual": 25433,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 12.0,
+    "num_centros_educativos": 12,
     "valor_catastral_residencial_eur_m2": 183.97,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 257.0,
@@ -2606,7 +2606,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2615,7 +2615,7 @@
     "poblacion_actual": 1157,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 78.37,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 12.0,
@@ -2624,7 +2624,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2633,7 +2633,7 @@
     "poblacion_actual": 7824,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 4.0,
+    "num_centros_educativos": 4,
     "valor_catastral_residencial_eur_m2": 96.59,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 12.6,
@@ -2642,7 +2642,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2651,7 +2651,7 @@
     "poblacion_actual": 658,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 51.72,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 4.4,
@@ -2660,7 +2660,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2669,7 +2669,7 @@
     "poblacion_actual": 1896,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 78.75,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 12.6,
@@ -2678,7 +2678,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2687,7 +2687,7 @@
     "poblacion_actual": 1122,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 55.44,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 13.2,
@@ -2696,7 +2696,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2705,7 +2705,7 @@
     "poblacion_actual": 1097,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 80.56,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 11.8,
@@ -2714,7 +2714,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2723,7 +2723,7 @@
     "poblacion_actual": 870,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 54.0,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 4.4,
@@ -2732,7 +2732,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2741,7 +2741,7 @@
     "poblacion_actual": 14420,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 5.0,
+    "num_centros_educativos": 5,
     "valor_catastral_residencial_eur_m2": 128.68,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 138.0,
@@ -2750,7 +2750,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2759,7 +2759,7 @@
     "poblacion_actual": 85972,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 37.0,
+    "num_centros_educativos": 37,
     "valor_catastral_residencial_eur_m2": 92.89,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 599.0,
@@ -2768,7 +2768,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2777,7 +2777,7 @@
     "poblacion_actual": 4626,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 5.0,
+    "num_centros_educativos": 5,
     "valor_catastral_residencial_eur_m2": 81.38,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 33.2,
@@ -2786,7 +2786,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2795,7 +2795,7 @@
     "poblacion_actual": 612,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 75.6,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 5.0,
@@ -2804,7 +2804,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2813,7 +2813,7 @@
     "poblacion_actual": 5175,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 116.57,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 21.0,
@@ -2822,7 +2822,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2831,7 +2831,7 @@
     "poblacion_actual": 3289,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 71.17,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 49.0,
@@ -2840,7 +2840,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2849,7 +2849,7 @@
     "poblacion_actual": 565,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 87.88,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 8.2,
@@ -2858,7 +2858,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2867,7 +2867,7 @@
     "poblacion_actual": 14468,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 6.0,
+    "num_centros_educativos": 6,
     "valor_catastral_residencial_eur_m2": 100.85,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 70.0,
@@ -2876,7 +2876,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2885,7 +2885,7 @@
     "poblacion_actual": 2281,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 69.35,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 23.2,
@@ -2894,7 +2894,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2903,7 +2903,7 @@
     "poblacion_actual": 2622,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 133.17,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 18.0,
@@ -2912,7 +2912,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2921,7 +2921,7 @@
     "poblacion_actual": 3569,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 71.71,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 32.2,
@@ -2930,7 +2930,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2939,7 +2939,7 @@
     "poblacion_actual": 7743,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 3.0,
+    "num_centros_educativos": 3,
     "valor_catastral_residencial_eur_m2": 74.74,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 103.0,
@@ -2948,7 +2948,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2957,7 +2957,7 @@
     "poblacion_actual": 18687,
     "anio_padron": 2025,
     "num_centros_salud": 3,
-    "num_centros_educativos": 11.0,
+    "num_centros_educativos": 11,
     "valor_catastral_residencial_eur_m2": 120.8,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 74.2,
@@ -2966,7 +2966,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2975,7 +2975,7 @@
     "poblacion_actual": 859,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 50.14,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 19.2,
@@ -2984,7 +2984,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -2993,7 +2993,7 @@
     "poblacion_actual": 2899,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 79.24,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 18.2,
@@ -3002,7 +3002,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3011,7 +3011,7 @@
     "poblacion_actual": 1660,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 80.08,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 11.8,
@@ -3020,7 +3020,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3029,7 +3029,7 @@
     "poblacion_actual": 24028,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 12.0,
+    "num_centros_educativos": 12,
     "valor_catastral_residencial_eur_m2": 173.35,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 543.6,
@@ -3038,7 +3038,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3047,7 +3047,7 @@
     "poblacion_actual": 18466,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 9.0,
+    "num_centros_educativos": 9,
     "valor_catastral_residencial_eur_m2": 86.24,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 213.0,
@@ -3056,7 +3056,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3065,7 +3065,7 @@
     "poblacion_actual": 1715,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 90.88,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 3.6,
@@ -3074,7 +3074,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3083,7 +3083,7 @@
     "poblacion_actual": 2341,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 81.62,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 16.2,
@@ -3092,7 +3092,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3101,7 +3101,7 @@
     "poblacion_actual": 8042,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 7.0,
+    "num_centros_educativos": 7,
     "valor_catastral_residencial_eur_m2": 70.34,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 61.4,
@@ -3110,7 +3110,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3119,7 +3119,7 @@
     "poblacion_actual": 30127,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 12.0,
+    "num_centros_educativos": 12,
     "valor_catastral_residencial_eur_m2": 191.66,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 532.6,
@@ -3128,7 +3128,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3137,7 +3137,7 @@
     "poblacion_actual": 332,
     "anio_padron": 2025,
     "num_centros_salud": 1,
-    "num_centros_educativos": 1.0,
+    "num_centros_educativos": 1,
     "valor_catastral_residencial_eur_m2": 61.12,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 2.2,
@@ -3146,7 +3146,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3155,7 +3155,7 @@
     "poblacion_actual": 1946,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 57.45,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 8.8,
@@ -3164,7 +3164,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3173,7 +3173,7 @@
     "poblacion_actual": 1468,
     "anio_padron": 2025,
     "num_centros_salud": 3,
-    "num_centros_educativos": 2.0,
+    "num_centros_educativos": 2,
     "valor_catastral_residencial_eur_m2": 75.04,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 8.4,
@@ -3182,7 +3182,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3191,7 +3191,7 @@
     "poblacion_actual": 759,
     "anio_padron": 2025,
     "num_centros_salud": 4,
-    "num_centros_educativos": NaN,
+    "num_centros_educativos": 0,
     "valor_catastral_residencial_eur_m2": 62.43,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 8.2,
@@ -3200,7 +3200,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   },
   {
@@ -3209,7 +3209,7 @@
     "poblacion_actual": 54592,
     "anio_padron": 2025,
     "num_centros_salud": 2,
-    "num_centros_educativos": 37.0,
+    "num_centros_educativos": 37,
     "valor_catastral_residencial_eur_m2": 146.34,
     "anio_valor_catastral": 2026,
     "migracion_neta_externa": 597.4,
@@ -3218,7 +3218,7 @@
     "metodo": "PANEL_179_CAPA_REAL",
     "dataset_version": "v1.1.0-F2",
     "fecha_disponible": "2026-10-27",
-    "fecha_calculo": "2026-10-27T12:57:26",
+    "fecha_calculo": "2026-10-27T13:24:51",
     "fuente_datos": "Población: INE Padrón 2881 | Equipamientos: CKAN CAM (sanidad/educación en ALTA) | Valor catastral: DG Catastro vía CKAN CAM | Migración externa: INE EVR vía CKAN CAM (2017-2021) | Crecimiento: INE Padrón 2020-2025"
   }
 ]

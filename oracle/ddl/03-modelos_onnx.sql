@@ -20,7 +20,7 @@ BEGIN
         metadata   => JSON('{
             "function": "regression",
             "regressionOutput": "variable",
-            "input": {
+            "input": {  
                 "float_input": [
                     "tiempo_medio_madrid_minutos",
                     "densidad",

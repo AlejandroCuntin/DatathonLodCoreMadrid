@@ -26,6 +26,8 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Columnas del panel | **92** |
 | Columnas observadas (reales) | **8** |
 | Dataset version | `v1.1.0-F2` |
+| Capa real 179 | `panel_179_real.csv` (179 × 16, todo oficial, 0 nulos) |
+| **Capa real <50k** | **`panel_menores_50k_real.csv` (155 × 16, 997.059 hab., 0 nulos)** |
 | Capa real 179 | `data/validated/panel_179_real.csv` (10 columnas oficiales; 156 completos) |
 | Perfil ciudadano | **C1-C6 hechos**; C7 (página APEX completa) pendiente |
 | Ranking Oracle | `04-perfiles_y_ranking.sql` ejecutado: pesos y ranking coinciden con Python |
@@ -303,9 +305,14 @@ recorren las filas de la tabla. Añadir municipios no requiere cambiar el motor.
 | Oracle | `TRUNCATE` + recarga del CSV |
 
 **Decisión:** no se amplía inventando las 84 columnas calibradas. Se añade una
-**capa real** de 179 municipios con ~10 columnas oficiales (población, valor
-catastral, migración, crecimiento, centros sanitarios y educativos) como dataset
-separado para el mapa y el diagnóstico. La capa de 20 mantiene el método completo.
+**capa real** con datos oficiales como dataset separado para el mapa y el
+diagnóstico:
+
+- `data/validated/panel_179_real.csv` → los 179 municipios (179 × 16)
+- `data/validated/panel_menores_50k_real.csv` → **155 municipios < 50.000 hab.** (el ámbito del reto)
+
+Ambas con 0 nulos: los centros sin dato en CKAN se rellenan con 0. La capa de 20
+mantiene el método completo (92 columnas, modelos y ranking).
 
 **Estado:** ✅ dataset construido con `python -m src.lodcore.ingest.pipeline_179`
 (179 filas, 16 columnas, 156 municipios con todas las fuentes; 23 pueblos
