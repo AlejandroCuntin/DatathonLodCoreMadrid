@@ -87,7 +87,7 @@ flowchart TD
 
 ### Slide 4: 3 · Perfil Ciudadano y Privacidad
 * **Perfil ciudadano y privacidad por diseño**
-* Python y Oracle como caminos paralelos, con garantía de privacidad (RGPD)
+* Python y Oracle 23ai Cloud como caminos paralelos, con garantía de privacidad (RGPD)
 * **Lo que introduce el ciudadano:**
   - Presupuesto de vivienda: Total en euros o máximo por m².
   - Ingresos netos del hogar: Esfuerzo sostenible por debajo del 30%.
@@ -98,10 +98,10 @@ flowchart TD
   - *Un módulo (`config/perfiles.py`) convierte las respuestas en pesos que suman 1,0 y reordena los municipios sin tocar el ICA objetivo.*
 * **Dos caminos paralelos:**
   - Python: Lee el CSV validado.
-  - Oracle APEX: Autónomo, sin llamar a Python.
-  - *Los tests comprueban que ambos producen los mismos pesos y rankings.*
+  - Oracle APEX 23ai: Desplegado en Autonomous Database (Región Madrid `eu-madrid-1`, Workspace `DATATHON`).
+  - *Los tests comprueban que ambos producen los mismos pesos y rankings con paridad PL/SQL determinista.*
 * **Privacidad estricta:**
-  - Oracle no guarda ningún dato personal, solo reglas de ponderación (cada hijo suma 0,05 a educación). Los datos del ciudadano son parámetros de sesión y nunca se escriben en disco.
+  - Oracle no guarda ningún dato personal: solo reglas de ponderación en `WKSP_DATATHON` (cada hijo suma 0,05 a educación). Los datos del ciudadano son parámetros volátiles de sesión y nunca se escriben en disco (RGPD).
 
 ---
 
@@ -229,7 +229,7 @@ flowchart TD
 * **Del piloto de 20 municipios a toda la región**
 * 1. **Resolución empírica y Backtest:** Sustituimos la especulación por un marco cuantitativo verificado con backtesting histórico (1,55% de error mediano) evitando cualquier overfitting.
 * 2. **Doble utilidad:** Sirve a las familias que planifican su traslado y a los gestores públicos que reparten recursos con rigor.
-* 3. **Cobertura regional en Git (¡Ya implementada!):** Capa real de **155 municipios < 50k hab. (997.059 hab., 0 nulos)** y **179 municipios de la CAM** ya ingestada con datos 100% oficiales (`pipeline_179.py`) y lista para Oracle 23ai.
+* 3. **Oracle Cloud 23ai y Agente IA con MCP (¡Desplegado!):** Desplegado en Oracle Autonomous Database 23ai (Región Madrid `eu-madrid-1`, mTLS) con APEX y conector estándar MCP (`apex-mcp`) para interacción con agentes de IA. Capa real de **155 municipios < 50k hab. (997.059 hab., 0 nulos)** y 179 municipios de la CAM ya ingestada.
 * *«No venimos a decir que nuestro índice predice el futuro: venimos a demostrar cuánto acierta, para qué sirve y cómo optimiza cada euro público invertido en la Comunidad de Madrid.»*
 
 ---
@@ -240,10 +240,7 @@ flowchart TD
   - *¿Cómo sé que el índice sirve?* $\rightarrow$ Mide capacidad de carga, no atractivo residencial. Contrastado con el crecimiento real, los pueblos que más crecen son los que ya están saturados, lo que justifica intervenir.
   - *¿Son fiables las proyecciones demográficas?* $\rightarrow$ Error mediano del 1,55% a 5 años en ventanas históricas (INE 2015-2025), frente al 7,02% de suponer que nada cambia.
   - *¿Por qué no usáis deep learning / Cómo evitáis el overfitting?* $\rightarrow$ Con 20 municipios, el deep learning causaría un severo overfitting. Empleamos modelos regularizados, validación GroupKFold por comarca y árboles exportados a ONNX con tolerancia < 1e-6.
-  - *¿Qué no habéis validado?* $\rightarrow$ Que el índice anticipe por sí solo el crecimiento espontáneo ($\rho = 0,10$). No lo afirmamos: mide capacidad dotacional objetiva.
-  - *¿Son fiables las proyecciones demográficas?* $\rightarrow$ Error mediano del 1,55% a 5 años en ventanas históricas (INE 2015-2025), frente al 7,02% de suponer que nada cambia.
-  - *¿Por qué no usáis deep learning?* $\rightarrow$ Con 20 municipios y sin etiquetas arbitrarias, una red neuronal sobreajustaría. Usamos árboles regularizados exportados a ONNX con tolerancia < 1e-6.
-  - *¿Qué no habéis validado?* $\rightarrow$ Que el índice anticipe por sí solo el crecimiento espontáneo ($\rho = 0,10$). No lo afirmamos: mide capacidad dotacional objetiva.
+  - *¿Cómo se conecta con Oracle y qué agentes soporta?* $\rightarrow$ Conexión cifrada mTLS mediante Oracle Client Wallet a la región Madrid (`eu-madrid-1`), esquema `WKSP_DATATHON` y servidor estándar MCP (`apex-mcp`) para que agentes inteligentes ejecuten consultas y rankings en tiempo real.
 
 ---
 

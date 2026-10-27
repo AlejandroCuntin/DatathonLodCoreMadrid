@@ -19,3 +19,11 @@ mlruns/
 Thumbs.db
 ~$*
 *.tmp
+
+# Oracle Wallet y credenciales Cloud (seguridad)
+wallet/
+*wallet*
+opencode.json
+*.sso
+*.p12
+*.jks
