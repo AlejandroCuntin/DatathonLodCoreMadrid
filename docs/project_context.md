@@ -31,7 +31,7 @@ y vivienda, y cuánto cuesta ampliar su capacidad.
 | Tests | **67 en verde** |
 | Modelos ONNX en Oracle | M1 y M4 |
 | API | `/health`, `/recomendar`, `/whatif`, `/optimizar-presupuesto` |
-| Página de algoritmos | `frontend/algoritmos.html` (explica los 5 módulos, qué es real y qué no) |
+| Página de algoritmos | `frontend/algoritmos.html`, enlazada desde la sección "Modelos de datos utilizados" del portal |
 | DDL Oracle | `01-tablas_procesadas.sql`, `02-vistas_apex.sql`, `03-modelos_onnx.sql`, `04-perfiles_y_ranking.sql` |
 
 **Ejecutar:**
