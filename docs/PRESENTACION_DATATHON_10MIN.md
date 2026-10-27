@@ -1,5 +1,5 @@
 # GUION MAESTRO DE PRESENTACIÓN · II DATATHON LoDCOREMadrid 2026
-## Defensa Oficial: Diapositivas Institucionales (14 Slides) + Demostración Web en Vivo
+## Defensa Oficial: Diapositivas Institucionales (15 Slides) + Demostración Web en Vivo
 **Fecha de defensa:** 29 de octubre de 2026 · Salón de Grados, Campus de Leganés, UC3M  
 **Tiempo oficial de exposición:** 10 minutos (+ turno de preguntas del jurado)  
 **Proyecto:** MadridNext · Capacidad de acogida territorial (< 50.000 hab.)  
@@ -9,7 +9,7 @@
 
 ---
 
-## 1. Estructura de la Presentación (14 Diapositivas)
+## 1. Estructura de la Presentación (15 Diapositivas)
 
 ```mermaid
 flowchart TD
@@ -18,14 +18,15 @@ flowchart TD
     S3 --> S4["Slide 4: 3 · Perfil Ciudadano y Privacidad"]
     S4 --> S5["Slide 5: 4 · Ecosistema de Modelos (M1 a M5)"]
     S5 --> S6["Slide 6: 5 · Claridad Metodológica (Evaluar vs Predecir vs Simular)"]
-    S6 --> S7["Slide 7: 6 · Validación Científica (Backtest 2015-2025, 1,55%)"]
-    S7 --> S8["Slide 8: 7 · Justificación del Problema (El ICA mide capacidad, no atractivo)"]
-    S8 --> S9["Slide 9: 8 · Diagnóstico y Control (Semáforo ICA y Alerta S)"]
-    S9 --> S10["Slide 10: 9 · Robustez Metodológica (El modelo aprende, no memoriza)"]
-    S10 --> S11["Slide 11: 10 · Herramientas para la Gestión (What-If y Optimizador M5)"]
-    S11 --> S12["Slide 12: 11 · Conclusiones y Transferencia (Del piloto a toda la región)"]
-    S12 --> S13["Slide 13: 12 · Anexo Metodológico (Preguntas del Jurado)"]
-    S13 --> S14["Slide 14: 13 · Cierre Oficial (Muchas Gracias y Preguntas)"]
+    S6 --> S7["Slide 7: Demostración en Directo (Espacio MVP y Dataset)"]
+    S7 --> S8["Slide 8: 6 · Validación Científica (Backtest 2015-2025, 1,55%)"]
+    S8 --> S9["Slide 9: 7 · Justificación del Problema (El ICA mide capacidad, no atractivo)"]
+    S9 --> S10["Slide 10: 8 · Diagnóstico y Control (Semáforo ICA y Alerta S)"]
+    S10 --> S11["Slide 11: 9 · Robustez Metodológica (El modelo aprende, no memoriza)"]
+    S11 --> S12["Slide 12: 10 · Herramientas para la Gestión (What-If y Optimizador M5)"]
+    S12 --> S13["Slide 13: 11 · Conclusiones y Transferencia (Del piloto a toda la región)"]
+    S13 --> S14["Slide 14: 12 · Anexo Metodológico (Preguntas del Jurado)"]
+    S14 --> S15["Slide 15: 13 · Cierre Oficial (Muchas Gracias y Preguntas)"]
 ```
 
 ---
@@ -37,14 +38,14 @@ flowchart TD
 | **00:00 – 01:00** | Slide 1 – Slide 2 | **Portada y Reto Territorial** | Asimetría metropolitana (80% en el área central) y Principio de Liebig: *un consultorio saturado no se compensa con aire puro*. |
 | **01:00 – 02:30** | Slide 3 – Slide 4 | **Ingesta, Calidad y Perfil Ciudadano** | Fases 1 y 2 (datos reales vs. estimados). Paridad Python / Oracle APEX sin almacenar datos personales (RGPD). |
 | **02:30 – 04:00** | Slide 5 – Slide 6 | **Modelos M1–M5 y Claridad de Conceptos** | Cinco modelos escribiendo en la misma ficha. Diferencia crucial: Evaluar vs. Predecir vs. Simular. |
-| **04:00 – 06:30** | **DEMO WEB EN VIVO** | **Navegación Interactiva (Portal + Mapa)** | Portada KPIs $\rightarrow$ Recomendador Ciudadano $\rightarrow$ Simulador What-If $\rightarrow$ Mapa semafórico. |
-| **06:30 – 07:45** | Slide 7 – Slide 8 | **Validación Científica y Paradoja Demográfica** | Backtesting 2015–2025 (error mediano 1,55%). Por qué los que más crecen tienen menor capacidad ($\rho=0,10$). |
-| **07:45 – 09:00** | Slide 9 – Slide 11 | **Diagnóstico, Semáforo ICA y Herramientas** | Semáforo ICA, Alerta dura S. Auditoría antifraude (36 tests). What-if y Optimizador comarcal (2 M€). |
-| **09:00 – 10:00** | Slide 12 – Slide 14 | **Transferencia, Anexo de Respuestas y Cierre** | Escalabilidad a 155 municipios. Respuestas blindadas al jurado. Agradecimiento y turno de preguntas. |
+| **04:00 – 06:30** | **Slide 7 + DEMO VIVO** | **Demostración Interactiva y Dataset** | Espacio reservado para proyectar el MVP Web (`http://localhost:8088/index.html`) y el Dataset certificado (`municipios_panel_validado.csv`). |
+| **06:30 – 07:45** | Slide 8 – Slide 9 | **Validación Científica y Paradoja Demográfica** | Backtesting 2015–2025 (error mediano 1,55%). Por qué los que más crecen tienen menor capacidad ($\rho=0,10$). |
+| **07:45 – 09:00** | Slide 10 – Slide 12 | **Diagnóstico, Semáforo ICA y Herramientas** | Semáforo ICA, Alerta dura S. Auditoría antifraude (73 tests). What-if y Optimizador comarcal (2 M€). |
+| **09:00 – 10:00** | Slide 13 – Slide 15 | **Transferencia, Anexo de Respuestas y Cierre** | Escalabilidad a 155 municipios. Respuestas blindadas al jurado. Agradecimiento y turno de preguntas. |
 
 ---
 
-## 3. Contenido de las 14 Diapositivas (`presentacion_datathon_oficial.pptx`)
+## 3. Contenido de las 15 Diapositivas (`presentacion_datathon_oficial.pptx`)
 
 ### Slide 1: Portada
 * **II DATATHON LODCOREMADRID 2026**
@@ -133,7 +134,23 @@ flowchart TD
 
 ---
 
-### Slide 7: 6 · Validación Científica
+### Slide 7: Demostración en Directo · MVP y Dataset
+* **Plataforma interactiva (MVP) y panel de datos**
+* Espacio reservado para la demostración del prototipo funcional y la estructura del panel de datos
+* **Tarjeta Izquierda · MVP Web (`http://localhost:8088/index.html`):**
+  - Espacio para captura o proyección en vivo del portal interactivo.
+  - *Hero interactivo* con 4 KPIs comarcales (+108.400 hab., 12,4 M€ inversión necesaria).
+  - *Recomendador ciudadano:* Simulación de perfiles y pesos sin almacenar datos personales.
+  - *Mapa comarcal:* Semáforo dotacional y filtro de cuellos de botella.
+* **Tarjeta Derecha · Dataset Certificado (`data/validated/municipios_panel_validado.csv`):**
+  - Espacio para captura o muestra tabular del panel de datos.
+  - *20 municipios piloto* en las 8 comarcas (200.267 habitantes cubiertos).
+  - *92 variables verificadas* (8 datos reales observados y etiquetados).
+  - *0 valores ausentes ni repetidos* con 73 tests continuos en verde.
+
+---
+
+### Slide 8: 6 · Validación Científica
 * **¿Cómo sabemos que el modelo es bueno?**
 * Proyectamos de 2020 a 2025 sin ver el dato real y lo comparamos con el padrón oficial
 * **Metodología en 5 pasos:**
@@ -151,7 +168,7 @@ flowchart TD
 
 ---
 
-### Slide 8: 7 · Justificación del Problema
+### Slide 9: 7 · Justificación del Problema
 * **El ICA mide capacidad, no atractivo**
 * Esa paradoja justifica la herramienta: crece más quien menos capacidad tiene
 * **El límite, dicho con honestidad:**
@@ -164,7 +181,7 @@ flowchart TD
 
 ---
 
-### Slide 9: 8 · Diagnóstico y Control
+### Slide 10: 8 · Diagnóstico y Control
 * **El semáforo ICA y la alerta no compensatoria**
 * Umbrales de capacidad e interrupción automática del encaje
 * **El Semáforo:**
@@ -178,7 +195,7 @@ flowchart TD
 
 ---
 
-### Slide 10: 9 · Robustez Metodológica
+### Slide 11: 9 · Robustez Metodológica
 * **El modelo aprende, no memoriza**
 * Garantías contra la fuga de datos y validación espacial sin atajos
 * **Tres formas de hacer trampa:**
@@ -193,7 +210,7 @@ flowchart TD
 
 ---
 
-### Slide 11: 10 · Herramientas para la Gestión
+### Slide 12: 10 · Herramientas para la Gestión
 * **Simulador what-if y optimizador presupuestario**
 * Instrumentos para decidir y repartir presupuesto
 * **Pantalla 1 · Simulador What-If:**
@@ -208,7 +225,7 @@ flowchart TD
 
 ---
 
-### Slide 12: 11 · Conclusiones y Transferencia
+### Slide 13: 11 · Conclusiones y Transferencia
 * **Del piloto de 20 municipios a toda la región**
 * 1. **Resolución empírica:** Sustituimos la especulación por un marco cuantitativo verificado con backtest real (1,55% de error mediano) que integra capacidad dotacional y precios.
 * 2. **Doble utilidad:** Sirve a las familias que planifican su traslado y a los gestores públicos que reparten recursos con rigor.
@@ -217,7 +234,7 @@ flowchart TD
 
 ---
 
-### Slide 13: 12 · Anexo Metodológico
+### Slide 14: 12 · Anexo Metodológico
 * **Anexo: preguntas que puede hacer el jurado**
 * Respuestas técnicas a las preguntas más probables:
   - *¿Cómo sé que el índice sirve?* $\rightarrow$ Mide capacidad de carga, no atractivo residencial. Contrastado con el crecimiento real, los pueblos que más crecen son los que ya están saturados, lo que justifica intervenir.
@@ -227,7 +244,7 @@ flowchart TD
 
 ---
 
-### Slide 14: 13 · Cierre Oficial
+### Slide 15: 13 · Cierre Oficial
 * **II DATATHON LODCOREMADRID 2026**
 * **Muchas gracias**
 * **¿Preguntas?**
