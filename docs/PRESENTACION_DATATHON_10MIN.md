@@ -78,7 +78,7 @@ flowchart TD
   - **92** columnas del panel verificadas.
   - **0** valores ausentes en las variables de modelado.
   - **20** códigos INE únicos, sin repetidos.
-  - **36** pruebas unitarias y de integración.
+  - **73** pruebas unitarias y de integración (100% pasando).
   - Todos los municipios tienen entre 1 y 49.999 habitantes, y precios, ocupaciones y cupos son positivos.
   - `data/validated/municipios_panel_validado.csv`.
 
@@ -189,7 +189,7 @@ flowchart TD
   - Comparativa adversarial: Versiones con y sin fuga deliberada, para confirmar que las métricas son generalización real.
   - Validación espacial GroupKFold: Los municipios de una misma comarca van juntos a entrenamiento o a prueba.
   - Control point-in-time: Ningún dato de entrada es posterior a la fecha de decisión del MVP.
-  - **36 tests unitarios y de integración:** Auditan las 7 fugas posibles (L1 a L7) con pytest.
+  - **73 tests unitarios y de integración:** Auditan las 7 fugas posibles (L1 a L7) con pytest.
 
 ---
 
