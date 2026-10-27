@@ -4,66 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LoDCORE Madrid · Cómo funciona</title>
-<style>
-  :root {
-    --blue: #477edc; --blue-dark: #295c84; --blue-deep: #204655;
-    --bg: #F7F9FC; --surface: #FFFFFF; --border: #DDE5EE;
-    --text: #232323; --text-2: #4A5568; --muted: #718096;
-    --green: #1f8a5b; --amber: #b7791f; --red: #c53030;
-    --radius: 10px;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--text);
-    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 15px; line-height: 1.6;
-  }
-  header {
-    background: linear-gradient(135deg, var(--blue-deep), var(--blue-dark));
-    color: #fff; padding: 46px 24px 40px;
-  }
-  header .wrap { max-width: 1080px; margin: 0 auto; }
-  header .pretitle { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
-  header h1 { margin: 8px 0 10px; font-size: 30px; line-height: 1.2; }
-  header p { margin: 0; max-width: 760px; color: #DCE7F5; }
-  header a { color: #fff; font-weight: 600; }
-  main { max-width: 1080px; margin: 0 auto; padding: 32px 24px 60px; }
-  h2 { font-size: 21px; margin: 38px 0 14px; color: var(--blue-deep); }
-  h2 .num { color: var(--blue); margin-right: 8px; }
-  p.lead { color: var(--text-2); }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-  .card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 18px 20px; border-top: 4px solid var(--blue);
-  }
-  .card h3 { margin: 0 0 4px; font-size: 16px; }
-  .card .q { color: var(--muted); font-size: 13px; font-style: italic; margin-bottom: 10px; }
-  .card dl { margin: 0; display: grid; grid-template-columns: 92px 1fr; gap: 4px 10px; font-size: 13.5px; }
-  .card dt { color: var(--muted); font-weight: 600; }
-  .card dd { margin: 0; }
-  .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
-  .tag.core { background: #E3EEFF; color: var(--blue-dark); }
-  .tag.support { background: #FFF4E0; color: var(--amber); }
-  .chain {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 22px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center;
-  }
-  .chain .step { background: #EEF4FF; border: 1px solid #C9D9F5; border-radius: 8px; padding: 10px 14px; font-size: 13px; text-align: center; }
-  .chain .step strong { display: block; color: var(--blue-dark); }
-  .chain .arrow { color: var(--blue); font-size: 20px; font-weight: 700; }
-  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); }
-  th { background: #F0F5FC; color: var(--blue-deep); font-size: 13px; }
-  tr:last-child td { border-bottom: none; }
-  .ok { color: var(--green); font-weight: 700; }
-  .warn { color: var(--amber); font-weight: 700; }
-  .no { color: var(--red); font-weight: 700; }
-  .note { background: #FFF8E6; border-left: 4px solid var(--amber); padding: 14px 18px; border-radius: 6px; font-size: 14px; }
-  .rule { background: #EEF4FF; border-left: 4px solid var(--blue); padding: 14px 18px; border-radius: 6px; font-size: 14px; }
-  code { background: #F0F3F7; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
-  footer { border-top: 1px solid var(--border); background: var(--surface); padding: 24px; text-align: center; color: var(--muted); font-size: 13px; }
-  footer a { color: var(--blue-dark); font-weight: 600; }
-</style>
+<link rel="stylesheet" href="algoritmos.css">
 </head>
 <body>
 
@@ -166,7 +107,54 @@
     seguirá teniendo margen en 5-10 años. No son cinco opiniones: es una cadena.
   </p>
 
-  <h2><span class="num">4.</span>Qué es real y qué está calibrado</h2>
+  <h2><span class="num">4.</span>Tres perfiles, tres formas de usar el sistema</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Ciudadano</h3>
+      <div class="q">¿Dónde me conviene vivir?</div>
+      <dl>
+        <dt>Entradas</dt><dd>Presupuesto, ingresos, tiempo máximo, hijos, edad, transporte y tenencia</dd>
+        <dt>Qué hace</dt><dd>Deriva los pesos de tus preferencias y ordena los municipios</dd>
+        <dt>Qué recibe</dt><dd>Ranking con encaje, cuota, entrada, esfuerzo financiero y explicación</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3>Institución pública</h3>
+      <div class="q">¿Dónde invertir sin dejar municipios atrás?</div>
+      <dl>
+        <dt>Entradas</dt><dd>Presupuesto cerrado, comarca y objetivo (eficiencia o equidad)</dd>
+        <dt>Qué hace</dt><dd>Reparte la inversión priorizando cuellos de botella</dd>
+        <dt>Qué recibe</dt><dd>Asignación por municipio y comparativa entre objetivos</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3>Empresario <span class="tag support">roadmap</span></h3>
+      <div class="q">¿Dónde instalar actividad?</div>
+      <dl>
+        <dt>Estado</dt><dd>No implementado</dd>
+        <dt>Por qué</dt><dd>Requiere suelo industrial, empresas por CNAE y afiliación por municipio, que hoy no están integrados</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="rule">
+    <strong>Regla común:</strong> los pesos del perfil cambian el <em>ranking</em>, nunca el ICA ni la regla dura.
+    Primero se calcula la capacidad objetiva; después se ordena según tus preferencias.
+  </div>
+
+  <h2><span class="num">5.</span>Dónde se ejecuta cada cosa</h2>
+  <div class="chain">
+    <div class="step"><strong>N1 · Python</strong>entrena, valida y exporta a ONNX</div>
+    <div class="arrow">→</div>
+    <div class="step"><strong>N2 · Oracle</strong>carga el ONNX y puntúa con <code>PREDICTION()</code></div>
+    <div class="arrow">→</div>
+    <div class="step"><strong>N3 · APEX / API</strong>muestra el ranking y la ficha</div>
+  </div>
+  <p class="lead" style="margin-top:12px">
+    El modelo no se llama desde fuera: <strong>vive dentro de la base de datos</strong>.
+    Eso permite puntuar miles de filas sin mover datos y demuestra el despliegue en Oracle.
+  </p>
+
+  <h2><span class="num">6.</span>Qué es real y qué está calibrado</h2>
   <table>
     <thead><tr><th>Dato</th><th>Origen</th><th>Estado</th></tr></thead>
     <tbody>
@@ -185,7 +173,7 @@
     Es mejor un sistema pequeño y comprobable que uno grande y falso.
   </div>
 
-  <h2><span class="num">5.</span>Qué hemos validado y qué no</h2>
+  <h2><span class="num">7.</span>Qué hemos validado y qué no</h2>
   <table>
     <thead><tr><th>Prueba</th><th>Resultado</th><th>Lectura</th></tr></thead>
     <tbody>
@@ -201,7 +189,7 @@
     El crecimiento no sigue a la capacidad: justo el problema que la herramienta ayuda a corregir.
   </div>
 
-  <h2><span class="num">6.</span>Qué no hacemos (y por qué)</h2>
+  <h2><span class="num">8.</span>Qué no hacemos (y por qué)</h2>
   <table>
     <thead><tr><th>Técnica</th><th>¿La usamos?</th><th>Motivo</th></tr></thead>
     <tbody>
@@ -214,7 +202,24 @@
     </tbody>
   </table>
 
-  <h2><span class="num">7.</span>Privacidad</h2>
+  <h2><span class="num">9.</span>Cómo leer una ficha</h2>
+  <table>
+    <thead><tr><th>Término</th><th>Qué significa</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ICA</strong></td><td>Índice de Capacidad de Acogida, de 0 a 100. Mide cuánto margen tiene el municipio.</td></tr>
+      <tr><td><strong>Capacidad (semáforo)</strong></td><td>ALTA ≥ 60 · MEDIA 40–59 · BAJA &lt; 40.</td></tr>
+      <tr><td><strong>Servicio crítico saturado</strong></td><td>Sí cuando supera 1.500 hab/médico o 95 % de ocupación escolar. Si es Sí, el ICA se trunca por debajo de 40.</td></tr>
+      <tr><td><strong>Se rompe primero</strong></td><td>El servicio que limita la acogida: sanidad, educación o vivienda.</td></tr>
+      <tr><td><strong>Encaje (%)</strong></td><td>Puntuación del ranking para tus preferencias. No es el ICA: dos personas pueden ver encajes distintos del mismo municipio.</td></tr>
+      <tr><td><strong>Esfuerzo financiero</strong></td><td>Porcentaje de tus ingresos que se va en la cuota: ≤ 30 % asequible · 30–35 % ajustado · 35–45 % alto · &gt; 45 % no asequible.</td></tr>
+      <tr><td><strong>Entrada</strong></td><td>El 20 % del precio que no se financia.</td></tr>
+      <tr><td><strong>Tu máximo sostenible</strong></td><td>Precio por m² que puedes pagar sin superar el 30 % de esfuerzo.</td></tr>
+      <tr><td><strong>Gap de mercado</strong></td><td>Diferencia entre el precio de referencia y el valor estimado por M1. Negativo = por debajo del valor del modelo.</td></tr>
+      <tr><td><strong>Riesgo futuro</strong></td><td>Población proyectada a 2031 y año estimado de saturación (M3).</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">10.</span>Privacidad</h2>
   <p class="lead">
     El formulario del ciudadano no guarda datos personales. Presupuesto, ingresos, edad o hijos
     se usan solo para calcular el ranking en el momento y no se almacenan.
