@@ -119,6 +119,7 @@ CREATE OR REPLACE TYPE t_pesos AS TABLE OF t_peso;
 
 CREATE OR REPLACE TYPE t_ranking_row AS OBJECT (
     nombre                  VARCHAR2(100),
+    codigo_ine              VARCHAR2(10),
     comarca                 VARCHAR2(100),
     afinidad                NUMBER,
     desglose_vivienda       NUMBER,
@@ -352,6 +353,7 @@ BEGIN
     FOR r IN (
         SELECT * FROM (
             SELECT m.nombre,
+                   m.codigo_ine,
                    m.comarca,
                    m.score_vivienda,
                    m.score_educacion,
@@ -421,6 +423,7 @@ BEGIN
 
         PIPE ROW (t_ranking_row(
             r.nombre,
+            r.codigo_ine,
             r.comarca,
             ROUND(v_af, 2),
             ROUND(v_viv * r.score_vivienda, 2),
@@ -451,7 +454,7 @@ END;
 -- 7. Vista de apoyo para APEX (parametros por defecto)
 -- ---------------------------------------------------------------------------
 CREATE OR REPLACE VIEW v_ranking_ciudadano_demo AS
-SELECT nombre, comarca, afinidad, semaforo_ica, alerta_no_compensatoria,
+SELECT nombre, codigo_ine, comarca, afinidad, semaforo_ica, alerta_no_compensatoria,
        factor_limitante, indice_ica_ajustado, precio_m2, cuota_mensual_eur,
        entrada_eur, esfuerzo_pct, etiqueta_esfuerzo, gap_mercado_pct
   FROM TABLE(f_ranking_ciudadano(

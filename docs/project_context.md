@@ -200,7 +200,7 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 | **C4** | Explicación por municipio: desglose, comparación con la media, fortalezas, carencias y texto sin causalidad | ✅ **Hecho**: `desglose_pct`, `comparacion_media`, `posicion` y motivo ampliado |
 | **C5** | Capa Oracle: `PERFILES_PARAMETROS`, `PERFILES_BASE`, `PERFILES_AJUSTES` y `f_ranking_ciudadano` | ✅ **Ejecutado en Oracle**: 8 parámetros, 4 pesos base, 6 reglas; pesos y ranking coinciden con Python |
 | **C6** | API N3 equivalente a la función SQL | ✅ **Hecho**: `/recomendar` usa `ranking.py` + `perfiles.py`; mismo resultado que APEX |
-| **C7** | Página APEX del ciudadano: formulario, resultados, mapa y comparador | Pendiente |
+| **C7** | Página APEX del ciudadano: formulario, resultados, mapa y comparador | 🟡 SQL listo (`codigo_ine` en el ranking); falta la página de detalle |
 
 ---
 
