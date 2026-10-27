@@ -198,7 +198,7 @@ Los datos personales **no se almacenan**: se calculan en la sesión.
 | **C3** | Asequibilidad: cuota, esfuerzo financiero y gap de mercado (M1) | Pendiente |
 | **C4** | Explicación por municipio: desglose de afinidad, fortalezas y carencias | Pendiente |
 | **C5** | Capa Oracle: `PERFILES_PARAMETROS`, `PERFILES_BASE`, `PERFILES_AJUSTES` y `f_ranking_ciudadano` | ✅ **Ejecutado en Oracle**: 8 parámetros, 4 pesos base, 6 reglas; pesos y ranking coinciden con Python |
-| **C6** | API N3 equivalente a la función SQL | Pendiente |
+| **C6** | API N3 equivalente a la función SQL | ✅ **Hecho**: `/recomendar` usa `ranking.py` + `perfiles.py`; mismo resultado que APEX |
 | **C7** | Página APEX del ciudadano: formulario, resultados, mapa y comparador | Pendiente |
 
 ---

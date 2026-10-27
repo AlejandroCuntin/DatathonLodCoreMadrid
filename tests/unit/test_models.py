@@ -79,22 +79,87 @@ def test_detector_lenguaje_causal():
 
 def test_fastapi_n3_recomendar_endpoint():
     payload = {
-        "peso_sanidad": 0.35,
-        "peso_educacion": 0.35,
-        "peso_conectividad": 0.15,
-        "peso_vivienda": 0.15,
-        "presupuesto_max_m2": 1800.0,
-        "tiempo_max_madrid_min": 65,
-        "top_k": 3
+        "presupuesto_max_m2_eur": 2000.0,
+        "ingresos_netos_hogar_eur": 2500.0,
+        "tiempo_max_commute_min": 90,
+        "modo_transporte": "publico",
+        "num_hijos": 2,
+        "edad": 40,
+        "tenencia": "compra",
+        "m2_deseados": 100.0,
+        "top_k": 3,
     }
     resp = client.post("/recomendar", json=payload)
     assert resp.status_code == 200
     data = resp.json()
     assert len(data["ranking"]) == 3
     assert data["origen"] == "ESTIMADO"
-    assert data["dataset_version"] == "v1.0.0-F2"
-    # Verificar orden decreciente de afinidad
-    assert data["ranking"][0]["afinidad_mcdm_pct"] >= data["ranking"][1]["afinidad_mcdm_pct"]
+    assert data["dataset_version"] == "v1.1.0-F2"
+    assert data["metodo"] == "PERFIL_CIUDADANO_SUMA_PONDERADA"
+    # Los pesos derivados suman 1
+    assert abs(sum(data["pesos_aplicados"].values()) - 1.0) < 1e-6
+    # Orden decreciente de afinidad
+    afinidades = [m["afinidad_pct"] for m in data["ranking"]]
+    assert afinidades == sorted(afinidades, reverse=True)
+    # La explicación viaja en la respuesta
+    assert data["ranking"][0]["motivo_recomendacion"]
+    assert "desglose" in data["ranking"][0]
+
+
+def test_api_recomendar_filtra_por_presupuesto():
+    payload = {
+        "presupuesto_max_m2_eur": 1200.0,
+        "ingresos_netos_hogar_eur": 2000.0,
+        "tiempo_max_commute_min": 120,
+        "tenencia": "compra",
+        "top_k": 20,
+    }
+    resp = client.post("/recomendar", json=payload)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["n_aceptados"] + data["n_excluidos"] == data["total_evaluados"]
+    assert data["n_excluidos"] > 0
+    assert all(e["motivo"] == "PRECIO" for e in data["excluidos"])
+
+
+def test_api_recomendar_los_hijos_suben_el_peso_de_educacion():
+    base = {
+        "presupuesto_max_m2_eur": 2500.0,
+        "ingresos_netos_hogar_eur": 2500.0,
+        "tiempo_max_commute_min": 120,
+        "modo_transporte": "privado",
+        "edad": 40,
+        "tenencia": "compra",
+        "top_k": 1,
+    }
+    sin_hijos = client.post("/recomendar", json={**base, "num_hijos": 0}).json()
+    con_hijos = client.post("/recomendar", json={**base, "num_hijos": 3}).json()
+    assert con_hijos["pesos_aplicados"]["educacion"] > sin_hijos["pesos_aplicados"]["educacion"]
+
+
+def test_api_recomendar_marca_los_municipios_colapsados():
+    payload = {
+        "presupuesto_max_m2_eur": 6000.0,
+        "ingresos_netos_hogar_eur": 3000.0,
+        "tiempo_max_commute_min": 120,
+        "tenencia": "compra",
+        "top_k": 20,
+    }
+    data = client.post("/recomendar", json=payload).json()
+    con_alerta = [m for m in data["ranking"] if m["alerta_no_compensatoria"]]
+    assert con_alerta, "El panel debe contener municipios con alerta no compensatoria"
+    for m in con_alerta:
+        assert m["semaforo_ica"] == "BAJA"
+        assert m["afinidad_pct"] <= 39.0
+        assert m["motivo_colapso"]
+
+
+def test_api_recomendar_rechaza_transporte_invalido():
+    resp = client.post(
+        "/recomendar",
+        json={"modo_transporte": "bicicleta", "top_k": 1},
+    )
+    assert resp.status_code == 422
 
 def test_fastapi_n3_whatif_endpoint():
     payload = {

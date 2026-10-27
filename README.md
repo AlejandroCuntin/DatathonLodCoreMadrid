@@ -64,10 +64,27 @@ uvicorn src.lodcore.serving.fastapi.app:app --reload --port 8000
 Endpoints:
 
 - `GET /health` — diagnóstico del servicio (versión, dataset y endpoints activos).
-- `POST /recomendar` — recomendación personalizada para un ciudadano (M5 + MCDM).
+- `POST /recomendar` — ranking del perfil ciudadano. Acepta presupuesto, ingresos, tiempo máximo, hijos, edad, transporte y tenencia; deriva los pesos y devuelve encaje, desglose, esfuerzo financiero y riesgo.
 - `POST /whatif` — simulación institucional de residentes, médicos, plazas e inversión.
 - `POST /optimizar-presupuesto` — heurística voraz comarcal: reparte un presupuesto cerrado entre municipios (M4-OPT).
 - `GET /docs` — Swagger autogenerado por FastAPI.
+
+Ejemplo de `/recomendar`:
+
+```json
+{
+  "presupuesto_max_m2_eur": 2000,
+  "ingresos_netos_hogar_eur": 2500,
+  "tiempo_max_commute_min": 90,
+  "modo_transporte": "publico",
+  "num_hijos": 2,
+  "edad": 40,
+  "tenencia": "compra",
+  "m2_deseados": 100,
+  "top_k": 5,
+  "incluir_sensibilidad": false
+}
+```
 
 > El portal `frontend/index.html` es **estático y autocontenido**: los datos van
 > embebidos en `index.js` y no llama a ninguna API. La UI de entrega será Oracle APEX.
